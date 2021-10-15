@@ -1,11 +1,9 @@
 import React from 'react';
-import login from '../components/LoginForm';
-import { LoginWrapper } from '../Styles/LoginStyle';
+import LoginForm from '../components/LoginForm'
+
 
 function WelcomePage() {
-    <LoginWrapper>
-        <LoginForm></LoginForm>
-    </LoginWrapper>
+    return <LoginForm/>
 }
 
 export default WelcomePage;

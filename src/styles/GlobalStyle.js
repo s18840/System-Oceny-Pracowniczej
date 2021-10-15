@@ -1,4 +1,4 @@
-import {createGlobalStyle} from 'styled-components/macro';
+import styled, {createGlobalStyle} from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   body{
@@ -10,4 +10,15 @@ export const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-weight: 300;
   }
+`;
+
+export const InputField = styled.input`
+    border-radius: 10px;
+    border: 2px solid #CCCCCC;
+    height: 18px;
+`;
+
+export const Input = styled.input`
+    width: ${props => props.width};
+    height: ${props => props.height};
 `;
