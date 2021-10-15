@@ -2,6 +2,7 @@ import React from "react";
 import { RegisterWrapper, RegisterFormWrapper, InputWrapper, Span, Login } from '../Styles/LoginStyle';
 import {Input} from '../styles/GlobalStyle'
 
+
 function LoginForm(){
 //logic for login and sending authentication
 //todo:  
