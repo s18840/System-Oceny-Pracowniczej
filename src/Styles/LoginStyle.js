@@ -8,14 +8,27 @@ export const RegisterWrapper = styled.div`
     padding-top: 72px;
     padding-bottom: 72px;
     align-items: center;
-    background-color: #eaeaea;
+    background-color: #FFF3FD;
+    border: 5px solid white;
+    border-radius: 48px;
 `;
 
 export const InputWrapper = styled.div`
     display: flex;
-    align-items: center;
+    align-items: left;
     flex-direction: column;
 `;
+
+
+export const LoginButton = styled.input`
+    width: 243px;
+    height: 67px;
+    background-color: #3D098A; 
+    color: white;
+    border-radius: 45px;
+    font-size: 42px;
+    font-family: 'Ubuntu';
+`
 
 export const RegisterFormWrapper = styled.form`
     display: flex;
@@ -31,7 +44,6 @@ export const RegisterFormWrapper = styled.form`
     & > input[type=submit] {
         margin-top: 10px;
     }
-    
     & > input[type=button] {
         margin-top: 10px;
     }
@@ -40,14 +52,18 @@ export const RegisterFormWrapper = styled.form`
 export const Login = styled.p`
     width: 357px;
     height: 52px;
-    margin: 0 0 64px;
-    font-size: 52px;
-    font-weight: 900;
+    margin-top: 0px;
+    margin-bottom: 100px;
+    font-size: 78px;
     text-align: center;
-    color: #22635e;
+    color: #FF4E01;
 `;
 
 export const Span = styled.div`
-    margin-top: 10px;
-    font-size: 0.8em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-decoration: ${props => props.underlined ? 'underline' : ''};
+    margin-left: 15px;
+    font-size: 20;
+    color: #FF4E01;
 `;

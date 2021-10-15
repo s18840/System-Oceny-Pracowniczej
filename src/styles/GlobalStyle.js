@@ -1,24 +1,22 @@
 import styled, {createGlobalStyle} from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+@font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      src: url('../../public/fonts/Ubuntu-Regular.tft') format('truetype');
+    }
   body{
     margin: 0;
     padding: 0;
-    color: black;
-    font-size: 1.2em;
-    font-family: ubuntu, sans-serif;
-    font-style: normal;
-    font-weight: 300;
+    font-family: 'Ubuntu';
   }
 `;
 
-export const InputField = styled.input`
-    border-radius: 10px;
-    border: 2px solid #CCCCCC;
-    height: 18px;
-`;
 
-export const Input = styled.input`
-    width: ${props => props.width};
+export const InputField = styled.input`
+    width: ${props => props.width}; 
     height: ${props => props.height};
+    border-radius: 44px;
+    border: 2px solid #CCCCCC;
 `;
