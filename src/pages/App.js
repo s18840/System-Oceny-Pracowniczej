@@ -1,9 +1,16 @@
 import react from "react";
-import {Router, Route, Switch} from Router
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import WelcomePage from './WelcomePage'
 
 function App() {
   return (
-      
+      <Router>
+          <Switch>
+            <Route exact path = "/welcome">
+              <WelcomePage/>
+            </Route>
+          </Switch>
+      </Router>
   );
 }
 
