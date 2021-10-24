@@ -58,12 +58,3 @@ export const Login = styled.p`
     text-align: center;
     color: #FF4E01;
 `;
-
-export const Span = styled.div`
-    margin-top: 5px;
-    margin-bottom: 5px;
-    text-decoration: ${props => props.underlined ? 'underline' : ''};
-    margin-left: 15px;
-    font-size: 20;
-    color: #FF4E01;
-`;

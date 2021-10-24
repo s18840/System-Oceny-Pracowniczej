@@ -1,6 +1,6 @@
 import React from "react";
-import { RegisterWrapper, RegisterFormWrapper, InputWrapper, Span, Login, LoginButton } from '../styles/LoginStyle';
-import {InputField} from '../styles/GlobalStyle'
+import { RegisterWrapper, RegisterFormWrapper, InputWrapper, Login, LoginButton } from '../styles/LoginStyle';
+import {InputField, Span} from '../styles/GlobalStyle'
 
 
 function LoginForm(){
@@ -15,17 +15,17 @@ return(
             <RegisterFormWrapper >
                 <Login>login</Login>
                 <InputWrapper>
-                    <Span>Username</Span>
+                    <Span fontSize = "20px">Username</Span>
                     <InputField width="357px" height="50px" name="username" type="text" ></InputField>
                 </InputWrapper>
 
                 <InputWrapper>
-                    <Span>Password</Span>
+                    <Span fontSize = "20px">Password</Span>
                     <InputField width="357px" height="50px" name="password" type="password"  ></InputField>
                 </InputWrapper>
 
                 <LoginButton type="submit" value="login"></LoginButton>
-                <Span underlined >Forgot password ?</Span>
+                <Span fontSize = "20px" underlined >Forgot password ?</Span>
 
             </RegisterFormWrapper>
         </RegisterWrapper>

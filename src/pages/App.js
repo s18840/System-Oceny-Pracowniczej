@@ -1,5 +1,5 @@
-import react from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import WelcomePage from './WelcomePage'
 import { GlobalStyle } from "../styles/GlobalStyle";
 
