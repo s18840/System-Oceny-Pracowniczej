@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 @font-face {
       font-family: 'Ubuntu';
       font-style: normal;
-      src: url('../res/fonts/Ubuntu-Regular.tft') format('truetype');
+      src: url('../assets/fonts/Ubuntu-Regular.tft') format('truetype');
     }
   body{
     margin: 0;

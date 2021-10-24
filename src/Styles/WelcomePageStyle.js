@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import backgroundImage from "../res/img/InterfaceMainPage.png";
+import backgroundImage from "../assets/img/InterfaceMainPage.png";
 import { FiMail } from "react-icons/fi";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { Link } from "react-scroll";

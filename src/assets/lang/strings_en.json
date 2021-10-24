@@ -1,0 +1,12 @@
+{
+    "HOME": "Home",
+    "ABOUT": "About",
+    "CONTACT": "Contact",
+    "LOGIN": "login",
+    "USERNAME": "Username",
+    "PASSWD": "Password",
+    "FORGOT_PASSWD": "Forgot password ?",
+    "NAME": "name",
+    "MSG": "message",
+    "SEND": "send"
+}
