@@ -27,7 +27,7 @@ export const Nav = styled.nav`
   left: 0;
 `;
 
-export const SideLogo = styled.div`
+export const NavLogo = styled.div`
   display: flex;
   flex-direction: column;
   width: 320px;
@@ -36,7 +36,7 @@ export const SideLogo = styled.div`
   margin-block-start: -30px;
 `;
 
-export const SideMenu = styled.div`
+export const NavMenu = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -45,12 +45,12 @@ export const SideMenu = styled.div`
   }
 `;
 
-export const SideCategories = styled.div`
+export const NavCategories = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  background-color: #522D8A;
+  background-color: #522d8a;
   width: 400px;
   height: 46px;
   justify-content: space-evenly;
@@ -58,7 +58,7 @@ export const SideCategories = styled.div`
   margin-block-end: 64px;
 `;
 
-export const SideLink = styled(Link)`
+export const NavLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,18 +68,4 @@ export const SideLink = styled(Link)`
   &.active {
     color: #6137a0;
   }
-`;
-
-export const SideIconHide = styled(Link)`
-  display: flex;
-  position: relative;
-  left: 200px;
-  color: #ea6e38;
-  background: #3d098a;
-  border: 1;
-  border-color: ea6e38;
-  transform: scale(2);
-  border-radius: 50%;
-  margin-block-start: -20px;
-  z-index: 5;
 `;

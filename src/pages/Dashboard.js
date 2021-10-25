@@ -1,18 +1,15 @@
 import React from "react";
+import Header from "../components/Header/Header";
+import { BrowserRouter as Router } from "react-router-dom";
+import NavBar from "../components/Navigation/NavBar";
 
-const Dashboard = () => {
+function App() {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "Right",
-        alignItems: "Right",
-        height: "100vh",
-      }}
-    >
-      <h1>Dashboard</h1>
-    </div>
+    <Router>
+      <Header />
+<NavBar/>
+    </Router>
   );
-};
+}
 
-export default Dashboard;
+export default App;
