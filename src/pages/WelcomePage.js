@@ -2,23 +2,24 @@ import React from 'react';
 import grade_1 from '../assets/img/grade_1.png'
 import grade_2 from '../assets/img/grade_2.png'
 import grade_3 from '../assets/img/grade_3.png'
+import logo from '../assets/img/feeDBack logo.png'
 import LoginForm from '../components/LoginForm'
 import WelcomeNav from '../components/WelcomeNav';
 import ContactForm from '../components/ContactForm';
 import ContactInfo from '../components/ContactInfo';
 import { Link } from 'react-scroll';
 import { HiglightText, Title } from '../styles/GlobalStyle';
-import {WelcomeTopWrapper, InlineWrapper, WelcomeTextWrapper, AboutInfoWrapper, WelcomePageContactWrapper, Footer, GradeWrapper, HomeDiv} from '../styles/WelcomePageStyle'
+import { Logo, WelcomeTopWrapper, InlineWrapper, WelcomeTextWrapper, AboutInfoWrapper, WelcomePageContactWrapper, Footer, GradeWrapper, HomeDiv } from '../styles/WelcomePageStyle'
 import { useTranslation } from 'react-i18next';
 
-
+// TODO add missing photos in about and contact sections
 function WelcomePage() {
     const { t } = useTranslation();
 
     return (
         <>
     <WelcomeTopWrapper id="top">
-       
+        <Logo src={logo}/>
         <InlineWrapper>
             <WelcomeNav/>
                 <WelcomeTextWrapper>
