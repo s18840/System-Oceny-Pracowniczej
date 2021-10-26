@@ -4,9 +4,16 @@ import { BsFillTelephoneFill } from 'react-icons/bs'
 import { Link } from 'react-scroll'
 import backgroundImage from '../assets/img/InterfaceMainPage.png'
 
+export const Logo = styled.img`
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: scale(1.3);
+`
+
 export const WelcomeTopWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   align-items: flex-start;
   padding-right: 150px;
   padding-top: 70px;
