@@ -1,5 +1,5 @@
-import { NavLink as Link } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink as Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 export const HeaderWrapper = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ export const HeaderWrapper = styled.div`
   border: 0.25px solid gray;
   border-left: none;
   font-size: 20px;
-`;
+`
 
 export const HeaderBtnProfileWrapper = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ export const HeaderBtnProfileWrapper = styled.div`
   flex-direction: row-reverse;
 
   text-align: center;
-`;
+`
 
 export const HeaderBtnTol = styled.div`
   padding: 22px;
@@ -34,7 +34,7 @@ export const HeaderBtnTol = styled.div`
     transition: all 0.2s ease-in-out;
     background: #15cd9c;
   }
-`;
+`
 export const HeaderBtnSignOut = styled.div`
   color: #fb0d0d;
   padding: 22px;
@@ -44,7 +44,7 @@ export const HeaderBtnSignOut = styled.div`
     transition: all 0.2s ease-in-out;
     background: #15cd9c;
   }
-`;
+`
 
 export const HeaderLocTree = styled.div`
   align-items: center;
@@ -53,7 +53,7 @@ export const HeaderLocTree = styled.div`
   background-color: #6137a0;
   border-top-right-radius: 45px;
   border-bottom-right-radius: 45px;
-`;
+`
 
 export const HeaderProfile = styled.div`
   padding: 25px;
@@ -64,7 +64,7 @@ export const HeaderProfile = styled.div`
   align-items: center;
   border-top-left-radius: 45px;
   border-bottom-left-radius: 45px;
-`;
+`
 
 export const HeaderSearch = styled.div`
   display: flex;
@@ -77,13 +77,13 @@ export const HeaderSearch = styled.div`
   border-radius: 45px;
   border: 0.25px solid gray;
   margin-right: -20px;
-`;
+`
 
 export const HeaderSearchIcon = styled.div`
   margin-right: 10px;
   cursor: pointer;
   margin-top: 1px;
-`;
+`
 
 export const HeaderProfilePhoto = styled.div`
   margin-right: 10px;
@@ -93,4 +93,4 @@ export const HeaderProfilePhoto = styled.div`
   max-width: 45px;
   border-radius: 100%;
   cursor: pointer;
-`;
+`

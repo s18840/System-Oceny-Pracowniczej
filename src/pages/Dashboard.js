@@ -1,7 +1,7 @@
-import React from "react";
-import Header from "../components/Header/Header";
-import { BrowserRouter as Router } from "react-router-dom";
-import NavBar from "../components/Navigation/NavBar";
+import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Header from '../components/Header/Header'
+import NavBar from '../components/Navigation/NavBar'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Header />
       <NavBar />
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

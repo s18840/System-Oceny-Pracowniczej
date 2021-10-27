@@ -1,14 +1,14 @@
-import React from "react";
-import {GlobalStyle} from '../styles/GlobalStyle'
+import React from 'react'
+import { GlobalStyle } from '../styles/GlobalStyle'
 import WelcomePage from './WelcomePage'
 
 function App() {
   return (
-  <>
-    <GlobalStyle/>
-    <WelcomePage/>
-  </>
-  );
+    <>
+      <GlobalStyle />
+      <WelcomePage />
+    </>
+  )
 }
 
-export default App;
+export default App

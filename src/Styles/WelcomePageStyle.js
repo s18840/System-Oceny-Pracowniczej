@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import backgroundImage from "../assets/img/InterfaceMainPage.png";
-import { FiMail } from "react-icons/fi";
-import { BsFillTelephoneFill } from "react-icons/bs";
-import { Link } from "react-scroll";
+import styled from 'styled-components'
+import { FiMail } from 'react-icons/fi'
+import { BsFillTelephoneFill } from 'react-icons/bs'
+import { Link } from 'react-scroll'
+import backgroundImage from '../assets/img/InterfaceMainPage.png'
 
 export const WelcomeTopWrapper = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ export const WelcomeTopWrapper = styled.div`
   background-image: url(${backgroundImage});
   background-repeat: no-repeat;
   background-size: cover;
-`;
+`
 
 export const WelcomeNavButton = styled(Link)`
   width: 248px;
@@ -27,13 +27,13 @@ export const WelcomeNavButton = styled(Link)`
   font-size: 39px;
   margin-left: 50px;
   text-align: center;
-`;
+`
 
 export const WelcomeNav = styled.li`
   display: flex;
   justify-content: flex-end;
   max-height: 100px;
-`;
+`
 
 export const WelcomeTextWrapper = styled.div`
   margin-right: 20px;
@@ -43,14 +43,13 @@ export const WelcomeTextWrapper = styled.div`
   font-size: 56px;
   filter: drop-shadow(-14px 31px 13px #000000);
   color: #ffffff;
-`;
+`
 export const InlineWrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   row-gap: 150px;
   margin-right: 40px;
-`;
-
+`
 
 export const GradeWrapper = styled.div`
   padding-top: 50px;
@@ -67,14 +66,13 @@ export const AboutInfoWrapper = styled.div`
   font-size: 40px;
   filter: drop-shadow(-23px 23px 16px #000000);
   color: #3d098a;
-`;
-
+`
 
 export const WelcomePageContactWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 100px;
-    margin-bottom: 100px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 100px;
+  margin-bottom: 100px;
 `
 
 export const ContactFormWrapper = styled.form`
@@ -90,7 +88,7 @@ export const ContactFormWrapper = styled.form`
   justify-content: space-evenly;
   padding-left: 100px;
   padding-right: 100px;
-`;
+`
 
 export const ContactListWrapper = styled.div`
   display: flex;
@@ -98,17 +96,17 @@ export const ContactListWrapper = styled.div`
   justify-content: flex-end;
   margin-top: 100px;
   margin-left: 50px;
-`;
+`
 
 export const ContactInfoWrapper = styled.div`
   display: flex;
   vertical-align: middle;
-`;
+`
 export const Contact = styled.a`
   padding: 40px;
   color: #6137a0;
   font-size: 56px;
-`;
+`
 
 export const MailIcon = styled(FiMail)`
   overflow: visible;
@@ -118,7 +116,7 @@ export const MailIcon = styled(FiMail)`
   padding: 5px;
   transform: scale(5);
   margin: 60px;
-`;
+`
 
 export const PhoneIcon = styled(BsFillTelephoneFill)`
   overflow: visible;
@@ -128,7 +126,7 @@ export const PhoneIcon = styled(BsFillTelephoneFill)`
   padding: 5px;
   transform: scale(5);
   margin: 60px;
-`;
+`
 
 export const HomeDiv = styled.div`
   text-align: center;
@@ -141,4 +139,4 @@ export const Footer = styled.footer`
   background-color: #3d098a;
   width: 100%;
   height: 40px;
-`;
+`

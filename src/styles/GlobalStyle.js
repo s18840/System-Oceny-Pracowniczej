@@ -1,4 +1,4 @@
-import styled, {createGlobalStyle} from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -11,41 +11,40 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Ubuntu';
   }
-`;
-
+`
 
 export const InputField = styled.input`
-    width: ${props => props.width}; 
-    height: ${props => props.height};
-    border-radius: 44px;
-    border: 2px solid #CCCCCC;
-`;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  border-radius: 44px;
+  border: 2px solid #cccccc;
+`
 
 export const Span = styled.div`
-    margin-top: 5px;
-    margin-bottom: 5px;
-    text-decoration: ${props => props.underlined ? 'underline' : ''};
-    margin-left: 15px;
-    font-size: ${props => props.fontSize};
-    color: #FF4E01;
-`;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-decoration: ${(props) => (props.underlined ? 'underline' : '')};
+  margin-left: 15px;
+  font-size: ${(props) => props.fontSize};
+  color: #ff4e01;
+`
 
 export const HiglightText = styled.a`
-  color: #FF4E01;
+  color: #ff4e01;
 `
 
 export const Title = styled.h1`
-  text-align: ${props => props.textAligment};
-  margin-left: ${props => props.marginLeft};
-  margin-right: ${props => props.marginRight};
+  text-align: ${(props) => props.textAligment};
+  margin-left: ${(props) => props.marginLeft};
+  margin-right: ${(props) => props.marginRight};
   font-size: 130px;
-  color: #FF4E01;
+  color: #ff4e01;
 `
 
 export const OrangeInputButton = styled.input`
   width: 243px;
   height: 67px;
-  background-color: #FF4E01; 
+  background-color: #ff4e01;
   color: white;
   border-radius: 45px;
   font-size: 42px;

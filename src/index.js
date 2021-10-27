@@ -1,14 +1,13 @@
-
-import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
-import App from './pages/App';
-import './i18n';
+import React, { Suspense } from 'react'
+import ReactDOM from 'react-dom'
+import App from './pages/App'
+import './i18n'
 
 ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback="loading...">
-        <App/>
+      <App />
     </Suspense>
   </React.StrictMode>,
-  document.getElementById("root")
-);
+  document.getElementById('root'),
+)
