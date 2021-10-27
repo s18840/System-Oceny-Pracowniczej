@@ -2,70 +2,60 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  background-image: linear-gradient(
-    to bottom,
-    #6137a0,
-    #5e369c,
-    #5c3597,
-    #593493,
-    #57338f,
-    #533188,
-    #4f2e82,
-    #4b2c7b,
-    #442870,
-    #3e2465,
-    #37205a,
-    #311c50
-  );
+  background: linear-gradient(#6137a0, #54318a, #311c50);
   display: flex;
   position: fixed;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   width: 400px;
-  height: 1080px;
+  height: 100%;
   font-size: 20px;
   top: 0;
   left: 0;
+  
 `;
 
 export const NavLogo = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 320px;
-  height: 320px;
+  justify-content: center;
   border-radius: 100%;
-  margin-block-start: -30px;
+  margin-block-start: -50px;
 `;
 
 export const NavMenu = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
 `;
 
 export const NavCategories = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   color: #ffffff;
-  background-color: #522d8a;
   width: 400px;
   height: 46px;
-  justify-content: space-evenly;
   margin-block-start: -32px;
   margin-block-end: 64px;
 `;
+export const NavCategoriesWrapper = styled.div`
+  display: flex;
+  margin-left: 15px;
+`;
+
+export const NavCategoriesText = styled.div`
+  margin-left: 15px;
+  color: #ffffff;
+`;
+
+export const NavBtnDropdown = styled.div`
+  margin-right: 15px;
+  cursor: pointer;
+`;
 
 export const NavLink = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-decoration: none;
-  background: #ffff;
   cursor: pointer;
   &.active {
-    color: #6137a0;
+    color: #1241f1;
   }
 `;

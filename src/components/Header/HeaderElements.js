@@ -1,7 +1,6 @@
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
-
 export const HeaderWrapper = styled.div`
   display: flex;
   position: fixed;
@@ -13,6 +12,7 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
   background-color: #fff;
   border: 0.25px solid gray;
+  border-left: none;
   font-size: 20px;
 `;
 
@@ -47,7 +47,9 @@ export const HeaderBtnSignOut = styled.div`
 `;
 
 export const HeaderLocTree = styled.div`
+  align-items: center;
   padding: 25px;
+  color: #ffffff;
   background-color: #6137a0;
   border-top-right-radius: 45px;
   border-bottom-right-radius: 45px;
@@ -58,20 +60,29 @@ export const HeaderProfile = styled.div`
   background-color: #6137a0;
   display: flex;
   flex-direction: row;
-
+  color: #ffffff;
   align-items: center;
   border-top-left-radius: 45px;
   border-bottom-left-radius: 45px;
 `;
 
 export const HeaderSearch = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
   margin: 25px 0px;
-  transform: scaleX(-1);
-  width: 424px;
+  width: 420px;
   max-height: 38px;
-  max-width: 424px;
+  max-width: 420px;
   border-radius: 45px;
-  background-color: #15cd9c;
+  border: 0.25px solid gray;
+  margin-right: -20px;
+`;
+
+export const HeaderSearchIcon = styled.div`
+  margin-right: 10px;
+  cursor: pointer;
+  margin-top: 1px;
 `;
 
 export const HeaderProfilePhoto = styled.div`

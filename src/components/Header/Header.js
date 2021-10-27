@@ -9,11 +9,13 @@ import {
   HeaderProfilePhoto,
   HeaderWrapper,
   HeaderBtnProfileWrapper,
-  HeaderLocSearchWrapper,
   HeaderBtnSignOut,
   HeaderBtnTol,
+  HeaderSearchIcon,
 } from "./HeaderElements";
 import { useLocation } from "react-router";
+
+//HeaderLocTree lokalizacja aktualna początek implementacji
 const usePathname = () => {
   const location = useLocation();
   return location.pathname;
@@ -38,10 +40,13 @@ const HeaderBar = () => {
       </HeaderBtnProfileWrapper>
 
       <HeaderSearch>
-        <FaSearch />
+        <HeaderSearchIcon>
+          <FaSearch />
+        </HeaderSearchIcon>
       </HeaderSearch>
+
       <HeaderLocTree to="/sciezka do miejsc" activeStyle>
-        <text>Profile/Personal Info</text>
+        <text>Profile / PersonalInfo</text>
       </HeaderLocTree>
     </HeaderWrapper>
   );

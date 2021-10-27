@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa"; //grades
 import { FaUsers } from "react-icons/fa"; //teams
 import { FaRegUser } from "react-icons/fa"; //profile
 import { FaRegObjectGroup } from "react-icons/fa"; //projects
 import { FaIdCard } from "react-icons/fa"; //dashboard
 import * as MDIcons from "react-icons/md";
-import * as IOIcons from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io"; //dropdown
 
 import {
   Nav,
   NavCategories,
   NavLogo,
   NavMenu,
-  NavIconHide,
+  NavCategoriesText,
+  NavBtnDropdown,
+  NavCategoriesWrapper,
+  NavLink,
 } from "./NavBarElements";
 
 const Navbar = () => {
@@ -22,13 +24,70 @@ const Navbar = () => {
     <Nav>
       <NavMenu>
         <NavLogo>
-          <img src="Logo.png" alt="" />
+          <NavLink to="/home">
+            <img src="Logo420.png" alt="" />
+          </NavLink>
         </NavLogo>
-        <NavCategories></NavCategories>
-        <NavCategories></NavCategories>
-        <NavCategories></NavCategories>
-        <NavCategories></NavCategories>
-        <NavCategories></NavCategories>
+
+        <NavCategories>
+          <NavCategoriesWrapper>
+            <FaIdCard />
+            <NavLink to="/dashboard">
+              <NavCategoriesText>Dashboard</NavCategoriesText>
+            </NavLink>
+          </NavCategoriesWrapper>
+          <NavBtnDropdown>
+            <IoIosArrowDown />
+          </NavBtnDropdown>
+        </NavCategories>
+
+        <NavCategories>
+          <NavCategoriesWrapper>
+            <FaRegUser />
+            <NavLink to="/profile">
+              <NavCategoriesText>Profile</NavCategoriesText>
+            </NavLink>
+          </NavCategoriesWrapper>
+          <NavBtnDropdown>
+            <IoIosArrowDown />
+          </NavBtnDropdown>
+        </NavCategories>
+
+        <NavCategories>
+          <NavCategoriesWrapper>
+            <FaUsers />
+            <NavLink to="/teams">
+              <NavCategoriesText>Teams</NavCategoriesText>
+            </NavLink>
+          </NavCategoriesWrapper>
+          <NavBtnDropdown>
+            <IoIosArrowDown />
+          </NavBtnDropdown>
+        </NavCategories>
+
+        <NavCategories>
+          <NavCategoriesWrapper>
+            <FaRegObjectGroup />
+            <NavLink to="/projects">
+              <NavCategoriesText>Projects</NavCategoriesText>
+            </NavLink>
+          </NavCategoriesWrapper>
+          <NavBtnDropdown>
+            <IoIosArrowDown />
+          </NavBtnDropdown>
+        </NavCategories>
+
+        <NavCategories>
+          <NavCategoriesWrapper>
+            <FaStar />
+            <NavLink to="/grades">
+              <NavCategoriesText>Grades</NavCategoriesText>
+            </NavLink>
+          </NavCategoriesWrapper>
+          <NavBtnDropdown>
+            <IoIosArrowDown />
+          </NavBtnDropdown>
+        </NavCategories>
       </NavMenu>
     </Nav>
   );
