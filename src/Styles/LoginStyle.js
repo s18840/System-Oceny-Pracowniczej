@@ -1,21 +1,21 @@
 import styled from 'styled-components'
 
-export const RegisterWrapper = styled.div`
-  width: 464px;
-  min-height: 570px;
+export const LoginFormWrapper = styled.form`
+  height: 700px;
+  width: 460px;
   display: flex;
   flex-direction: column;
-  padding-top: 72px;
-  padding-bottom: 72px;
+  justify-content: space-around;
   align-items: center;
+  
   background-color: #fff3fd;
   border: 5px solid white;
   border-radius: 48px;
+  padding: 0 40px 0 40px;
 `
 
 export const InputWrapper = styled.div`
   display: flex;
-  align-items: left;
   flex-direction: column;
 `
 
@@ -29,30 +29,7 @@ export const LoginButton = styled.input`
   font-family: 'Ubuntu';
 `
 
-export const RegisterFormWrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  & > ${InputWrapper} {
-    margin-bottom: 35px;
-  }
-  & > input[type='password'] {
-    margin-bottom: 30px;
-  }
-  & > input[type='submit'] {
-    margin-top: 10px;
-  }
-  & > input[type='button'] {
-    margin-top: 10px;
-  }
-`
-
-export const Login = styled.p`
-  width: 357px;
-  height: 52px;
-  margin-top: 0px;
-  margin-bottom: 100px;
+export const Login = styled.a`
   font-size: 78px;
   text-align: center;
   color: #ff4e01;

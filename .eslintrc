@@ -1,4 +1,6 @@
 {
   "extends": "google",
-  "linebreak-style": "windows"
+  "rules":{
+    "linebreak-style": 0
+  }
 }

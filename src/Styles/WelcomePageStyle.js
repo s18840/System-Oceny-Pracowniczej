@@ -5,9 +5,6 @@ import { Link } from 'react-scroll'
 import backgroundImage from '../assets/img/InterfaceMainPage.png'
 
 export const Logo = styled.img`
-  position: relative;
-  top: 0;
-  left: 0;
   transform: scale(1.3);
 `
 
@@ -17,6 +14,7 @@ export const WelcomeTopWrapper = styled.div`
   align-items: flex-start;
   padding-right: 150px;
   padding-top: 70px;
+  padding-bottom: 200px;
   background-color: #f9ebf6;
   background-image: url(${backgroundImage});
   background-repeat: no-repeat;
@@ -63,19 +61,23 @@ export const GradeWrapper = styled.div`
   padding-right: 100px;
 `
 
+export const AboutWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 export const AboutInfoWrapper = styled.div`
   background-color: #ffffff;
   border-top-right-radius: 45px;
   border-bottom-right-radius: 45px;
   width: 50%;
-  padding: 50px;
-  padding-left: 100px;
+  padding: 50px 50px 50px 100px;
   font-size: 40px;
   filter: drop-shadow(-23px 23px 16px #000000);
   color: #3d098a;
 `
 
-export const WelcomePageContactWrapper = styled.div`
+export const ConctactContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 100px;
@@ -101,7 +103,6 @@ export const ContactListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-top: 100px;
   margin-left: 50px;
 `
 
