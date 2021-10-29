@@ -8,11 +8,6 @@ display: flex;
   margin-block-start: -50px;
 `
 
-export const ProfileText = styled.text`
-display: flex;
-text-decoration: none;
-`
-
 export const NavLink = styled(Link)`
   text-decoration: none;
   cursor: pointer;
