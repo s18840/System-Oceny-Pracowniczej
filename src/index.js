@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
-import App from './pages/App'
+//import App from './pages/App'
+import App from './pages/ProfilePage'
 import './i18n'
 
 ReactDOM.render(
