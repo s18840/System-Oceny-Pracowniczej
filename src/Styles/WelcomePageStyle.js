@@ -168,17 +168,3 @@ export const ImageStack = styled.div`
   justify-content: flex-start;
   margin-right: 50px;
 `
-
-export const ImageStackTop = styled.div`
-  float: left;
-  width: 66%;
-  margin-right: -100%;
-  padding-top: 15%;
-  position: relative;
-  z-index: 1;
-`
-
-export const ImageStackBottom = styled.div`
-  float: right;
-  width: 75%;
-`
