@@ -5,16 +5,21 @@ import { Link } from 'react-scroll'
 import backgroundImage from '../assets/img/InterfaceMainPage.png'
 
 export const Logo = styled.img`
+  grid-area: logo;
   transform: scale(1.3);
 `
 
 export const WelcomeTopWrapper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr 1fr;
+  grid-template-rows: 1.6fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas: 
+    "logo inlineWrapper login"
+    "grades-images grades-images login";
   padding-right: 150px;
   padding-top: 70px;
-  padding-bottom: 200px;
+  padding-bottom: 100px;
   background-color: #f9ebf6;
   background-image: url(${backgroundImage});
   background-repeat: no-repeat;
@@ -50,6 +55,7 @@ export const WelcomeTextWrapper = styled.div`
   color: #ffffff;
 `
 export const InlineWrapper = styled.div`
+  grid-area: inlineWrapper;
   display: inline-flex;
   flex-direction: column;
   row-gap: 150px;
@@ -57,8 +63,10 @@ export const InlineWrapper = styled.div`
 `
 
 export const GradeWrapper = styled.div`
-  padding-top: 50px;
-  padding-right: 100px;
+  grid-area: grades-images;
+  display: flex;
+  justify-content: space-around;
+;
 `
 
 export const AboutWrapper = styled.div`
@@ -70,7 +78,6 @@ export const AboutInfoWrapper = styled.div`
   background-color: #ffffff;
   border-top-right-radius: 45px;
   border-bottom-right-radius: 45px;
-  width: 50%;
   padding: 50px 50px 50px 100px;
   font-size: 40px;
   filter: drop-shadow(-23px 23px 16px #000000);
@@ -90,7 +97,6 @@ export const ContactFormWrapper = styled.form`
   text-align: right;
   background-color: #3d098a;
   min-height: 800px;
-  width: 50%;
   border-top-left-radius: 45px;
   border-bottom-left-radius: 45px;
   filter: drop-shadow(22px 23px 16px #000000);
@@ -102,14 +108,21 @@ export const ContactFormWrapper = styled.form`
 export const ContactListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  margin-left: 50px;
+  justify-content: space-evenly;
+  margin-left: 50px;  
 `
 
 export const ContactInfoWrapper = styled.div`
   display: flex;
   vertical-align: middle;
 `
+//TODO change name
+export const ContactRightSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+`
+
 export const Contact = styled.a`
   padding: 40px;
   color: #6137a0;
@@ -147,4 +160,25 @@ export const Footer = styled.footer`
   background-color: #3d098a;
   width: 100%;
   height: 40px;
+`
+
+export const ImageStack = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: 50px;
+`
+
+export const ImageStackTop = styled.div`
+  float: left;
+  width: 66%;
+  margin-right: -100%;
+  padding-top: 15%;
+  position: relative;
+  z-index: 1;
+`
+
+export const ImageStackBottom = styled.div`
+  float: right;
+  width: 75%;
 `

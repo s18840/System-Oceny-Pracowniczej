@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { WelcomeNavButton, WelcomeNav } from '../styles/WelcomePageStyle'
+import { WelcomeNavButton, WelcomeNav } from '../../styles/WelcomePageStyle'
 
 function Nav() {
   const { t } = useTranslation()

@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const LoginFormWrapper = styled.form`
+  grid-area: login;
+  
   height: 700px;
   width: 460px;
   display: flex;

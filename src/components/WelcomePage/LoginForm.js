@@ -5,12 +5,13 @@ import {
   InputWrapper,
   Login,
   LoginButton,
-} from '../styles/LoginStyle'
-import { InputField, Span } from '../styles/GlobalStyle'
+} from '../../styles/LoginStyle'
+import { InputField, Span } from '../../styles/GlobalStyle'
 
 function LoginForm() {
   const { t } = useTranslation()
   // logic for login and sending authentication
+
 
   return (
       <LoginFormWrapper>
