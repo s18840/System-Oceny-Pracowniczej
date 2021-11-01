@@ -1,5 +1,8 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useForm } from "react-hook-form";
+import sha256 from 'crypto-js/sha256'
+
 import {
   LoginFormWrapper,
   InputWrapper,
@@ -8,17 +11,34 @@ import {
 } from '../../styles/LoginStyle'
 import { InputField, Span } from '../../styles/GlobalStyle'
 
+//TODO add errors for form validation
 function LoginForm() {
   const { t } = useTranslation()
-  // logic for login and sending authentication
+  var log = require('loglevel')
+  const { register, handleSubmit} = useForm();
+  const submitForm = (data) => {
+    console.log(data);
+
+    //TODO encrypt password
+
+    // const hashedPassword = bcrypt.hashSync(data.password, salt);
+
+    // let credentials = {
+    //   "username": data.username,
+    //   "password": hashedPassword
+    // };
+
+    // console.log(credentials);/
+  };
 
 
   return (
-      <LoginFormWrapper>
+      <LoginFormWrapper onSubmit={handleSubmit(submitForm)}>
         <Login>{t('LOGIN')}</Login>
         <InputWrapper>
           <Span fontSize="20px">{t('USERNAME')}</Span>
           <InputField
+            {...register("username", ({required: true}))}
             width="357px"
             height="50px"
             name="username"
@@ -27,6 +47,7 @@ function LoginForm() {
 
           <Span fontSize="20px">{t('PASSWD')}</Span>
           <InputField
+            {...register("password", ({required: true}))}
             width="357px"
             height="50px"
             name="password"
