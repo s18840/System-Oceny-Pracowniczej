@@ -16,8 +16,25 @@ export const GlobalStyle = createGlobalStyle`
 export const InputField = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  font-size: 30px;
+  line-height: 40px;
   border-radius: 44px;
   border: 2px solid #cccccc;
+  box-sizing: border-box;
+  padding-left: 20px;
+  max-lines: 1;
+`
+
+export const TextField = styled.textarea`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  font-size: 30px;
+  line-height: 35px;
+  border-radius: 44px;
+  border: 2px solid #cccccc;
+  box-sizing: border-box;
+  padding: 20px 20px 20px 20px;
+  
 `
 
 export const Span = styled.div`
