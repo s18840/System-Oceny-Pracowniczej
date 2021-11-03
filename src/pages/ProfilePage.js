@@ -10,9 +10,12 @@ import {
   ProfileInfoDiv,
   ProfilePhoto,
   ProfileSubHeaderText,
+  ProfileTab,
+  ProfileTabWrapper,
   ProfileText,
   ProfileTextWrapper,
-ProfileWrapper
+ProfileWrapper,
+StatusIcon
 } from "../styles/ProfilePageStyle"
 
 function App() {
@@ -49,7 +52,7 @@ function App() {
     <ProfileTextWrapper>
     <ProfileHeaderText>
       <PhoneIcon/>
-      <text>+48 506 123 412</text>
+      <text>+48 506123412</text>
       </ProfileHeaderText>
     <ProfileSubHeaderText>
       <text>Personal Number:</text>
@@ -66,13 +69,22 @@ function App() {
       </ProfileHeaderText>
     <ProfileSubHeaderText>
       <text>Status:</text>
-      <ProfileText>
-        <text> DODAC KOLOR</text>
-      </ProfileText>
+      <StatusIcon/>
       </ProfileSubHeaderText> 
     </ProfileTextWrapper>
     
     </ProfileInfoDiv>
+<ProfileTabWrapper>
+  <ProfileTab>
+  <text>Basic Inforamtion</text>
+  </ProfileTab>
+  <ProfileTab>
+  <text>Employment</text>
+  </ProfileTab>
+  <ProfileTab>
+  <text>Education</text>
+  </ProfileTab>
+</ProfileTabWrapper>
 
     </Router>
   );

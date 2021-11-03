@@ -71,16 +71,16 @@ export const HeaderSearch = styled.div`
   justify-content: flex-end;
 
   margin: 25px 0px;
-  width: 420px;
+  width: 380px;
   max-height: 38px;
   max-width: 420px;
   border-radius: 45px;
   border: 0.25px solid gray;
-  margin-right: -20px;
 `
 
 export const HeaderSearchIcon = styled.div`
   margin-right: 10px;
+  margin-left: 10px;
   cursor: pointer;
   margin-top: 1px;
 `

@@ -1,12 +1,10 @@
 import styled from 'styled-components'
 import { NavLink as Link } from 'react-router-dom'
 import { FiMail } from "react-icons/fi";
-import { BsFillTelephoneFill } from "react-icons/bs";
+import { BsFillTelephoneFill,BsCircle } from "react-icons/bs";
 
 export const ProfilePhoto = styled.div`
-
 border-radius: 100%;
-
 `
 
 export const NavLink = styled(Link)`
@@ -29,9 +27,13 @@ flex-direction: column;
 `
 
 export const ProfileHeaderText = styled.text`
+display: flex;
 font-size: 24px;
 color: #6137a0;
 font-weight:bold;
+align-items: center;
+margin: 15px 0px;
+
 `
 export const ProfileSubHeaderText = styled.text`
 font-size: 14px;
@@ -46,6 +48,17 @@ font-weight:bold;
 margin: 15px 0px;
 `
 
+export const ProfileTab = styled.div`
+  padding: 25px;
+  color: #FFFFFF;
+  background-color: #6137a0;
+  border-radius: 45px;
+  margin-top: 10px;
+margin-right: 15px;
+font-size: 24px;
+font-weight:bold;
+`
+
 export const ProfileInfoDiv = styled.div`
 display: flex;
 justify-content: space-around;
@@ -54,7 +67,11 @@ margin-top: 83px;
 margin-left: 400px;
 `
 
-export const ProfileTabDiv = styled.div`
+export const ProfileTabWrapper = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+margin-left: 400px;
 
 `
 
@@ -82,4 +99,14 @@ export const PhoneIcon = styled(BsFillTelephoneFill)`
   padding: 5px;
   transform: scale(1.5);
 
+`;
+export const StatusIcon = styled(BsCircle)`
+  overflow: visible;
+  background-color: #55FF11;
+  //dla statusu nieaktywnego #ff5511
+  border-color: black;
+  border-radius: 50%;
+  margin-top: 5px;
+  margin-left: 20px;
+  border-width: 1px;
 `;
