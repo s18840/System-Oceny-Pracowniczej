@@ -8,5 +8,6 @@
     "FORGOT_PASSWD": "Zapomniałeś hasła ?",
     "NAME": "nazwa",
     "MSG": "wiadomość",
-    "SEND": "wyslij"
+    "SEND": "wyslij",
+    "REQUIRED": "To pole jest wymagane"
 }

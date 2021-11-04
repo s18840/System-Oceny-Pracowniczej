@@ -8,5 +8,6 @@
     "FORGOT_PASSWD": "Forgot password ?",
     "NAME": "name",
     "MSG": "message",
-    "SEND": "send"
+    "SEND": "send",
+    "REQUIRED": "This field is required"
 }
