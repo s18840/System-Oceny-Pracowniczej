@@ -5,12 +5,16 @@ import NavBar from "../components/Navigation/NavBar";
 import Footer from "../components/Footer/Footer";
 import {
   MailIcon,
+  NavLink,
   PhoneIcon,
+  ProfileDetailedInfoWrapper,
+  ProfileDetailedPersonalInfo,
   ProfileHeaderText,
   ProfileInfoDiv,
   ProfilePhoto,
   ProfileSubHeaderText,
   ProfileTab,
+  ProfileTabBar,
   ProfileTabWrapper,
   ProfileText,
   ProfileTextWrapper,
@@ -21,15 +25,16 @@ StatusIcon
 function App() {
   return (
     <Router>
-
       <NavBar />
-
-
       <Header /> 
       <Footer />
+
       <ProfileInfoDiv>
     <ProfilePhoto>
+      <NavLink to ="/profile">
+
     <img src="prof.png" alt="" width="100%" />
+    </NavLink>
     </ProfilePhoto>
     <ProfileTextWrapper>
     <ProfileHeaderText>
@@ -74,6 +79,7 @@ function App() {
     </ProfileTextWrapper>
     
     </ProfileInfoDiv>
+
 <ProfileTabWrapper>
   <ProfileTab>
   <text>Basic Inforamtion</text>
@@ -85,6 +91,12 @@ function App() {
   <text>Education</text>
   </ProfileTab>
 </ProfileTabWrapper>
+<ProfileTabBar/>
+<ProfileDetailedInfoWrapper>
+  <ProfileDetailedPersonalInfo>
+    
+  </ProfileDetailedPersonalInfo>
+</ProfileDetailedInfoWrapper>
 
     </Router>
   );

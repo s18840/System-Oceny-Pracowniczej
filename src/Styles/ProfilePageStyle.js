@@ -49,7 +49,7 @@ margin: 15px 0px;
 `
 
 export const ProfileTab = styled.div`
-  padding: 25px;
+  padding: 10px;
   color: #FFFFFF;
   background-color: #6137a0;
   border-radius: 45px;
@@ -57,6 +57,22 @@ export const ProfileTab = styled.div`
 margin-right: 15px;
 font-size: 24px;
 font-weight:bold;
+cursor: pointer;
+//styl dla guzik dla wcisnietego, narazie tylko na klik
+:active{
+  color: #ff4e01;
+  border-radius: 30px 30px 0px 0px;
+  margin-bottom: -5px;
+}
+`
+export const ProfileTabBar = styled.div`
+  display: flex;
+  position: fixed;
+  margin-top: 5px;
+  right: 0;
+  left: 400px;
+  height: 10px;
+  background-color: #6137a0;
 `
 
 export const ProfileInfoDiv = styled.div`
@@ -65,6 +81,7 @@ justify-content: space-around;
 align-items: center;
 margin-top: 83px;
 margin-left: 400px;
+
 `
 
 export const ProfileTabWrapper = styled.div`
@@ -75,9 +92,28 @@ margin-left: 400px;
 
 `
 
-export const ProfileDetailedInfoDiv = styled.div`
+
+export const ProfileDetailedInfoWrapper = styled.div`
 
 `
+export const ProfileDetailedPersonalInfo = styled.div`  
+left: 400 px;
+bottom: 30 px;
+display: grid; 
+grid-auto-columns: 1fr 1fr; 
+grid-auto-rows: 1fr; 
+grid-template-columns: 1fr 1fr; 
+grid-template-rows: 1fr 1fr 1fr; 
+gap: 0px 0px; 
+border-width:2px;
+color: green;
+grid-template-areas: 
+  ". ."
+  ". ."
+  ". ."; 
+`
+
+
 export const MailIcon = styled(FiMail)`
   overflow: visible;
   background-color: #ff4e01;
@@ -109,4 +145,4 @@ export const StatusIcon = styled(BsCircle)`
   margin-top: 5px;
   margin-left: 20px;
   border-width: 1px;
-`;
+`
