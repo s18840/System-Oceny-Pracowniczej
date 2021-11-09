@@ -26,7 +26,7 @@ export const ProfileWrapper = styled.div`
 
 export const ProfileHeaderText = styled.text`
   display: flex;
-  font-size: 24px;
+  font-size: 28px;
   color: #6137a0;
   font-weight: bold;
   align-items: center;
@@ -52,7 +52,7 @@ export const ProfileTab = styled.div`
   border-radius: 45px;
   margin-top: 10px;
   margin-right: 15px;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   cursor: pointer;
   //styl dla guzik dla wcisnietego, narazie tylko na klik
@@ -64,7 +64,6 @@ export const ProfileTab = styled.div`
 `;
 export const ProfileTabBar = styled.div`
   display: flex;
-  position: fixed;
   margin-top: 5px;
   right: 0;
   left: 400px;
@@ -88,82 +87,100 @@ export const ProfileTabWrapper = styled.div`
 `;
 
 export const ProfileDetailedInfoWrapper = styled.div`
+  border: 2px solid #dfdfdf;
+  margin-left: 400px;
   display: grid;
-  right: 0;
-  grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
-  grid-template-rows: 0.25fr 0.25fr 0.25fr 0.25fr 0.25fr;
+  justify-content: space-evenly;
+  margin-top: 50px;
+  row-gap: 0px;
+  grid-template-columns: 280px 200px 200px;
+  grid-template-rows: 80px 80px 80px 80px 80px 80px;
   color: blue;
 `;
-export const ProfileDateText = styled.div`
-  font-size: 24px;
+export const ProfileDataText = styled.div`
+  font-size: 28px;
+  font-weight: bold;
+  color: purple;
+`;
+export const PersonalDataHeadingText = styled.div`
+  grid-row: 1;
+  grid-column: 1;
+  font-size: 42px;
+  font-weight: bold;
+  color: purple;
+`;
+export const AddressHeadingText = styled.div`
+  grid-row: 2;
+  grid-column: 2;
+  font-size: 42px;
   font-weight: bold;
   color: purple;
 `;
 export const FirstName = styled.div`
-  grid-row: 1;
+  grid-row: 2;
   grid-column: 1;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
 `;
 export const SecondName = styled.div`
-  grid-row: 2;
+  grid-row: 3;
   grid-column: 1;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
 `;
 export const SurName = styled.div`
-  grid-row: 3;
+  grid-row: 4;
   grid-column: 1;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
 `;
 export const FamilyName = styled.div`
-  grid-row: 4;
-  grid-column: 1;
-  font-size: 24px;
-  font-style:italic;
-`;
-export const DateOfBirth = styled.div`
   grid-row: 5;
   grid-column: 1;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
+`;
+export const DateOfBirth = styled.div`
+  grid-row: 6;
+  grid-column: 1;
+  font-size: 28px;
+  font-style: italic;
 `;
 export const Street = styled.div`
-  grid-row: 2;
+  grid-row: 3;
   grid-column: 2;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
 `;
 export const HouseNumber = styled.div`
-  grid-row: 2;
+  grid-row: 3;
   grid-column: 3;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
 `;
 export const City = styled.div`
-  grid-row: 3;
+  grid-row: 4;
   grid-column: 2;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
 `;
 export const District = styled.div`
-  grid-row: 3;
+  grid-row: 4;
   grid-column: 3;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
 `;
 export const PostalCode = styled.div`
-  grid-row: 4;
+  grid-row: 5;
   grid-column: 2;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
 `;
 export const Country = styled.div`
-  grid-row: 4;
+  grid-row: 5;
   grid-column: 3;
-  font-size: 24px;
-  font-style:italic;
+  font-size: 28px;
+  font-style: italic;
 `;
 
 export const MailIcon = styled(FiMail)`
