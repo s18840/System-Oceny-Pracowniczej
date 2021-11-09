@@ -9,9 +9,10 @@ export const ProfilePhoto = styled.div`
 
 export const NavLink = styled(Link)`
   text-decoration: none;
+  color: #ffffff;
   cursor: pointer;
   &.active {
-    color: #1241f1;
+    color: #ff4e01;
   }
 `;
 export const ProfileTextWrapper = styled.div`
@@ -45,7 +46,7 @@ export const ProfileText = styled.text`
   margin: 15px 0px;
 `;
 
-export const ProfileTab = styled.div`
+export const ProfileTab = styled.button`
   padding: 10px;
   color: #ffffff;
   background-color: #6137a0;
@@ -56,8 +57,7 @@ export const ProfileTab = styled.div`
   font-weight: bold;
   cursor: pointer;
   //styl dla guzik dla wcisnietego, narazie tylko na klik
-  :active {
-    color: #ff4e01;
+  :visited {
     border-radius: 30px 30px 0px 0px;
     margin-bottom: -5px;
   }
@@ -66,7 +66,7 @@ export const ProfileTabBar = styled.div`
   display: flex;
   margin-top: 5px;
   right: 0;
-  left: 400px;
+  margin-left: 400px;
   height: 10px;
   background-color: #6137a0;
 `;
@@ -183,6 +183,61 @@ export const Country = styled.div`
   font-style: italic;
 `;
 
+export const ProfileEmploymentWrapper = styled.div`
+  border: 2px solid #dfdfdf;
+  border-radius: 20px;
+  margin-left: 400px;
+  display: grid;
+  justify-content: space-around;
+  justify-items: center;
+  align-items: center;
+  margin-top: 40px;
+  row-gap: 40px;
+`;
+
+export const EmploymentHeadingText = styled.div`
+  display: grid;
+  grid-row: 1;
+  font-size: 42px;
+  font-weight: bold;
+  color: purple;
+`;
+
+export const EmploymentDetailed = styled.div`
+  grid-column: 1;
+  border: 2px solid #dfdfdf;
+  border-radius: 20px;
+  display: grid;
+  justify-content: space-around;
+  justify-items: center;
+  align-items: center;
+`;
+export const EmploymentDate = styled.div`
+  grid-row: 2;
+  grid-column: 1;
+  font-size: 28px;
+  color: purple;
+`;
+export const EmploymentDep = styled.div`
+  grid-row: 2;
+  grid-column: 2;
+  font-size: 28px;
+  color: purple;
+`;
+
+export const EmploymentJob = styled.div`
+  grid-row: 2;
+  grid-column: 3;
+  font-size: 28px;
+  color: purple;
+`;
+export const EmploymentTeam = styled.div`
+  grid-row: 2;
+  grid-column: 4;
+  font-size: 28px;
+  color: purple;
+`;
+
 export const MailIcon = styled(FiMail)`
   overflow: visible;
   background-color: #ff4e01;
@@ -193,7 +248,6 @@ export const MailIcon = styled(FiMail)`
   padding: 5px;
   transform: scale(1.5);
 `;
-
 export const PhoneIcon = styled(BsFillTelephoneFill)`
   overflow: visible;
   background-color: #ff4e01;

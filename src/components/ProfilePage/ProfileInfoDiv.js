@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   MailIcon,
   NavLink,
@@ -12,72 +13,76 @@ import {
   StatusIcon,
   ProfileTabWrapper,
   ProfileTab,
-  ProfileTabBar
+  ProfileTabBar,
 } from "../../styles/ProfilePageStyle";
 const ProfileInfo = () => (
   <>
-  <ProfileInfoDiv>
-    <ProfilePhoto>
-      <NavLink to="/profile">
-        <img src="prof.png" alt="" width="100%" />
-      </NavLink>
-    </ProfilePhoto>
-    <ProfileTextWrapper>
-      <ProfileHeaderText>
-        <text>Amadeusz Jarząbkowski</text>
-      </ProfileHeaderText>
-      <ProfileSubHeaderText>
-        <text>Department:</text>
-        <ProfileText>
-          <text> IT</text>
-        </ProfileText>
-      </ProfileSubHeaderText>
-      <ProfileSubHeaderText>
-        <text>Job:</text>
-        <ProfileText>
-          <text> Junior Java Developer</text>
-        </ProfileText>
-      </ProfileSubHeaderText>
-    </ProfileTextWrapper>
+    <ProfileInfoDiv>
+      <ProfilePhoto>
+        <NavLink to="/profile">
+          <img src="prof.png" alt="" width="100%" />
+        </NavLink>
+      </ProfilePhoto>
+      <ProfileTextWrapper>
+        <ProfileHeaderText>
+          <text>Amadeusz Jarząbkowski</text>
+        </ProfileHeaderText>
+        <ProfileSubHeaderText>
+          <text>Department:</text>
+          <ProfileText>
+            <text> IT</text>
+          </ProfileText>
+        </ProfileSubHeaderText>
+        <ProfileSubHeaderText>
+          <text>Job:</text>
+          <ProfileText>
+            <text> Junior Java Developer</text>
+          </ProfileText>
+        </ProfileSubHeaderText>
+      </ProfileTextWrapper>
 
-    <ProfileTextWrapper>
-      <ProfileHeaderText>
-        <PhoneIcon />
-        <text>+48 506123412</text>
-      </ProfileHeaderText>
-      <ProfileSubHeaderText>
-        <text>Personal Number:</text>
-        <ProfileText>
-          <text> 172</text>
-        </ProfileText>
-      </ProfileSubHeaderText>
-    </ProfileTextWrapper>
+      <ProfileTextWrapper>
+        <ProfileHeaderText>
+          <PhoneIcon />
+          <text>+48 506123412</text>
+        </ProfileHeaderText>
+        <ProfileSubHeaderText>
+          <text>Personal Number:</text>
+          <ProfileText>
+            <text> 172</text>
+          </ProfileText>
+        </ProfileSubHeaderText>
+      </ProfileTextWrapper>
 
-    <ProfileTextWrapper>
-      <ProfileHeaderText>
-        <MailIcon />
-        <text>a.jarzab@gmail.com</text>
-      </ProfileHeaderText>
-      <ProfileSubHeaderText>
-        <text>Status:</text>
-        <StatusIcon />
-      </ProfileSubHeaderText>
-    </ProfileTextWrapper>
-
-  </ProfileInfoDiv>
-      <ProfileTabWrapper>
+      <ProfileTextWrapper>
+        <ProfileHeaderText>
+          <MailIcon />
+          <text>a.jarzab@gmail.com</text>
+        </ProfileHeaderText>
+        <ProfileSubHeaderText>
+          <text>Status:</text>
+          <StatusIcon />
+        </ProfileSubHeaderText>
+      </ProfileTextWrapper>
+    </ProfileInfoDiv>
+    <ProfileTabWrapper>
       <ProfileTab>
-        <text>Basic Inforamtion</text>
+        <NavLink to="/BasicInformation.js">
+          <text>Basic Inforamtion</text>
+        </NavLink>
+      </ProfileTab>
+      <ProfileTab onClick="">
+        <NavLink to="/EmploymentInformation.js">
+          <text>Employment</text>
+        </NavLink>
       </ProfileTab>
       <ProfileTab>
-        <text>Employment</text>
-      </ProfileTab>
-      <ProfileTab>
-        <text>Education</text>
+        <NavLink to="/EducationInformation.js">
+          <text>Education</text>
+        </NavLink>
       </ProfileTab>
     </ProfileTabWrapper>
     <ProfileTabBar />
-    </>
-  
+  </>
 );
 export default ProfileInfo;
