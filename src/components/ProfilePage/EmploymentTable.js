@@ -2,7 +2,8 @@ import React from "react";
 import {
   EmploymentTableInfo,
   EmploymentTableDetailsDate,
-  EmploymentTableBorder
+  EmploymentTableBorder,
+  EmploymentTableDateLine
 } from "../../styles/ProfilePageStyle";
 const EmploymentTable = () => (
   <>
@@ -22,17 +23,21 @@ const EmploymentTable = () => (
             <td>14.05.2011</td>
           </EmploymentTableDetailsDate>
           <EmploymentTableDetailsDate>
+          <EmploymentTableDateLine/>
+          </EmploymentTableDetailsDate>
+          <EmploymentTableDetailsDate>
             <td>15.12.2012</td>
           </EmploymentTableDetailsDate>
           <td>HR</td>
           <td>Manager</td>
           <td>12C</td>
         </tr>
-        
+
         <tr>
           <EmploymentTableDetailsDate>
             <td>14.05.2011</td>
           </EmploymentTableDetailsDate>
+          <EmploymentTableDateLine/>
           <EmploymentTableDetailsDate>
             <td>15.12.2012</td>
           </EmploymentTableDetailsDate>
@@ -45,6 +50,7 @@ const EmploymentTable = () => (
           <EmploymentTableDetailsDate>
             <td>14.05.2011</td>
           </EmploymentTableDetailsDate>
+          <EmploymentTableDateLine/>
           <EmploymentTableDetailsDate>
             <td>15.12.2012</td>
           </EmploymentTableDetailsDate>

@@ -184,29 +184,30 @@ export const Country = styled.div`
   font-style: italic;
 `;
 export const EmploymentTableInfo = styled.div`
+  flex-direction: column;
   display: flex;
-  flex-flow: row wrap;
+  margin-top: 10px;
   margin-left: 400px;
   font-size: 42px;
   font-weight: bold;
   color: #522d8a;
   border: 2px solid #dfdfdf;
   border-radius: 20px;
+  justify-content: center;
 `;
-export const EmploymentTableBorder = styled.div`
-  border: 2px solid #dfdfdf;
-  border-radius: 20px;
+export const EmploymentTableDateLine = styled.div`
+  height: 1px;
+  max-width: 50%;
+  background-color: #707070;
 `;
 export const EmploymentTableDetailsDate = styled.div`
   font-size: 25px;
   font-weight: bold;
   color: #ff4e01;
 `;
-export const EmploymentDetailed = styled.div`
-  border: 2px solid #dfdfdf;
-  border-radius: 20px;
-  margin-left: 400px;
-  display: flex;
+//ten div ma byc w kazdej tabeli jako ramka do kazdego TR
+export const EmploymentDetailed = styled.td`
+  justify-content: center;
 `;
 export const EmploymentDate = styled.div`
   font-size: 28px;
