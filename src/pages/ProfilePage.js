@@ -12,15 +12,14 @@ import EducationInformation from "../components/ProfilePage/EducationInformation
 function App() {
   return (
     <Router>
-      
       <NavBar />
       <Header />
       <Footer />
       <ProfileInfo />
       <Switch>
-      <Route path="/BasicInformation.js" exact component={BasicInformation} />
-      <Route path="/EmploymentInformation.js" exact component={EmploymentInformation} />
-      <Route path="/EducationInformation.js" exact component={EducationInformation} />
+      <Route path="/BasicInformation" exact component={BasicInformation} />
+      <Route path="/EmploymentInformation" exact component={EmploymentInformation} />
+      <Route path="/EducationInformation" exact component={EducationInformation} />
       </Switch>
     </Router>
   );

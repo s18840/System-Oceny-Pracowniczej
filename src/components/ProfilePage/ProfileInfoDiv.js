@@ -67,17 +67,17 @@ const ProfileInfo = () => (
     </ProfileInfoDiv>
     <ProfileTabWrapper>
       <ProfileTab>
-        <NavLink to="/BasicInformation.js">
+        <NavLink to="/BasicInformation">
           <text>Basic Inforamtion</text>
         </NavLink>
       </ProfileTab>
-      <ProfileTab onClick="">
-        <NavLink to="/EmploymentInformation.js">
+      <ProfileTab>
+        <NavLink to="/EmploymentInformation">
           <text>Employment</text>
         </NavLink>
       </ProfileTab>
       <ProfileTab>
-        <NavLink to="/EducationInformation.js">
+        <NavLink to="/EducationInformation">
           <text>Education</text>
         </NavLink>
       </ProfileTab>

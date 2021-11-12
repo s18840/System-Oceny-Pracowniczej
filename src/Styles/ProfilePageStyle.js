@@ -51,13 +51,14 @@ export const ProfileTab = styled.button`
   color: #ffffff;
   background-color: #6137a0;
   border-radius: 45px;
+  border-bottom: 0;
   margin-top: 10px;
   margin-right: 15px;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
   //styl dla guzik dla wcisnietego, narazie tylko na klik
-  :visited {
+  :active {
     border-radius: 30px 30px 0px 0px;
     margin-bottom: -5px;
   }
@@ -66,7 +67,7 @@ export const ProfileTabBar = styled.div`
   display: flex;
   margin-top: 5px;
   right: 0;
-  margin-left: 400px;
+  margin-left: 380px;
   height: 10px;
   background-color: #6137a0;
 `;
@@ -91,7 +92,7 @@ export const ProfileDetailedInfoWrapper = styled.div`
   margin-left: 400px;
   display: grid;
   justify-content: space-evenly;
-  margin-top: 50px;
+  margin-top: 5px;
   row-gap: 0px;
   grid-template-columns: 280px 200px 200px;
   grid-template-rows: 80px 80px 80px 80px 80px 80px;
@@ -182,58 +183,45 @@ export const Country = styled.div`
   font-size: 28px;
   font-style: italic;
 `;
-
-export const ProfileEmploymentWrapper = styled.div`
+export const EmploymentTableInfo = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: 400px;
+  font-size: 42px;
+  font-weight: bold;
+  color: #522d8a;
+  border: 2px solid #dfdfdf;
+  border-radius: 20px;
+`;
+export const EmploymentTableBorder = styled.div`
+  border: 2px solid #dfdfdf;
+  border-radius: 20px;
+`;
+export const EmploymentTableDetailsDate = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  color: #ff4e01;
+`;
+export const EmploymentDetailed = styled.div`
   border: 2px solid #dfdfdf;
   border-radius: 20px;
   margin-left: 400px;
-  display: grid;
-  justify-content: space-around;
-  justify-items: center;
-  align-items: center;
-  margin-top: 40px;
-  row-gap: 40px;
-`;
-
-export const EmploymentHeadingText = styled.div`
-  display: grid;
-  grid-row: 1;
-  font-size: 42px;
-  font-weight: bold;
-  color: purple;
-`;
-
-export const EmploymentDetailed = styled.div`
-  grid-column: 1;
-  border: 2px solid #dfdfdf;
-  border-radius: 20px;
-  display: grid;
-  justify-content: space-around;
-  justify-items: center;
-  align-items: center;
+  display: flex;
 `;
 export const EmploymentDate = styled.div`
-  grid-row: 2;
-  grid-column: 1;
   font-size: 28px;
   color: purple;
 `;
 export const EmploymentDep = styled.div`
-  grid-row: 2;
-  grid-column: 2;
   font-size: 28px;
   color: purple;
 `;
 
 export const EmploymentJob = styled.div`
-  grid-row: 2;
-  grid-column: 3;
   font-size: 28px;
   color: purple;
 `;
 export const EmploymentTeam = styled.div`
-  grid-row: 2;
-  grid-column: 4;
   font-size: 28px;
   color: purple;
 `;

@@ -6,6 +6,6 @@ export const FooterWrapper = styled.div`
   right: 0;
   bottom: 0;
   left: 400px;
-  height: 30px;
+  height: 15px;
   background-color: #311c50;
-`
+`;
