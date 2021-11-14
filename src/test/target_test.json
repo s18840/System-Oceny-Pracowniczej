@@ -1,0 +1,24 @@
+{
+  "titles": [
+    "name",
+    "weight",
+    "completion"
+  ],
+  "content": [
+    {
+      "name": "nazwa1",
+      "weight": "weight1",
+      "completion": 71
+    },
+    {
+      "name": "nazwa2",
+      "weight": "weight2",
+      "completion": 72
+    },
+    {
+      "name": "nazwa3",
+      "weight": "weight3",
+      "completion": 73
+    }
+  ]
+}

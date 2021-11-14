@@ -53,6 +53,7 @@ export const Span = styled.div`
 
 export const HighlightText = styled.a`
   color: #ff4e01;
+  font-size: ${(props => props.fontSize)};
 `
 
 export const Title = styled.h1`
@@ -61,6 +62,14 @@ export const Title = styled.h1`
   margin-right: ${(props) => props.marginRight};
   font-size: 130px;
   color: #ff4e01;
+`
+
+export const SubTitle = styled.h2`
+  text-align: ${(props) => props.textAligment};
+  margin-left: ${(props) => props.marginLeft};
+  margin-right: ${(props) => props.marginRight};
+  font-size: 60px;
+  color: #3D098A;
 `
 
 export const OrangeInputButton = styled.input`
@@ -72,11 +81,4 @@ export const OrangeInputButton = styled.input`
   font-size: 42px;
   line-height: 67px;
   text-align: center;
-`
-
-export const PageContentAndHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  float: right;
 `

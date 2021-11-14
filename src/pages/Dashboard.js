@@ -1,8 +1,11 @@
 import React from 'react';
 import Navbar from '../components/Navigation/NavBar';
 import Header from '../components/Header/Header';
-import {PageWrapper} from '../styles/GlobalStyle';
+import {PageWrapper, SubTitle, Title} from '../styles/GlobalStyle';
 import Clock from '../components/Dashboard/Clock';
+import {DashboardContentWrapper, DashboardWrapper} from "../styles/DashboardStyles";
+import NextGrading from "../components/Dashboard/NextGrading";
+import TargetList from "../components/Dashboard/TargetList";
 
 function Dashboard() {
 
@@ -11,7 +14,18 @@ function Dashboard() {
       <Navbar/>
       <Header/>
       <PageWrapper>
-        <Clock/>
+        <DashboardWrapper>
+          <DashboardContentWrapper>
+            <Title>Witaj, Amadeusz</Title>
+            <SubTitle>grading</SubTitle>
+            <NextGrading/>
+            <SubTitle>your targets</SubTitle>
+            <TargetList/>
+            <SubTitle>current projects</SubTitle>
+
+          </DashboardContentWrapper>
+          <Clock/>
+        </DashboardWrapper>
       </PageWrapper>
     </>
   );

@@ -1,4 +1,3 @@
-import { NavLink as Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const HeaderWrapper = styled.div`
@@ -11,7 +10,8 @@ export const HeaderWrapper = styled.div`
   flex-direction: row-reverse;
   justify-content: space-between;
   background-color: #fff;
-  border: 0.25px solid gray;
+  border: 0.25px gray;
+  border-style: none solid solid solid;
   border-left: none;
   font-size: 20px;
 `

@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 const addZero = n => n < 10 ? '0' + n : n;
 
 function Clock() {
-  const [time, setTime] = useState({time: "00:00:00", date: "date"});
+  const [time, setTime] = useState({time: "00:00:00",dayOfWeek: "monday", date: "date"});
 
   const startClock = () => {
     setTime(getTime)
@@ -25,15 +25,16 @@ function Clock() {
 
     dayOfWeek = date.getDay();
     dayOfMonth = addZero(date.getDate());
-    month = addZero(date.getMonth());
+    month = addZero(date.getMonth() + 1);
     year = date.getFullYear();
 
     dayOfWeek = getDayOfWeekString(dayOfWeek)
-    dateInfo = `<HighlightText> ${dayOfWeek} </HighlightText>, ${dayOfMonth}.${month}.${year}`
+    dateInfo = `${dayOfMonth}.${month}.${year}`
     //TODO fix string with html tags
 
     return {
       time: time,
+      dayOfWeek: dayOfWeek,
       date: dateInfo
     };
 
@@ -70,7 +71,7 @@ function Clock() {
         {time.time}
       </TimeView>
       <DateView>
-        {time.date}
+        <HighlightText>{time.dayOfWeek}</HighlightText>, {time.date}
       </DateView>
     </ClockWrapper>
   );
