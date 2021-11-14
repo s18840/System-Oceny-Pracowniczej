@@ -1,7 +1,8 @@
 import React from 'react'
 import { FaPowerOff, FaWrench, FaSearch } from 'react-icons/fa'
 
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router-dom'
+import { NavLink } from '../../styles/ProfilePageStyle'
 import {
   HeaderLocTree,
   HeaderProfile,
@@ -26,8 +27,8 @@ const HeaderBar = () => (
       <HeaderBtnSignOut>
         <FaPowerOff />
       </HeaderBtnSignOut>
-      <HeaderBtnTol>
-        <FaWrench />
+      <HeaderBtnTol>  
+        <FaWrench  />
       </HeaderBtnTol>
       <HeaderProfile to="/sciezka do miejsc" activeStyle>
         <HeaderProfilePhoto>
