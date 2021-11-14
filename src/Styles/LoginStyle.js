@@ -1,10 +1,8 @@
 import styled from 'styled-components'
 
 export const LoginFormWrapper = styled.form`
+  height: 70%;
   grid-area: login;
-  
-  height: 700px;
-  width: 460px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -13,7 +11,6 @@ export const LoginFormWrapper = styled.form`
   background-color: #fff3fd;
   border: 5px solid white;
   border-radius: 48px;
-  padding: 0 40px 0 40px;
 `
 
 export const InputWrapper = styled.div`

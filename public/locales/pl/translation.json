@@ -9,5 +9,12 @@
     "NAME": "nazwa",
     "MSG": "wiadomość",
     "SEND": "wyslij",
-    "REQUIRED": "To pole jest wymagane"
+    "REQUIRED": "To pole jest wymagane",
+    "DAY_1": "poniedziałek",
+    "DAY_2": "wtorek",
+    "DAY_3": "środa",
+    "DAY_4": "czwartek",
+    "DAY_5": "piątek",
+    "DAY_6": "sobota",
+    "DAY_7": "niedziela"
 }

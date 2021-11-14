@@ -9,5 +9,12 @@
     "NAME": "name",
     "MSG": "message",
     "SEND": "send",
-    "REQUIRED": "This field is required"
+    "REQUIRED": "This field is required",
+    "DAY_1": "monday",
+    "DAY_2": "tuesday",
+    "DAY_3": "wednesday",
+    "DAY_4": "thursday",
+    "DAY_5": "friday",
+    "DAY_6": "saturday",
+    "DAY_7": "sunday"
 }

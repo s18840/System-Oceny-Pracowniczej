@@ -16,11 +16,11 @@ function ContactInfo() {
       <img src={contact_img} alt=""/>
       <ContactInfoWrapper>
         <MailIcon />
-        <Contact>1827398172937</Contact>
+        <Contact>mail@mail.com</Contact>
       </ContactInfoWrapper>
       <ContactInfoWrapper>
         <PhoneIcon />
-        <Contact>mail@mail.com</Contact>
+        <Contact>1827398172937</Contact>
       </ContactInfoWrapper>
     </ContactListWrapper>
   )

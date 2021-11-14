@@ -13,6 +13,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 `
 
+export const PageWrapper = styled.div`
+    margin-left: 400px;
+    margin-top: 80px;
+`;
+
 export const InputField = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -46,7 +51,7 @@ export const Span = styled.div`
   color: #ff4e01;
 `
 
-export const HiglightText = styled.a`
+export const HighlightText = styled.a`
   color: #ff4e01;
 `
 
@@ -67,4 +72,11 @@ export const OrangeInputButton = styled.input`
   font-size: 42px;
   line-height: 67px;
   text-align: center;
+`
+
+export const PageContentAndHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  float: right;
 `

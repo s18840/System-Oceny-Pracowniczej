@@ -1,15 +1,23 @@
-import React from "react";
-import Header from "../components/Header/Header";
-import { BrowserRouter as Router } from "react-router-dom";
-import NavBar from "../components/Navigation/NavBar";
+import React from 'react';
+import Navbar from '../components/Navigation/NavBar';
+import Header from '../components/Header/Header';
+import {PageWrapper} from '../styles/GlobalStyle';
+import Clock from '../components/Dashboard/Clock';
 
-function App() {
+function Dashboard() {
+
   return (
-    <Router>
-      <Header />
-      <NavBar />
-    </Router>
+    <>
+      <Navbar/>
+      <Header/>
+      <PageWrapper>
+        <Clock/>
+      </PageWrapper>
+    </>
   );
+
 }
 
-export default App;
+export default Dashboard;
+
+

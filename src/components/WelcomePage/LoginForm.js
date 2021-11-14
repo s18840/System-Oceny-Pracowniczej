@@ -4,14 +4,18 @@ import {useForm} from "react-hook-form";
 import {InputWrapper, Login, LoginButton, LoginFormWrapper,} from '../../styles/LoginStyle'
 import {InputField, Span} from '../../styles/GlobalStyle'
 import {hashPassword, isPasswordCorrect} from '../../Utils/PasswordUtils'
+import { useHistory } from 'react-router-dom';
 
 
 //TODO add errors for form validation
 function LoginForm() {
+  let history = useHistory()
   const {t} = useTranslation()
   const {register, handleSubmit, formState: {errors}} = useForm();
   const submitForm = (data) => {
-    let hashedPassword = hashPassword(data.password)
+    // let hashedPassword = hashPassword(data.password)
+
+    history.push("/dashboard")
   };
 
 

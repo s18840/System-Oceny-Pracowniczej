@@ -6,20 +6,19 @@ import backgroundImage from '../assets/img/InterfaceMainPage.png'
 
 export const Logo = styled.img`
   grid-area: logo;
-  transform: scale(1.3);
 `
 
 export const WelcomeTopWrapper = styled.div`
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr 1fr;
+  grid-template-columns: 15% 55% 30%;
   grid-template-rows: 1.6fr 1fr;
   gap: 0px 0px;
   grid-template-areas: 
     "logo inlineWrapper login"
     "grades-images grades-images login";
-  padding-right: 150px;
   padding-top: 70px;
   padding-bottom: 100px;
+  padding-right: 50px;
   background-color: #f9ebf6;
   background-image: url(${backgroundImage});
   background-repeat: no-repeat;
