@@ -183,29 +183,34 @@ export const Country = styled.div`
   font-size: 28px;
   font-style: italic;
 `;
-export const EmploymentTableInfo = styled.div`
-  flex-direction: column;
-  display: flex;
-  margin-top: 10px;
+export const MarginSet = styled.div`
   margin-left: 400px;
+`;
+export const EmploymentTableInfo = styled.table`
+  flex-direction: column;
+  width: 100%;
+  display: table;
   font-size: 42px;
   font-weight: bold;
   color: #522d8a;
-  border: 2px solid #dfdfdf;
-  border-radius: 20px;
+  text-align: center;
+`;
+export const EmploymentDateWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   justify-content: center;
+  align-items: center;
 `;
 export const EmploymentTableDateLine = styled.div`
-  height: 1px;
-  max-width: 50%;
-  background-color: #707070;
+  height: 2px;
+  border-top: 2px solid #111111;
 `;
 export const EmploymentTableDetailsDate = styled.div`
   font-size: 25px;
   font-weight: bold;
   color: #ff4e01;
 `;
-//ten div ma byc w kazdej tabeli jako ramka do kazdego TR
 export const EmploymentDetailed = styled.td`
   justify-content: center;
 `;
@@ -225,6 +230,49 @@ export const EmploymentJob = styled.div`
 export const EmploymentTeam = styled.div`
   font-size: 28px;
   color: purple;
+`;
+
+export const EduRow = styled.tr`
+  border: 1px solid #dfdfdf !important;
+  border-radius: 20px;
+  border-collapse: collapse;
+  box-shadow: 0 0 0 1px #666;
+`;
+
+export const ListHeadings = styled.div`
+  font-size: 42px;
+  font-weight: bold;
+  color: #522d8a;
+`;
+export const EduList = styled.ul`
+  margin-left: 400px;
+  list-style-type: none;
+`;
+export const ListElement = styled.li`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 2px solid #dfdfdf;
+  border-radius: 20px;
+`;
+export const ListDataDate = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  color: #ff4e01;
+`;
+export const ListData = styled.div`
+  font-size: 25px;
+  color: #111111;
+`;
+export const ListDateLine = styled.div`
+  height: 1px;
+  max-width: 100%;
+  background-color: #707070;
+`;
+export const ListDetailsDate = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  color: #ff4e01;
 `;
 
 export const MailIcon = styled(FiMail)`
