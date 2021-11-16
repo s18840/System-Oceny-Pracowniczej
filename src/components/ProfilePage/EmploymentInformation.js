@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  EmploymentTableInfo,
-} from "../../styles/ProfilePageStyle";
+import { TableInfo } from "../../styles/ProfilePageStyle";
 import EmploymentTable from "./EmploymentTable";
 const EmploymentInformation = () => (
   <>
-
-      <EmploymentTable></EmploymentTable>
-    
+    <EmploymentTable></EmploymentTable>
   </>
 );
 export default EmploymentInformation;

@@ -1,46 +1,66 @@
 import React from "react";
 import {
-  EduList,
-  ListElement,
-  ListDataDate,
-  ListHeadings,
-  ListData,
-  ListDateLine,
-  ListDetailsDate,
+  TableInfo,
+  TableDetailsDate,
+  EmploymentTableBorder,
+  EmploymentTableDateLine,
+  TableBodyBorder,
+  Row,
+  MarginSet,
+  DateWrapper,
 } from "../../styles/ProfilePageStyle";
 const today = new Date();
+const dataJson = {
+  titles: ["Time", "Institution", "Degree"],
+  content: [
+    {
+      StartDate: "14.05.2013",
+      GraduationDate: "14.05.2016",
+      Institution: "Politechnika Warszawska",
+      Degree: "Geography",
+    },
+    {
+      StartDate: "14.05.2016",
+      GraduationDate: "11.10.2019",
+      Institution: "PJATK",
+      Degree: "Programming",
+    },
+    {
+      StartDate: "08.09.2010",
+      GraduationDate: "30.05.2013",
+      Institution: "Liceum XVI im. A.Mickiewicza",
+      Degree: "-",
+    },
+  ],
+};
 const EducationInformation = () => (
   <>
-    <EduList>
-      <ListElement>
-        <ListHeadings>Time</ListHeadings>
-        <ListHeadings>Department</ListHeadings>
-        <ListHeadings>Job</ListHeadings>
-        <ListHeadings>Team</ListHeadings>
-      </ListElement>
-
-      <ListElement>
-        <ListDataDate>
-          <ListDetailsDate>21.12.2009</ListDetailsDate>
-          <ListDateLine />
-          <ListDetailsDate>30.05.2015</ListDetailsDate>
-        </ListDataDate>
-        <ListData>IT</ListData>
-        <ListData>SQL Administrator</ListData>
-        <ListData>7c</ListData>
-      </ListElement>
-      
-      <ListElement>
-        <ListDataDate>
-          <ListDetailsDate>09.12.2011</ListDetailsDate>
-          <ListDateLine />
-          <ListDetailsDate>24.02.2019</ListDetailsDate>
-        </ListDataDate>
-        <ListData>Testing Department</ListData>
-        <ListData>SQL Administrator</ListData>
-        <ListData>-</ListData>
-      </ListElement>
-    </EduList>
+    <MarginSet>
+      <TableInfo class="table">
+        <thead>
+          <tr>
+            {dataJson.titles.map((title) => (
+              <th>{title}</th>
+            ))}
+          </tr>
+        </thead>
+        {dataJson.content.map((content) => (
+          <Row>
+            <DateWrapper>
+              <TableDetailsDate>
+                <td>{content.StartDate}</td>
+              </TableDetailsDate>
+              <EmploymentTableDateLine />
+              <TableDetailsDate>
+                <td>{content.GraduationDate}</td>
+              </TableDetailsDate>
+            </DateWrapper>
+            <td>{content.Institution}</td>
+            <td>{content.Degree}</td>
+          </Row>
+        ))}
+      </TableInfo>
+    </MarginSet>
   </>
 );
 

@@ -186,7 +186,7 @@ export const Country = styled.div`
 export const MarginSet = styled.div`
   margin-left: 400px;
 `;
-export const EmploymentTableInfo = styled.table`
+export const TableInfo = styled.table`
   flex-direction: column;
   width: 100%;
   display: table;
@@ -195,7 +195,7 @@ export const EmploymentTableInfo = styled.table`
   color: #522d8a;
   text-align: center;
 `;
-export const EmploymentDateWrapper = styled.div`
+export const DateWrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -203,10 +203,11 @@ export const EmploymentDateWrapper = styled.div`
   align-items: center;
 `;
 export const EmploymentTableDateLine = styled.div`
+width: 110px;
   height: 2px;
   border-top: 2px solid #111111;
 `;
-export const EmploymentTableDetailsDate = styled.div`
+export const TableDetailsDate = styled.div`
   font-size: 25px;
   font-weight: bold;
   color: #ff4e01;
@@ -232,47 +233,11 @@ export const EmploymentTeam = styled.div`
   color: purple;
 `;
 
-export const EduRow = styled.tr`
+export const Row = styled.tr`
   border: 1px solid #dfdfdf !important;
   border-radius: 20px;
   border-collapse: collapse;
   box-shadow: 0 0 0 1px #666;
-`;
-
-export const ListHeadings = styled.div`
-  font-size: 42px;
-  font-weight: bold;
-  color: #522d8a;
-`;
-export const EduList = styled.ul`
-  margin-left: 400px;
-  list-style-type: none;
-`;
-export const ListElement = styled.li`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  border: 2px solid #dfdfdf;
-  border-radius: 20px;
-`;
-export const ListDataDate = styled.div`
-  font-size: 25px;
-  font-weight: bold;
-  color: #ff4e01;
-`;
-export const ListData = styled.div`
-  font-size: 25px;
-  color: #111111;
-`;
-export const ListDateLine = styled.div`
-  height: 1px;
-  max-width: 100%;
-  background-color: #707070;
-`;
-export const ListDetailsDate = styled.div`
-  font-size: 25px;
-  font-weight: bold;
-  color: #ff4e01;
 `;
 
 export const MailIcon = styled(FiMail)`

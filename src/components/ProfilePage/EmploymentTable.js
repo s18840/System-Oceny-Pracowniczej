@@ -1,13 +1,13 @@
 import React from "react";
 import {
-  EmploymentTableInfo,
-  EmploymentTableDetailsDate,
+  TableInfo,
+  TableDetailsDate,
   EmploymentTableBorder,
   EmploymentTableDateLine,
   TableBodyBorder,
-  EduRow,
+  Row,
   MarginSet,
-  EmploymentDateWrapper,
+  DateWrapper,
 } from "../../styles/ProfilePageStyle";
 
 const dataJson = {
@@ -39,7 +39,7 @@ const dataJson = {
 const EmploymentTable = () => (
   <>
     <MarginSet>
-      <EmploymentTableInfo class="table">
+      <TableInfo class="table">
         <thead>
           <tr>
             {dataJson.titles.map((title) => (
@@ -48,22 +48,22 @@ const EmploymentTable = () => (
           </tr>
         </thead>
         {dataJson.content.map((content) => (
-          <EduRow>
-            <EmploymentDateWrapper>
-              <EmploymentTableDetailsDate>
+          <Row>
+            <DateWrapper>
+              <TableDetailsDate>
                 <td>{content.DateStart}</td>
-              </EmploymentTableDetailsDate>
+              </TableDetailsDate>
               <EmploymentTableDateLine />
-              <EmploymentTableDetailsDate>
+              <TableDetailsDate>
                 <td>{content.DateEnd}</td>
-              </EmploymentTableDetailsDate>
-            </EmploymentDateWrapper>
+              </TableDetailsDate>
+            </DateWrapper>
             <td>{content.Department}</td>
             <td>{content.Job}</td>
             <td>{content.Team}</td>
-          </EduRow>
+          </Row>
         ))}
-      </EmploymentTableInfo>
+      </TableInfo>
     </MarginSet>
   </>
 );
