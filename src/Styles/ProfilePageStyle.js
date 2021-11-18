@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { NavLink as Link } from "react-router-dom";
-import { FiMail } from "react-icons/fi";
-import { BsFillTelephoneFill, BsCircle } from "react-icons/bs";
+import {NavLink as Link} from "react-router-dom";
+import {FiMail} from "react-icons/fi";
+import {BsCircle, BsFillTelephoneFill} from "react-icons/bs";
 
 export const ProfilePhoto = styled.div`
   border-radius: 100%;
@@ -11,6 +11,7 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   color: #ffffff;
   cursor: pointer;
+
   &.active {
     color: #ff4e01;
   }
@@ -57,11 +58,6 @@ export const ProfileTab = styled.button`
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
-  //styl dla guzik dla wcisnietego, narazie tylko na klik
-  :active {
-    border-radius: 30px 30px 0px 0px;
-    margin-bottom: -5px;
-  }
 `;
 export const ProfileTabBar = styled.div`
   display: flex;
@@ -90,7 +86,7 @@ export const ProfileDetailedInfoWrapper = styled.div`
   margin-top: 5px;
   row-gap: 0px;
   grid-template-columns: 280px 200px 200px;
-  grid-template-rows: 80px 80px 80px 80px 80px 80px;
+  grid-template-rows: 120px 80px 80px 80px 80px 80px;
   color: blue;
 `;
 export const ProfileDataText = styled.div`
@@ -179,9 +175,6 @@ export const Country = styled.div`
   font-style: italic;
 `;
 
-export const MarginSet = styled.div`
-  margin-left: 400px;
-`;
 export const TableInfo = styled.table`
   flex-direction: column;
   width: 100%;
@@ -199,7 +192,7 @@ export const DateWrapper = styled.div`
   align-items: center;
 `;
 export const EmploymentTableDateLine = styled.div`
-width: 110px;
+  width: 110px;
   height: 2px;
   border-top: 2px solid #111111;
 `;

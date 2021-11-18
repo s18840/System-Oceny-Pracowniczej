@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  TableInfo,
-  TableDetailsDate,
-  EmploymentTableBorder,
-  EmploymentTableDateLine,
-  TableBodyBorder,
-  Row,
-  MarginSet,
-  DateWrapper,
-} from "../../styles/ProfilePageStyle";
+import {DateWrapper, EmploymentTableDateLine, Row, TableDetailsDate, TableInfo,} from "../../styles/ProfilePageStyle";
+
 const today = new Date();
 const dataJson = {
   titles: ["Time", "Institution", "Degree"],
@@ -35,32 +27,30 @@ const dataJson = {
 };
 const EducationInformation = () => (
   <>
-    <MarginSet>
-      <TableInfo class="table">
-        <thead>
-          <tr>
-            {dataJson.titles.map((title) => (
-              <th>{title}</th>
-            ))}
-          </tr>
-        </thead>
-        {dataJson.content.map((content) => (
-          <Row>
-            <DateWrapper>
-              <TableDetailsDate>
-                <td>{content.StartDate}</td>
-              </TableDetailsDate>
-              <EmploymentTableDateLine />
-              <TableDetailsDate>
-                <td>{content.GraduationDate}</td>
-              </TableDetailsDate>
-            </DateWrapper>
-            <td>{content.Institution}</td>
-            <td>{content.Degree}</td>
-          </Row>
+    <TableInfo class="table">
+      <thead>
+      <tr>
+        {dataJson.titles.map((title) => (
+          <th>{title}</th>
         ))}
-      </TableInfo>
-    </MarginSet>
+      </tr>
+      </thead>
+      {dataJson.content.map((content) => (
+        <Row>
+          <DateWrapper>
+            <TableDetailsDate>
+              <td>{content.StartDate}</td>
+            </TableDetailsDate>
+            <EmploymentTableDateLine/>
+            <TableDetailsDate>
+              <td>{content.GraduationDate}</td>
+            </TableDetailsDate>
+          </DateWrapper>
+          <td>{content.Institution}</td>
+          <td>{content.Degree}</td>
+        </Row>
+      ))}
+    </TableInfo>
   </>
 );
 

@@ -19,6 +19,11 @@ import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
 
+const activeStyle = {
+  color: "#ff4e01",
+  borderRadius: "30px 30px 0 0",
+  marginBottom: "-5px"
+}
 
 function ProfileInfo() {
   const BASIC_INFO = "BASIC_INFO"
@@ -81,13 +86,13 @@ function ProfileInfo() {
         </ProfileTextWrapper>
       </ProfileInfoDiv>
       <ProfileTabWrapper>
-        <ProfileTab onClick={() => switchType(BASIC_INFO)}>
+        <ProfileTab onClick={() => switchType(BASIC_INFO)} style={contentType === BASIC_INFO ? activeStyle : {}}>
           <text>Basic Inforamtion</text>
         </ProfileTab>
-        <ProfileTab onClick={() => switchType(EMPLOYMENT_INFO)}>
+        <ProfileTab onClick={() => switchType(EMPLOYMENT_INFO)} style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}>
           <text>Employment</text>
         </ProfileTab>
-        <ProfileTab onClick={() => switchType(EDUCATION_INFO)}>
+        <ProfileTab onClick={() => switchType(EDUCATION_INFO)} style={contentType === EDUCATION_INFO ? activeStyle : {}}>
           <text>Education</text>
         </ProfileTab>
       </ProfileTabWrapper>

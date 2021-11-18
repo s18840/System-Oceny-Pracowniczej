@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  TableInfo,
-  TableDetailsDate,
-  EmploymentTableBorder,
-  EmploymentTableDateLine,
-  TableBodyBorder,
-  Row,
-  MarginSet,
-  DateWrapper,
-} from "../../styles/ProfilePageStyle";
+import {DateWrapper, EmploymentTableDateLine, Row, TableDetailsDate, TableInfo,} from "../../styles/ProfilePageStyle";
 
 const dataJson = {
   titles: ["Time", "Department", "Job", "Team"],
@@ -38,33 +29,31 @@ const dataJson = {
 };
 const EmploymentTable = () => (
   <>
-    <MarginSet>
-      <TableInfo class="table">
-        <thead>
-          <tr>
-            {dataJson.titles.map((title) => (
-              <th>{title}</th>
-            ))}
-          </tr>
-        </thead>
-        {dataJson.content.map((content) => (
-          <Row>
-            <DateWrapper>
-              <TableDetailsDate>
-                <td>{content.DateStart}</td>
-              </TableDetailsDate>
-              <EmploymentTableDateLine />
-              <TableDetailsDate>
-                <td>{content.DateEnd}</td>
-              </TableDetailsDate>
-            </DateWrapper>
-            <td>{content.Department}</td>
-            <td>{content.Job}</td>
-            <td>{content.Team}</td>
-          </Row>
+    <TableInfo class="table">
+      <thead>
+      <tr>
+        {dataJson.titles.map((title) => (
+          <th>{title}</th>
         ))}
-      </TableInfo>
-    </MarginSet>
+      </tr>
+      </thead>
+      {dataJson.content.map((content) => (
+        <Row>
+          <DateWrapper>
+            <TableDetailsDate>
+              <td>{content.DateStart}</td>
+            </TableDetailsDate>
+            <EmploymentTableDateLine/>
+            <TableDetailsDate>
+              <td>{content.DateEnd}</td>
+            </TableDetailsDate>
+          </DateWrapper>
+          <td>{content.Department}</td>
+          <td>{content.Job}</td>
+          <td>{content.Team}</td>
+        </Row>
+      ))}
+    </TableInfo>
   </>
 );
 export default EmploymentTable;
