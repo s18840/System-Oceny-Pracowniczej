@@ -178,28 +178,36 @@ export const Country = styled.div`
   font-size: 28px;
   font-style: italic;
 `;
-export const EmploymentTableInfo = styled.div`
+
+export const MarginSet = styled.div`
+  margin-left: 400px;
+`;
+export const TableInfo = styled.table`
   flex-direction: column;
-  display: flex;
-  margin-top: 10px;
+  width: 100%;
+  display: table;
   font-size: 42px;
   font-weight: bold;
   color: #522d8a;
-  border: 2px solid #dfdfdf;
-  border-radius: 20px;
+  text-align: center;
+`;
+export const DateWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   justify-content: center;
+  align-items: center;
 `;
 export const EmploymentTableDateLine = styled.div`
-  height: 1px;
-  max-width: 50%;
-  background-color: #707070;
+width: 110px;
+  height: 2px;
+  border-top: 2px solid #111111;
 `;
-export const EmploymentTableDetailsDate = styled.div`
+export const TableDetailsDate = styled.div`
   font-size: 25px;
   font-weight: bold;
   color: #ff4e01;
 `;
-//ten div ma byc w kazdej tabeli jako ramka do kazdego TR
 export const EmploymentDetailed = styled.td`
   justify-content: center;
 `;
@@ -219,6 +227,13 @@ export const EmploymentJob = styled.div`
 export const EmploymentTeam = styled.div`
   font-size: 28px;
   color: purple;
+`;
+
+export const Row = styled.tr`
+  border: 1px solid #dfdfdf !important;
+  border-radius: 20px;
+  border-collapse: collapse;
+  box-shadow: 0 0 0 1px #666;
 `;
 
 export const MailIcon = styled(FiMail)`

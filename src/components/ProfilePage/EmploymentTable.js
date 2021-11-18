@@ -1,65 +1,70 @@
 import React from "react";
 import {
-  EmploymentTableInfo,
-  EmploymentTableDetailsDate,
+  TableInfo,
+  TableDetailsDate,
   EmploymentTableBorder,
-  EmploymentTableDateLine
+  EmploymentTableDateLine,
+  TableBodyBorder,
+  Row,
+  MarginSet,
+  DateWrapper,
 } from "../../styles/ProfilePageStyle";
+
+const dataJson = {
+  titles: ["Time", "Department", "Job", "Team"],
+  content: [
+    {
+      DateStart: "14.05.2011",
+      DateEnd: "15.12.2012",
+      Department: "HR",
+      Job: "Manager",
+      Team: "12c",
+    },
+    {
+      DateStart: "12.05.2019",
+      DateEnd: "23.12.2020",
+      Department: "Testing",
+      Job: "Tester",
+      Team: "-",
+    },
+    {
+      DateStart: "14.05.2021",
+      DateEnd: "15.11.2021",
+      Department: "IT",
+      Job: "Java Developer",
+      Team: "22c",
+    },
+  ],
+};
 const EmploymentTable = () => (
   <>
-    <EmploymentTableInfo>
-      <table class="table-list">
+    <MarginSet>
+      <TableInfo class="table">
         <thead>
           <tr>
-            <th>Time</th>
-            <th>Department</th>
-            <th>Job</th>
-            <th>Team</th>
+            {dataJson.titles.map((title) => (
+              <th>{title}</th>
+            ))}
           </tr>
         </thead>
-
-        <tr>
-          <EmploymentTableDetailsDate>
-            <td>14.05.2011</td>
-          </EmploymentTableDetailsDate>
-          <EmploymentTableDetailsDate>
-          <EmploymentTableDateLine/>
-          </EmploymentTableDetailsDate>
-          <EmploymentTableDetailsDate>
-            <td>15.12.2012</td>
-          </EmploymentTableDetailsDate>
-          <td>HR</td>
-          <td>Manager</td>
-          <td>12C</td>
-        </tr>
-
-        <tr>
-          <EmploymentTableDetailsDate>
-            <td>14.05.2011</td>
-          </EmploymentTableDetailsDate>
-          <EmploymentTableDateLine/>
-          <EmploymentTableDetailsDate>
-            <td>15.12.2012</td>
-          </EmploymentTableDetailsDate>
-          <td>Audit</td>
-          <td>Asystent</td>
-          <td>-</td>
-        </tr>
-
-        <tr>
-          <EmploymentTableDetailsDate>
-            <td>14.05.2011</td>
-          </EmploymentTableDetailsDate>
-          <EmploymentTableDateLine/>
-          <EmploymentTableDetailsDate>
-            <td>15.12.2012</td>
-          </EmploymentTableDetailsDate>
-          <td>IT</td>
-          <td>Java Developer</td>
-          <td>10A</td>
-        </tr>
-      </table>
-    </EmploymentTableInfo>
+        {dataJson.content.map((content) => (
+          <Row>
+            <DateWrapper>
+              <TableDetailsDate>
+                <td>{content.DateStart}</td>
+              </TableDetailsDate>
+              <EmploymentTableDateLine />
+              <TableDetailsDate>
+                <td>{content.DateEnd}</td>
+              </TableDetailsDate>
+            </DateWrapper>
+            <td>{content.Department}</td>
+            <td>{content.Job}</td>
+            <td>{content.Team}</td>
+          </Row>
+        ))}
+      </TableInfo>
+    </MarginSet>
   </>
 );
 export default EmploymentTable;
