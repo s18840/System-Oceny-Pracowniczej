@@ -67,7 +67,6 @@ export const ProfileTabBar = styled.div`
   display: flex;
   margin-top: 5px;
   right: 0;
-  margin-left: 380px;
   height: 10px;
   background-color: #6137a0;
 `;
@@ -76,20 +75,16 @@ export const ProfileInfoDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 83px;
-  margin-left: 400px;
 `;
 
 export const ProfileTabWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  margin-left: 400px;
 `;
 
 export const ProfileDetailedInfoWrapper = styled.div`
   border: 2px solid #dfdfdf;
-  margin-left: 400px;
   display: grid;
   justify-content: space-evenly;
   margin-top: 5px;
@@ -187,7 +182,6 @@ export const EmploymentTableInfo = styled.div`
   flex-direction: column;
   display: flex;
   margin-top: 10px;
-  margin-left: 400px;
   font-size: 42px;
   font-weight: bold;
   color: #522d8a;

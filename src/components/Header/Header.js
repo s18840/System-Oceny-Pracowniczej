@@ -1,8 +1,6 @@
 import React from 'react'
 import { FaPowerOff, FaWrench, FaSearch } from 'react-icons/fa'
 
-import { useLocation } from 'react-router-dom'
-import { NavLink } from '../../styles/ProfilePageStyle'
 import {
   HeaderLocTree,
   HeaderProfile,
@@ -15,11 +13,6 @@ import {
   HeaderSearchIcon,
 } from './HeaderElements'
 
-// HeaderLocTree lokalizacja aktualna początek implementacji
-const usePathname = () => {
-  const location = useLocation()
-  return location.pathname
-}
 
 const HeaderBar = () => (
   <HeaderWrapper>

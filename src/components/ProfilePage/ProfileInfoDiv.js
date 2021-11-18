@@ -1,88 +1,107 @@
-import React from "react";
+import React, {useState} from "react";
 
 import {
   MailIcon,
-  NavLink,
   PhoneIcon,
   ProfileHeaderText,
   ProfileInfoDiv,
   ProfilePhoto,
   ProfileSubHeaderText,
+  ProfileTab,
+  ProfileTabBar,
+  ProfileTabWrapper,
   ProfileText,
   ProfileTextWrapper,
   StatusIcon,
-  ProfileTabWrapper,
-  ProfileTab,
-  ProfileTabBar,
 } from "../../styles/ProfilePageStyle";
-const ProfileInfo = () => (
-  <>
-    <ProfileInfoDiv>
-      <ProfilePhoto>
-        <NavLink to="/profile">
-          <img src="prof.png" alt="" width="100%" />
-        </NavLink>
-      </ProfilePhoto>
-      <ProfileTextWrapper>
-        <ProfileHeaderText>
-          <text>Amadeusz Jarząbkowski</text>
-        </ProfileHeaderText>
-        <ProfileSubHeaderText>
-          <text>Department:</text>
-          <ProfileText>
-            <text> IT</text>
-          </ProfileText>
-        </ProfileSubHeaderText>
-        <ProfileSubHeaderText>
-          <text>Job:</text>
-          <ProfileText>
-            <text> Junior Java Developer</text>
-          </ProfileText>
-        </ProfileSubHeaderText>
-      </ProfileTextWrapper>
+import {PageWrapper} from "../../styles/GlobalStyle";
+import BasicInformation from "./BasicInformation";
+import EmploymentInformation from "./EmploymentInformation";
+import EducationInformation from "./EducationInformation";
 
-      <ProfileTextWrapper>
-        <ProfileHeaderText>
-          <PhoneIcon />
-          <text>+48 506123412</text>
-        </ProfileHeaderText>
-        <ProfileSubHeaderText>
-          <text>Personal Number:</text>
-          <ProfileText>
-            <text> 172</text>
-          </ProfileText>
-        </ProfileSubHeaderText>
-      </ProfileTextWrapper>
 
-      <ProfileTextWrapper>
-        <ProfileHeaderText>
-          <MailIcon />
-          <text>a.jarzab@gmail.com</text>
-        </ProfileHeaderText>
-        <ProfileSubHeaderText>
-          <text>Status:</text>
-          <StatusIcon />
-        </ProfileSubHeaderText>
-      </ProfileTextWrapper>
-    </ProfileInfoDiv>
-    <ProfileTabWrapper>
-      <ProfileTab>
-        <NavLink to="/BasicInformation">
+function ProfileInfo() {
+  const BASIC_INFO = "BASIC_INFO"
+  const EMPLOYMENT_INFO = "EMPLOYMENT_INFO"
+  const EDUCATION_INFO = "EDUCATION_INFO"
+
+  const [contentType, setContentType] = useState(BASIC_INFO)
+
+  const switchType = (conType) => {
+    setContentType(conType)
+    console.log("state change to: " + conType)
+  }
+
+  return (
+    <PageWrapper>
+      <ProfileInfoDiv>
+        <ProfilePhoto>
+          <img src="prof.png" alt="" width="100%"/>
+        </ProfilePhoto>
+        <ProfileTextWrapper>
+          <ProfileHeaderText>
+            <text>Amadeusz Jarząbkowski</text>
+          </ProfileHeaderText>
+          <ProfileSubHeaderText>
+            <text>Department:</text>
+            <ProfileText>
+              <text> IT</text>
+            </ProfileText>
+          </ProfileSubHeaderText>
+          <ProfileSubHeaderText>
+            <text>Job:</text>
+            <ProfileText>
+              <text> Junior Java Developer</text>
+            </ProfileText>
+          </ProfileSubHeaderText>
+        </ProfileTextWrapper>
+
+        <ProfileTextWrapper>
+          <ProfileHeaderText>
+            <PhoneIcon/>
+            <text>+48 506123412</text>
+          </ProfileHeaderText>
+          <ProfileSubHeaderText>
+            <text>Personal Number:</text>
+            <ProfileText>
+              <text> 172</text>
+            </ProfileText>
+          </ProfileSubHeaderText>
+        </ProfileTextWrapper>
+
+        <ProfileTextWrapper>
+          <ProfileHeaderText>
+            <MailIcon/>
+            <text>a.jarzab@gmail.com</text>
+          </ProfileHeaderText>
+          <ProfileSubHeaderText>
+            <text>Status:</text>
+            <StatusIcon/>
+          </ProfileSubHeaderText>
+        </ProfileTextWrapper>
+      </ProfileInfoDiv>
+      <ProfileTabWrapper>
+        <ProfileTab onClick={() => switchType(BASIC_INFO)}>
           <text>Basic Inforamtion</text>
-        </NavLink>
-      </ProfileTab>
-      <ProfileTab>
-        <NavLink to="/EmploymentInformation">
+        </ProfileTab>
+        <ProfileTab onClick={() => switchType(EMPLOYMENT_INFO)}>
           <text>Employment</text>
-        </NavLink>
-      </ProfileTab>
-      <ProfileTab>
-        <NavLink to="/EducationInformation">
+        </ProfileTab>
+        <ProfileTab onClick={() => switchType(EDUCATION_INFO)}>
           <text>Education</text>
-        </NavLink>
-      </ProfileTab>
-    </ProfileTabWrapper>
-    <ProfileTabBar />
-  </>
-);
+        </ProfileTab>
+      </ProfileTabWrapper>
+      <ProfileTabBar/>
+      <div>
+        {(() => {
+          switch (contentType) {
+            case BASIC_INFO:   return <BasicInformation/>;
+            case EMPLOYMENT_INFO: return <EmploymentInformation/>;
+            case EDUCATION_INFO:  return <EducationInformation/>;
+          }
+        })()}
+      </div>
+    </PageWrapper>
+  )
+}
 export default ProfileInfo;

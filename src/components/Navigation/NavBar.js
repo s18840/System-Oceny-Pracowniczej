@@ -23,17 +23,13 @@ const Navbar = () => (
   <Nav>
     <NavMenu>
       <NavLogo>
-        <NavLink to="/home">
           <img src="Logo420.png" alt="" />
-        </NavLink>
       </NavLogo>
 
       <NavCategories>
         <NavCategoriesWrapper>
           <FaIdCard />
-          <NavLink to="/dashboard">
             <NavCategoriesText>Dashboard</NavCategoriesText>
-          </NavLink>
         </NavCategoriesWrapper>
         <NavBtnDropdown>
           <IoIosArrowDown />
@@ -43,9 +39,7 @@ const Navbar = () => (
       <NavCategories>
         <NavCategoriesWrapper>
           <FaRegUser />
-          <NavLink to="/profile">
             <NavCategoriesText>Profile</NavCategoriesText>
-          </NavLink>
         </NavCategoriesWrapper>
         <NavBtnDropdown>
           <IoIosArrowDown />
@@ -55,9 +49,7 @@ const Navbar = () => (
       <NavCategories>
         <NavCategoriesWrapper>
           <FaUsers />
-          <NavLink to="/teams">
             <NavCategoriesText>Teams</NavCategoriesText>
-          </NavLink>
         </NavCategoriesWrapper>
         <NavBtnDropdown>
           <IoIosArrowDown />
@@ -67,9 +59,7 @@ const Navbar = () => (
       <NavCategories>
         <NavCategoriesWrapper>
           <FaRegObjectGroup />
-          <NavLink to="/projects">
             <NavCategoriesText>Projects</NavCategoriesText>
-          </NavLink>
         </NavCategoriesWrapper>
         <NavBtnDropdown>
           <IoIosArrowDown />
@@ -79,9 +69,7 @@ const Navbar = () => (
       <NavCategories>
         <NavCategoriesWrapper>
           <FaStar />
-          <NavLink to="/grades">
             <NavCategoriesText>Grades</NavCategoriesText>
-          </NavLink>
         </NavCategoriesWrapper>
         <NavBtnDropdown>
           <IoIosArrowDown />
