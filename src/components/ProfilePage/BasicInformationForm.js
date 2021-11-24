@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import {
   AddressHeadingText,
   City,
@@ -16,6 +17,7 @@ import {
   Street,
   SurName,
 } from "../../styles/ProfilePageStyle";
+import {} from "../../styles/ProfilePageFormStyle";
 const dataJson = {
   content: [
     {
@@ -33,6 +35,12 @@ const dataJson = {
     },
   ],
 };
+const {
+  register,
+  handleSubmit,
+  formState: { errors },
+} = useForm();
+
 const BasicInformation = () => (
   <>
     {dataJson.content.map((content) => (
@@ -41,37 +49,49 @@ const BasicInformation = () => (
         <AddressHeadingText>Address</AddressHeadingText>
 
         <FirstName>
-          <ProfileDataText>First name:</ProfileDataText>{content.FirstName}
+          <ProfileDataText>First name:</ProfileDataText>
+          {content.FirstName}
+          <input></input>
         </FirstName>
         <SecondName>
-          <ProfileDataText>Second name:</ProfileDataText>{content.SecondName}
+          <ProfileDataText>Second name:</ProfileDataText>
+          {content.SecondName}
         </SecondName>
         <SurName>
-          <ProfileDataText>Surname:</ProfileDataText>{content.Surname}
+          <ProfileDataText>Surname:</ProfileDataText>
+          {content.Surname}
         </SurName>
         <FamilyName>
-          <ProfileDataText>Family name:</ProfileDataText>{content.FamilyName}
+          <ProfileDataText>Family name:</ProfileDataText>
+          {content.FamilyName}
         </FamilyName>
         <DateOfBirth>
-          <ProfileDataText>Date of birth:</ProfileDataText>{content.DateOfBirth}
+          <ProfileDataText>Date of birth:</ProfileDataText>
+          {content.DateOfBirth}
         </DateOfBirth>
         <Street>
-          <ProfileDataText>Street:</ProfileDataText>{content.Street}
+          <ProfileDataText>Street:</ProfileDataText>
+          {content.Street}
         </Street>
         <HouseNumber>
-          <ProfileDataText>HouseNumber:</ProfileDataText>{content.HouseNumber}
+          <ProfileDataText>HouseNumber:</ProfileDataText>
+          {content.HouseNumber}
         </HouseNumber>
         <City>
-          <ProfileDataText>City:</ProfileDataText>{content.City}
+          <ProfileDataText>City:</ProfileDataText>
+          {content.City}
         </City>
         <District>
-          <ProfileDataText>District:</ProfileDataText>{content.District}
+          <ProfileDataText>District:</ProfileDataText>
+          {content.District}
         </District>
         <PostalCode>
-          <ProfileDataText>Postal code:</ProfileDataText>{content.PostalCode}
+          <ProfileDataText>Postal code:</ProfileDataText>
+          {content.PostalCode}
         </PostalCode>
         <Country>
-          <ProfileDataText>Country:</ProfileDataText>{content.Country}
+          <ProfileDataText>Country:</ProfileDataText>
+          {content.Country}
         </Country>
       </ProfileDetailedInfoWrapper>
     ))}

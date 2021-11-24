@@ -212,7 +212,6 @@ export const EmploymentDep = styled.div`
   font-size: 28px;
   color: purple;
 `;
-
 export const EmploymentJob = styled.div`
   font-size: 28px;
   color: purple;
