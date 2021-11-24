@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import {
   AddressHeadingText,
   City,
@@ -8,6 +9,7 @@ import {
   District,
   FamilyName,
   FirstName,
+  FormButton,
   HouseNumber,
   PersonalDataHeadingText,
   PostalCode,
@@ -17,7 +19,8 @@ import {
   Street,
   SurName,
 } from "../../styles/ProfilePageStyle";
-import {} from "../../styles/ProfilePageFormStyle";
+import { FormWrapper, InputField } from "../../styles/ProfilePageFormStyle";
+
 const dataJson = {
   content: [
     {
@@ -35,66 +38,106 @@ const dataJson = {
     },
   ],
 };
-const {
-  register,
-  handleSubmit,
-  formState: { errors },
-} = useForm();
 
-const BasicInformation = () => (
-  <>
-    {dataJson.content.map((content) => (
-      <ProfileDetailedInfoWrapper>
-        <PersonalDataHeadingText>Personal Data</PersonalDataHeadingText>
-        <AddressHeadingText>Address</AddressHeadingText>
-
-        <FirstName>
-          <ProfileDataText>First name:</ProfileDataText>
-          {content.FirstName}
-          <input></input>
-        </FirstName>
-        <SecondName>
-          <ProfileDataText>Second name:</ProfileDataText>
-          {content.SecondName}
-        </SecondName>
-        <SurName>
-          <ProfileDataText>Surname:</ProfileDataText>
-          {content.Surname}
-        </SurName>
-        <FamilyName>
-          <ProfileDataText>Family name:</ProfileDataText>
-          {content.FamilyName}
-        </FamilyName>
-        <DateOfBirth>
-          <ProfileDataText>Date of birth:</ProfileDataText>
-          {content.DateOfBirth}
-        </DateOfBirth>
-        <Street>
-          <ProfileDataText>Street:</ProfileDataText>
-          {content.Street}
-        </Street>
-        <HouseNumber>
-          <ProfileDataText>HouseNumber:</ProfileDataText>
-          {content.HouseNumber}
-        </HouseNumber>
-        <City>
-          <ProfileDataText>City:</ProfileDataText>
-          {content.City}
-        </City>
-        <District>
-          <ProfileDataText>District:</ProfileDataText>
-          {content.District}
-        </District>
-        <PostalCode>
-          <ProfileDataText>Postal code:</ProfileDataText>
-          {content.PostalCode}
-        </PostalCode>
-        <Country>
-          <ProfileDataText>Country:</ProfileDataText>
-          {content.Country}
-        </Country>
-      </ProfileDetailedInfoWrapper>
-    ))}
-  </>
-);
+function BasicInformation() {
+  let history = useHistory();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const submitForm = (data) => {
+    history.push("/basicInformationForm");
+  };
+  return (
+    <>
+      {dataJson.content.map((content) => (
+        <FormWrapper onSubmit={handleSubmit(submitForm)}>
+          <ProfileDetailedInfoWrapper>
+            <PersonalDataHeadingText>Personal Data</PersonalDataHeadingText>
+            <AddressHeadingText>Address</AddressHeadingText>
+            <FirstName>
+              <ProfileDataText>First name:</ProfileDataText>
+              <InputField
+                placeholder={content.FirstName}
+                {...register("FirstName", { required: true })}
+              ></InputField>
+            </FirstName>
+            <SecondName>
+              <ProfileDataText>Second name:</ProfileDataText>
+              <InputField
+                placeholder={content.SecondName}
+                {...register("SecondName", { required: true })}
+              ></InputField>
+            </SecondName>
+            <SurName>
+              <ProfileDataText>Surname:</ProfileDataText>
+              <InputField
+                placeholder={content.Surname}
+                {...register("Surname", { required: true })}
+              ></InputField>
+            </SurName>
+            <FamilyName>
+              <ProfileDataText>Family name:</ProfileDataText>
+              <InputField
+                placeholder={content.FamilyName}
+                {...register("FamilyName", { required: false })}
+              ></InputField>
+            </FamilyName>
+            <DateOfBirth>
+              <ProfileDataText>Date of birth:</ProfileDataText>
+              <InputField
+                placeholder={content.DateOfBirth}
+                {...register("DateOfBirth", { required: true })}
+              ></InputField>
+            </DateOfBirth>
+            <Street>
+              <ProfileDataText>Street:</ProfileDataText>
+              <InputField
+                placeholder={content.Street}
+                {...register("Street", { required: true })}
+              ></InputField>
+            </Street>
+            <HouseNumber>
+              <ProfileDataText>HouseNumber:</ProfileDataText>
+              <InputField
+                placeholder={content.HouseNumber}
+                {...register("HouseNumber", { required: true })}
+              ></InputField>
+            </HouseNumber>
+            <City>
+              <ProfileDataText>City:</ProfileDataText>
+              <InputField
+                placeholder={content.City}
+                {...register("City", { required: true })}
+              ></InputField>
+            </City>
+            <District>
+              <ProfileDataText>District:</ProfileDataText>
+              <InputField
+                placeholder={content.District}
+                {...register("District", { required: true })}
+              ></InputField>
+            </District>
+            <PostalCode>
+              <ProfileDataText>Postal code:</ProfileDataText>
+              <InputField
+                placeholder={content.PostalCode}
+                {...register("PostalCode", { required: true })}
+              ></InputField>
+            </PostalCode>
+            <Country>
+              <ProfileDataText>Country:</ProfileDataText>
+              <InputField
+                placeholder={content.Country}
+                {...register("Country", { required: true })}
+              ></InputField>
+            </Country>
+            <FormButton type="submit">Edit</FormButton>
+          </ProfileDetailedInfoWrapper>
+        </FormWrapper>
+      ))}
+    </>
+  );
+}
 export default BasicInformation;

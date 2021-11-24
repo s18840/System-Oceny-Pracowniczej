@@ -3,6 +3,7 @@ import {GlobalStyle} from '../styles/GlobalStyle';
 import Dashboard from './Dashboard';
 import WelcomePage from './WelcomePage';
 import ProfilePage from "./ProfilePage";
+import BasicInformationForm from "../components/ProfilePage/BasicInformationForm"
 import {
   BrowserRouter as Router,
   Redirect,
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route exact path="/profile">
             <ProfilePage/>
+          </Route>
+          <Route exact path="/basicInformationForm">
+            <BasicInformationForm/>
           </Route>
         </Switch>
       </Router>

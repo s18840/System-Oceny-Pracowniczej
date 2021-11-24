@@ -174,6 +174,19 @@ export const Country = styled.div`
   font-size: 28px;
   font-style: italic;
 `;
+export const FormButton = styled.button`
+  grid-row: 1;
+  grid-column: 3;
+  width: 100px;
+  height: 40px;
+  background-color: #FF4E01;
+  color: white;
+  border-radius: 45px;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+  justify-self: center;
+  align-self: center;
+`;
 
 export const TableInfo = styled.table`
   flex-direction: column;

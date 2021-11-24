@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const LoginFormWrapper = styled.form`
   height: 70%;
@@ -7,16 +7,16 @@ export const LoginFormWrapper = styled.form`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  
+
   background-color: #fff3fd;
   border: 5px solid white;
   border-radius: 48px;
-`
+`;
 
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const LoginButton = styled.input`
   width: 243px;
@@ -25,11 +25,11 @@ export const LoginButton = styled.input`
   color: white;
   border-radius: 45px;
   font-size: 42px;
-  font-family: 'Ubuntu';
-`
+  font-family: "Ubuntu";
+`;
 
 export const Login = styled.a`
   font-size: 78px;
   text-align: center;
   color: #ff4e01;
-`
+`;
