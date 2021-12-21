@@ -30,9 +30,11 @@ function App() {
           <Route exact path="/profile">
             <ProfilePage/>
           </Route>
+          
           <Route exact path="/basicInformationForm">
             <BasicInformationForm/>
           </Route>
+          
         </Switch>
       </Router>
     </>

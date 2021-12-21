@@ -1,4 +1,5 @@
 import React from "react";
+import {useTranslation} from 'react-i18next';
 import {
   AddressHeadingText,
   City,
@@ -34,49 +35,52 @@ const dataJson = {
     },
   ],
 };
-const BasicInformation = () => (
+
+function BasicInformation() {
+  const {t} = useTranslation();
+  return (
   <>
     {dataJson.content.map((content) => (
       <ProfileDetailedInfoWrapper>
-        <PersonalDataHeadingText>Personal Data</PersonalDataHeadingText>
-        <AddressHeadingText>Address</AddressHeadingText>
+        <PersonalDataHeadingText>{t('Personal Data')}</PersonalDataHeadingText>
+        <AddressHeadingText>{t('Address')}</AddressHeadingText>
 
         <FirstName>
-          <ProfileDataText>First name:</ProfileDataText>{content.FirstName}
+          <ProfileDataText>{t('First name')}</ProfileDataText>{content.FirstName}
         </FirstName>
         <SecondName>
-          <ProfileDataText>Second name:</ProfileDataText>{content.SecondName}
+          <ProfileDataText>{t('Second name')}</ProfileDataText>{content.SecondName}
         </SecondName>
         <SurName>
-          <ProfileDataText>Surname:</ProfileDataText>{content.Surname}
+          <ProfileDataText>{t('Surname')}</ProfileDataText>{content.Surname}
         </SurName>
         <FamilyName>
-          <ProfileDataText>Family name:</ProfileDataText>{content.FamilyName}
+          <ProfileDataText>{t('Family name')}</ProfileDataText>{content.FamilyName}
         </FamilyName>
         <DateOfBirth>
-          <ProfileDataText>Date of birth:</ProfileDataText>{content.DateOfBirth}
+          <ProfileDataText>{t('Date of birth')}</ProfileDataText>{content.DateOfBirth}
         </DateOfBirth>
         <Street>
-          <ProfileDataText>Street:</ProfileDataText>{content.Street}
+          <ProfileDataText>{t('Street')}</ProfileDataText>{content.Street}
         </Street>
         <HouseNumber>
-          <ProfileDataText>HouseNumber:</ProfileDataText>{content.HouseNumber}
+          <ProfileDataText>{t('House number')}</ProfileDataText>{content.HouseNumber}
         </HouseNumber>
         <City>
-          <ProfileDataText>City:</ProfileDataText>{content.City}
+          <ProfileDataText>{t('City')}</ProfileDataText>{content.City}
         </City>
         <District>
-          <ProfileDataText>District:</ProfileDataText>{content.District}
+          <ProfileDataText>{t('District')}</ProfileDataText>{content.District}
         </District>
         <PostalCode>
-          <ProfileDataText>Postal code:</ProfileDataText>{content.PostalCode}
+          <ProfileDataText>{t('Postal code')}</ProfileDataText>{content.PostalCode}
         </PostalCode>
         <Country>
-          <ProfileDataText>Country:</ProfileDataText>{content.Country}
+          <ProfileDataText>{t('Country')}</ProfileDataText>{content.Country}
         </Country>
-        <FormButton type="submit">Edit</FormButton>
+        <FormButton type="submit">{t('Edit')}</FormButton>
       </ProfileDetailedInfoWrapper>
     ))}
   </>
-);
+  )};
 export default BasicInformation;

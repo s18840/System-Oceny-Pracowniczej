@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import {useTranslation} from 'react-i18next';
+
 import {
   AddressHeadingText,
   City,
@@ -136,7 +137,7 @@ function BasicInformation() {
                 {...register("Country", { required: true })}
               ></InputField>
             </Country>
-            <FormButton type="submit">Edit</FormButton>
+            <FormButton onClick={()=>console.log('tututu')}>{t('Edit')}</FormButton>
           </ProfileDetailedInfoWrapper>
         </FormWrapper>
       ))}

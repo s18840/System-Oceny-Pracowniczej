@@ -1,6 +1,6 @@
 import React from "react";
 import {DateWrapper, EmploymentTableDateLine, Row, TableDetailsDate, TableInfo,} from "../../styles/ProfilePageStyle";
-
+import {useTranslation} from 'react-i18next';
 const dataJson = {
   titles: ["Time", "Department", "Job", "Team"],
   content: [
@@ -27,7 +27,9 @@ const dataJson = {
     },
   ],
 };
-const EmploymentTable = () => (
+function EmploymentTable () {
+  const {t} = useTranslation();
+  return(
   <>
     <TableInfo class="table">
       <thead>
@@ -48,12 +50,15 @@ const EmploymentTable = () => (
               <td>{content.DateEnd}</td>
             </TableDetailsDate>
           </DateWrapper>
-          <td>{content.Department}</td>
+          <td>
+            
+            {content.Department}</td>
           <td>{content.Job}</td>
           <td>{content.Team}</td>
         </Row>
       ))}
     </TableInfo>
   </>
-);
+  )
+};
 export default EmploymentTable;
