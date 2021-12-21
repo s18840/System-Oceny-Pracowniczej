@@ -10,6 +10,8 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import ProjectList from '../components/Project/ProjectList';
+import Projects from './Projects';
 
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
           
           <Route exact path="/basicInformationForm">
             <BasicInformationForm/>
+          </Route>
+          <Route exact path="/projectList">
+            <Projects/>
           </Route>
           
         </Switch>

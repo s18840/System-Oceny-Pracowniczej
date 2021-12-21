@@ -1,16 +1,19 @@
 import React from "react";
+import Header from "../components/Header/Header";
+import NavBar from "../components/Navigation/NavBar";
+import Footer from "../components/Footer/Footer";
+import ProjectList from "../components/Project/ProjectList";
 
-const Projects = () => (
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "Right",
-      alignItems: "Right",
-      height: "100vh",
-    }}
-  >
-    <h1>Projects</h1>
-  </div>
-);
+function Projects() {
+  return (
+<>
+      <NavBar/>
+      <Header/>
+      <Footer/>
+      <ProjectList/>
+</>
+
+  );
+}
 
 export default Projects;
