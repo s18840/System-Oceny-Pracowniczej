@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import {useTranslation} from 'react-i18next';
 import {
   AddressHeadingText,
   City,
@@ -41,6 +42,7 @@ const dataJson = {
 
 function BasicInformation() {
   let history = useHistory();
+  const {t} = useTranslation();
   const {
     register,
     handleSubmit,
@@ -48,86 +50,87 @@ function BasicInformation() {
   } = useForm();
   const submitForm = (data) => {
     history.push("/basicInformationForm");
+    console.log(data)
   };
   return (
     <>
       {dataJson.content.map((content) => (
         <FormWrapper onSubmit={handleSubmit(submitForm)}>
           <ProfileDetailedInfoWrapper>
-            <PersonalDataHeadingText>Personal Data</PersonalDataHeadingText>
-            <AddressHeadingText>Address</AddressHeadingText>
+            <PersonalDataHeadingText>{t('Personal Data')}</PersonalDataHeadingText>
+            <AddressHeadingText>{t('Address')}</AddressHeadingText>
             <FirstName>
-              <ProfileDataText>First name:</ProfileDataText>
+              <ProfileDataText>{t('First name')}</ProfileDataText>
               <InputField
                 placeholder={content.FirstName}
                 {...register("FirstName", { required: true })}
               ></InputField>
             </FirstName>
             <SecondName>
-              <ProfileDataText>Second name:</ProfileDataText>
+              <ProfileDataText>{t('Second name')}</ProfileDataText>
               <InputField
                 placeholder={content.SecondName}
                 {...register("SecondName", { required: true })}
               ></InputField>
             </SecondName>
             <SurName>
-              <ProfileDataText>Surname:</ProfileDataText>
+              <ProfileDataText>{t('Surname')}</ProfileDataText>
               <InputField
                 placeholder={content.Surname}
                 {...register("Surname", { required: true })}
               ></InputField>
             </SurName>
             <FamilyName>
-              <ProfileDataText>Family name:</ProfileDataText>
+              <ProfileDataText>{t('Family name')}</ProfileDataText>
               <InputField
                 placeholder={content.FamilyName}
                 {...register("FamilyName", { required: false })}
               ></InputField>
             </FamilyName>
             <DateOfBirth>
-              <ProfileDataText>Date of birth:</ProfileDataText>
+              <ProfileDataText>{t('Date of birth')}</ProfileDataText>
               <InputField
                 placeholder={content.DateOfBirth}
                 {...register("DateOfBirth", { required: true })}
               ></InputField>
             </DateOfBirth>
             <Street>
-              <ProfileDataText>Street:</ProfileDataText>
+              <ProfileDataText>{t('Street')}</ProfileDataText>
               <InputField
                 placeholder={content.Street}
                 {...register("Street", { required: true })}
               ></InputField>
             </Street>
             <HouseNumber>
-              <ProfileDataText>HouseNumber:</ProfileDataText>
+              <ProfileDataText>{t('House number')}</ProfileDataText>
               <InputField
                 placeholder={content.HouseNumber}
                 {...register("HouseNumber", { required: true })}
               ></InputField>
             </HouseNumber>
             <City>
-              <ProfileDataText>City:</ProfileDataText>
+              <ProfileDataText>{t('City')}</ProfileDataText>
               <InputField
                 placeholder={content.City}
                 {...register("City", { required: true })}
               ></InputField>
             </City>
             <District>
-              <ProfileDataText>District:</ProfileDataText>
+              <ProfileDataText>{t('District')}</ProfileDataText>
               <InputField
                 placeholder={content.District}
                 {...register("District", { required: true })}
               ></InputField>
             </District>
             <PostalCode>
-              <ProfileDataText>Postal code:</ProfileDataText>
+              <ProfileDataText>{t('Postal code')}</ProfileDataText>
               <InputField
                 placeholder={content.PostalCode}
                 {...register("PostalCode", { required: true })}
               ></InputField>
             </PostalCode>
             <Country>
-              <ProfileDataText>Country:</ProfileDataText>
+              <ProfileDataText>{t('Country')}</ProfileDataText>
               <InputField
                 placeholder={content.Country}
                 {...register("Country", { required: true })}

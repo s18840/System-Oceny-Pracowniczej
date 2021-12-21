@@ -16,5 +16,18 @@
     "DAY_4": "czwartek",
     "DAY_5": "piątek",
     "DAY_6": "sobota",
-    "DAY_7": "niedziela"
+    "DAY_7": "niedziela",
+    "Personal Data": "Dane osobowe",
+    "Address": "Adres",
+    "First name": "Pierwsze Imie",
+    "Second name": "Drugie Imie",
+    "Surname": "Nazwisko",
+    "Family name": "Nazwisko rodowe",
+    "Date of birth": "Data urodzenia",
+    "Street": "Ulica",
+    "House number": "Numer domu",
+    "City": "Miasto",
+    "District": "Dzielnica",
+    "Postal code": "Kod pocztowy",
+    "Country": "Kraj"
 }

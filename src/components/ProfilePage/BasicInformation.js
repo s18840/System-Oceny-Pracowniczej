@@ -15,6 +15,7 @@ import {
   SecondName,
   Street,
   SurName,
+  FormButton
 } from "../../styles/ProfilePageStyle";
 const dataJson = {
   content: [
@@ -73,6 +74,7 @@ const BasicInformation = () => (
         <Country>
           <ProfileDataText>Country:</ProfileDataText>{content.Country}
         </Country>
+        <FormButton type="submit">Edit</FormButton>
       </ProfileDetailedInfoWrapper>
     ))}
   </>
