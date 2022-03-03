@@ -18,7 +18,7 @@ import {PageWrapper} from "../../styles/GlobalStyle";
 import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
-
+import BasicInformationForm from "./BasicInformationForm";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
@@ -29,6 +29,7 @@ function ProfileInfo() {
   const BASIC_INFO = "BASIC_INFO"
   const EMPLOYMENT_INFO = "EMPLOYMENT_INFO"
   const EDUCATION_INFO = "EDUCATION_INFO"
+  const BASIC_INFO_EDIT = "BASIC_INFO_EDIT"
 
   const [contentType, setContentType] = useState(BASIC_INFO)
 
@@ -87,7 +88,7 @@ function ProfileInfo() {
       </ProfileInfoDiv>
       <ProfileTabWrapper>
         <ProfileTab onClick={() => switchType(BASIC_INFO)} style={contentType === BASIC_INFO ? activeStyle : {}}>
-          <text>Basic Inforamtion</text>
+          <text>Basic Information</text>
         </ProfileTab>
         <ProfileTab onClick={() => switchType(EMPLOYMENT_INFO)} style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}>
           <text>Employment</text>
@@ -103,6 +104,7 @@ function ProfileInfo() {
             case BASIC_INFO:   return <BasicInformation/>;
             case EMPLOYMENT_INFO: return <EmploymentInformation/>;
             case EDUCATION_INFO:  return <EducationInformation/>;
+            case BASIC_INFO_EDIT: return <BasicInformationForm/>;
           }
         })()}
       </div>

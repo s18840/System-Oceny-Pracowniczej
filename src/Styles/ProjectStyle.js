@@ -37,5 +37,5 @@ export const PersonalDataHeadingText = styled.div`
   margin-top: 100px;
   font-size: 42px;
   font-weight: bold;
-  color: purple;
+  color: #522d8a;
 `;

@@ -187,6 +187,19 @@ export const FormButton = styled.button`
   justify-self: center;
   align-self: center;
 `;
+export const AcceptButton = styled.button`
+  grid-row: 1;
+  grid-column: 2;
+  width: 100px;
+  height: 40px;
+  background-color: #FF4E01;
+  color: white;
+  border-radius: 45px;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+  justify-self: center;
+  align-self: center;
+`;
 
 export const TableInfo = styled.table`
   flex-direction: column;

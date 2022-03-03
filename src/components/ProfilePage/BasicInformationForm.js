@@ -53,6 +53,7 @@ function BasicInformation() {
     history.push("/basicInformationForm");
     console.log(data)
   };
+  const disabled = false;
   return (
     <>
       {dataJson.content.map((content) => (
@@ -63,42 +64,42 @@ function BasicInformation() {
             <FirstName>
               <ProfileDataText>{t('First name')}</ProfileDataText>
               <InputField
-                placeholder={content.FirstName}
+                value={content.FirstName} disable={disabled}
                 {...register("FirstName", { required: true })}
               ></InputField>
             </FirstName>
             <SecondName>
               <ProfileDataText>{t('Second name')}</ProfileDataText>
               <InputField
-                placeholder={content.SecondName}
+                value={content.SecondName}disable={disabled}
                 {...register("SecondName", { required: true })}
               ></InputField>
             </SecondName>
             <SurName>
               <ProfileDataText>{t('Surname')}</ProfileDataText>
               <InputField
-                placeholder={content.Surname}
+                value={content.Surname}
                 {...register("Surname", { required: true })}
               ></InputField>
             </SurName>
             <FamilyName>
               <ProfileDataText>{t('Family name')}</ProfileDataText>
               <InputField
-                placeholder={content.FamilyName}
+                value={content.FamilyName}
                 {...register("FamilyName", { required: false })}
               ></InputField>
             </FamilyName>
             <DateOfBirth>
               <ProfileDataText>{t('Date of birth')}</ProfileDataText>
               <InputField
-                placeholder={content.DateOfBirth}
+                value={content.DateOfBirth}
                 {...register("DateOfBirth", { required: true })}
               ></InputField>
             </DateOfBirth>
             <Street>
               <ProfileDataText>{t('Street')}</ProfileDataText>
               <InputField
-                placeholder={content.Street}
+                value={content.Street}
                 {...register("Street", { required: true })}
               ></InputField>
             </Street>
@@ -112,28 +113,28 @@ function BasicInformation() {
             <City>
               <ProfileDataText>{t('City')}</ProfileDataText>
               <InputField
-                placeholder={content.City}
+                value={content.City}
                 {...register("City", { required: true })}
               ></InputField>
             </City>
             <District>
               <ProfileDataText>{t('District')}</ProfileDataText>
               <InputField
-                placeholder={content.District}
+                value={content.District}
                 {...register("District", { required: true })}
               ></InputField>
             </District>
             <PostalCode>
               <ProfileDataText>{t('Postal code')}</ProfileDataText>
               <InputField
-                placeholder={content.PostalCode}
+                value={content.PostalCode}
                 {...register("PostalCode", { required: true })}
               ></InputField>
             </PostalCode>
             <Country>
               <ProfileDataText>{t('Country')}</ProfileDataText>
               <InputField
-                placeholder={content.Country}
+                value={content.Country}
                 {...register("Country", { required: true })}
               ></InputField>
             </Country>
