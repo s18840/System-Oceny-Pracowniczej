@@ -5,6 +5,8 @@ import {
   TableDetailsDate,
   TableDetails,
   PersonalDataHeadingText,
+  NewProjectButton,
+  EditProjectButton,
 } from "../../styles/ProjectStyle";
 
 const dataJson = {
@@ -77,6 +79,12 @@ function ProjectList() {
   return (
     <>
       <PersonalDataHeadingText>Project List</PersonalDataHeadingText>
+      <EditProjectButton>
+        <text>Edit Project</text>
+      </EditProjectButton>
+      <NewProjectButton>
+        <text>New Project</text>
+      </NewProjectButton>
       <TableInfo class="table">
         <thead>
           <tr>

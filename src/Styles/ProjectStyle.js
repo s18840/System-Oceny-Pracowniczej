@@ -39,3 +39,25 @@ export const PersonalDataHeadingText = styled.div`
   font-weight: bold;
   color: #522d8a;
 `;
+export const NewProjectButton = styled.button`
+float: right;
+margin-right: 50px;
+  width: 200px;
+  height: 40px;
+  background-color:  #522d8a;
+  color: white;
+  border-radius: 45px;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+`;
+export const EditProjectButton = styled.button`
+float: right;
+margin-right: 250px;
+  width: 200px;
+  height: 40px;
+  background-color:  #522d8a;
+  color: white;
+  border-radius: 45px;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+`;
