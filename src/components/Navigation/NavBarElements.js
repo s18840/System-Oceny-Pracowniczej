@@ -1,20 +1,65 @@
 import { NavLink as Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const Nav = styled.nav`
+export const Nav = styled.div`
   background: linear-gradient(#6137a0, #54318a, #311c50);
   display: flex;
   position: fixed;
+  justify-content: flex-start;
   flex-direction: column;
-  justify-content: space-between;
   width: 400px;
   height: 100%;
   font-size: 20px;
   top: 0;
-  left: 0;
+
+  z-index: 15;
 `
 
 export const NavLogo = styled.div`
+  justify-content: center;
+  border-radius: 100%;
+  margin-block-start: -50px;
+`
+export const SidebarLink = styled(Link)`
+display: flex;
+color: #e1e9fc;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+width: 352px;
+list-style: none;
+height: 60px;
+text-decoration: none;
+font-size: 20px;
+&:hover{
+  background: #252831;
+  border-left: 8px solid #ff4e01;
+  cursor: pointer;
+}
+`
+export const SidebarLabel = styled.span`
+margin-left: 20px;
+`
+
+export const DropdownLink = styled(Link)`
+height: 60px;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+text-decoration: none;
+color: #f5f5f5;
+font-size: 20px;
+&::hover{
+  background: #632ce4;
+  cursor: pointer;
+}
+`
+export const SidebarNav = styled.nav`
+  justify-content: center;
+  border-radius: 100%;
+  margin-block-start: -50px;
+`
+export const SidebarWrap = styled.nav`
   justify-content: center;
   border-radius: 100%;
   margin-block-start: -50px;

@@ -6,24 +6,24 @@ import { FaRegObjectGroup } from 'react-icons/fa' // projects
 import { FaIdCard } from 'react-icons/fa' // dashboard
 import * as MDIcons from 'react-icons/md'
 
-export const SideBarData = [
+export const NavBarData = [
   {
     title: 'Dashboard',
     path: '/dashboard',
-    icon: FaIdCard,
-    iconOpened: <MDIcons.MdKeyboardArrowDown />,
-    iconClosed: <MDIcons.MdKeyboardArrowUp />,
+    icon: <FaIdCard/>,
+    iconClosed: <MDIcons.MdKeyboardArrowDown />,
+    iconOpened: <MDIcons.MdKeyboardArrowUp />,
   },
   {
     title: 'Profile',
     path: '/profile',
-    icon: FaRegUser,
-    iconOpened: <MDIcons.MdKeyboardArrowDown />,
-    iconClosed: <MDIcons.MdKeyboardArrowUp />,
+    icon: <FaRegUser/>,
+    iconClosed: <MDIcons.MdKeyboardArrowDown />,
+    iconOpened: <MDIcons.MdKeyboardArrowUp />,
     subnav: [
       {
         title: 'Personal Information',
-        path: '/personalInformation',
+        path: '/profile',
       },
       {
         title: 'Your goals',
@@ -34,9 +34,9 @@ export const SideBarData = [
   {
     title: 'Teams',
     path: '/teams',
-    icon: FaUsers,
-    iconOpened: <MDIcons.MdKeyboardArrowDown />,
-    iconClosed: <MDIcons.MdKeyboardArrowUp />,
+    icon: <FaUsers/>,
+    iconClosed: <MDIcons.MdKeyboardArrowDown />,
+    iconOpened: <MDIcons.MdKeyboardArrowUp />,
     subnav: [
       {
         title: 'Your Teams',
@@ -54,10 +54,10 @@ export const SideBarData = [
   },
   {
     title: 'Projects',
-    path: '/projects',
-    icon: FaRegObjectGroup,
-    iconOpened: <MDIcons.MdKeyboardArrowDown />,
-    iconClosed: <MDIcons.MdKeyboardArrowUp />,
+    path: '/projectList',
+    icon: <FaRegObjectGroup/>,
+    iconClosed: <MDIcons.MdKeyboardArrowDown />,
+    iconOpened: <MDIcons.MdKeyboardArrowUp />,
     subnav: [
       {
         title: 'Project List',
@@ -76,9 +76,9 @@ export const SideBarData = [
   {
     title: 'Grades',
     path: '/grades',
-    icon: FaStar,
-    iconOpened: <MDIcons.MdKeyboardArrowDown />,
-    iconClosed: <MDIcons.MdKeyboardArrowUp />,
+    icon: <FaStar/>,
+    iconClosed: <MDIcons.MdKeyboardArrowDown />,
+    iconOpened: <MDIcons.MdKeyboardArrowUp />,
     subnav: [
       {
         title: 'Competences',

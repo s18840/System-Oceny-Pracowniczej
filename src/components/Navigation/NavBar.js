@@ -1,4 +1,5 @@
-import React from 'react'
+import React,{useState} from 'react'
+import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import { FaStar } from 'react-icons/fa' // grades
 import { FaUsers } from 'react-icons/fa' // teams
@@ -10,72 +11,30 @@ import { IoIosArrowDown } from 'react-icons/io' // dropdown
 
 import {
   Nav,
-  NavCategories,
   NavLogo,
   NavMenu,
-  NavCategoriesText,
-  NavBtnDropdown,
-  NavCategoriesWrapper,
-  NavLink,
 } from './NavBarElements'
+import {NavBarData} from './NavBarData'
+import SubMenu from './SubMenu'
 
-const Navbar = () => (
+
+
+const Navbar = () => {
+
+const [sidebar,setSidebar] = useState(false)
+const showSidebar = () => setSidebar(!sidebar)
+
+return (
   <Nav>
+    <NavLogo>
+      <img src="Logo420.png" alt="" />
+    </NavLogo>
+
     <NavMenu>
-      <NavLogo>
-          <img src="Logo420.png" alt="" />
-      </NavLogo>
-
-      <NavCategories>
-        <NavCategoriesWrapper>
-          <FaIdCard />
-            <NavCategoriesText>Dashboard</NavCategoriesText>
-        </NavCategoriesWrapper>
-        <NavBtnDropdown>
-          <IoIosArrowDown />
-        </NavBtnDropdown>
-      </NavCategories>
-
-      <NavCategories>
-        <NavCategoriesWrapper>
-          <FaRegUser />
-            <NavCategoriesText>Profile</NavCategoriesText>
-        </NavCategoriesWrapper>
-        <NavBtnDropdown>
-          <IoIosArrowDown />
-        </NavBtnDropdown>
-      </NavCategories>
-
-      <NavCategories>
-        <NavCategoriesWrapper>
-          <FaUsers />
-            <NavCategoriesText>Teams</NavCategoriesText>
-        </NavCategoriesWrapper>
-        <NavBtnDropdown>
-          <IoIosArrowDown />
-        </NavBtnDropdown>
-      </NavCategories>
-
-      <NavCategories>
-        <NavCategoriesWrapper>
-          <FaRegObjectGroup />
-            <NavCategoriesText>Projects</NavCategoriesText>
-        </NavCategoriesWrapper>
-        <NavBtnDropdown>
-          <IoIosArrowDown />
-        </NavBtnDropdown>
-      </NavCategories>
-
-      <NavCategories>
-        <NavCategoriesWrapper>
-          <FaStar />
-            <NavCategoriesText>Grades</NavCategoriesText>
-        </NavCategoriesWrapper>
-        <NavBtnDropdown>
-          <IoIosArrowDown />
-        </NavBtnDropdown>
-      </NavCategories>
+      {NavBarData.map((item,index)=> {
+        return<SubMenu item={item} key={index}/>;
+      })}
     </NavMenu>
   </Nav>
-)
+)}
 export default Navbar
