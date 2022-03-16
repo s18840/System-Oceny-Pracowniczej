@@ -1,5 +1,7 @@
 import React from 'react'
 import { FaPowerOff, FaWrench, FaSearch } from 'react-icons/fa'
+import { createBrowserHistory } from "history";
+
 
 import {
   HeaderLocTree,
@@ -14,8 +16,9 @@ import {
   HeaderName,
 } from './HeaderElements'
 
-
+const history = createBrowserHistory()
 const HeaderBar = () => (
+  
   <HeaderWrapper>
     <HeaderBtnProfileWrapper>
       <HeaderBtnSignOut to="/welcome">
@@ -39,7 +42,7 @@ const HeaderBar = () => (
     </HeaderSearch>
 
     <HeaderLocTree to="/sciezka do miejsc" activeStyle>
-      <text>Profile / PersonalInfo</text>
+      {history.location.pathname}
     </HeaderLocTree>
   </HeaderWrapper>
 )
