@@ -7,15 +7,7 @@ export const ProfilePhoto = styled.div`
   border-radius: 100%;
 `;
 
-export const NavLink = styled(Link)`
-  text-decoration: none;
-  color: #ffffff;
-  cursor: pointer;
 
-  &.active {
-    color: #ff4e01;
-  }
-`;
 export const ProfileTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -72,6 +64,10 @@ export const ProfileInfoDiv = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+
+export const NavLink= styled(Link)`
+
+`
 
 export const ProfileTabWrapper = styled.div`
   display: flex;
