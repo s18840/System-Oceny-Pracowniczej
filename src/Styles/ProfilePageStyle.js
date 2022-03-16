@@ -82,7 +82,7 @@ export const ProfileDetailedInfoWrapper = styled.div`
   margin-top: 5px;
   row-gap: 0px;
   grid-template-columns: 280px 200px 200px;
-  grid-template-rows: 120px 80px 80px 80px 80px 80px;
+  grid-template-rows: 120px 80px 80px 80px 80px 80px 80px 80px;
   color: blue;
 `;
 export const ProfileDataText = styled.div`
@@ -167,6 +167,18 @@ export const PostalCode = styled.div`
 export const Country = styled.div`
   grid-row: 5;
   grid-column: 3;
+  font-size: 28px;
+  font-style: italic;
+`;
+export const Mail = styled.div`
+  grid-row: 8;
+  grid-column: 1;
+  font-size: 28px;
+  font-style: italic;
+`;
+export const PhoneNumber = styled.div`
+  grid-row: 7;
+  grid-column: 1;
   font-size: 28px;
   font-style: italic;
 `;

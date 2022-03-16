@@ -22,6 +22,8 @@ import {
   SurName,
   FormButton,
   AcceptButton,
+  PhoneNumber,
+  Mail
 } from "../../styles/ProfilePageStyle";
 const dataJson = {
   content: [
@@ -37,6 +39,8 @@ const dataJson = {
       District: "Mazowieckie",
       PostalCode: "01-100",
       Country: "Poland",
+      PhoneNumber: "+48 506123412",
+      Mail: "a.jarzab@gmail.com"
     },
   ],
 };
@@ -99,6 +103,20 @@ function BasicInformation() {
                     {...register("DateOfBirth", { required: true })}
                   ></InputField>
                 </DateOfBirth>
+                <PhoneNumber>
+                  <ProfileDataText>{t("Phone Number")}</ProfileDataText>
+                  <InputField
+                    value={content.PhoneNumber} disabled={true}
+                    {...register("PhoneNumber", { required: true })}
+                  ></InputField>
+                </PhoneNumber>
+                <Mail>
+                  <ProfileDataText>{t("Mail")}</ProfileDataText>
+                  <InputField
+                    value={content.Mail} disabled={true}
+                    {...register("Mail", { required: true })}
+                  ></InputField>
+                </Mail>
                 <Street>
                   <ProfileDataText>{t("Street")}</ProfileDataText>
                   <InputField
