@@ -11,23 +11,24 @@ import {
   HeaderBtnSignOut,
   HeaderBtnTol,
   HeaderSearchIcon,
+  HeaderName,
 } from './HeaderElements'
 
 
 const HeaderBar = () => (
   <HeaderWrapper>
     <HeaderBtnProfileWrapper>
-      <HeaderBtnSignOut>
+      <HeaderBtnSignOut to="/welcome">
         <FaPowerOff />
       </HeaderBtnSignOut>
       <HeaderBtnTol>  
         <FaWrench  />
       </HeaderBtnTol>
       <HeaderProfile to="/sciezka do miejsc" activeStyle>
-        <HeaderProfilePhoto>
+        <HeaderProfilePhoto to="/profile">
           <img src="prof.png" alt="" width="100%" />
         </HeaderProfilePhoto>
-        <text>Amadeusz Jarząbkowski</text>
+        <HeaderName to="/profile">Amadeusz Jarząbkowski</HeaderName>
       </HeaderProfile>
     </HeaderBtnProfileWrapper>
 

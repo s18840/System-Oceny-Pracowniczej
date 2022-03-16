@@ -26,7 +26,7 @@ const showSidebar = () => setSidebar(!sidebar)
 
 return (
   <Nav>
-    <NavLogo>
+    <NavLogo to="/dashboard">
       <img src="Logo420.png" alt="" />
     </NavLogo>
 

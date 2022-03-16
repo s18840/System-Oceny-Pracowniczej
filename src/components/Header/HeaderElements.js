@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { NavLink as Link } from 'react-router-dom'
 
 export const HeaderWrapper = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ export const HeaderBtnTol = styled.div`
     background: #15cd9c;
   }
 `
-export const HeaderBtnSignOut = styled.div`
+export const HeaderBtnSignOut = styled(Link)`
   color: #fb0d0d;
   padding: 22px;
   cursor: pointer;
@@ -84,8 +85,12 @@ export const HeaderSearchIcon = styled.div`
   cursor: pointer;
   margin-top: 1px;
 `
+export const HeaderName= styled(Link)`
+ color: #ffffff;
+ text-decoration: none ;
+`
 
-export const HeaderProfilePhoto = styled.div`
+export const HeaderProfilePhoto = styled(Link)`
   margin-right: 10px;
   min-width: 45px;
   min-height: 45px;

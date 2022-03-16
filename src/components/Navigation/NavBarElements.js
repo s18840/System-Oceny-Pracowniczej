@@ -15,7 +15,7 @@ export const Nav = styled.div`
   z-index: 15;
 `
 
-export const NavLogo = styled.div`
+export const NavLogo = styled(Link)`
   justify-content: center;
   border-radius: 100%;
   margin-block-start: -50px;
@@ -23,7 +23,7 @@ export const NavLogo = styled.div`
 export const SidebarLink = styled(Link)`
 display: flex;
 color: #e1e9fc;
-justify-content: space-between;
+
 align-items: center;
 padding: 20px;
 width: 352px;
@@ -44,7 +44,7 @@ margin-left: 20px;
 export const DropdownLink = styled(Link)`
 height: 60px;
 display: flex;
-justify-content: flex-start;
+
 align-items: center;
 text-decoration: none;
 color: #f5f5f5;
