@@ -211,8 +211,9 @@ export const AcceptButton = styled.button`
 
 export const TableInfo = styled.table`
   flex-direction: column;
-  width: 100%;
+  width:100% ;
   display: table;
+  padding: 30px ;
   font-size: 42px;
   font-weight: bold;
   color: #522d8a;
