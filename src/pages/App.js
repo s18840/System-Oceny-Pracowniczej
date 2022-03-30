@@ -30,18 +30,15 @@ function App() {
           <Route exact path="/dashboard" component={Dashboard}>
             <Dashboard/>
           </Route>
-          <Route exact path="/profile" component={ProfilePage}>
-            
+          <Route exact path="/profile" component={ProfilePage}>        
             <ProfilePage/>
           </Route>
-          
           <Route exact path="/basicInformationForm" component={BasicInformationForm}>
             <BasicInformationForm/>
           </Route>
           <Route exact path="/projectList" component={ProjectList}>
             <Projects/>
-          </Route>
-          
+          </Route>       
         </Switch>
       </Router>
     </>

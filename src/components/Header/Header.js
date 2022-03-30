@@ -36,13 +36,11 @@ const HeaderBar = () => {
         <HeaderName to="/profile">Amadeusz Jarząbkowski</HeaderName>
       </HeaderProfile>
     </HeaderBtnProfileWrapper>
-
     <HeaderSearch>
       <HeaderSearchIcon>
         <FaSearch />
       </HeaderSearchIcon>
     </HeaderSearch>
-
     <HeaderLocTree activeStyle>
     {history.location.pathname}
     </HeaderLocTree>
