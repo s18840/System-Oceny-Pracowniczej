@@ -14,29 +14,31 @@ import ProjectList from '../components/Project/ProjectList';
 import Projects from './Projects';
 
 
+
 function App() {
   return (
     <>
       <Router>
         <GlobalStyle/>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/" component={WelcomePage}>
             <Redirect to="/welcome" />
           </Route>
-          <Route exact path="/welcome">
+          <Route exact path="/welcome" component={WelcomePage}>
             <WelcomePage/>
           </Route>
-          <Route exact path="/dashboard">
+          <Route exact path="/dashboard" component={Dashboard}>
             <Dashboard/>
           </Route>
-          <Route exact path="/profile">
+          <Route exact path="/profile" component={ProfilePage}>
+            
             <ProfilePage/>
           </Route>
           
-          <Route exact path="/basicInformationForm">
+          <Route exact path="/basicInformationForm" component={BasicInformationForm}>
             <BasicInformationForm/>
           </Route>
-          <Route exact path="/projectList">
+          <Route exact path="/projectList" component={ProjectList}>
             <Projects/>
           </Route>
           

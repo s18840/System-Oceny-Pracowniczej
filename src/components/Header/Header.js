@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaPowerOff, FaWrench, FaSearch } from 'react-icons/fa'
-import { createBrowserHistory } from "history";
+import { useHistory } from "react-router-dom";
 
 
 import {
@@ -16,9 +16,11 @@ import {
   HeaderName,
 } from './HeaderElements'
 
-const history = createBrowserHistory()
-const HeaderBar = () => (
-  
+
+
+const HeaderBar = () => {
+  const history = useHistory();
+  return(
   <HeaderWrapper>
     <HeaderBtnProfileWrapper>
       <HeaderBtnSignOut to="/welcome">
@@ -27,7 +29,7 @@ const HeaderBar = () => (
       <HeaderBtnTol>  
         <FaWrench  />
       </HeaderBtnTol>
-      <HeaderProfile to="/sciezka do miejsc" activeStyle>
+      <HeaderProfile activeStyle>
         <HeaderProfilePhoto to="/profile">
           <img src="prof.png" alt="" width="100%" />
         </HeaderProfilePhoto>
@@ -41,9 +43,10 @@ const HeaderBar = () => (
       </HeaderSearchIcon>
     </HeaderSearch>
 
-    <HeaderLocTree to="/sciezka do miejsc" activeStyle>
-      {history.location.pathname}
+    <HeaderLocTree activeStyle>
+    {history.location.pathname}
     </HeaderLocTree>
   </HeaderWrapper>
-)
+  )
+}
 export default HeaderBar

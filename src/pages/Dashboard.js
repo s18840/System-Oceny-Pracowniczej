@@ -6,8 +6,11 @@ import Clock from '../components/Dashboard/Clock';
 import {DashboardContentWrapper, DashboardWrapper} from "../styles/DashboardStyles";
 import NextGrading from "../components/Dashboard/NextGrading";
 import TargetList from "../components/Dashboard/TargetList";
+import {useHistory, useLocation} from 'react-router-dom'
 
 function Dashboard() {
+  const location = useLocation();
+  console.log(location);
 
   return (
     <>
