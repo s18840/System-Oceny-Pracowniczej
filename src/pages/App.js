@@ -12,6 +12,8 @@ import {
 } from 'react-router-dom';
 import ProjectList from '../components/Project/ProjectList';
 import Projects from './Projects';
+import CompetenceList from '../components/Competences/CompetenceList';
+import Competences from './Competences';
 
 
 
@@ -38,7 +40,10 @@ function App() {
           </Route>
           <Route exact path="/projectList" component={ProjectList}>
             <Projects/>
-          </Route>       
+          </Route>
+          <Route exact path="/competenceList" component={CompetenceList}>
+            <Competences/>
+          </Route>   
         </Switch>
       </Router>
     </>
