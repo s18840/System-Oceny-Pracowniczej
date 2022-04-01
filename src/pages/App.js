@@ -1,20 +1,21 @@
 import React from 'react';
 import {GlobalStyle} from '../styles/GlobalStyle';
-import Dashboard from './Dashboard';
-import WelcomePage from './WelcomePage';
-import ProfilePage from "./ProfilePage";
-import BasicInformationForm from "../components/ProfilePage/BasicInformationForm"
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
 } from 'react-router-dom';
+import Dashboard from './Dashboard';
+import WelcomePage from './WelcomePage';
+import ProfilePage from "./ProfilePage";
+import BasicInformationForm from "../components/ProfilePage/BasicInformationForm"
 import ProjectList from '../components/Project/ProjectList';
 import Projects from './Projects';
 import CompetenceList from '../components/Competences/CompetenceList';
 import Competences from './Competences';
-
+import RolesList from '../components/Roles/RolesList';
+import Roles from './Roles';
 
 
 function App() {
@@ -44,6 +45,9 @@ function App() {
           <Route exact path="/competenceList" component={CompetenceList}>
             <Competences/>
           </Route>   
+          <Route exact path="/roleList" component={RolesList}>
+            <Roles/>
+          </Route>      
         </Switch>
       </Router>
     </>
