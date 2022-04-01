@@ -12,6 +12,8 @@ import {
 } from 'react-router-dom';
 import ProjectList from '../components/Project/ProjectList';
 import Projects from './Projects';
+import RolesList from '../components/Roles/RolesList';
+import Roles from './Roles';
 
 
 
@@ -38,7 +40,10 @@ function App() {
           </Route>
           <Route exact path="/projectList" component={ProjectList}>
             <Projects/>
-          </Route>       
+          </Route>
+          <Route exact path="/roleList" component={RolesList}>
+            <Roles/>
+          </Route>      
         </Switch>
       </Router>
     </>
