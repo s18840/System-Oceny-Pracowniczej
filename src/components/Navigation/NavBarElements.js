@@ -17,8 +17,8 @@ export const Nav = styled.div`
 
 export const NavLogo = styled(Link)`
   justify-content: center;
-  border-radius: 100%;
-  margin-block-start: -50px;
+
+
 `
 export const SidebarLink = styled(Link)`
 display: flex;

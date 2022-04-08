@@ -72,18 +72,18 @@ function ProfileInfo() {
             </ProfilePhoto>
             <ProfileTextWrapper>
               <ProfileHeaderText>
-                <text>{content.Name + " " + content.Surname}</text>
+                {content.Name + " " + content.Surname}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
-                <text>Department:</text>
+                Department:
                 <ProfileText>
-                  <text>{" " + content.Department}</text>
+                  {" " + content.Department}
                 </ProfileText>
               </ProfileSubHeaderText>
               <ProfileSubHeaderText>
-                <text>Job:</text>
+                Job:
                 <ProfileText>
-                  <text>{" " + content.Job}</text>
+                 {" " + content.Job}
                 </ProfileText>
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
@@ -91,12 +91,12 @@ function ProfileInfo() {
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 <PhoneIcon />
-                <text>{content.PhoneNumber}</text>
+                {content.PhoneNumber}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
-                <text>Personal Number:</text>
+                Personal Number:
                 <ProfileText>
-                  <text>{" " + content.PersonalNumber}</text>
+                  {" " + content.PersonalNumber}
                 </ProfileText>
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
@@ -104,10 +104,10 @@ function ProfileInfo() {
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 <MailIcon />
-                <text>{content.Mail}</text>
+                {content.Mail}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
-                <text>Status:</text>
+                Status:
                 <StatusIcon />
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
@@ -119,19 +119,19 @@ function ProfileInfo() {
           onClick={() => switchType(BASIC_INFO)}
           style={contentType === BASIC_INFO ? activeStyle : {}}
         >
-          <text>Basic Information</text>
+          Basic Information
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EMPLOYMENT_INFO)}
           style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
         >
-          <text>Employment</text>
+          Employment
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EDUCATION_INFO)}
           style={contentType === EDUCATION_INFO ? activeStyle : {}}
         >
-          <text>Education</text>
+          Education
         </ProfileTab>
       </ProfileTabWrapper>
       <ProfileTabBar />

@@ -80,12 +80,12 @@ function ProjectList() {
     <>
       <PersonalDataHeadingText>Project List</PersonalDataHeadingText>
       <EditProjectButton>
-        <text>Edit Project</text>
+        Edit Project
       </EditProjectButton>
       <NewProjectButton>
-        <text>New Project</text>
+        New Project
       </NewProjectButton>
-      <TableInfo class="table">
+      <TableInfo className="table">
         <thead>
           <tr>
             {dataJson.titles.map((title) => (

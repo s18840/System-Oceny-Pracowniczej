@@ -31,7 +31,7 @@ function EmploymentTable () {
   const {t} = useTranslation();
   return(
   <>
-    <TableInfo class="table">
+    <TableInfo className="table">
       <thead>
       <tr>
         {dataJson.titles.map((title) => (

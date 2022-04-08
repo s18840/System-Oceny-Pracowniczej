@@ -50,12 +50,12 @@ function CompetenceList() {
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
       <EditCompetenceButton>
-        <text>Edit Competence</text>
+        Edit Competence
       </EditCompetenceButton>
       <NewCompetenceButton>
-        <text>New Competence</text>
+        New Competence
       </NewCompetenceButton>
-      <TableInfo class="table">
+      <TableInfo className="table">
         <thead>
           <tr>
             {dataJson.titles.map((title) => (

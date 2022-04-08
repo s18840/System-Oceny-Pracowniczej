@@ -27,7 +27,7 @@ const dataJson = {
 };
 const EducationInformation = () => (
   <>
-    <TableInfo class="table">
+    <TableInfo className="table">
       <thead>
       <tr>
         {dataJson.titles.map((title) => (

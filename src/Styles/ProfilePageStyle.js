@@ -63,6 +63,7 @@ export const ProfileInfoDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
 `;
 
 export const NavLink= styled(Link)`
@@ -73,6 +74,7 @@ export const ProfileTabWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  
 `;
 
 export const ProfileDetailedInfoWrapper = styled.div`
@@ -80,6 +82,7 @@ export const ProfileDetailedInfoWrapper = styled.div`
   display: grid;
   justify-content: space-evenly;
   margin-top: 5px;
+  
   row-gap: 0px;
   grid-template-columns: 280px 200px 200px;
   grid-template-rows: 120px 80px 80px 80px 80px 80px 80px 80px;
@@ -185,7 +188,7 @@ export const PhoneNumber = styled.div`
 export const FormButton = styled.button`
   grid-row: 1;
   grid-column: 3;
-  width: 100px;
+  width: 110px;
   height: 40px;
   background-color: #FF4E01;
   color: white;
@@ -197,8 +200,9 @@ export const FormButton = styled.button`
 `;
 export const AcceptButton = styled.button`
   grid-row: 1;
-  grid-column: 2;
-  width: 100px;
+  grid-column: 3;
+  margin-left:230px ;
+  width: 110px;
   height: 40px;
   background-color: #FF4E01;
   color: white;
