@@ -14,7 +14,8 @@ import ProjectList from '../components/Project/ProjectList';
 import Projects from './Projects';
 import CompetenceList from '../components/Competences/CompetenceList';
 import Competences from './Competences';
-
+import NewCompetence from '../components/Competences/NewCompetence';
+import NewCompetenceView from './NewCompetenceView';
 
 
 function App() {
@@ -40,7 +41,10 @@ function App() {
           </Route>
           <Route exact path="/competenceList" component={CompetenceList}>
             <Competences/>
-          </Route>   
+          </Route>
+          <Route exact path="/newCompetence" component={NewCompetence}>
+            <NewCompetenceView/>
+          </Route>
         </Switch>
       </Router>
     </>

@@ -11,19 +11,15 @@ export const Nav = styled.div`
   height: 100%;
   font-size: 20px;
   top: 0;
-
   z-index: 15;
 `
 
 export const NavLogo = styled(Link)`
   justify-content: center;
-
-
 `
 export const SidebarLink = styled(Link)`
 display: flex;
 color: #e1e9fc;
-
 align-items: center;
 padding: 20px;
 width: 352px;
@@ -67,6 +63,7 @@ export const SidebarWrap = styled.nav`
 
 export const NavMenu = styled.div`
   display: flex;
+  margin-top:-20px;
   align-items: center;
   flex-direction: column;
 `

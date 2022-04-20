@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const TableInfo = styled.table`
-  margin-left: 440px;
+  margin-left: 430px;
   margin-top: 70px;
-  width: 80%;
+  margin-bottom: 25px ;
+  width: 76%;
   flex-direction: column;
   display: table;
   font-size: 42px;
@@ -30,6 +31,13 @@ export const TableDetails = styled.td`
   font-size: 25px;
   font-weight: bold;
   color: #522d8a;
+`;
+export const TableDetailsMarker = styled.td`
+
+  font-size: 25px;
+  font-weight: bold;
+  color: #522d8a;
+  justify-content: center ;
 `;
 
 export const PersonalDataHeadingText = styled.div`
@@ -61,3 +69,32 @@ margin-right: 250px;
   font-size: 28px;
   font-family: 'Ubuntu';
 `;
+
+export const CompetenceDataText = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  color: purple;
+`;
+
+export const InputField = styled.input`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  font-size: 24px;
+  line-height: 30px;
+  border-radius: 44px;
+  border: 2px solid #cccccc;
+  background-color: #DDDDDD;
+  box-sizing: border-box;
+  padding-left: 20px;
+  max-lines: 1;
+`
+export const ProfileDataText = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  color: purple;
+`;
+export const CompetenceWrapper = styled.div`
+  margin-left: 450px ;
+`
+export const Name = styled.div`
+`

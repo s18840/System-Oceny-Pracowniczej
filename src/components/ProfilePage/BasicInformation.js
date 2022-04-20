@@ -52,7 +52,6 @@ function BasicInformation() {
 
   const switchForm = () => {
     setFormState(!formState);
-    console.log("dupsko");
   };
 
   const {
@@ -70,10 +69,7 @@ function BasicInformation() {
   if (formState) {
     button=<FormButton onClick={switchForm}>{t("Edit")}</FormButton>;
   } else {
-    button=<>
-      <FormButton onClick={switchForm}>{t("Edit")}</FormButton>
-      <AcceptButton onClick={switchForm}>{t("Save")}</AcceptButton>
-    </>;
+    button=<FormButton onClick={switchForm}>{t("Save")}</FormButton>;
   }
 
   return (
