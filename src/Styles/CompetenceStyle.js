@@ -98,3 +98,17 @@ export const CompetenceWrapper = styled.div`
 `
 export const Name = styled.div`
 `
+export const MarkersTable = styled.div`
+display:flex ;
+justify-content: center ;
+  flex-direction: column;
+  display: table;
+  font-weight: bold;
+  color: #522d8a;
+  text-align: center;
+    margin: 0px ;
+`
+export const MarkersRow = styled.tr`
+  text-align: center; 
+  vertical-align: middle;
+`

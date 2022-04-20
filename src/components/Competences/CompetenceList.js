@@ -7,7 +7,9 @@ import {
   PersonalDataHeadingText,
   NewCompetenceButton,
   EditCompetenceButton,
-  TableDetailsMarker
+  TableDetailsMarker,
+  MarkersTable,
+  MarkersRow
 } from "../../styles/CompetenceStyle";
 
 const dataJson = {
@@ -15,7 +17,7 @@ const dataJson = {
   content: [
     {
       competenceName: "Competence 1",
-      markersRequired: ["Marker 1","Marker 2","Marker 3"],
+      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
     },
     {
       competenceName: "Competence 2",
@@ -48,12 +50,8 @@ function CompetenceList() {
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
-      <EditCompetenceButton>
-        Edit
-      </EditCompetenceButton>
-      <NewCompetenceButton>
-        New
-      </NewCompetenceButton>
+      <EditCompetenceButton>Edit</EditCompetenceButton>
+      <NewCompetenceButton>New</NewCompetenceButton>
       <TableInfo className="table">
         <thead>
           <tr>
@@ -65,8 +63,19 @@ function CompetenceList() {
         {dataJson.content.map((content) => (
           <Row>
             <TableDetailsDate>{content.competenceName}</TableDetailsDate>
-            <TableDetailsMarker>{content.markersRequired}</TableDetailsMarker>
-            <TableDetails>For {content.competenceName}, you will need {content.markersRequired}.</TableDetails>
+            <TableDetailsMarker>
+              <MarkersTable>
+                {content.markersRequired?.map(marker =>(
+                  <MarkersRow>
+                    <div>{marker}</div>
+                  </MarkersRow>
+                ))}
+              </MarkersTable>
+            </TableDetailsMarker>
+            <TableDetails>
+              For {content.competenceName}, you will need{" "}
+              {content.markersRequired+" "}.
+            </TableDetails>
           </Row>
         ))}
       </TableInfo>
