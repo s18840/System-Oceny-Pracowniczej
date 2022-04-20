@@ -67,7 +67,7 @@ function CompetenceList() {
               <MarkersTable>
                 {content.markersRequired?.map(marker =>(
                   <MarkersRow>
-                    <div>{marker}</div>
+                    {marker}
                   </MarkersRow>
                 ))}
               </MarkersTable>
