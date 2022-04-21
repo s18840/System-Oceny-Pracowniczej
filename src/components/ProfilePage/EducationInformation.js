@@ -1,7 +1,8 @@
 import React from "react";
 import {DateWrapper, EmploymentTableDateLine, Row, TableDetailsDate, TableInfo,} from "../../styles/ProfilePageStyle";
-
+import { useTranslation } from "react-i18next";
 const today = new Date();
+
 const dataJson = {
   titles: ["Time", "Institution", "Degree"],
   content: [
@@ -25,13 +26,15 @@ const dataJson = {
     },
   ],
 };
-const EducationInformation = () => (
+function EducationInformation () {
+  const { t } = useTranslation();
+  return(
   <>
     <TableInfo className="table">
       <thead>
       <tr>
         {dataJson.titles.map((title) => (
-          <th>{title}</th>
+          <th>{t(title)}</th>
         ))}
       </tr>
       </thead>
@@ -52,6 +55,6 @@ const EducationInformation = () => (
       ))}
     </TableInfo>
   </>
-);
+  )};
 
 export default EducationInformation;

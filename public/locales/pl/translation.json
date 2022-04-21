@@ -43,5 +43,8 @@
     "Department": "Departament",
     "Job": "Stanowisko",
     "Personal number":"Numer pracowniczy",
-    "Status": "Status"
+    "Status": "Status",
+    "Time": "Daty",
+    "Institution": "Placówka",
+    "Degree": "Wydział"
 }
