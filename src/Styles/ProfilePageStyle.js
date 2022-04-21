@@ -193,6 +193,7 @@ export const FormButton = styled.button`
   background-color: #FF4E01;
   color: white;
   border-radius: 45px;
+  border-style: solid;
   font-size: 28px;
   font-family: 'Ubuntu';
   justify-self: center;

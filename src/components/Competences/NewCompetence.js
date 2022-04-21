@@ -9,25 +9,26 @@ import {
   CompetenceInsideWrapper,
   MarkersAddButton,
   TableMarkers,
-  RowMarkers,
+  RowLi,
+  DescriptionField
 } from "../../styles/CompetenceStyle";
-import { Span, TextField } from "../../styles/GlobalStyle";
+import { TextField } from "../../styles/GlobalStyle";
 
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 const dataJson = {
   content: [
     {
-      Marker: "Marker 1",
+      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
     },
     {
-      Marker: "Marker 2",
+      markersRequired: ["Marker 4"],
     },
     {
-      Marker: "Marker 3",
+      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
     },
     {
-      Marker: "Marker 4",
+      markersRequired: ["Marker 4"],
     },
   ],
 };
@@ -42,6 +43,7 @@ function NewCompetence() {
   const submitForm = (data) => {
     console.log(data);
   };
+  const { content } = dataJson;
   return (
     <>
       <PersonalDataHeadingText>
@@ -62,18 +64,24 @@ function NewCompetence() {
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
-              {dataJson.content.map((content) => (
-                <RowMarkers>
-                  <td>{content.Marker}</td>
-                  <td><MarkersAddButton>Add</MarkersAddButton></td>
-                </RowMarkers>
+              {content.map((el) => (
+                <tr>
+                  <td>
+                    {el.markersRequired.map((marker) => (
+                      <RowLi>
+                        {marker}
+                        <MarkersAddButton>{t("Add")}</MarkersAddButton>
+                      </RowLi>
+                    ))}
+                  </td>
+                </tr>
               ))}
             </TableMarkers>
           </MarkersWrapper>
           <Heading>
             <ProfileDataText>{t("Description") + ": "}</ProfileDataText>
           </Heading>
-          <TextField {...register("message", { required: true })} />
+          <DescriptionField {...register("message", { required: true })} />
         </CompetenceInsideWrapper>
       </CompetenceWrapper>
     </>
