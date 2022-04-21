@@ -92,11 +92,22 @@ export const ProfileDataText = styled.div`
   font-size: 24px;
   font-weight: bold;
   color: purple;
+padding-bottom:5px ;
 `;
 export const CompetenceWrapper = styled.div`
+background-color: beige ;
+border: 0.25px gray;
+  border-style: solid;
+  border-radius: 20px ;
   margin-left: 450px ;
+  margin-right: 50px ;
 `
-export const Name = styled.div`
+export const Markers = styled.table`
+margin: 10px ;
+`
+
+export const Heading = styled.div`
+padding-bottom: 5px ;
 `
 export const MarkersTable = styled.div`
 display:flex ;
@@ -106,7 +117,61 @@ justify-content: center ;
   color: #522d8a;
   text-align: center;
 `
-export const MarkersRow = styled.div`
+export const MarkersRow = styled.tr`
   text-align: center; 
   vertical-align: middle;
 `
+
+export const MarkersWrapper = styled.div`
+background-color: peachpuff ;
+border: 0.25px gray;
+border-radius: 20px ;
+border-style: solid;
+width: 40%;
+height: ${(props) => props.height};
+`
+
+export const DescriptionField = styled.textarea`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  font-size: 30px;
+  line-height: 35px;
+  border-radius: 44px;
+  border: 2px solid #cccccc;
+  box-sizing: border-box;
+  padding: 20px 20px 20px 20px;
+  
+`
+
+export const CompetenceInsideWrapper = styled.div`
+margin: 10px ;
+`
+
+export const MarkersAddButton = styled.button`
+  width: 100px;
+  height: 40px;
+  background-color: #EFAA8C;
+  color: white;
+  border: 2px solid #cccccc;
+  border-radius: 45px;
+  font-size: 24px;
+  font-family: 'Ubuntu';
+  justify-self: center;
+  align-self: center;
+`
+
+export const TableMarkers = styled.table`
+  flex-direction: column;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  display: flex;
+  font-size: 24px;
+  font-weight: bold;
+  color: #522d8a;
+`;
+
+export const RowMarkers = styled.tr`
+display: flex ;
+justify-content: space-around ;
+align-items:center;
+`;

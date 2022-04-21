@@ -218,7 +218,7 @@ export const TableInfo = styled.table`
   margin:10px 10px 10px 10px;
   border-radius: 20px ;
   flex-direction: column;
-  width:100% ;
+  width:98.7% ;
   display: table;
   padding: 30px ;
   font-size: 42px;
