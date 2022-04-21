@@ -7,9 +7,7 @@ import {
   CompetenceWrapper,
   MarkersWrapper,
   CompetenceInsideWrapper,
-  Markers,
   MarkersAddButton,
-  MarkersRow,
   TableMarkers,
   RowMarkers,
 } from "../../styles/CompetenceStyle";
