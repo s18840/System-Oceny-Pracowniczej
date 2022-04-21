@@ -122,7 +122,7 @@ function BasicInformation() {
               ></InputField>
             </DateOfBirth>
             <PhoneNumber>
-              <ProfileDataText>{t("Phone Number")}</ProfileDataText>
+              <ProfileDataText>{t("Phone number")}</ProfileDataText>
               <InputField
                 value={content.PhoneNumber}
                 disabled={formState}

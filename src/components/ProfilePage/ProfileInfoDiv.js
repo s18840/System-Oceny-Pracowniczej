@@ -19,6 +19,7 @@ import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
 import BasicInformationForm from "./BasicInformationForm";
+import { useTranslation } from "react-i18next";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
@@ -54,7 +55,7 @@ function ProfileInfo() {
   const BASIC_INFO_EDIT = "BASIC_INFO_EDIT";
 
   const [contentType, setContentType] = useState(BASIC_INFO);
-
+  const { t } = useTranslation();
   const switchType = (conType) => {
     setContentType(conType);
     console.log("state change to: " + conType);
@@ -75,13 +76,13 @@ function ProfileInfo() {
                 {content.Name + " " + content.Surname}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
-                Department:
+              {t("Department")+": "}
                 <ProfileText>
                   {" " + content.Department}
                 </ProfileText>
               </ProfileSubHeaderText>
               <ProfileSubHeaderText>
-                Job:
+              {t("Job")+": "}
                 <ProfileText>
                  {" " + content.Job}
                 </ProfileText>
@@ -94,7 +95,7 @@ function ProfileInfo() {
                 {content.PhoneNumber}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
-                Personal Number:
+              {t("Personal number")+": "}
                 <ProfileText>
                   {" " + content.PersonalNumber}
                 </ProfileText>
@@ -107,7 +108,7 @@ function ProfileInfo() {
                 {content.Mail}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
-                Status:
+              {t("Status")+": "}
                 <StatusIcon />
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
@@ -119,19 +120,19 @@ function ProfileInfo() {
           onClick={() => switchType(BASIC_INFO)}
           style={contentType === BASIC_INFO ? activeStyle : {}}
         >
-          Basic Information
+          {t("Basic Information")}
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EMPLOYMENT_INFO)}
           style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
         >
-          Employment
+          {t("Employment")}
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EDUCATION_INFO)}
           style={contentType === EDUCATION_INFO ? activeStyle : {}}
         >
-          Education
+          {t("Education")}
         </ProfileTab>
       </ProfileTabWrapper>
       <ProfileTabBar />

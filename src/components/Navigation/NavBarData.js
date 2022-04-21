@@ -6,6 +6,7 @@ import { FaRegObjectGroup } from 'react-icons/fa' // projects
 import { FaIdCard } from 'react-icons/fa' // dashboard
 import * as MDIcons from 'react-icons/md'
 
+
 export const NavBarData = [
   {
     title: 'Dashboard',

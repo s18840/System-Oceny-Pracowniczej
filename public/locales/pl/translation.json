@@ -29,7 +29,19 @@
     "City": "Miasto",
     "District": "Dzielnica",
     "Postal code": "Kod pocztowy",
+    "Phone number": "Numer telefonu",
     "Country": "Kraj",
     "Edit": "Edytuj",
-    "Save":"Zapisz"
+    "Save":"Zapisz",
+    "Basic Information": "Dane osobowe",
+    "Employment": "Zatrudnienie",
+    "Education": "Wykształcenie",
+    "Profile": "Profil",
+    "Teams": "Zespoły",
+    "Competences": "Kompetencje",
+    "Grades": "Oceny",
+    "Department": "Departament",
+    "Job": "Stanowisko",
+    "Personal number":"Numer pracowniczy",
+    "Status": "Status"
 }
