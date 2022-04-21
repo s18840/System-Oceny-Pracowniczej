@@ -16,7 +16,8 @@ import CompetenceList from '../components/Competences/CompetenceList';
 import Competences from './Competences';
 import RolesList from '../components/Roles/RolesList';
 import Roles from './Roles';
-
+import NewCompetence from '../components/Competences/NewCompetence';
+import NewCompetenceView from './NewCompetenceView';
 
 function App() {
   return (
@@ -36,9 +37,6 @@ function App() {
           <Route exact path="/profile" component={ProfilePage}>        
             <ProfilePage/>
           </Route>
-          <Route exact path="/basicInformationForm" component={BasicInformationForm}>
-            <BasicInformationForm/>
-          </Route>
           <Route exact path="/projectList" component={ProjectList}>
             <Projects/>
           </Route>
@@ -48,6 +46,9 @@ function App() {
           <Route exact path="/roleList" component={RolesList}>
             <Roles/>
           </Route>      
+          <Route exact path="/newCompetence" component={NewCompetence}>
+            <NewCompetenceView/>
+          </Route>
         </Switch>
       </Router>
     </>

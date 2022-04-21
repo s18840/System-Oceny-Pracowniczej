@@ -6,6 +6,7 @@ import { FaRegObjectGroup } from 'react-icons/fa' // projects
 import { FaIdCard } from 'react-icons/fa' // dashboard
 import * as MDIcons from 'react-icons/md'
 
+
 export const NavBarData = [
   {
     title: 'Dashboard',
@@ -46,30 +47,18 @@ export const NavBarData = [
         title: 'Teams History',
         path: '/hisoryTeams',
       },
-      {
-        title: 'New Team',
-        path: '/newTeam',
-      },
     ],
   },
   {
-    title: 'Projects',
-    path: '/projectList',
+    title: 'Competences',
+    path: '/competenceList',
     icon: <FaRegObjectGroup/>,
     iconClosed: <MDIcons.MdKeyboardArrowDown />,
     iconOpened: <MDIcons.MdKeyboardArrowUp />,
     subnav: [
       {
-        title: 'Project List',
-        path: '/projectList',
-      },
-      {
-        title: 'Your Projects',
-        path: '/hisoryTeams',
-      },
-      {
-        title: 'New Project',
-        path: '/newProject',
+        title: 'Markers',
+        path: '/markersList',
       },
     ],
   },

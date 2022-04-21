@@ -63,6 +63,7 @@ export const ProfileInfoDiv = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+
 `;
 
 export const NavLink= styled(Link)`
@@ -73,34 +74,36 @@ export const ProfileTabWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  
 `;
 
 export const ProfileDetailedInfoWrapper = styled.div`
   border: 2px solid #dfdfdf;
+  margin:10px 10px 10px 10px;
+  border-radius: 20px ;
   display: grid;
   justify-content: space-evenly;
-  margin-top: 5px;
-  row-gap: 0px;
+  row-gap: 2px;
   grid-template-columns: 280px 200px 200px;
-  grid-template-rows: 120px 80px 80px 80px 80px 80px 80px 80px;
+  grid-template-rows: 50px 70px 70px 70px 70px 70px 70px 70px;
   color: blue;
 `;
 export const ProfileDataText = styled.div`
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
   color: purple;
 `;
 export const PersonalDataHeadingText = styled.div`
   grid-row: 1;
   grid-column: 1;
-  font-size: 42px;
+  font-size: 36px;
   font-weight: bold;
   color: purple;
 `;
 export const AddressHeadingText = styled.div`
-  grid-row: 2;
+  grid-row: 3;
   grid-column: 2;
-  font-size: 42px;
+  font-size: 36px;
   font-weight: bold;
   color: purple;
 `;
@@ -135,37 +138,37 @@ export const DateOfBirth = styled.div`
   font-style: italic;
 `;
 export const Street = styled.div`
-  grid-row: 3;
+  grid-row: 4;
   grid-column: 2;
   font-size: 28px;
   font-style: italic;
 `;
 export const HouseNumber = styled.div`
-  grid-row: 3;
+  grid-row: 4;
   grid-column: 3;
   font-size: 28px;
   font-style: italic;
 `;
 export const City = styled.div`
-  grid-row: 4;
+  grid-row: 5;
   grid-column: 2;
   font-size: 28px;
   font-style: italic;
 `;
 export const District = styled.div`
-  grid-row: 4;
+  grid-row: 5;
   grid-column: 3;
   font-size: 28px;
   font-style: italic;
 `;
 export const PostalCode = styled.div`
-  grid-row: 5;
+  grid-row: 6;
   grid-column: 2;
   font-size: 28px;
   font-style: italic;
 `;
 export const Country = styled.div`
-  grid-row: 5;
+  grid-row: 6;
   grid-column: 3;
   font-size: 28px;
   font-style: italic;
@@ -185,11 +188,12 @@ export const PhoneNumber = styled.div`
 export const FormButton = styled.button`
   grid-row: 1;
   grid-column: 3;
-  width: 100px;
+  width: 110px;
   height: 40px;
   background-color: #FF4E01;
   color: white;
   border-radius: 45px;
+  border-style: solid;
   font-size: 28px;
   font-family: 'Ubuntu';
   justify-self: center;
@@ -197,8 +201,9 @@ export const FormButton = styled.button`
 `;
 export const AcceptButton = styled.button`
   grid-row: 1;
-  grid-column: 2;
-  width: 100px;
+  grid-column: 3;
+  margin-left:230px ;
+  width: 110px;
   height: 40px;
   background-color: #FF4E01;
   color: white;
@@ -210,8 +215,11 @@ export const AcceptButton = styled.button`
 `;
 
 export const TableInfo = styled.table`
+  border: 2px solid #dfdfdf;
+  margin:10px 10px 10px 10px;
+  border-radius: 20px ;
   flex-direction: column;
-  width:100% ;
+  width:98.7% ;
   display: table;
   padding: 30px ;
   font-size: 42px;

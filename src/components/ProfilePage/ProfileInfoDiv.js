@@ -19,6 +19,7 @@ import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
 import BasicInformationForm from "./BasicInformationForm";
+import { useTranslation } from "react-i18next";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
@@ -54,7 +55,7 @@ function ProfileInfo() {
   const BASIC_INFO_EDIT = "BASIC_INFO_EDIT";
 
   const [contentType, setContentType] = useState(BASIC_INFO);
-
+  const { t } = useTranslation();
   const switchType = (conType) => {
     setContentType(conType);
     console.log("state change to: " + conType);
@@ -72,18 +73,18 @@ function ProfileInfo() {
             </ProfilePhoto>
             <ProfileTextWrapper>
               <ProfileHeaderText>
-                <text>{content.Name + " " + content.Surname}</text>
+                {content.Name + " " + content.Surname}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
-                <text>Department:</text>
+              {t("Department")+": "}
                 <ProfileText>
-                  <text>{" " + content.Department}</text>
+                  {" " + content.Department}
                 </ProfileText>
               </ProfileSubHeaderText>
               <ProfileSubHeaderText>
-                <text>Job:</text>
+              {t("Job")+": "}
                 <ProfileText>
-                  <text>{" " + content.Job}</text>
+                 {" " + content.Job}
                 </ProfileText>
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
@@ -91,12 +92,12 @@ function ProfileInfo() {
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 <PhoneIcon />
-                <text>{content.PhoneNumber}</text>
+                {content.PhoneNumber}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
-                <text>Personal Number:</text>
+              {t("Personal number")+": "}
                 <ProfileText>
-                  <text>{" " + content.PersonalNumber}</text>
+                  {" " + content.PersonalNumber}
                 </ProfileText>
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
@@ -104,10 +105,10 @@ function ProfileInfo() {
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 <MailIcon />
-                <text>{content.Mail}</text>
+                {content.Mail}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
-                <text>Status:</text>
+              {t("Status")+": "}
                 <StatusIcon />
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
@@ -119,19 +120,19 @@ function ProfileInfo() {
           onClick={() => switchType(BASIC_INFO)}
           style={contentType === BASIC_INFO ? activeStyle : {}}
         >
-          <text>Basic Information</text>
+          {t("Basic Information")}
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EMPLOYMENT_INFO)}
           style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
         >
-          <text>Employment</text>
+          {t("Employment")}
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EDUCATION_INFO)}
           style={contentType === EDUCATION_INFO ? activeStyle : {}}
         >
-          <text>Education</text>
+          {t("Education")}
         </ProfileTab>
       </ProfileTabWrapper>
       <ProfileTabBar />

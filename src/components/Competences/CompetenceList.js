@@ -6,7 +6,10 @@ import {
   TableDetails,
   PersonalDataHeadingText,
   NewCompetenceButton,
-  EditCompetenceButton
+  EditCompetenceButton,
+  TableDetailsMarker,
+  MarkersTable,
+  MarkersRow
 } from "../../styles/CompetenceStyle";
 
 const dataJson = {
@@ -14,33 +17,31 @@ const dataJson = {
   content: [
     {
       competenceName: "Competence 1",
-      markersRequired: ["Marker 1","Marker 2"],
-      description: "Description for Competence 1, you will need marker1.",
+      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
     },
     {
       competenceName: "Competence 2",
-      markersRequired: "Marker 2",
-      description: "Description for Competence 2, you will need marker2.",
+      markersRequired: ["Marker 2"],
     },
     {
-      competenceName: "Competence 1",
-      markersRequired: "Marker 1",
-      description: "Description for Competence 1, you will need marker1.",
+      competenceName: "Competence 3",
+      markersRequired: ["Marker 11"],
     },
     {
-      competenceName: "Competence 2",
-      markersRequired: "Marker 2",
-      description: "Description for Competence 2, you will need marker2.",
+      competenceName: "Competence 4",
+      markersRequired: ["Marker 15"],
     },
     {
-      competenceName: "Competence 1",
-      markersRequired: "Marker 1",
-      description: "Description for Competence 1, you will need marker1.",
+      competenceName: "Competence 6",
+      markersRequired: ["Marker 15"],
     },
     {
-      competenceName: "Competence 2",
-      markersRequired: "Marker 2",
-      description: "Description for Competence 2, you will need marker2.",
+      competenceName: "Competence 7",
+      markersRequired: ["Marker 22"],
+    },
+    {
+      competenceName: "Competence 8",
+      markersRequired: ["Marker 25"],
     },
   ],
 };
@@ -49,13 +50,9 @@ function CompetenceList() {
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
-      <EditCompetenceButton>
-        <text>Edit Competence</text>
-      </EditCompetenceButton>
-      <NewCompetenceButton>
-        <text>New Competence</text>
-      </NewCompetenceButton>
-      <TableInfo class="table">
+      <EditCompetenceButton>Edit</EditCompetenceButton>
+      <NewCompetenceButton>New</NewCompetenceButton>
+      <TableInfo className="table">
         <thead>
           <tr>
             {dataJson.titles.map((title) => (
@@ -66,8 +63,19 @@ function CompetenceList() {
         {dataJson.content.map((content) => (
           <Row>
             <TableDetailsDate>{content.competenceName}</TableDetailsDate>
-            <TableDetails>{content.markersRequired}</TableDetails>
-            <TableDetails>{content.description}</TableDetails>
+            <TableDetailsMarker>
+              <MarkersTable>
+                {content.markersRequired?.map(marker =>(
+                  <MarkersRow>
+                    {marker}
+                  </MarkersRow>
+                ))}
+              </MarkersTable>
+            </TableDetailsMarker>
+            <TableDetails>
+              For {content.competenceName}, you will need{" "}
+              {content.markersRequired+" "}.
+            </TableDetails>
           </Row>
         ))}
       </TableInfo>
