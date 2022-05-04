@@ -24,7 +24,6 @@ function Dashboard() {
             <NextGrading/>
             <SubTitle>your targets</SubTitle>
             <TargetList/>
-            <SubTitle>current projects</SubTitle>
           </DashboardContentWrapper>
           <Clock/>
         </DashboardWrapper>

@@ -18,6 +18,8 @@ import RolesList from '../components/Roles/RolesList';
 import Roles from './Roles';
 import NewCompetence from '../components/Competences/NewCompetence';
 import NewCompetenceView from './NewCompetenceView';
+import Targets from './Targets';
+
 
 function App() {
   return (
@@ -34,7 +36,7 @@ function App() {
           <Route exact path="/dashboard" component={Dashboard}>
             <Dashboard/>
           </Route>
-          <Route exact path="/profile" component={ProfilePage}>        
+          <Route exact path="/profile" component={ProfilePage}>
             <ProfilePage/>
           </Route>
           <Route exact path="/projectList" component={ProjectList}>
@@ -42,12 +44,15 @@ function App() {
           </Route>
           <Route exact path="/competenceList" component={CompetenceList}>
             <Competences/>
-          </Route>   
+          </Route>
           <Route exact path="/roleList" component={RolesList}>
             <Roles/>
-          </Route>      
+          </Route>
           <Route exact path="/newCompetence" component={NewCompetence}>
             <NewCompetenceView/>
+          </Route>
+          <Route exact path="/targets" component={Targets}>
+            <Targets/>
           </Route>
         </Switch>
       </Router>

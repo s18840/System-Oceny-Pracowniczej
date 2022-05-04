@@ -1,8 +1,8 @@
 import React from 'react'
 import {useTranslation} from 'react-i18next'
 import {useForm} from "react-hook-form";
-import {InputWrapper, Login, LoginButton, LoginFormWrapper,} from '../../styles/LoginStyle'
-import {InputField, Span} from '../../styles/GlobalStyle'
+import {Login, LoginButton, LoginFormWrapper,} from '../../styles/LoginStyle'
+import {InputField, InputWrapper, Span} from '../../styles/GlobalStyle'
 import {hashPassword, isPasswordCorrect} from '../../Utils/PasswordUtils'
 import { useHistory } from 'react-router-dom';
 

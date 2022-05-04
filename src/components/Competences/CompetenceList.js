@@ -10,7 +10,7 @@ import {
   TableDetailsMarker,
   MarkersTable,
   MarkersRow
-} from "../../styles/CompetenceStyle";
+} from "../../styles/CompetenceStyle.js";
 
 const dataJson = {
   titles: ["Competence name:", "Markers required", "Description"],

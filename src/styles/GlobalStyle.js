@@ -18,6 +18,13 @@ export const PageWrapper = styled.div`
     margin-top: 80px;
 `;
 
+export const InputWrapper = styled.div`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  display: flex;
+  flex-direction: column;
+`
+
 export const InputField = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -76,6 +83,17 @@ export const OrangeInputButton = styled.input`
   width: 243px;
   height: 67px;
   background-color: #ff4e01;
+  color: white;
+  border-radius: 45px;
+  font-size: 42px;
+  line-height: 67px;
+  text-align: center;
+`
+
+export const GlobalButton = styled.button`
+  width: 243px;
+  height: 67px;
+  background-color:  #3d098a;
   color: white;
   border-radius: 45px;
   font-size: 42px;
