@@ -24,7 +24,10 @@ import TeamList from '../components/Team/TeamList';
 import Team from './Team';
 import NewTeam from '../components/Team/NewTeam';
 import NewTeamView from './NewTeamView';
-
+import RoleList from '../components/Role/RoleList';
+import Role from './Role';
+import NewRole from '../components/Role/NewRole';
+import NewRoleView from './NewRoleView';
 function App() {
   return (
     <>
@@ -63,6 +66,12 @@ function App() {
           </Route>
           <Route exact path="/newTeam" component={NewTeam}>
             <NewTeamView/>
+          </Route>
+          <Route exact path="/roleList" component={RoleList}>
+            <Role/>
+          </Route>
+          <Route exact path="/newRole" component={NewRole}>
+            <NewRoleView/>
           </Route>
         </Switch>
       </Router>
