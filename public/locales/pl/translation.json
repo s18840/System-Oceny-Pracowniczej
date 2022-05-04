@@ -59,9 +59,13 @@
     "Department name": "Nazwa Departamentu",
     "Department Teams": "Zespoły w Departamencie",
     "Abbreviation": "Skrót",
-    "Add Teams":"Dodaj zespoły",
+    "Add Teams": "Dodaj zespoły",
     "Add Employees":"Dodaj pracowników",
     "Add Directors": "Dodaj dyrektorów",
-    "Creating new department":"Tworzenie nowego departamentu",
-    "Director:":"Dyrektor"
+    "Creating new department": "Tworzenie nowego departamentu",
+    "Director:": "Dyrektor",
+    "Teams List": "Lista zespołów",
+    "Creating new team": "Tworzenie nowego zespołu",
+    "Add managers": "Dodaj managerow",
+    "Add required competences": "Dodaj wymagane kompetencje"
 }

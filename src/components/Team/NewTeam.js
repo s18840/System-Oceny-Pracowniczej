@@ -12,7 +12,7 @@ import {
   RowLi,
   DescriptionField,
   NewButton
-} from "../../styles/DepartmentStyle";
+} from "../../styles/TeamStyle";
 import { TextField } from "../../styles/GlobalStyle";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -20,22 +20,22 @@ import { useForm } from "react-hook-form";
 const dataJson = {
   content: [
     {
-      team: "Team 1",
+      competenceName: "Competence 1",
     },
     {
-      team: "Team 2",
+      competenceName: "Competence 2",
     },
     {
-      team: "Team 3",
+      competenceName: "Competence 3",
     },
     {
-      team: "Team 4",
+      competenceName: "Competence 4",
     },
     {
-      team: "Team 5",
+      competenceName: "Competence 5",
     },
     {
-      team: "Team 6",
+      competenceName: "Competence 6",
     },
   ],
 };
@@ -61,13 +61,13 @@ const dataJsonEmp = {
     },
   ],
 };
-const dataJsonDir = {
+const dataJsonMan = {
   content: [
     {
-      dir: "Wojciech Antczak",
+      man: "Wojciech Antczak",
     },
     {
-      dir: "Joanna Bajko",
+      man: "Joanna Bajko",
     },
 
 
@@ -99,32 +99,32 @@ const NewCompetence = (props)=> {
     console.log(data);
   };
   const { content } = dataJson;
-  const [marks, setMarks] = useState([]);
+  const [comps, setComps] = useState([]);
   const [emps, setEmps] = useState([]);
-  const [dirs, setDirs] = useState([]);
+  const [mans, setMans] = useState([]);
   return (
     <>
       <PersonalDataHeadingText>
-        {t("Creating new department")}
-        <NewButton onClick={() => {alert(marks.toString()+"\n"+emps.toString()+"\n"+dirs.toString());window.location.href='/departmentList'}}>{t("Add")}</NewButton>
+        {t("Creating new team")}
+        <NewButton onClick={() => {alert(comps.toString()+"\n"+emps.toString()+"\n"+mans.toString());window.location.href='/teamList'}}>{t("Add")}</NewButton>
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
           <Heading>
             <ProfileDataText>{t("Name") + ": "}</ProfileDataText>
-            <InputField placeholder="np: Departament Finansów"></InputField>
+            <InputField placeholder="np: ING Team"></InputField>
           </Heading>
           <Heading>
-            <ProfileDataText>{t("Add Directors") + ": "}</ProfileDataText>
+            <ProfileDataText>{t("Add managers") + ": "}</ProfileDataText>
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
-              {dataJsonDir.content.map((el) => (
+              {dataJsonMan.content.map((el) => (
                 <tr>
                   <td>
                       <RowLi>
-                        {el.dir}
-                        <Button onClick={() => {setDirs((prev) => [...prev, el.dir])}}/> 
+                        {el.man}
+                        <Button onClick={() => {setMans((prev) => [...prev, el.man])}}/> 
                       </RowLi>
                   </td>
                 </tr>
@@ -149,7 +149,7 @@ const NewCompetence = (props)=> {
             </TableMarkers>
           </MarkersWrapper>
           <Heading>
-            <ProfileDataText>{t("Add Teams") + ": "}</ProfileDataText>
+            <ProfileDataText>{t("Add required competences") + ": "}</ProfileDataText>
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
@@ -157,8 +157,8 @@ const NewCompetence = (props)=> {
                 <tr>
                   <td>
                       <RowLi>
-                        {el.team}
-                        <Button onClick={() => {setMarks((prev) => [...prev, el.team])}}/> 
+                        {el.competenceName}
+                        <Button onClick={() => {setComps((prev) => [...prev, el.competenceName])}}/> 
                       </RowLi>
                   </td>
                 </tr>
