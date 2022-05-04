@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {
+import {  
   Heading,
   PersonalDataHeadingText,
   ProfileDataText,
@@ -10,8 +10,6 @@ import {
   TableMarkers,
   RowLi,
   DescriptionField,
-} from "../../styles/TeamStyle";
-import {  
   NewButton,
   EditButton,
   AddButton,

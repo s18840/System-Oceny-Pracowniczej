@@ -4,14 +4,12 @@ import {
   PersonalDataHeadingText,
   ProfileDataText,
   InputField,
-  CompetenceWrapper,
-  MarkersWrapper,
-  CompetenceInsideWrapper,
+  Wrapper,
+  MarkersSmallWrapper,
+  InsideWrapper,
   TableMarkers,
   RowLi,
-  DescriptionField,
-} from "../../styles/CompetenceStyle";
-import {  
+  DescriptionField,  
   NewButton,
   AddButton,
 } from '../../styles/GlobalStyle';
@@ -74,8 +72,8 @@ const NewCompetence = (props)=> {
         {t("Creating new competence")}
         <NewButton onClick={() => {alert(marks.toString());window.location.href='/competenceList'}}>{t("Add")}</NewButton>
       </PersonalDataHeadingText>
-      <CompetenceWrapper>
-        <CompetenceInsideWrapper>
+      <Wrapper>
+        <InsideWrapper>
           <Heading>
             <ProfileDataText>{t("Name") + ": "}</ProfileDataText>
             <InputField placeholder="Nazwa kompetencji"></InputField>
@@ -83,7 +81,7 @@ const NewCompetence = (props)=> {
           <Heading>
             <ProfileDataText>{t("Markers required") + ": "}</ProfileDataText>
           </Heading>
-          <MarkersWrapper>
+          <MarkersSmallWrapper>
             <TableMarkers className="table">
               {content.map((el) => (
                 <tr>
@@ -96,13 +94,13 @@ const NewCompetence = (props)=> {
                 </tr>
               ))}
             </TableMarkers>
-          </MarkersWrapper>
+          </MarkersSmallWrapper>
           <Heading>
             <ProfileDataText>{t("Description") + ": "}</ProfileDataText>
           </Heading>
           <DescriptionField {...register("message", { required: true })} />
-        </CompetenceInsideWrapper>
-      </CompetenceWrapper>
+        </InsideWrapper>
+      </Wrapper>
 
     </>
   );

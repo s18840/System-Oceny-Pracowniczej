@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import {
+import {  
   Heading,
   PersonalDataHeadingText,
   ProfileDataText,
   InputField,
   Wrapper,
   MarkersWrapper,
+  MarkersSmallWrapper,
   InsideWrapper,
   TableMarkers,
   RowLi,
   DescriptionField,
-} from "../../styles/DepartmentStyle";
-import {  
   NewButton,
   AddButton,
 } from '../../styles/GlobalStyle';
@@ -153,7 +152,7 @@ const NewCompetence = (props)=> {
           <Heading>
             <ProfileDataText>{t("Add Teams") + ": "}</ProfileDataText>
           </Heading>
-          <MarkersWrapper>
+          <MarkersSmallWrapper>
             <TableMarkers className="table">
               {content.map((el) => (
                 <tr>
@@ -166,7 +165,7 @@ const NewCompetence = (props)=> {
                 </tr>
               ))}
             </TableMarkers>
-          </MarkersWrapper>
+          </MarkersSmallWrapper>
         </InsideWrapper>
       </Wrapper>
 

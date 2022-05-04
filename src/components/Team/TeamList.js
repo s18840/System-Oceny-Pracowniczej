@@ -1,5 +1,5 @@
 import React from "react";
-import {
+import { 
   TableInfo,
   Row,
   TableDetailsDate,
@@ -7,9 +7,7 @@ import {
   PersonalDataHeadingText,
   TableDetailsMarker,
   MarkersTable,
-  MarkersRow
-} from "../../styles/TeamStyle";
-import {  
+  MarkersRow, 
   NewButton,
   EditButton,
 } from '../../styles/GlobalStyle';

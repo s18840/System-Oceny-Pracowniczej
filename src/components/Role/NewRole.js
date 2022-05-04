@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import {
+import {  
   Heading,
   PersonalDataHeadingText,
   ProfileDataText,
   InputField,
-  CompetenceWrapper,
+  Wrapper,
   MarkersWrapper,
-  CompetenceInsideWrapper,
+  InsideWrapper,
   TableMarkers,
   RowLi,
   DescriptionField,
-} from "../../styles/RoleStyle";
-import {  
   NewButton,
   AddButton,
 } from '../../styles/GlobalStyle';
@@ -74,8 +72,8 @@ const NewCompetence = (props)=> {
         {t("Creating new competence")}
         <NewButton onClick={() => {alert(marks.toString());window.location.href='/roleList'}}>{t("Add")}</NewButton>
       </PersonalDataHeadingText>
-      <CompetenceWrapper>
-        <CompetenceInsideWrapper>
+      <Wrapper>
+        <InsideWrapper>
           <Heading>
             <ProfileDataText>{t("Name") + ": "}</ProfileDataText>
             <InputField placeholder="Nazwa kompetencji"></InputField>
@@ -105,8 +103,8 @@ const NewCompetence = (props)=> {
             <ProfileDataText>{t("Description") + ": "}</ProfileDataText>
           </Heading>
           <DescriptionField {...register("message", { required: true })} />
-        </CompetenceInsideWrapper>
-      </CompetenceWrapper>
+        </InsideWrapper>
+      </Wrapper>
 
     </>
   );
