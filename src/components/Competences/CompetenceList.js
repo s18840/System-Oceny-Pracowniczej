@@ -43,6 +43,10 @@ const dataJson = {
       competenceName: "Competence 8",
       markersRequired: ["Marker 25"],
     },
+    {
+      competenceName: "Competence 9",
+      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
+    },
   ],
 };
 
@@ -51,7 +55,7 @@ function CompetenceList() {
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
       <EditCompetenceButton>Edit</EditCompetenceButton>
-      <NewCompetenceButton>New</NewCompetenceButton>
+      <NewCompetenceButton onClick={event =>  window.location.href='/newCompetence'}>New</NewCompetenceButton>
       <TableInfo className="table">
         <thead>
           <tr>

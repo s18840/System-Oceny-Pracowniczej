@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Heading,
   PersonalDataHeadingText,
@@ -10,30 +10,51 @@ import {
   MarkersAddButton,
   TableMarkers,
   RowLi,
-  DescriptionField
+  DescriptionField,
+  NewCompetenceButton
 } from "../../styles/CompetenceStyle";
 import { TextField } from "../../styles/GlobalStyle";
-
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+
 const dataJson = {
   content: [
     {
-      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
+      markersRequired: "Marker 1",
     },
     {
-      markersRequired: ["Marker 4"],
+      markersRequired: "Marker 2",
     },
     {
-      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
+      markersRequired: "Marker 3",
     },
     {
-      markersRequired: ["Marker 4"],
+      markersRequired: "Marker 4",
+    },
+    {
+      markersRequired: "Marker 5",
+    },
+    {
+      markersRequired: "Marker 6",
     },
   ],
 };
 
-function NewCompetence() {
+const Button = (props) => {
+  const [added, setAdded] = useState(false);
+  return (
+    <MarkersAddButton
+      onClick={() => {
+        props.onClick();
+        setAdded((prev) => !prev);
+      }}
+    >
+      {added ? "Added" : "Add"}
+    </MarkersAddButton>
+  );
+};
+
+const NewCompetence = (props)=> {
   const { t } = useTranslation();
   const {
     register,
@@ -44,20 +65,18 @@ function NewCompetence() {
     console.log(data);
   };
   const { content } = dataJson;
+  const [marks, setMarks] = useState([]);
   return (
     <>
       <PersonalDataHeadingText>
         {t("Creating new competence")}
+        <NewCompetenceButton onClick={() => {alert(marks.toString());window.location.href='/competenceList'}}>{t("Add")}</NewCompetenceButton>
       </PersonalDataHeadingText>
       <CompetenceWrapper>
         <CompetenceInsideWrapper>
           <Heading>
             <ProfileDataText>{t("Name") + ": "}</ProfileDataText>
             <InputField placeholder="Nazwa kompetencji"></InputField>
-          </Heading>
-          <Heading>
-            <ProfileDataText>{t("Grade") + ": "}</ProfileDataText>
-            <InputField placeholder="Ocena"></InputField>
           </Heading>
           <Heading>
             <ProfileDataText>{t("Markers required") + ": "}</ProfileDataText>
@@ -67,12 +86,10 @@ function NewCompetence() {
               {content.map((el) => (
                 <tr>
                   <td>
-                    {el.markersRequired.map((marker) => (
                       <RowLi>
-                        {marker}
-                        <MarkersAddButton>{t("Add")}</MarkersAddButton>
+                        {el.markersRequired}
+                        <Button onClick={() => {setMarks((prev) => [...prev, el.markersRequired])}}/> 
                       </RowLi>
-                    ))}
                   </td>
                 </tr>
               ))}
@@ -84,6 +101,7 @@ function NewCompetence() {
           <DescriptionField {...register("message", { required: true })} />
         </CompetenceInsideWrapper>
       </CompetenceWrapper>
+
     </>
   );
 }

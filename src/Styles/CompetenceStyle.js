@@ -4,7 +4,7 @@ export const TableInfo = styled.table`
   margin-left: 430px;
   margin-top: 70px;
   margin-bottom: 25px;
-  width: 76%;
+  width: 78%;
   flex-direction: column;
   display: table;
   font-size: 42px;
@@ -94,7 +94,6 @@ export const ProfileDataText = styled.div`
   padding-bottom: 5px;
 `;
 export const CompetenceWrapper = styled.div`
-  background-color: beige;
   border: 3px #707070;
   border-style: solid;
   border-radius: 20px;
@@ -129,7 +128,6 @@ export const MarkersRow = styled.tr`
 `;
 
 export const MarkersWrapper = styled.div`
-  background-color: peachpuff;
   border: 0.25px gray;
   border-radius: 20px;
   border-style: solid;
@@ -161,7 +159,14 @@ export const MarkersAddButton = styled.button`
   justify-self: center;
   align-self: center;
   margin-left: 50px;
+  :hover {background-color: #EA6E38}
+
+  :active {
+    background-color: #EA6E38;
+    transform: translateY(1px);
+  }
 `;
+
 
 export const TableMarkers = styled.table`
   font-size: 24px;
