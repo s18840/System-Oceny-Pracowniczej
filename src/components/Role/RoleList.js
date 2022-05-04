@@ -5,12 +5,14 @@ import {
   TableDetailsDate,
   TableDetails,
   PersonalDataHeadingText,
-  NewCompetenceButton,
-  EditCompetenceButton,
   TableDetailsMarker,
   MarkersTable,
   MarkersRow
 } from "../../styles/RoleStyle";
+import {  
+  NewButton,
+  EditButton,
+} from '../../styles/GlobalStyle';
 import { useTranslation } from "react-i18next";
 
 const dataJson = {
@@ -54,8 +56,8 @@ function RoleList() {
   return (
     <>
       <PersonalDataHeadingText>{t("Role List")}</PersonalDataHeadingText>
-      <EditCompetenceButton>{t("Edit")}</EditCompetenceButton>
-      <NewCompetenceButton onClick={event =>  window.location.href='/newRole'}>{t("New")}</NewCompetenceButton>
+      <EditButton>{t("Edit")}</EditButton>
+      <NewButton onClick={event =>  window.location.href='/newRole'}>{t("New")}</NewButton>
       <TableInfo className="table">
         <thead>
           <tr>

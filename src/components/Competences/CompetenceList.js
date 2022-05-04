@@ -5,12 +5,14 @@ import {
   TableDetailsDate,
   TableDetails,
   PersonalDataHeadingText,
-  NewCompetenceButton,
-  EditCompetenceButton,
   TableDetailsMarker,
   MarkersTable,
   MarkersRow
 } from "../../styles/CompetenceStyle";
+import {  
+  NewButton,
+  EditButton,
+} from '../../styles/GlobalStyle';
 
 const dataJson = {
   titles: ["Competence name:", "Markers required", "Description"],
@@ -54,8 +56,8 @@ function CompetenceList() {
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
-      <EditCompetenceButton>Edit</EditCompetenceButton>
-      <NewCompetenceButton onClick={event =>  window.location.href='/newCompetence'}>New</NewCompetenceButton>
+      <EditButton>Edit</EditButton>
+      <NewButton onClick={event =>  window.location.href='/newCompetence'}>New</NewButton>
       <TableInfo className="table">
         <thead>
           <tr>

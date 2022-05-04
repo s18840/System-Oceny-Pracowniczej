@@ -7,12 +7,15 @@ import {
   Wrapper,
   MarkersWrapper,
   InsideWrapper,
-  MarkersAddButton,
   TableMarkers,
   RowLi,
   DescriptionField,
-  NewButton
 } from "../../styles/TeamStyle";
+import {  
+  NewButton,
+  EditButton,
+  AddButton,
+} from '../../styles/GlobalStyle';
 import { TextField } from "../../styles/GlobalStyle";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -77,14 +80,14 @@ const dataJsonMan = {
 const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
-    <MarkersAddButton
+    <AddButton
       onClick={() => {
         props.onClick();
         setAdded((prev) => !prev);
       }}
     >
       {added ? "Added" : "Add"}
-    </MarkersAddButton>
+    </AddButton>
   );
 };
 

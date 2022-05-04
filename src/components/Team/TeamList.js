@@ -5,12 +5,14 @@ import {
   TableDetailsDate,
   TableDetails,
   PersonalDataHeadingText,
-  NewButton,
-  EditButton,
   TableDetailsMarker,
   MarkersTable,
   MarkersRow
 } from "../../styles/TeamStyle";
+import {  
+  NewButton,
+  EditButton,
+} from '../../styles/GlobalStyle';
 import { useTranslation } from "react-i18next";
 
 const dataJson = {

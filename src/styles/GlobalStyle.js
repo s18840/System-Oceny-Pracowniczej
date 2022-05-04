@@ -82,3 +82,44 @@ export const OrangeInputButton = styled.input`
   line-height: 67px;
   text-align: center;
 `
+export const NewButton = styled.button`
+  float: right;
+  margin-right: 50px;
+  width: 200px;
+  height: 40px;
+  background-color: #522d8a;
+  color: white;
+  border-radius: 45px;
+  font-size: 28px;
+  font-family: "Ubuntu";
+`;
+export const EditButton = styled.button`
+  float: right;
+  margin-right: 250px;
+  width: 200px;
+  height: 40px;
+  background-color: #522d8a;
+  color: white;
+  border-radius: 45px;
+  font-size: 28px;
+  font-family: "Ubuntu";
+`;
+export const AddButton = styled.button`
+  width: 100px;
+  height: 40px;
+  background-color: #efaa8c;
+  color: white;
+  border: 2px solid #cccccc;
+  border-radius: 45px;
+  font-size: 24px;
+  font-family: "Ubuntu";
+  justify-self: center;
+  align-self: center;
+  margin-left: 80px;
+  :hover {background-color: #EA6E38}
+
+  :active {
+    background-color: #EA6E38;
+    transform: translateY(1px);
+  }
+`;

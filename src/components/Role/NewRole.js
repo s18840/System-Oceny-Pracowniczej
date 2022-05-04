@@ -7,12 +7,14 @@ import {
   CompetenceWrapper,
   MarkersWrapper,
   CompetenceInsideWrapper,
-  MarkersAddButton,
   TableMarkers,
   RowLi,
   DescriptionField,
-  NewCompetenceButton
 } from "../../styles/RoleStyle";
+import {  
+  NewButton,
+  AddButton,
+} from '../../styles/GlobalStyle';
 import { TextField } from "../../styles/GlobalStyle";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -43,14 +45,14 @@ const dataJson = {
 const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
-    <MarkersAddButton
+    <AddButton
       onClick={() => {
         props.onClick();
         setAdded((prev) => !prev);
       }}
     >
       {added ? "Added" : "Add"}
-    </MarkersAddButton>
+    </AddButton>
   );
 };
 
@@ -70,7 +72,7 @@ const NewCompetence = (props)=> {
     <>
       <PersonalDataHeadingText>
         {t("Creating new competence")}
-        <NewCompetenceButton onClick={() => {alert(marks.toString());window.location.href='/roleList'}}>{t("Add")}</NewCompetenceButton>
+        <NewButton onClick={() => {alert(marks.toString());window.location.href='/roleList'}}>{t("Add")}</NewButton>
       </PersonalDataHeadingText>
       <CompetenceWrapper>
         <CompetenceInsideWrapper>
