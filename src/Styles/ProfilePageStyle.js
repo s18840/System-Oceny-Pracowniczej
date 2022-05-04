@@ -78,6 +78,7 @@ export const ProfileTabWrapper = styled.div`
 `;
 
 export const ProfileDetailedInfoWrapper = styled.div`
+padding-bottom: 10px ;
   border: 2px solid #dfdfdf;
   margin:10px 10px 10px 10px;
   border-radius: 20px ;
