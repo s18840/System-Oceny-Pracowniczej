@@ -46,7 +46,7 @@ export const PersonalDataHeadingText = styled.div`
   font-weight: bold;
   color: #522d8a;
 `;
-export const NewCompetenceButton = styled.button`
+export const NewButton = styled.button`
   float: right;
   margin-right: 50px;
   width: 200px;
@@ -57,7 +57,7 @@ export const NewCompetenceButton = styled.button`
   font-size: 28px;
   font-family: "Ubuntu";
 `;
-export const EditCompetenceButton = styled.button`
+export const EditButton = styled.button`
   float: right;
   margin-right: 250px;
   width: 200px;
@@ -93,16 +93,17 @@ export const ProfileDataText = styled.div`
   color: purple;
   padding-bottom: 5px;
 `;
-export const CompetenceWrapper = styled.div`
+export const Wrapper = styled.div`
   border: 3px #707070;
   border-style: solid;
   border-radius: 20px;
   margin-left: 450px;
   margin-right: 50px;
   min-width: 420px;
+  margin-bottom: 40px ;
 `;
 
-export const CompetenceInsideWrapper = styled.div`
+export const InsideWrapper = styled.div`
   margin: 10px;
 `;
 
@@ -131,7 +132,7 @@ export const MarkersWrapper = styled.div`
   border: 0.25px gray;
   border-radius: 20px;
   border-style: solid;
-  width: 20%;
+  width: 30%;
   min-width: 300px;
 `;
 
@@ -158,7 +159,8 @@ export const MarkersAddButton = styled.button`
   font-family: "Ubuntu";
   justify-self: center;
   align-self: center;
-  margin-left: 50px;
+  margin-left: 80px;
+  margin-top: 5px ;
   :hover {background-color: #EA6E38}
 
   :active {

@@ -12,11 +12,16 @@ import {
 } from 'react-router-dom';
 import ProjectList from '../components/Project/ProjectList';
 import Projects from './Projects';
+
 import CompetenceList from '../components/Competences/CompetenceList';
 import Competences from './Competences';
 import NewCompetence from '../components/Competences/NewCompetence';
 import NewCompetenceView from './NewCompetenceView';
 
+import DepartmentList from '../components/Department/DepartmentList';
+import Department from './Department';
+import NewDepartment from '../components/Department/NewDepartment';
+import NewDepartmentView from './NewDepartmentView';
 
 function App() {
   return (
@@ -44,6 +49,12 @@ function App() {
           </Route>
           <Route exact path="/newCompetence" component={NewCompetence}>
             <NewCompetenceView/>
+          </Route>
+          <Route exact path="/departmentList" component={DepartmentList}>
+            <Department/>
+          </Route>
+          <Route exact path="/newDepartment" component={NewDepartment}>
+            <NewDepartmentView/>
           </Route>
         </Switch>
       </Router>
