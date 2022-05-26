@@ -30,6 +30,10 @@ export const NavBarData = [
         title: 'Your goals',
         path: '/yourGoals',
       },
+      {
+        title: 'Create new employee',
+        path: '/newEmp',
+      },
     ],
   },
   {

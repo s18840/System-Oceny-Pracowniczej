@@ -115,7 +115,7 @@ export const AddButton = styled.button`
   font-family: "Ubuntu";
   justify-self: center;
   align-self: center;
-  margin-left: 80px;
+  margin-left: 110px;
   :hover {background-color: #EA6E38}
 
   :active {
@@ -128,7 +128,7 @@ export const TableInfo = styled.table`
   margin-left: 430px;
   margin-top: 70px;
   margin-bottom: 35px;
-  width: 78%;
+  width: 76%;
   flex-direction: column;
   display: table;
   font-size: 42px;
@@ -211,7 +211,9 @@ export const Wrapper = styled.div`
   border-radius: 20px;
   margin-left: 450px;
   margin-right: 50px;
+  margin-bottom: 25px ;
   min-width: 420px;
+  padding-bottom: 5px ;
 `;
 
 export const InsideWrapper = styled.div`
@@ -243,15 +245,15 @@ export const MarkersWrapper = styled.div`
   border: 0.25px gray;
   border-radius: 20px;
   border-style: solid;
-  width: 30%;
-  min-width: 300px;
+  width: 35%;
+  min-width: 400px;
 `;
 export const MarkersSmallWrapper = styled.div`
   border: 0.25px gray;
   border-radius: 20px;
   border-style: solid;
   width: 20%;
-  min-width: 300px;
+  min-width: 350px;
 `;
 
 export const DescriptionField = styled.textarea`
