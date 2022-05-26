@@ -3,7 +3,6 @@ import {GlobalStyle} from '../styles/GlobalStyle';
 import Dashboard from './Dashboard';
 import WelcomePage from './WelcomePage';
 import ProfilePage from "./ProfilePage";
-import BasicInformationForm from "../components/ProfilePage/BasicInformationForm"
 import {
   BrowserRouter as Router,
   Redirect,
