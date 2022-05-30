@@ -59,12 +59,6 @@ export const NavBarData = [
     icon: <FaRegObjectGroup/>,
     iconClosed: <MDIcons.MdKeyboardArrowDown />,
     iconOpened: <MDIcons.MdKeyboardArrowUp />,
-    subnav: [
-      {
-        title: 'Markers',
-        path: '/markersList',
-      },
-    ],
   },
   {
     title: 'Grades',

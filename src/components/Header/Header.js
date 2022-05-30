@@ -37,7 +37,7 @@ const HeaderBar = () => {
       <HeaderBtnSignOut to="/welcome">
         <FaPowerOff />
       </HeaderBtnSignOut>
-      <HeaderBtnTol>  
+      <HeaderBtnTol to="/settings">  
         <FaWrench  />
       </HeaderBtnTol>
       <HeaderProfile activeStyle>

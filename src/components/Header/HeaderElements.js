@@ -26,7 +26,7 @@ export const HeaderBtnProfileWrapper = styled.div`
   text-align: center;
 `
 
-export const HeaderBtnTol = styled.div`
+export const HeaderBtnTol = styled(Link)`
   padding: 22px;
   cursor: pointer;
   border: 0.25px solid gray;

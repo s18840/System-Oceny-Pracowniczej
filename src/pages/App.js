@@ -29,6 +29,8 @@ import RoleList from '../components/Role/RoleList';
 import Role from './Role';
 import NewRole from '../components/Role/NewRole';
 import NewRoleView from './NewRoleView';
+import Settings from './Settings';
+import Grades from './Grades';
 function App() {
   return (
     <>
@@ -76,6 +78,12 @@ function App() {
           </Route>
           <Route exact path="/newRole" component={NewRole}>
             <NewRoleView/>
+          </Route>
+          <Route exact path="/settings" component={Settings}>
+          <Settings/>
+          </Route>
+          <Route exact path="/grades" component={Grades}>
+          <Grades/>
           </Route>
         </Switch>
       </Router>
