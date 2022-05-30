@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import {
+import {  
   Heading,
   PersonalDataHeadingText,
   ProfileDataText,
   InputField,
   Wrapper,
-  MarkersSmallWrapper,
+  MarkersWrapper,
   InsideWrapper,
   TableMarkers,
   RowLi,
-  DescriptionField,  
+  DescriptionField,
   NewButton,
   AddButton,
 } from '../../styles/GlobalStyle';
@@ -20,22 +20,22 @@ import { useForm } from "react-hook-form";
 const dataJson = {
   content: [
     {
-      markersRequired: "Marker 1",
+      competencesRequired: "Competence 1",
     },
     {
-      markersRequired: "Marker 2",
+      competencesRequired: "Competence 2",
     },
     {
-      markersRequired: "Marker 3",
+      competencesRequired: "Competence 3",
     },
     {
-      markersRequired: "Marker 4",
+      competencesRequired: "Competence 4",
     },
     {
-      markersRequired: "Marker 5",
+      competencesRequired: "Competence 5",
     },
     {
-      markersRequired: "Marker 6",
+      competencesRequired: "Competence 6",
     },
   ],
 };
@@ -70,7 +70,7 @@ const NewCompetence = (props)=> {
     <>
       <PersonalDataHeadingText>
         {t("Creating new competence")}
-        <NewButton onClick={() => {alert(marks.toString());window.location.href='/competenceList'}}>{t("Add")}</NewButton>
+        <NewButton onClick={() => {alert(marks.toString());window.location.href='/roleList'}}>{t("Add")}</NewButton>
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
@@ -79,22 +79,26 @@ const NewCompetence = (props)=> {
             <InputField placeholder="Nazwa kompetencji"></InputField>
           </Heading>
           <Heading>
-            <ProfileDataText>{t("Markers required") + ": "}</ProfileDataText>
+            <ProfileDataText>{t("Rank") + ": "}</ProfileDataText>
+            <InputField placeholder="Ranga"></InputField>
           </Heading>
-          <MarkersSmallWrapper>
+          <Heading>
+            <ProfileDataText>{t("Competences required") + ": "}</ProfileDataText>
+          </Heading>
+          <MarkersWrapper>
             <TableMarkers className="table">
               {content.map((el) => (
                 <tr>
                   <td>
                       <RowLi>
-                        {el.markersRequired}
-                        <Button onClick={() => {setMarks((prev) => [...prev, el.markersRequired])}}/> 
+                        {el.competencesRequired}
+                        <Button onClick={() => {setMarks((prev) => [...prev, el.competencesRequired])}}/> 
                       </RowLi>
                   </td>
                 </tr>
               ))}
             </TableMarkers>
-          </MarkersSmallWrapper>
+          </MarkersWrapper>
           <Heading>
             <ProfileDataText>{t("Description") + ": "}</ProfileDataText>
           </Heading>

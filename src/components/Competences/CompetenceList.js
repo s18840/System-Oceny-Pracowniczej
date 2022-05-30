@@ -5,12 +5,12 @@ import {
   TableDetailsDate,
   TableDetails,
   PersonalDataHeadingText,
-  NewCompetenceButton,
-  EditCompetenceButton,
   TableDetailsMarker,
   MarkersTable,
-  MarkersRow
-} from "../../styles/CompetenceStyle";
+  MarkersRow,  
+  NewButton,
+  EditButton,
+} from '../../styles/GlobalStyle';
 
 const dataJson = {
   titles: ["Competence name:", "Markers required", "Description"],
@@ -43,6 +43,10 @@ const dataJson = {
       competenceName: "Competence 8",
       markersRequired: ["Marker 25"],
     },
+    {
+      competenceName: "Competence 9",
+      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
+    },
   ],
 };
 
@@ -50,8 +54,8 @@ function CompetenceList() {
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
-      <EditCompetenceButton>Edit</EditCompetenceButton>
-      <NewCompetenceButton>New</NewCompetenceButton>
+      <EditButton>Edit</EditButton>
+      <NewButton onClick={event =>  window.location.href='/newCompetence'}>New</NewButton>
       <TableInfo className="table">
         <thead>
           <tr>

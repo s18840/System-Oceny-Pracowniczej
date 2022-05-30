@@ -30,22 +30,26 @@ export const NavBarData = [
         title: 'Your goals',
         path: '/yourGoals',
       },
+      {
+        title: 'Create new employee',
+        path: '/newEmp',
+      },
     ],
   },
   {
-    title: 'Teams',
-    path: '/teams',
+    title: 'Teams & Departments',
+    path: '/profile',
     icon: <FaUsers/>,
     iconClosed: <MDIcons.MdKeyboardArrowDown />,
     iconOpened: <MDIcons.MdKeyboardArrowUp />,
     subnav: [
       {
         title: 'Your Teams',
-        path: '/yourTeams',
+        path: '/teamList',
       },
       {
-        title: 'Teams History',
-        path: '/hisoryTeams',
+        title: 'Your Departments',
+        path: '/departmentList',
       },
     ],
   },

@@ -44,7 +44,7 @@ export const ProfileTab = styled.button`
   color: #ffffff;
   background-color: #6137a0;
   border-radius: 45px;
-  border-bottom: 0;
+  border: 0;
   margin-top: 10px;
   margin-right: 15px;
   font-size: 28px;
@@ -74,16 +74,17 @@ export const ProfileTabWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  
+  margin-left: 10px;
 `;
 
 export const ProfileDetailedInfoWrapper = styled.div`
+padding-bottom: 5px ;
   border: 2px solid #dfdfdf;
   margin:10px 10px 10px 10px;
   border-radius: 20px ;
   display: grid;
   justify-content: space-evenly;
-  row-gap: 2px;
+  row-gap: 1px;
   grid-template-columns: 280px 200px 200px;
   grid-template-rows: 50px 70px 70px 70px 70px 70px 70px 70px;
   color: blue;
@@ -193,7 +194,7 @@ export const FormButton = styled.button`
   background-color: #FF4E01;
   color: white;
   border-radius: 45px;
-  border-style: solid;
+  border: 0;
   font-size: 28px;
   font-family: 'Ubuntu';
   justify-self: center;

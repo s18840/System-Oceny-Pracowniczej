@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useState } from 'react'
 import { FaPowerOff, FaWrench, FaSearch } from 'react-icons/fa'
 import { useHistory } from "react-router-dom";
 
@@ -16,10 +16,21 @@ import {
   HeaderName,
 } from './HeaderElements'
 
-
+const dataJson = {
+  content: [
+    {
+      FirstName: "Andrzej",
+      Surname: "Jarząbkowski",
+    },
+  ],
+};
 
 const HeaderBar = () => {
   const history = useHistory();
+  const [formData, setFormData] = useState({
+    FirstName: dataJson.content[0].FirstName,
+    Surname: dataJson.content[0].Surname,
+  })
   return(
   <HeaderWrapper>
     <HeaderBtnProfileWrapper>
@@ -33,7 +44,7 @@ const HeaderBar = () => {
         <HeaderProfilePhoto to="/profile">
           <img src="prof.png" alt="" width="100%" />
         </HeaderProfilePhoto>
-        <HeaderName to="/profile">Amadeusz Jarząbkowski</HeaderName>
+        <HeaderName to="/profile">{formData.FirstName + " " + formData.Surname}</HeaderName>
       </HeaderProfile>
     </HeaderBtnProfileWrapper>
     <HeaderSearch>

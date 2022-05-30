@@ -53,5 +53,22 @@
     "Creating new competence": "Tworzenie nowej kompetencji",
     "Description": "Opis",
     "Add": "Dodaj",
-    "Added": "Dodane"
+    "Added": "Dodane",
+    "New": "Nowy",
+    "Department List": "Lista Departamentów",
+    "Department name": "Nazwa Departamentu",
+    "Department Teams": "Zespoły w Departamencie",
+    "Abbreviation": "Skrót",
+    "Add Teams": "Dodaj zespoły",
+    "Add Employees":"Dodaj pracowników",
+    "Add Directors": "Dodaj dyrektorów",
+    "Creating new department": "Tworzenie nowego departamentu",
+    "Director:": "Dyrektor",
+    "Teams List": "Lista zespołów",
+    "Creating new team": "Tworzenie nowego zespołu",
+    "Add managers": "Dodaj managerow",
+    "Add required competences": "Dodaj wymagane kompetencje",
+    "Role List": "Lista roli",
+    "Rank": "Ranga",
+    "Competences required": "Wymagane kompetencje"
 }

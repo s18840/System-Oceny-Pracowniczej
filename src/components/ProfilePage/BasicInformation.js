@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FormWrapper, InputField } from "../../styles/ProfilePageFormStyle";
 import {
@@ -46,23 +44,15 @@ const dataJson = {
 };
 
 function BasicInformation() {
-  let history = useHistory();
-
   const [formState, setFormState] = useState(true);
 
   const switchForm = () => {
     setFormState(!formState);
   };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
   const submitForm = (data) => {
-    
-    //history.push("/basicInformationForm");
-    console.log(data);
+    data.preventDefault()
+    console.log(formData);
   };
   const { t } = useTranslation();
   let button;
@@ -72,10 +62,24 @@ function BasicInformation() {
     button=<FormButton onClick={switchForm}>{t("Save")}</FormButton>;
   }
 
+  const [formData, setFormData] = useState({
+    FirstName: dataJson.content[0].FirstName,
+    SecondName: dataJson.content[0].SecondName,
+    Surname: dataJson.content[0].Surname,
+    FamilyName: dataJson.content[0].FamilyName,
+    DateOfBirth: dataJson.content[0].DateOfBirth,
+    Street: dataJson.content[0].Street,
+    HouseNumber: dataJson.content[0].HouseNumber,
+    City: dataJson.content[0].City,
+    District: dataJson.content[0].District,
+    PostalCode: dataJson.content[0].PostalCode,
+    Country: dataJson.content[0].Country,
+    PhoneNumber: dataJson.content[0].PhoneNumber,
+    Mail: dataJson.content[0].Mail,
+  })
   return (
     <>
-      {dataJson.content.map((content) => (
-        <FormWrapper onSubmit={handleSubmit(submitForm)}>
+        <FormWrapper onSubmit={submitForm}>
           <ProfileDetailedInfoWrapper>
             <PersonalDataHeadingText>
               {t("Personal Data")}
@@ -84,111 +88,123 @@ function BasicInformation() {
             <FirstName>
               <ProfileDataText>{t("First name")}</ProfileDataText>
               <InputField
-                value={content.FirstName}
+                value={formData.FirstName}
+                onChange={(e) => setFormData({...formData, FirstName: e.target.value})}
                 disabled={formState}
-                {...register("FirstName", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </FirstName>
             <SecondName>
               <ProfileDataText>{t("Second name")}</ProfileDataText>
               <InputField
-                value={content.SecondName}
+                value={formData.SecondName}
+                onChange={(e) => setFormData({...formData, SecondName: e.target.value})}
                 disabled={formState}
-                {...register("SecondName", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </SecondName>
             <SurName>
               <ProfileDataText>{t("Surname")}</ProfileDataText>
               <InputField
-                value={content.Surname}
+                value={formData.Surname}
+                onChange={(e) => setFormData({...formData, Surname: e.target.value})}
                 disabled={formState}
-                {...register("Surname", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </SurName>
             <FamilyName>
               <ProfileDataText>{t("Family name")}</ProfileDataText>
               <InputField
-                value={content.FamilyName}
+                value={formData.FamilyName}
+                onChange={(e) => setFormData({...formData, FamilyName: e.target.value})}
                 disabled={formState}
-                {...register("FamilyName", { required: false })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </FamilyName>
             <DateOfBirth>
               <ProfileDataText>{t("Date of birth")}</ProfileDataText>
               <InputField
-                value={content.DateOfBirth}
+                value={formData.DateOfBirth}
+                onChange={(e) => setFormData({...formData, DateOfBirth: e.target.value})}
                 disabled={formState}
-                {...register("DateOfBirth", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </DateOfBirth>
             <PhoneNumber>
               <ProfileDataText>{t("Phone number")}</ProfileDataText>
               <InputField
-                value={content.PhoneNumber}
+                value={formData.PhoneNumber}
+                onChange={(e) => setFormData({...formData, PhoneNumber: e.target.value})}
                 disabled={formState}
-                {...register("PhoneNumber", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </PhoneNumber>
             <Mail>
               <ProfileDataText>{t("Mail")}</ProfileDataText>
               <InputField
-                value={content.Mail}
+                value={formData.Mail}
+                onChange={(e) => setFormData({...formData, Mail: e.target.value})}
                 disabled={formState}
-                {...register("Mail", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </Mail>
             <Street>
               <ProfileDataText>{t("Street")}</ProfileDataText>
               <InputField
-                value={content.Street}
+                value={formData.Street}
+                onChange={(e) => setFormData({...formData, Street: e.target.value})}
                 disabled={formState}
-                {...register("Street", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </Street>
             <HouseNumber>
               <ProfileDataText>{t("House number")}</ProfileDataText>
               <InputField
-                value={content.HouseNumber}
+                value={formData.HouseNumber}
+                onChange={(e) => setFormData({...formData, HouseNumber: e.target.value})}
                 disabled={formState}
-                {...register("HouseNumber", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </HouseNumber>
             <City>
               <ProfileDataText>{t("City")}</ProfileDataText>
               <InputField
-                value={content.City}
+                value={formData.City}
+                onChange={(e) => setFormData({...formData, City: e.target.value})}
                 disabled={formState}
-                {...register("City", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </City>
             <District>
               <ProfileDataText>{t("District")}</ProfileDataText>
               <InputField
-                value={content.District}
+                value={formData.District}
+                onChange={(e) => setFormData({...formData, District: e.target.value})}
                 disabled={formState}
-                {...register("District", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </District>
             <PostalCode>
               <ProfileDataText>{t("Postal code")}</ProfileDataText>
               <InputField
-                value={content.PostalCode}
+                value={formData.PostalCode}
+                onChange={(e) => setFormData({...formData, PostalCode: e.target.value})}
                 disabled={formState}
-                {...register("PostalCode", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </PostalCode>
             <Country>
               <ProfileDataText>{t("Country")}</ProfileDataText>
               <InputField
-                value={content.Country}
+                value={formData.Country}
+                onChange={(e) => setFormData({...formData, Country: e.target.value})}
                 disabled={formState}
-                {...register("Country", { required: true })}
+                style={formState?{backgroundColor:"white"}:{backgroundColor:"#DDDDDD"}}
               ></InputField>
             </Country>
             {button}
           </ProfileDetailedInfoWrapper>
         </FormWrapper>
-      ))}
     </>
   );
 }
