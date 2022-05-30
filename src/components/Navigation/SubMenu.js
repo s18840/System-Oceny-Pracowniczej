@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { IoMdHeartEmpty } from "react-icons/io";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { SidebarLabel, SidebarLink, DropdownLink } from "./NavBarElements";
 const SubMenu = ({ item }) => {
     const [subnav, setSubnav ] = useState(false)

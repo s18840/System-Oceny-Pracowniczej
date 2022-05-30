@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FormWrapper, InputField } from "../../styles/ProfilePageFormStyle";
 import {
@@ -19,7 +18,6 @@ import {
   Street,
   SurName,
   FormButton,
-  AcceptButton,
   PhoneNumber,
   Mail,
 } from "../../styles/ProfilePageStyle";

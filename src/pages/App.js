@@ -9,10 +9,6 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import WelcomePage from './WelcomePage';
-import ProfilePage from "./ProfilePage";
-import BasicInformationForm from "../components/ProfilePage/BasicInformationForm"
 import ProjectList from '../components/Project/ProjectList';
 import Projects from './Projects';
 import CompetenceList from '../components/Competences/CompetenceList';

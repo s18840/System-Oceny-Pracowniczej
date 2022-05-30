@@ -1,7 +1,7 @@
 import React from "react";
 import {DateWrapper, EmploymentTableDateLine, Row, TableDetailsDate, TableInfo,} from "../../styles/ProfilePageStyle";
 import { useTranslation } from "react-i18next";
-const today = new Date();
+//const today = new Date();
 
 const dataJson = {
   titles: ["Time", "Institution", "Degree"],

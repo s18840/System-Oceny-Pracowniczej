@@ -1,14 +1,4 @@
 import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
-import styled from 'styled-components'
-import { FaStar } from 'react-icons/fa' // grades
-import { FaUsers } from 'react-icons/fa' // teams
-import { FaRegUser } from 'react-icons/fa' // profile
-import { FaRegObjectGroup } from 'react-icons/fa' // projects
-import { FaIdCard } from 'react-icons/fa' // dashboard
-import * as MDIcons from 'react-icons/md'
-import { IoIosArrowDown } from 'react-icons/io' // dropdown
-import { useTranslation } from "react-i18next";
 import {
   Nav,
   NavLogo,
