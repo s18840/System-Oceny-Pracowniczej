@@ -8,14 +8,16 @@ export const Nav = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   width: 400px;
-  height: 100%;
+  height: 940px;
   font-size: 20px;
   top: 0;
   z-index: 15;
 `
 
 export const NavLogo = styled(Link)`
+  display: flex;
   justify-content: center;
+  align-items: center;
 `
 export const SidebarLink = styled(Link)`
 display: flex;
@@ -63,9 +65,15 @@ export const SidebarWrap = styled.nav`
 
 export const NavMenu = styled.div`
   display: flex;
+  height: 700px ;
   margin-top:-20px;
   align-items: center;
   flex-direction: column;
+  overflow-x: hidden ;
+  overflow-y: scroll;
+  ::-webkit-scrollbar{
+    display: none ;
+  }
 `
 
 export const NavCategories = styled.div`
