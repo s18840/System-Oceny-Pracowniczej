@@ -26,7 +26,7 @@ import {
 } from "../../styles/ProfilePageStyle";
 
 function BasicInformation() {
-  let empId =7;
+  let empId =5;
   
   const [formFirstName, setFirstName] = useState(" ");
   const [formSecondName, setSecondName] = useState(" ");
@@ -45,7 +45,7 @@ function BasicInformation() {
   useEffect (()=>{
     const timer = setTimeout(()=>{
       setFirstName(emp.firstName);
-      setSecondName(emp.secondName ? emp.secondName : "No Second Name");
+      setSecondName(emp.secondName ? emp.secondName : "-");
       setSurname(emp.lastName);
       const newBirthDate = emp.birthDate.split('T')[0];
       setDateOfBirth(newBirthDate);
@@ -53,7 +53,7 @@ function BasicInformation() {
       setHouseNumber(emp.buildingNumber);
       setApartmentNumber(emp.apartmentNumber ? emp.apartmentNumber : 4);
       setCity(emp.city);
-      setPostalCode(emp.postalCode ? emp.postalCode : "No Postal Code");
+      setPostalCode(emp.postalCode);
       setCountry(emp.country);
       setPhoneNumber(emp.cellPhoneNumber);
       setMail(emp.email);
