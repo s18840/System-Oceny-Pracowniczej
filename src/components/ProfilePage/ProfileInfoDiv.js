@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MailIcon,
   PhoneIcon,
@@ -19,32 +19,11 @@ import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
 import { useTranslation } from "react-i18next";
+import useApi from "../../api/useApi";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
   marginBottom: "-5px",
-};
-const dataJson = {
-  titles: [
-    "Name",
-    "Surname",
-    "Department",
-    "Job",
-    "PhoneNumber",
-    "PersonalNumber",
-    "Mail",
-  ],
-  content: [
-    {
-      Name: "Amadeusz",
-      Surname: "Jarząbkowski",
-      Department: "IT",
-      Job: "Junior Java Developer",
-      PhoneNumber: "+48 506123412",
-      PersonalNumber: "172",
-      Mail: "a.jarzab@gmail.com",
-    },
-  ],
 };
 
 function ProfileInfo() {
@@ -58,17 +37,30 @@ function ProfileInfo() {
     setContentType(conType);
     console.log("state change to: " + conType);
   };
+  let empId =7;
+  const { emp } = useApi(`https://localhost:5001/api/Dto/emp/${empId}`);
+  console.log(emp)
+  const [formFirstName, setFirstName] = useState(" ");
+  const [formSurname, setSurname] = useState(" ");
+  const [formDepartment, setDepartment] = useState(" ");
+  const [formJob, setJob] = useState(" ");
+  const [formPhoneNumber, setPhoneNumber] = useState(" ");
+  const [formPersonalNumber, setPersonalNumber] = useState(" ");
+  const [formMail, setMail] = useState(" ");
 
-  const [profileData, setProfileData] = useState({
-    Name: dataJson.content[0].Name,
-    Surname: dataJson.content[0].Surname,
-    Department: dataJson.content[0].Department,
-    Job: dataJson.content[0].Job,
-    PhoneNumber: dataJson.content[0].PhoneNumber,
-    PersonalNumber: dataJson.content[0].PersonalNumber,
-    Mail: dataJson.content[0].Mail,
-  })
-
+  useEffect (()=>{
+    const timer = setTimeout(()=>{
+      setFirstName(emp.firstName);
+      setSurname(emp.lastName);
+      setDepartment(emp.departmentName);
+      setJob(emp.jobName);
+      setPhoneNumber(emp.cellPhoneNumber);
+      setMail(emp.email);
+      setPersonalNumber(empId)
+    },11);
+    return () => clearTimeout(timer);
+  },[emp])
+  
   return (
     <PageWrapper>
       <>
@@ -80,30 +72,30 @@ function ProfileInfo() {
             </ProfilePhoto>
             <ProfileTextWrapper>
               <ProfileHeaderText>
-                {profileData.Name + " " + profileData.Surname}
+                {formFirstName + " " + formSurname}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
               {t("Department")+": "}
                 <ProfileText>
-                  {" " + profileData.Department}
+                  {" " + formDepartment}
                 </ProfileText>
               </ProfileSubHeaderText>
               <ProfileSubHeaderText>
               {t("Job")+": "}
                 <ProfileText>
-                 {" " + profileData.Job}
+                 {" " + formJob}
                 </ProfileText>
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 <PhoneIcon />
-                {profileData.PhoneNumber}
+                {formPhoneNumber}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
               {t("Personal number")+": "}
                 <ProfileText>
-                  {" " + profileData.PersonalNumber}
+                  {" " + formPersonalNumber}
                 </ProfileText>
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
@@ -111,7 +103,7 @@ function ProfileInfo() {
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 <MailIcon />
-                {profileData.Mail}
+                {formMail}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
               {t("Status")+": "}

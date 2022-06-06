@@ -1,6 +1,7 @@
 import React from "react";
 import {DateWrapper, EmploymentTableDateLine, Row, TableDetailsDate, TableInfo,} from "../../styles/ProfilePageStyle";
 import {useTranslation} from 'react-i18next';
+import useApi from "../../api/useApi";
 const dataJson = {
   titles: ["Time", "Department", "Job", "Team"],
   content: [
@@ -28,6 +29,9 @@ const dataJson = {
   ],
 };
 function EmploymentTable () {
+  let empId =7;
+  const { loading , emp } = useApi(`https://localhost:5001/api/Dto/emp/${empId}`);
+  console.log(emp)
   const {t} = useTranslation();
   return(
   <>

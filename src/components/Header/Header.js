@@ -1,7 +1,7 @@
-import React , { useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { FaPowerOff, FaWrench, FaSearch } from 'react-icons/fa'
 import { useHistory } from "react-router-dom";
-
+import useApi from "../../api/useApi";
 
 import {
   HeaderLocTree,
@@ -27,10 +27,20 @@ const dataJson = {
 
 const HeaderBar = () => {
   const history = useHistory();
-  const [formData, setFormData] = useState({
-    FirstName: dataJson.content[0].FirstName,
-    Surname: dataJson.content[0].Surname,
-  })
+  let empId =7;
+  const { emp } = useApi(`https://localhost:5001/api/Dto/emp/${empId}`);
+  console.log(emp)
+  const [formFirstName, setFirstName] = useState(" ");
+  const [formSurname, setSurname] = useState(" ");
+  
+  useEffect (()=>{
+    const timer = setTimeout(()=>{
+      setFirstName(emp.firstName);
+      setSurname(emp.lastName);
+    },11);
+    return () => clearTimeout(timer);
+  },[emp])
+
   return(
   <HeaderWrapper>
     <HeaderBtnProfileWrapper>
@@ -44,7 +54,7 @@ const HeaderBar = () => {
         <HeaderProfilePhoto to="/profile">
           <img src="prof.png" alt="" width="100%" />
         </HeaderProfilePhoto>
-        <HeaderName to="/profile">{formData.FirstName + " " + formData.Surname}</HeaderName>
+        <HeaderName to="/profile">{formFirstName + " " + formSurname}</HeaderName>
       </HeaderProfile>
     </HeaderBtnProfileWrapper>
     <HeaderSearch>

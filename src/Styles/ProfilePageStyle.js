@@ -80,13 +80,13 @@ export const ProfileTabWrapper = styled.div`
 export const ProfileDetailedInfoWrapper = styled.div`
 padding-bottom: 5px ;
   border: 2px solid #dfdfdf;
-  margin:10px 10px 10px 10px;
+  margin:45px 10px 10px 10px;
   border-radius: 20px ;
   display: grid;
   justify-content: space-evenly;
   row-gap: 1px;
   grid-template-columns: 280px 200px 200px;
-  grid-template-rows: 50px 70px 70px 70px 70px 70px 70px 70px;
+  grid-template-rows: 50px 70px 70px 70px 70px 70px 70px;
   color: blue;
 `;
 export const ProfileDataText = styled.div`
@@ -133,7 +133,7 @@ export const FamilyName = styled.div`
   font-style: italic;
 `;
 export const DateOfBirth = styled.div`
-  grid-row: 6;
+  grid-row: 5;
   grid-column: 1;
   font-size: 28px;
   font-style: italic;
@@ -145,14 +145,14 @@ export const Street = styled.div`
   font-style: italic;
 `;
 export const HouseNumber = styled.div`
-  grid-row: 4;
-  grid-column: 3;
+  grid-row: 5;
+  grid-column: 2;
   font-size: 28px;
   font-style: italic;
 `;
 export const City = styled.div`
-  grid-row: 5;
-  grid-column: 2;
+  grid-row: 4;
+  grid-column: 3;
   font-size: 28px;
   font-style: italic;
 `;
@@ -175,13 +175,13 @@ export const Country = styled.div`
   font-style: italic;
 `;
 export const Mail = styled.div`
-  grid-row: 8;
+  grid-row: 7;
   grid-column: 1;
   font-size: 28px;
   font-style: italic;
 `;
 export const PhoneNumber = styled.div`
-  grid-row: 7;
+  grid-row: 6;
   grid-column: 1;
   font-size: 28px;
   font-style: italic;

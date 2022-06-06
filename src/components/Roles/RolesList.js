@@ -41,10 +41,10 @@ function RolesList() {
     <>
       <PersonalDataHeadingText>Roles List</PersonalDataHeadingText>
       <EditRoleButton>
-        <text>Edit Role</text>
+        Edit Role
       </EditRoleButton>
       <NewRoleButton>
-        <text>New Role</text>
+        New Role
       </NewRoleButton>
       <TableInfo class="table">
         <thead>
