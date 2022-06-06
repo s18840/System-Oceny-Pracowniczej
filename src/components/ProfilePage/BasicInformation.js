@@ -47,7 +47,8 @@ function BasicInformation() {
       setFirstName(emp.firstName);
       setSecondName(emp.secondName ? emp.secondName : "No Second Name");
       setSurname(emp.lastName);
-      setDateOfBirth(emp.birthDate);
+      const newBirthDate = emp.birthDate.split('T')[0];
+      setDateOfBirth(newBirthDate);
       setStreet(emp.street);
       setHouseNumber(emp.buildingNumber);
       setApartmentNumber(emp.apartmentNumber ? emp.apartmentNumber : 4);
@@ -118,18 +119,6 @@ function BasicInformation() {
       return setFirstName(e.target.value);
     }
   };
-
-  // setFirstName(emp.first_Name);
-  // setSecondName(emp.second_Name);
-  // setSurname(emp.last_Name);
-  // setDateOfBirth(emp.birth_Date);
-  // setStreet(emp.street);
-  // setHouseNumber(emp.building_Number);
-  // setCity(emp.city);
-  // setPostalCode(emp.postal_Code);
-  // setCountry(emp.country);
-  // setPhoneNumber(emp.cell_Phone_Number);
-  // setMail(emp.email);
   return (
     <>
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
