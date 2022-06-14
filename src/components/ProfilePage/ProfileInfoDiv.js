@@ -48,6 +48,7 @@ function ProfileInfo() {
     //setTeam(data.);
     setPhoneNumber(data.cellPhoneNumber);
     setMail(data.email);
+    setStatus(data.status);
     setPersonalNumber(context.employeeId)});
   },[context]);
   const [formFirstName, setFirstName] = useState(" ");
@@ -57,7 +58,7 @@ function ProfileInfo() {
   const [formPhoneNumber, setPhoneNumber] = useState(" ");
   const [formPersonalNumber, setPersonalNumber] = useState(" ");
   const [formMail, setMail] = useState(" ");
-
+  const [status, setStatus] = useState(" ");
   // useEffect (()=>{
   //   const timer = setTimeout(()=>{
   //     setFirstName(emp.firstName);
@@ -70,7 +71,13 @@ function ProfileInfo() {
   //   },11);
   //   return () => clearTimeout(timer);
   // },[emp])
-  
+  function checkStatus(){
+    if(status===1){
+      return true
+    }else{
+      return false
+    }
+  }
   return (
     <PageWrapper>
       <>
@@ -117,7 +124,7 @@ function ProfileInfo() {
               </ProfileHeaderText>
               <ProfileSubHeaderText>
               {t("Status")+": "}
-                <StatusIcon />
+                <StatusIcon style={status>0 ? { backgroundColor:"#55ff11"}:{backgroundColor:"#ff5511"}} />
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
           </ProfileInfoDiv>

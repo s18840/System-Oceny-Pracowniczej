@@ -33,6 +33,7 @@ import Settings from './Settings';
 import Grades from './Grades';
 import { Context } from "./Context.js";
 function App() {
+  //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
   const [context, setContext] = useState("default context value");
   return (
     <Context.Provider value={[context, setContext]}>
