@@ -80,13 +80,13 @@ export const ProfileTabWrapper = styled.div`
 export const ProfileDetailedInfoWrapper = styled.div`
 padding-bottom: 5px ;
   border: 2px solid #dfdfdf;
-  margin:45px 10px 10px 10px;
+  margin:10px 10px 10px 10px;
   border-radius: 20px ;
   display: grid;
   justify-content: space-evenly;
   row-gap: 1px;
   grid-template-columns: 280px 200px 200px;
-  grid-template-rows: 50px 70px 70px 70px 70px 70px 70px;
+  grid-template-rows: 50px 70px 70px 70px 70px 70px 70px 70px;
   color: blue;
 `;
 export const ProfileDataText = styled.div`
@@ -174,8 +174,14 @@ export const Country = styled.div`
   font-size: 28px;
   font-style: italic;
 `;
-export const Mail = styled.div`
+export const CompanyMail = styled.div`
   grid-row: 7;
+  grid-column: 1;
+  font-size: 28px;
+  font-style: italic;
+`;
+export const Mail = styled.div`
+  grid-row: 8;
   grid-column: 1;
   font-size: 28px;
   font-style: italic;
@@ -185,6 +191,9 @@ export const PhoneNumber = styled.div`
   grid-column: 1;
   font-size: 28px;
   font-style: italic;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
 export const FormButton = styled.button`
   grid-row: 1;

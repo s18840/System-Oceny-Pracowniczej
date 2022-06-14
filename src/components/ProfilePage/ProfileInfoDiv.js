@@ -39,11 +39,11 @@ function ProfileInfo() {
   };
   let empId =7;
   const { emp } = useApi(`https://localhost:5001/api/Dto/emp/${empId}`);
-  console.log(emp)
+  //console.log(emp)
   const [formFirstName, setFirstName] = useState(" ");
   const [formSurname, setSurname] = useState(" ");
   const [formDepartment, setDepartment] = useState(" ");
-  const [formJob, setJob] = useState(" ");
+  const [formTeam, setTeam] = useState("PMI");
   const [formPhoneNumber, setPhoneNumber] = useState(" ");
   const [formPersonalNumber, setPersonalNumber] = useState(" ");
   const [formMail, setMail] = useState(" ");
@@ -53,7 +53,7 @@ function ProfileInfo() {
       setFirstName(emp.firstName);
       setSurname(emp.lastName);
       setDepartment(emp.departmentName);
-      setJob(emp.jobName);
+      //setTeam(emp.);
       setPhoneNumber(emp.cellPhoneNumber);
       setMail(emp.email);
       setPersonalNumber(empId)
@@ -81,9 +81,9 @@ function ProfileInfo() {
                 </ProfileText>
               </ProfileSubHeaderText>
               <ProfileSubHeaderText>
-              {t("Job")+": "}
+              {t("Team")+": "}
                 <ProfileText>
-                 {" " + formJob}
+                 {" " + formTeam}
                 </ProfileText>
               </ProfileSubHeaderText>
             </ProfileTextWrapper>

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { FormWrapper, InputField } from "../../styles/ProfilePageFormStyle";
+import { FormWrapper} from "../../styles/ProfilePageFormStyle";
+import {InputField, Span} from '../../styles/GlobalStyle'
 import useApi from "../../api/useApi";
 import {
   AddressHeadingText,
@@ -23,102 +24,85 @@ import {
   FormButton,
   PhoneNumber,
   Mail,
+  CompanyMail,
 } from "../../styles/ProfilePageStyle";
 
 function BasicInformation() {
-  let empId =5;
-  
-  const [formFirstName, setFirstName] = useState(" ");
-  const [formSecondName, setSecondName] = useState(" ");
-  const [formSurname, setSurname] = useState(" ");
-  const [formDateOfBirth, setDateOfBirth] = useState(" ");
-  const [formStreet, setStreet] = useState(" ");
-  const [formHouseNumber, setHouseNumber] = useState(" ");
-  const [formApartmentNumber, setApartmentNumber] = useState();
-  const [formCity, setCity] = useState(" ");
-  const [formPostalCode, setPostalCode] = useState(" ");
-  const [formCountry, setCountry] = useState(" ");
-  const [formPhoneNumber, setPhoneNumber] = useState(" ");
-  const [formMail, setMail] = useState(" ");
+  let empId =4; 
+  const [firstName, setFirstName] = useState(" ");
+  const [secondName, setSecondName] = useState(" ");
+  const [lastName, setLastName] = useState(" ");
+  const [birthDate, setBirthDate] = useState(" ");
+  const [street, setStreet] = useState(" ");
+  const [buildingNumber, setBuildingNumber] = useState(" ");
+  const [apartmentNumber, setApartmentNumber] = useState();
+  const [city, setCity] = useState(" ");
+  const [postalCode, setPostalCode] = useState(" ");
+  const [country, setCountry] = useState(" ");
+  const [cellPhoneNumber, setCellPhoneNumber] = useState(" ");
+  const [companyMail, setCompanyMail] = useState(" ");
+  const [email, setEmail] = useState(" ");
   const { emp } = useApi(`https://localhost:5001/api/Dto/emp/${empId}`);
+  console.log(emp);
 
   useEffect (()=>{
     const timer = setTimeout(()=>{
-      setFirstName(emp.firstName);
-      setSecondName(emp.secondName ? emp.secondName : "-");
-      setSurname(emp.lastName);
-      const newBirthDate = emp.birthDate.split('T')[0];
-      setDateOfBirth(newBirthDate);
-      setStreet(emp.street);
-      setHouseNumber(emp.buildingNumber);
-      setApartmentNumber(emp.apartmentNumber ? emp.apartmentNumber : 4);
-      setCity(emp.city);
-      setPostalCode(emp.postalCode);
-      setCountry(emp.country);
-      setPhoneNumber(emp.cellPhoneNumber);
-      setMail(emp.email);
+      setValue("firstName",emp.firstName,{shouldValidate: true});
+      setValue("secondName",emp.secondName ? emp.secondName : "-",{shouldValidate: true});
+      setValue("lastName",emp.lastName,{shouldValidate: true});
+      setValue("birthDate",emp?.birthDate.split('T')[0]?emp?.birthDate.split('T')[0] :'',{shouldValidate: true});
+      setValue("street",emp.street,{shouldValidate: true});
+      setValue("buildingNumber",emp.buildingNumber,{shouldValidate: true});
+      setValue("apartmentNumber",emp.apartmentNumber ? emp.apartmentNumber : "-",{shouldValidate: true});
+      setValue("city",emp.city,{shouldValidate: true});
+      setValue("postalCode",emp.postalCode,{shouldValidate: true});
+      setValue("country",emp.country,{shouldValidate: true});
+      setValue("cellPhoneNumber",emp.cellPhoneNumber,{shouldValidate: true});
+      setValue("companyMail",emp.companyMail ? emp.companyMail : "-",{shouldValidate: true});
+      //setEmail("email",emp.email);
     },11);
     return () => clearTimeout(timer);
   },[emp])
 
-  const {register,handleSubmit,formState: { errors }} = useForm();
+  const {register,handleSubmit,setValue, formState: { errors,isValid }} = useForm({mode: 'onChange'});
   const [formReady, setFormReady] = useState(false);
 
   const switchForm = () => {
-    setFormReady(!formReady);
+    console.log(formReady,isValid)
+    setFormReady((currentFormReady)=>(!(currentFormReady && isValid)));
   };
 
   const prepareUser = () => {
     const obj = {
-      firstName: formFirstName,
-      lastName: formSecondName,
-      surname: formSurname,
-      dateofBirth: formDateOfBirth,
-      street: formStreet,
-      houseNumber: formHouseNumber,
-      apartmentNumber: formApartmentNumber,
-      city: formCity,
-      postalCode: formPostalCode,
-      country: formCountry,
-      phoneNumber: formPhoneNumber,
-      mail: formMail
+      firstName: firstName,
+      secondName: secondName,
+      lastName: lastName,
+      birthDate: birthDate,
+      street: street,
+      buildingNumber: buildingNumber,
+      apartmentNumber: apartmentNumber,
+      city: city,
+      postalCode: postalCode,
+      country: country,
+      cellPhoneNumber: cellPhoneNumber,
+      companyMail: companyMail,
+      //email: email
     };
 
     return obj;
   };
-  const submitForm = () => {
-    if (!formReady) {
-      console.log(prepareUser());
-      //TUTAJ BĘDZIE AXIOS.PUT
-    }
+  const submitForm = (data) => {
+
+     if (!formReady) {
+      console.log(data);
+    //   //TUTAJ BĘDZIE AXIOS.PUT
+     }
   };
 
   let button;
-  if (!formReady) {
-    button = (
-      <FormButton onClick={switchForm} disabled={formReady}>
-        {"Edit"}
-      </FormButton>
-    );
-  } else {
-    button = (
-      <FormButton onClick={switchForm} disabled={!formReady}>
-        {"Save"}
-      </FormButton>
-    );
-  }
 
-  // TODO Walidacja
-  function isRequired(value) {
-    return value != null && value.trim().length > 0;
-  }
-  const validateTest = (e) => {
-    if (e.target.value.length === 0) {
-      return;
-    } else {
-      return setFirstName(e.target.value);
-    }
-  };
+  button = (<FormButton onClick={switchForm}>{!formReady ? "Edit" : "Save"}</FormButton>);
+
   return (
     <>
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
@@ -128,28 +112,20 @@ function BasicInformation() {
           <FirstName>
             <ProfileDataText>{"First name"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formFirstName}
-              {...register("formFirstName", {
-                validate: (value) =>
-                  value !== "" || console.log("No First Name") // JS only: <p>error message</p> TS only support string
-              })}
-              onChange={(e) => validateTest(e)}
+              {...register("firstName", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
                   ? { backgroundColor: "white" }
                   : { backgroundColor: "#DDDDDD" }
               }
-            ></InputField>
+            />
+            {errors.username && errors.username.type === "required" && <Span style={{color:"red"}}>{'REQUIRED'}</Span>}
           </FirstName>
           <SecondName>
             <ProfileDataText>{"Second name"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formSecondName}
-              {...register(formSecondName)}
-              onChange={(e) => validateTest(e)}
+              {...register("secondName", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
@@ -161,10 +137,7 @@ function BasicInformation() {
           <SurName>
             <ProfileDataText>{"Surname"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formSurname}
-              {...register(formSurname)}
-              onChange={(e) => setSurname(e.target.value)}
+              {...register("lastName", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
@@ -176,10 +149,8 @@ function BasicInformation() {
           <DateOfBirth>
             <ProfileDataText>{"Date of birth"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formDateOfBirth}
-              {...register(formDateOfBirth)}
-              onChange={(e) => setDateOfBirth(e.target.value)}
+              type="date"
+              {...register("birthDate", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
@@ -191,25 +162,20 @@ function BasicInformation() {
           <PhoneNumber>
             <ProfileDataText>{"Phone number"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formPhoneNumber}
-              {...register(formPhoneNumber)}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+            type="number"
+              {...register("cellPhoneNumber", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
-                  ? { backgroundColor: "white" }
-                  : { backgroundColor: "#DDDDDD" }
+                  ? {"-webkit-appearance": "none", backgroundColor: "white" }
+                  : {"-webkit-appearance": "none", backgroundColor: "#DDDDDD" }
               }
             ></InputField>
           </PhoneNumber>
-          <Mail>
+          {/*<Mail>
             <ProfileDataText>{"Mail"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formMail}
-              {...register(formMail)}
-              onChange={(e) => setMail(e.target.value)}
+              {...register("email", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
@@ -217,14 +183,23 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             ></InputField>
-          </Mail>
+            </Mail>*/}
+          <CompanyMail>
+          <ProfileDataText>{"Company Mail"}</ProfileDataText>
+            <InputField
+              {...register("companyMail", ({required: true}))}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </CompanyMail>
           <Street>
             <ProfileDataText>{"Street"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formStreet}
-              {...register(formStreet)}
-              onChange={(e) => setStreet(e.target.value)}
+              {...register("street", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
@@ -236,10 +211,7 @@ function BasicInformation() {
           <HouseNumber>
             <ProfileDataText>{"House number"}</ProfileDataText>
             <InputField
-              type="number"
-              value={formHouseNumber}
-              {...register(formHouseNumber)}
-              onChange={(e) => setHouseNumber(e.target.value)}
+              {...register("buildingNumber", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
@@ -251,10 +223,7 @@ function BasicInformation() {
           <City>
             <ProfileDataText>{"City"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formCity}
-              {...register(formCity)}
-              onChange={(e) => setCity(e.target.value)}
+              {...register("city", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
@@ -266,8 +235,7 @@ function BasicInformation() {
           <District>
               <ProfileDataText>{"Apartment number"}</ProfileDataText>
               <InputField
-                value={formApartmentNumber}
-                onChange={(e) => setApartmentNumber(e.target.value)}
+                {...register("apartmentNumber", ({required: true}))}
                 disabled={!formReady}
                 style={
                   !formReady
@@ -279,10 +247,7 @@ function BasicInformation() {
           <PostalCode>
             <ProfileDataText>{"Postal code"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formPostalCode}
-              {...register(formPostalCode)}
-              onChange={(e) => setPostalCode(e.target.value)}
+              {...register("postalCode", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
@@ -294,10 +259,7 @@ function BasicInformation() {
           <Country>
             <ProfileDataText>{"Country"}</ProfileDataText>
             <InputField
-              type="text"
-              value={formCountry}
-              {...register(formCountry)}
-              onChange={(e) => setCountry(e.target.value)}
+              {...register("country", ({required: true}))}
               disabled={!formReady}
               style={
                 !formReady
