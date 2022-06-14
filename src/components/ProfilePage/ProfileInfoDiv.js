@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   MailIcon,
   PhoneIcon,
@@ -20,6 +20,8 @@ import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
 import { useTranslation } from "react-i18next";
 import useApi from "../../api/useApi";
+import { Context } from '../../pages/Context';
+import axios from "axios";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
@@ -30,16 +32,24 @@ function ProfileInfo() {
   const BASIC_INFO = "BASIC_INFO";
   const EMPLOYMENT_INFO = "EMPLOYMENT_INFO";
   const EDUCATION_INFO = "EDUCATION_INFO";
-
+  const [context, setContext] = useContext(Context);
+  const [employee, setEmployee] = useState();
   const [contentType, setContentType] = useState(BASIC_INFO);
   const { t } = useTranslation();
   const switchType = (conType) => {
     setContentType(conType);
-    console.log("state change to: " + conType);
+    //console.log("state change to: " + conType);
   };
-  let empId =7;
-  const { emp } = useApi(`https://localhost:5001/api/Dto/emp/${empId}`);
-  //console.log(emp)
+  useEffect (()=>{
+    context && axios.get(`https://localhost:5001/api/Dto/emp/${context.employeeId}`, {headers: {Authorization: `Bearer ${context.token}` }}).then(({data}) => {setEmployee(data); 
+    setFirstName(data.firstName);
+    setSurname(data.lastName);
+    setDepartment(data.departmentName);
+    //setTeam(data.);
+    setPhoneNumber(data.cellPhoneNumber);
+    setMail(data.email);
+    setPersonalNumber(context.employeeId)});
+  },[context]);
   const [formFirstName, setFirstName] = useState(" ");
   const [formSurname, setSurname] = useState(" ");
   const [formDepartment, setDepartment] = useState(" ");
@@ -48,18 +58,18 @@ function ProfileInfo() {
   const [formPersonalNumber, setPersonalNumber] = useState(" ");
   const [formMail, setMail] = useState(" ");
 
-  useEffect (()=>{
-    const timer = setTimeout(()=>{
-      setFirstName(emp.firstName);
-      setSurname(emp.lastName);
-      setDepartment(emp.departmentName);
-      //setTeam(emp.);
-      setPhoneNumber(emp.cellPhoneNumber);
-      setMail(emp.email);
-      setPersonalNumber(empId)
-    },11);
-    return () => clearTimeout(timer);
-  },[emp])
+  // useEffect (()=>{
+  //   const timer = setTimeout(()=>{
+  //     setFirstName(emp.firstName);
+  //     setSurname(emp.lastName);
+  //     setDepartment(emp.departmentName);
+  //     //setTeam(emp.);
+  //     setPhoneNumber(emp.cellPhoneNumber);
+  //     setMail(emp.email);
+  //     setPersonalNumber(empId)
+  //   },11);
+  //   return () => clearTimeout(timer);
+  // },[emp])
   
   return (
     <PageWrapper>

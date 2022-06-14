@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState, useContext } from "react";
 import { FaPowerOff, FaWrench, FaSearch } from 'react-icons/fa'
 import { useHistory } from "react-router-dom";
 import useApi from "../../api/useApi";
-
+import { Context } from '../../pages/Context';
 import {
   HeaderLocTree,
   HeaderProfile,
@@ -26,20 +27,23 @@ const dataJson = {
 };
 
 const HeaderBar = () => {
+  const [context, setContext] = useContext(Context);
   const history = useHistory();
-  let empId =7;
-  const { emp } = useApi(`https://localhost:5001/api/Dto/emp/${empId}`);
-  console.log(emp)
+  const [employee, setEmployee] = useState();
   const [formFirstName, setFirstName] = useState(" ");
   const [formSurname, setSurname] = useState(" ");
-  
   useEffect (()=>{
-    const timer = setTimeout(()=>{
-      setFirstName(emp.firstName);
-      setSurname(emp.lastName);
-    },11);
-    return () => clearTimeout(timer);
-  },[emp])
+    context && axios.get(`https://localhost:5001/api/Dto/emp/${context.employeeId}`, {headers: {Authorization: `Bearer ${context.token}` }}).then(({data}) => {setEmployee(data); setFirstName(data.firstName);
+    setSurname(data.lastName);});
+  },[context]);
+
+  // useEffect (()=>{
+  //   const timer = setTimeout(()=>{
+  //     setFirstName(employee.firstName);
+  //     setSurname(employee.lastName);
+  //   },11);
+  //   return () => clearTimeout(timer);
+  // },[employee])
 
   return(
   <HeaderWrapper>

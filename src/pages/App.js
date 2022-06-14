@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {GlobalStyle} from '../styles/GlobalStyle';
 import Dashboard from './Dashboard';
 import WelcomePage from './WelcomePage';
@@ -31,9 +31,11 @@ import NewRole from '../components/Role/NewRole';
 import NewRoleView from './NewRoleView';
 import Settings from './Settings';
 import Grades from './Grades';
+import { Context } from "./Context.js";
 function App() {
+  const [context, setContext] = useState("default context value");
   return (
-    <>
+    <Context.Provider value={[context, setContext]}>
       <Router>
         <GlobalStyle/>
         <Switch>
@@ -87,7 +89,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-    </>
+    </Context.Provider>
   );
 }
 

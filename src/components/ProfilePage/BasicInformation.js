@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios';
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -26,9 +26,11 @@ import {
   Mail,
   CompanyMail,
 } from "../../styles/ProfilePageStyle";
+import { Context } from '../../pages/Context';
 
 function BasicInformation() {
-  let empId =4; 
+  const [context, setContext] = useContext(Context);
+  const [employee, setEmployee] = useState();
   const [firstName, setFirstName] = useState(" ");
   const [secondName, setSecondName] = useState(" ");
   const [lastName, setLastName] = useState(" ");
@@ -42,33 +44,48 @@ function BasicInformation() {
   const [cellPhoneNumber, setCellPhoneNumber] = useState(" ");
   const [companyMail, setCompanyMail] = useState(" ");
   const [email, setEmail] = useState(" ");
-  const { emp } = useApi(`https://localhost:5001/api/Dto/emp/${empId}`);
-  console.log(emp);
-
   useEffect (()=>{
-    const timer = setTimeout(()=>{
-      setValue("firstName",emp.firstName,{shouldValidate: true});
-      setValue("secondName",emp.secondName ? emp.secondName : "-",{shouldValidate: true});
-      setValue("lastName",emp.lastName,{shouldValidate: true});
-      setValue("birthDate",emp?.birthDate.split('T')[0]?emp?.birthDate.split('T')[0] :'',{shouldValidate: true});
-      setValue("street",emp.street,{shouldValidate: true});
-      setValue("buildingNumber",emp.buildingNumber,{shouldValidate: true});
-      setValue("apartmentNumber",emp.apartmentNumber ? emp.apartmentNumber : "-",{shouldValidate: true});
-      setValue("city",emp.city,{shouldValidate: true});
-      setValue("postalCode",emp.postalCode,{shouldValidate: true});
-      setValue("country",emp.country,{shouldValidate: true});
-      setValue("cellPhoneNumber",emp.cellPhoneNumber,{shouldValidate: true});
-      setValue("companyMail",emp.companyMail ? emp.companyMail : "-",{shouldValidate: true});
-      //setEmail("email",emp.email);
-    },11);
-    return () => clearTimeout(timer);
-  },[emp])
+    context && axios.get(`https://localhost:5001/api/Dto/emp/${context.employeeId}`, {headers: {Authorization: `Bearer ${context.token}` }}).then(({data}) => 
+    {setEmployee(data); 
+    setValue("firstName",data.firstName,{shouldValidate: true});
+    setValue("secondName",data.secondName ? data.secondName : "-",{shouldValidate: true});
+    setValue("lastName",data.lastName,{shouldValidate: true});
+    setValue("birthDate",data?.birthDate.split('T')[0]?data?.birthDate.split('T')[0] :'',{shouldValidate: true});
+    setValue("street",data.street,{shouldValidate: true});
+    setValue("buildingNumber",data.buildingNumber,{shouldValidate: true});
+    setValue("apartmentNumber",data.apartmentNumber ? data.apartmentNumber : "-",{shouldValidate: true});
+    setValue("city",data.city,{shouldValidate: true});
+    setValue("postalCode",data.postalCode,{shouldValidate: true});
+    setValue("country",data.country,{shouldValidate: true});
+    setValue("cellPhoneNumber",data.cellPhoneNumber,{shouldValidate: true});
+    setValue("companyMail",data.companyMail ? data.companyMail : "-",{shouldValidate: true});
+    });
+  },[context]);
+
+  // useEffect (()=>{
+  //   const timer = setTimeout(()=>{
+  //     setValue("firstName",emp.firstName,{shouldValidate: true});
+  //     setValue("secondName",emp.secondName ? emp.secondName : "-",{shouldValidate: true});
+  //     setValue("lastName",emp.lastName,{shouldValidate: true});
+  //     setValue("birthDate",emp?.birthDate.split('T')[0]?emp?.birthDate.split('T')[0] :'',{shouldValidate: true});
+  //     setValue("street",emp.street,{shouldValidate: true});
+  //     setValue("buildingNumber",emp.buildingNumber,{shouldValidate: true});
+  //     setValue("apartmentNumber",emp.apartmentNumber ? emp.apartmentNumber : "-",{shouldValidate: true});
+  //     setValue("city",emp.city,{shouldValidate: true});
+  //     setValue("postalCode",emp.postalCode,{shouldValidate: true});
+  //     setValue("country",emp.country,{shouldValidate: true});
+  //     setValue("cellPhoneNumber",emp.cellPhoneNumber,{shouldValidate: true});
+  //     setValue("companyMail",emp.companyMail ? emp.companyMail : "-",{shouldValidate: true});
+  //     //setEmail("email",emp.email);
+  //   },11);
+  //   return () => clearTimeout(timer);
+  // },[emp])
 
   const {register,handleSubmit,setValue, formState: { errors,isValid }} = useForm({mode: 'onChange'});
   const [formReady, setFormReady] = useState(false);
 
   const switchForm = () => {
-    console.log(formReady,isValid)
+    //console.log(formReady,isValid)
     setFormReady((currentFormReady)=>(!(currentFormReady && isValid)));
   };
 
