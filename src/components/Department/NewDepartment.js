@@ -40,6 +40,7 @@ const dataJson = {
     },
   ],
 };
+/*
 const dataJsonEmp = {
   content: [
     {
@@ -62,6 +63,7 @@ const dataJsonEmp = {
     },
   ],
 };
+*/
 const dataJsonDir = {
   content: [
     {
@@ -101,13 +103,13 @@ const NewCompetence = (props)=> {
   };
   const { content } = dataJson;
   const [marks, setMarks] = useState([]);
-  const [emps, setEmps] = useState([]);
+  //const [emps, setEmps] = useState([]);
   const [dirs, setDirs] = useState([]);
   return (
     <>
       <PersonalDataHeadingText>
         {t("Creating new department")}
-        <NewButton onClick={() => {alert(marks.toString()+"\n"+emps.toString()+"\n"+dirs.toString());window.location.href='/departmentList'}}>{t("Add")}</NewButton>
+        <NewButton onClick={() => {alert(marks.toString()+"\n"+dirs.toString());window.location.href='/departmentList'}}>{t("Add")}</NewButton>
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
@@ -132,7 +134,7 @@ const NewCompetence = (props)=> {
               ))}
             </TableMarkers>
           </MarkersWrapper>
-          <Heading>
+          {/* <Heading>
             <ProfileDataText>{t("Add Employees") + ": "}</ProfileDataText>
           </Heading>
           <MarkersWrapper>
@@ -148,7 +150,7 @@ const NewCompetence = (props)=> {
                 </tr>
               ))}
             </TableMarkers>
-          </MarkersWrapper>
+          </MarkersWrapper> */}
           <Heading>
             <ProfileDataText>{t("Add Teams") + ": "}</ProfileDataText>
           </Heading>

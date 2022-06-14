@@ -64,7 +64,7 @@ function DepartmentList() {
   return (
     <>
       <PersonalDataHeadingText>{t("Department List")}</PersonalDataHeadingText>
-      <EditButton>{t("Edit")}</EditButton>
+      {/*<EditButton>{t("Edit")}</EditButton>*/}
       <NewButton onClick={event =>  window.location.href='/newDepartment'}>{t("New")}</NewButton>
       <TableInfo className="table">
         <thead>
