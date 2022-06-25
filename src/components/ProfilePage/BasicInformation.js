@@ -44,6 +44,7 @@ function BasicInformation() {
   const [cellPhoneNumber, setCellPhoneNumber] = useState(" ");
   const [companyMail, setCompanyMail] = useState(" ");
   const [email, setEmail] = useState(" ");
+  const {t} = useTranslation();
   useEffect (()=>{
     context && axios.get(`https://localhost:5001/api/Dto/emp/${localStorage.getItem("employeeId")}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}` }}).then(({data}) => 
     {setEmployee(data); 
@@ -118,16 +119,16 @@ function BasicInformation() {
 
   let button;
 
-  button = (<FormButton onClick={switchForm}>{!formReady ? "Edit" : "Save"}</FormButton>);
+  button = (<FormButton onClick={switchForm}>{!formReady ? t("Edit") : t("Save")}</FormButton>);
 
   return (
     <>
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
         <ProfileDetailedInfoWrapper>
-          <PersonalDataHeadingText>{"Personal Data"}</PersonalDataHeadingText>
-          <AddressHeadingText>{"Address"}</AddressHeadingText>
+          <PersonalDataHeadingText>{t("Personal Data")}</PersonalDataHeadingText>
+          <AddressHeadingText>{t("Address")}</AddressHeadingText>
           <FirstName>
-            <ProfileDataText>{"First name"}</ProfileDataText>
+            <ProfileDataText>{t("First name")}</ProfileDataText>
             <InputField
               {...register("firstName", ({required: true}))}
               disabled={!formReady}
@@ -140,7 +141,7 @@ function BasicInformation() {
             {errors.username && errors.username.type === "required" && <Span style={{color:"red"}}>{'REQUIRED'}</Span>}
           </FirstName>
           <SecondName>
-            <ProfileDataText>{"Second name"}</ProfileDataText>
+            <ProfileDataText>{t("Second name")}</ProfileDataText>
             <InputField
               {...register("secondName", ({required: true}))}
               disabled={!formReady}
@@ -152,7 +153,7 @@ function BasicInformation() {
             ></InputField>
           </SecondName>
           <SurName>
-            <ProfileDataText>{"Surname"}</ProfileDataText>
+            <ProfileDataText>{t("Surname")}</ProfileDataText>
             <InputField
               {...register("lastName", ({required: true}))}
               disabled={!formReady}
@@ -164,7 +165,7 @@ function BasicInformation() {
             ></InputField>
           </SurName>
           <DateOfBirth>
-            <ProfileDataText>{"Date of birth"}</ProfileDataText>
+            <ProfileDataText>{t("Date of birth")}</ProfileDataText>
             <InputField
               type="date"
               {...register("birthDate", ({required: true}))}
@@ -177,7 +178,7 @@ function BasicInformation() {
             ></InputField>
           </DateOfBirth>
           <PhoneNumber>
-            <ProfileDataText>{"Phone number"}</ProfileDataText>
+            <ProfileDataText>{t("Phone number")}</ProfileDataText>
             <InputField
             type="number"
               {...register("cellPhoneNumber", ({required: true}))}
@@ -202,7 +203,7 @@ function BasicInformation() {
             ></InputField>
             </Mail>*/}
           <CompanyMail>
-          <ProfileDataText>{"Company Mail"}</ProfileDataText>
+          <ProfileDataText>{t("Company Mail")}</ProfileDataText>
             <InputField
               {...register("companyMail", ({required: true}))}
               disabled={!formReady}
@@ -214,7 +215,7 @@ function BasicInformation() {
             ></InputField>
           </CompanyMail>
           <Street>
-            <ProfileDataText>{"Street"}</ProfileDataText>
+            <ProfileDataText>{t("Street")}</ProfileDataText>
             <InputField
               {...register("street", ({required: true}))}
               disabled={!formReady}
@@ -226,7 +227,7 @@ function BasicInformation() {
             ></InputField>
           </Street>
           <HouseNumber>
-            <ProfileDataText>{"House number"}</ProfileDataText>
+            <ProfileDataText>{t("House number")}</ProfileDataText>
             <InputField
               {...register("buildingNumber", ({required: true}))}
               disabled={!formReady}
@@ -238,7 +239,7 @@ function BasicInformation() {
             ></InputField>
           </HouseNumber>
           <City>
-            <ProfileDataText>{"City"}</ProfileDataText>
+            <ProfileDataText>{t("City")}</ProfileDataText>
             <InputField
               {...register("city", ({required: true}))}
               disabled={!formReady}
@@ -250,7 +251,7 @@ function BasicInformation() {
             ></InputField>
           </City>
           <District>
-              <ProfileDataText>{"Apartment number"}</ProfileDataText>
+              <ProfileDataText>{t("Apartment number")}</ProfileDataText>
               <InputField
                 {...register("apartmentNumber", ({required: true}))}
                 disabled={!formReady}
@@ -262,7 +263,7 @@ function BasicInformation() {
               ></InputField>
             </District>
           <PostalCode>
-            <ProfileDataText>{"Postal code"}</ProfileDataText>
+            <ProfileDataText>{t("Postal code")}</ProfileDataText>
             <InputField
               {...register("postalCode", ({required: true}))}
               disabled={!formReady}
@@ -274,7 +275,7 @@ function BasicInformation() {
             ></InputField>
           </PostalCode>
           <Country>
-            <ProfileDataText>{"Country"}</ProfileDataText>
+            <ProfileDataText>{t("Country")}</ProfileDataText>
             <InputField
               {...register("country", ({required: true}))}
               disabled={!formReady}

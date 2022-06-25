@@ -23,10 +23,10 @@ function EducationInformation () {
     });
   },[context]);
 
-  let dArr;
+  let dataArray;
   function reformatDate(dateStr){
-    dArr = dateStr.split("-");
-    return dArr[2]+ "-" +dArr[1]+ "-" +dArr[0];
+    dataArray = dateStr.split("-");
+    return dataArray[2]+ "-" +dataArray[1]+ "-" +dataArray[0];
   }
 
   return(

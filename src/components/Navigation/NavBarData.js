@@ -37,21 +37,18 @@ export const NavBarData = [
     ],
   },
   {
-    title: 'Teams & Departments',
-    path: '/profile',
+    title: 'Teams',
+    path: '/teamList',
     icon: <FaUsers/>,
     iconClosed: <MDIcons.MdKeyboardArrowDown />,
     iconOpened: <MDIcons.MdKeyboardArrowUp />,
-    subnav: [
-      {
-        title: 'Your Teams',
-        path: '/teamList',
-      },
-      {
-        title: 'Your Departments',
-        path: '/departmentList',
-      },
-    ],
+  },
+  {
+    title: 'Departments',
+    path: '/departmentList',
+    icon: <FaUsers/>,
+    iconClosed: <MDIcons.MdKeyboardArrowDown />,
+    iconOpened: <MDIcons.MdKeyboardArrowUp />,
   },
   {
     title: 'Competences',
