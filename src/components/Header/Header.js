@@ -44,7 +44,7 @@ const HeaderBar = () => {
   //   },11);
   //   return () => clearTimeout(timer);
   // },[employee])
-
+  let pathName = history.location.pathname;
   return(
   <HeaderWrapper>
     <HeaderBtnProfileWrapper>
@@ -67,7 +67,7 @@ const HeaderBar = () => {
       </HeaderSearchIcon>
     </HeaderSearch>
     <HeaderLocTree activeStyle>
-    {history.location.pathname}
+    {pathName=pathName.substring(0).charAt(1).toUpperCase() + pathName.substring(2)}
     </HeaderLocTree>
   </HeaderWrapper>
   )
