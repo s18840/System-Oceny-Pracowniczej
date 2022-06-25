@@ -1,96 +1,96 @@
-import React, { useState } from 'react';
-import {GlobalStyle} from '../styles/GlobalStyle';
-import Dashboard from './Dashboard';
-import WelcomePage from './WelcomePage';
+import React, { useState } from "react";
+import { GlobalStyle } from "../styles/GlobalStyle";
+import Dashboard from "./Dashboard";
+import WelcomePage from "./WelcomePage";
 import ProfilePage from "./ProfilePage";
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
-} from 'react-router-dom';
-import ProjectList from '../components/Project/ProjectList';
-import Projects from './Projects';
-import CompetenceList from '../components/Competences/CompetenceList';
-import Competences from './Competences';
-import RolesList from '../components/Roles/RolesList';
-import Roles from './Roles';
-import NewCompetence from '../components/Competences/NewCompetence';
-import NewCompetenceView from './NewCompetenceView';
-import DepartmentList from '../components/Department/DepartmentList';
-import Department from './Department';
-import NewDepartment from '../components/Department/NewDepartment';
-import NewDepartmentView from './NewDepartmentView';
-import TeamList from '../components/Team/TeamList';
-import Team from './Team';
-import NewTeam from '../components/Team/NewTeam';
-import NewTeamView from './NewTeamView';
-import RoleList from '../components/Role/RoleList';
-import Role from './Role';
-import NewRole from '../components/Role/NewRole';
-import NewRoleView from './NewRoleView';
-import Settings from './Settings';
-import Grades from './Grades';
+} from "react-router-dom";
+import ProjectList from "../components/Project/ProjectList";
+import Projects from "./Projects";
+import CompetenceList from "../components/Competences/CompetenceList";
+import Competences from "./Competences";
+import RolesList from "../components/Roles/RolesList";
+import Roles from "./Roles";
+import NewCompetence from "../components/Competences/NewCompetence";
+import NewCompetenceView from "./NewCompetenceView";
+import DepartmentList from "../components/Department/DepartmentList";
+import Department from "./Department";
+import NewDepartment from "../components/Department/NewDepartment";
+import NewDepartmentView from "./NewDepartmentView";
+import TeamList from "../components/Team/TeamList";
+import Team from "./Team";
+import NewTeam from "../components/Team/NewTeam";
+import NewTeamView from "./NewTeamView";
+import RoleList from "../components/Role/RoleList";
+import Role from "./Role";
+import NewRole from "../components/Role/NewRole";
+import NewRoleView from "./NewRoleView";
+import Settings from "./Settings";
+import Grades from "./Grades";
 import { Context } from "./Context.js";
 function App() {
   //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
   const [context, setContext] = useState("default context value");
-  localStorage.setItem("token",context.token);
-  localStorage.setItem("avatar",context.avatar);
-  localStorage.setItem("employeeId",context.employeeId);
-  localStorage.setItem("username",context.username);
+  localStorage.setItem("token", context.token);
+  localStorage.setItem("avatar", context.avatar);
+  localStorage.setItem("employeeId", context.employeeId);
+  localStorage.setItem("username", context.username);
   return (
     <Context.Provider value={[context, setContext]}>
       <Router>
-        <GlobalStyle/>
+        <GlobalStyle />
         <Switch>
           <Route exact path="/" component={WelcomePage}>
             <Redirect to="/welcome" />
           </Route>
           <Route exact path="/welcome" component={WelcomePage}>
-            <WelcomePage/>
+            <WelcomePage />
           </Route>
           <Route exact path="/dashboard" component={Dashboard}>
-            <Dashboard/>
+            <Dashboard />
           </Route>
-          <Route exact path="/profile" component={ProfilePage}>        
-            <ProfilePage/>
+          <Route exact path="/profile" component={ProfilePage}>
+            <ProfilePage />
           </Route>
           <Route exact path="/projectList" component={ProjectList}>
-            <Projects/>
+            <Projects />
           </Route>
           <Route exact path="/competenceList" component={CompetenceList}>
-            <Competences/>
-          </Route>   
+            <Competences />
+          </Route>
           <Route exact path="/roleList" component={RolesList}>
-            <Roles/>
-          </Route>      
+            <Roles />
+          </Route>
           <Route exact path="/newCompetence" component={NewCompetence}>
-            <NewCompetenceView/>
+            <NewCompetenceView />
           </Route>
           <Route exact path="/departmentList" component={DepartmentList}>
-            <Department/>
+            <Department />
           </Route>
           <Route exact path="/newDepartment" component={NewDepartment}>
-            <NewDepartmentView/>
+            <NewDepartmentView />
           </Route>
           <Route exact path="/teamList" component={TeamList}>
-            <Team/>
+            <Team />
           </Route>
           <Route exact path="/newTeam" component={NewTeam}>
-            <NewTeamView/>
+            <NewTeamView />
           </Route>
           <Route exact path="/roleList" component={RoleList}>
-            <Role/>
+            <Role />
           </Route>
           <Route exact path="/newRole" component={NewRole}>
-            <NewRoleView/>
+            <NewRoleView />
           </Route>
           <Route exact path="/settings" component={Settings}>
-          <Settings/>
+            <Settings />
           </Route>
           <Route exact path="/grades" component={Grades}>
-          <Grades/>
+            <Grades />
           </Route>
         </Switch>
       </Router>

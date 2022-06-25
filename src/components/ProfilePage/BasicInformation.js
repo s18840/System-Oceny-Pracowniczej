@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { FormWrapper} from "../../styles/ProfilePageFormStyle";
-import {InputField, Span} from '../../styles/GlobalStyle'
+import { FormWrapper } from "../../styles/ProfilePageFormStyle";
+import { InputField, Span } from "../../styles/GlobalStyle";
 import useApi from "../../api/useApi";
 import {
   AddressHeadingText,
@@ -26,7 +26,7 @@ import {
   Mail,
   CompanyMail,
 } from "../../styles/ProfilePageStyle";
-import { Context } from '../../pages/Context';
+import { Context } from "../../pages/Context";
 
 function BasicInformation() {
   const [context, setContext] = useContext(Context);
@@ -44,24 +44,52 @@ function BasicInformation() {
   const [cellPhoneNumber, setCellPhoneNumber] = useState(" ");
   const [companyMail, setCompanyMail] = useState(" ");
   const [email, setEmail] = useState(" ");
-  const {t} = useTranslation();
-  useEffect (()=>{
-    context && axios.get(`https://localhost:5001/api/Dto/emp/${localStorage.getItem("employeeId")}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}` }}).then(({data}) => 
-    {setEmployee(data); 
-    setValue("firstName",data.firstName,{shouldValidate: true});
-    setValue("secondName",data.secondName ? data.secondName : "-",{shouldValidate: true});
-    setValue("lastName",data.lastName,{shouldValidate: true});
-    setValue("birthDate",data?.birthDate.split('T')[0]?data?.birthDate.split('T')[0] :'',{shouldValidate: true});
-    setValue("street",data.street,{shouldValidate: true});
-    setValue("buildingNumber",data.buildingNumber,{shouldValidate: true});
-    setValue("apartmentNumber",data.apartmentNumber ? data.apartmentNumber : "-",{shouldValidate: true});
-    setValue("city",data.city,{shouldValidate: true});
-    setValue("postalCode",data.postalCode,{shouldValidate: true});
-    setValue("country",data.country,{shouldValidate: true});
-    setValue("cellPhoneNumber",data.cellPhoneNumber,{shouldValidate: true});
-    setValue("companyMail",data.companyMail ? data.companyMail : "-",{shouldValidate: true});
-    });
-  },[context]);
+  const { t } = useTranslation();
+  useEffect(() => {
+    context &&
+      axios
+        .get(
+          `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+            "employeeId"
+          )}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setEmployee(data);
+          setValue("firstName", data.firstName, { shouldValidate: true });
+          setValue("secondName", data.secondName ? data.secondName : "-", {
+            shouldValidate: true,
+          });
+          setValue("lastName", data.lastName, { shouldValidate: true });
+          setValue(
+            "birthDate",
+            data?.birthDate.split("T")[0] ? data?.birthDate.split("T")[0] : "",
+            { shouldValidate: true }
+          );
+          setValue("street", data.street, { shouldValidate: true });
+          setValue("buildingNumber", data.buildingNumber, {
+            shouldValidate: true,
+          });
+          setValue(
+            "apartmentNumber",
+            data.apartmentNumber ? data.apartmentNumber : "-",
+            { shouldValidate: true }
+          );
+          setValue("city", data.city, { shouldValidate: true });
+          setValue("postalCode", data.postalCode, { shouldValidate: true });
+          setValue("country", data.country, { shouldValidate: true });
+          setValue("cellPhoneNumber", data.cellPhoneNumber, {
+            shouldValidate: true,
+          });
+          setValue("companyMail", data.companyMail ? data.companyMail : "-", {
+            shouldValidate: true,
+          });
+        });
+  }, [context]);
 
   // useEffect (()=>{
   //   const timer = setTimeout(()=>{
@@ -82,12 +110,17 @@ function BasicInformation() {
   //   return () => clearTimeout(timer);
   // },[emp])
 
-  const {register,handleSubmit,setValue, formState: { errors,isValid }} = useForm({mode: 'onChange'});
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange" });
   const [formReady, setFormReady] = useState(false);
 
   const switchForm = () => {
     //console.log(formReady,isValid)
-    setFormReady((currentFormReady)=>(!(currentFormReady && isValid)));
+    setFormReady((currentFormReady) => !(currentFormReady && isValid));
   };
 
   const prepareUser = () => {
@@ -110,27 +143,32 @@ function BasicInformation() {
     return obj;
   };
   const submitForm = (data) => {
-
-     if (!formReady) {
+    if (!formReady) {
       console.log(data);
-    //   //TUTAJ BĘDZIE AXIOS.PUT
-     }
+      //   //TUTAJ BĘDZIE AXIOS.PUT
+    }
   };
 
   let button;
 
-  button = (<FormButton onClick={switchForm}>{!formReady ? t("Edit") : t("Save")}</FormButton>);
+  button = (
+    <FormButton onClick={switchForm}>
+      {!formReady ? t("Edit") : t("Save")}
+    </FormButton>
+  );
 
   return (
     <>
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
         <ProfileDetailedInfoWrapper>
-          <PersonalDataHeadingText>{t("Personal Data")}</PersonalDataHeadingText>
+          <PersonalDataHeadingText>
+            {t("Personal Data")}
+          </PersonalDataHeadingText>
           <AddressHeadingText>{t("Address")}</AddressHeadingText>
           <FirstName>
             <ProfileDataText>{t("First name")}</ProfileDataText>
             <InputField
-              {...register("firstName", ({required: true}))}
+              {...register("firstName", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
@@ -138,12 +176,14 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.username && errors.username.type === "required" && <Span style={{color:"red"}}>{'REQUIRED'}</Span>}
+            {errors.username && errors.username.type === "required" && (
+              <Span style={{ color: "red" }}>{"REQUIRED"}</Span>
+            )}
           </FirstName>
           <SecondName>
             <ProfileDataText>{t("Second name")}</ProfileDataText>
             <InputField
-              {...register("secondName", ({required: true}))}
+              {...register("secondName", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
@@ -155,7 +195,7 @@ function BasicInformation() {
           <SurName>
             <ProfileDataText>{t("Surname")}</ProfileDataText>
             <InputField
-              {...register("lastName", ({required: true}))}
+              {...register("lastName", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
@@ -168,7 +208,7 @@ function BasicInformation() {
             <ProfileDataText>{t("Date of birth")}</ProfileDataText>
             <InputField
               type="date"
-              {...register("birthDate", ({required: true}))}
+              {...register("birthDate", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
@@ -180,13 +220,13 @@ function BasicInformation() {
           <PhoneNumber>
             <ProfileDataText>{t("Phone number")}</ProfileDataText>
             <InputField
-            type="number"
-              {...register("cellPhoneNumber", ({required: true}))}
+              type="number"
+              {...register("cellPhoneNumber", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
-                  ? {"-webkit-appearance": "none", backgroundColor: "white" }
-                  : {"-webkit-appearance": "none", backgroundColor: "#DDDDDD" }
+                  ? { "-webkit-appearance": "none", backgroundColor: "white" }
+                  : { "-webkit-appearance": "none", backgroundColor: "#DDDDDD" }
               }
             ></InputField>
           </PhoneNumber>
@@ -203,9 +243,9 @@ function BasicInformation() {
             ></InputField>
             </Mail>*/}
           <CompanyMail>
-          <ProfileDataText>{t("Company Mail")}</ProfileDataText>
+            <ProfileDataText>{t("Company Mail")}</ProfileDataText>
             <InputField
-              {...register("companyMail", ({required: true}))}
+              {...register("companyMail", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
@@ -217,7 +257,7 @@ function BasicInformation() {
           <Street>
             <ProfileDataText>{t("Street")}</ProfileDataText>
             <InputField
-              {...register("street", ({required: true}))}
+              {...register("street", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
@@ -229,7 +269,7 @@ function BasicInformation() {
           <HouseNumber>
             <ProfileDataText>{t("House number")}</ProfileDataText>
             <InputField
-              {...register("buildingNumber", ({required: true}))}
+              {...register("buildingNumber", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
@@ -241,7 +281,7 @@ function BasicInformation() {
           <City>
             <ProfileDataText>{t("City")}</ProfileDataText>
             <InputField
-              {...register("city", ({required: true}))}
+              {...register("city", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
@@ -251,21 +291,21 @@ function BasicInformation() {
             ></InputField>
           </City>
           <District>
-              <ProfileDataText>{t("Apartment number")}</ProfileDataText>
-              <InputField
-                {...register("apartmentNumber", ({required: true}))}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
-                }
-              ></InputField>
-            </District>
+            <ProfileDataText>{t("Apartment number")}</ProfileDataText>
+            <InputField
+              {...register("apartmentNumber", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </District>
           <PostalCode>
             <ProfileDataText>{t("Postal code")}</ProfileDataText>
             <InputField
-              {...register("postalCode", ({required: true}))}
+              {...register("postalCode", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
@@ -277,7 +317,7 @@ function BasicInformation() {
           <Country>
             <ProfileDataText>{t("Country")}</ProfileDataText>
             <InputField
-              {...register("country", ({required: true}))}
+              {...register("country", { required: true })}
               disabled={!formReady}
               style={
                 !formReady
