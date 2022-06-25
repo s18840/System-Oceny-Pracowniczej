@@ -46,7 +46,7 @@
     "Status": "Status",
     "Time": "Daty",
     "Institution": "Placówka",
-    "Degree": "Wydział",
+    "Degree": "Stopień",
     "Markers required": "Wymagane markery",
     "Name": "Nazwa",
     "Grade": "Ocena",
@@ -70,5 +70,6 @@
     "Add required competences": "Dodaj wymagane kompetencje",
     "Role List": "Lista roli",
     "Rank": "Ranga",
-    "Competences required": "Wymagane kompetencje"
+    "Competences required": "Wymagane kompetencje",
+    "Graduation Date": "Data ukończenia"
 }
