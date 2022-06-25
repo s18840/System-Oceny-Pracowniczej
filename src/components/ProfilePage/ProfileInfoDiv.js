@@ -41,7 +41,7 @@ function ProfileInfo() {
     //console.log("state change to: " + conType);
   };
   useEffect (()=>{
-    context && axios.get(`https://localhost:5001/api/Dto/emp/${context.employeeId}`, {headers: {Authorization: `Bearer ${context.token}` }}).then(({data}) => {setEmployee(data); 
+    context && axios.get(`https://localhost:5001/api/Dto/emp/${localStorage.getItem("employeeId")}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}` }}).then(({data}) => {setEmployee(data); 
     setFirstName(data.firstName);
     setSurname(data.lastName);
     setDepartment(data.departmentName);

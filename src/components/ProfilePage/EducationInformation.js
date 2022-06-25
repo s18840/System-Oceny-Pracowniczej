@@ -15,7 +15,7 @@ function EducationInformation () {
   const [placeOfEducation, setPlaceOfEducation] = useState(" ");
   const { t } = useTranslation();
   useEffect (()=>{
-    context && axios.get(`https://localhost:5001/api/Dto/emp/${context.employeeId}`, {headers: {Authorization: `Bearer ${context.token}` }}).then(({data}) => 
+    context && axios.get(`https://localhost:5001/api/Dto/emp/${localStorage.getItem("employeeId")}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}` }}).then(({data}) => 
     {setEmployee(data); 
       setPlaceOfEducation(data.educations.placeOfEducation);
       setDegree(data.educations.degree);

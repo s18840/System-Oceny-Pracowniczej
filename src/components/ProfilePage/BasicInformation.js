@@ -45,7 +45,7 @@ function BasicInformation() {
   const [companyMail, setCompanyMail] = useState(" ");
   const [email, setEmail] = useState(" ");
   useEffect (()=>{
-    context && axios.get(`https://localhost:5001/api/Dto/emp/${context.employeeId}`, {headers: {Authorization: `Bearer ${context.token}` }}).then(({data}) => 
+    context && axios.get(`https://localhost:5001/api/Dto/emp/${localStorage.getItem("employeeId")}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}` }}).then(({data}) => 
     {setEmployee(data); 
     setValue("firstName",data.firstName,{shouldValidate: true});
     setValue("secondName",data.secondName ? data.secondName : "-",{shouldValidate: true});

@@ -35,6 +35,10 @@ import { Context } from "./Context.js";
 function App() {
   //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
   const [context, setContext] = useState("default context value");
+  localStorage.setItem("token",context.token);
+  localStorage.setItem("avatar",context.avatar);
+  localStorage.setItem("employeeId",context.employeeId);
+  localStorage.setItem("username",context.username);
   return (
     <Context.Provider value={[context, setContext]}>
       <Router>
