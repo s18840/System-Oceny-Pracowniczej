@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import axios from 'axios';
 import {
   TableInfo,
   Row,
@@ -12,82 +13,48 @@ import {
   EditButton,
 } from '../../styles/GlobalStyle';
 import { useTranslation } from "react-i18next";
+import useApi from "../../api/useApi";
+import { Context } from '../../pages/Context';
 
-const dataJson = {
-  titles: ["Department name:", "Department Teams:","Director:"],
-  content: [
-    {
-      departmentName: "Department 1",
-      teams: ["Team 1", "Team 2", "Team 3"],
-      director: "Wojciech Antczak"
-    },
-    {
-      departmentName: "Department 2",
-      teams: ["Team 2"],
-      director: "Wojciech Antczak"
-    },
-    {
-      departmentName: "Department 3",
-      teams: ["Team 11"],
-      director: "Joanna Bajko"
-    },
-    {
-      departmentName: "Department 4",
-      teams: ["Team 15"],
-      director: "Wojciech Antczak"
-    },
-    {
-      departmentName: "Department 6",
-      teams: ["Team 15"],
-      director: "Joanna Bajko"
-    },
-    {
-      departmentName: "Department 7",
-      teams: ["Team 22"],
-      director: "Wojciech Antczak"
-    },
-    {
-      departmentName: "Department 8",
-      teams: ["Team 25"],
-      director: "Joanna Bajko"
-    },
-    {
-      departmentName: "Department 9",
-      teams: ["Team 1", "Team 2", "Team 3"],
-      director: "Wojciech Antczak"
-    },
-  ],
-};
+const dataJson =["Department name:", "Department Teams:","Director:"];
 
 function DepartmentList() {
   const { t } = useTranslation();
+  const [context, setContext] = useContext(Context);
+  const [departments, setDepartments] = useState();
+  useEffect (()=>{
+    context && axios.get(`https://localhost:5001/api/Dto/deps`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}` }}).then(({data}) => 
+    {setDepartments(data)
+      console.log(data)
+    });
+  },[context]);
   return (
     <>
       <PersonalDataHeadingText>{t("Department List")}</PersonalDataHeadingText>
-      <EditButton>{t("Edit")}</EditButton>
+      {/*<EditButton>{t("Edit")}</EditButton>*/}
       <NewButton onClick={event =>  window.location.href='/newDepartment'}>{t("New")}</NewButton>
       <TableInfo className="table">
         <thead>
-          <tr>
-            {dataJson.titles.map((title) => (
-              <th>{title}</th>
-            ))}
-          </tr>
+        <tr>
+          {dataJson.map((title) => (
+            <th>{t(title)}</th>
+          ))}
+        </tr>
         </thead>
-        {dataJson.content.map((content) => (
+        {departments?.map((content) => (
           <Row>
             <TableDetailsDate>{content.departmentName}</TableDetailsDate>
             <TableDetailsMarker>
               <MarkersTable>
-                {content.teams?.map(marker =>(
+                {content?.teams?.map(team =>(
                   <MarkersRow>
-                    {marker}
+                    {team.teamName}
                   </MarkersRow>
                 ))}
               </MarkersTable>
             </TableDetailsMarker>
             <TableDetails>
-              {content.director}
+              {content.directorName + " "+ content.directorSurname}
             </TableDetails>
           </Row>
         ))}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {GlobalStyle} from '../styles/GlobalStyle';
 import Dashboard from './Dashboard';
 import WelcomePage from './WelcomePage';
@@ -29,9 +29,18 @@ import RoleList from '../components/Role/RoleList';
 import Role from './Role';
 import NewRole from '../components/Role/NewRole';
 import NewRoleView from './NewRoleView';
+import Settings from './Settings';
+import Grades from './Grades';
+import { Context } from "./Context.js";
 function App() {
+  //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
+  const [context, setContext] = useState("default context value");
+  localStorage.setItem("token",context.token);
+  localStorage.setItem("avatar",context.avatar);
+  localStorage.setItem("employeeId",context.employeeId);
+  localStorage.setItem("username",context.username);
   return (
-    <>
+    <Context.Provider value={[context, setContext]}>
       <Router>
         <GlobalStyle/>
         <Switch>
@@ -77,9 +86,15 @@ function App() {
           <Route exact path="/newRole" component={NewRole}>
             <NewRoleView/>
           </Route>
+          <Route exact path="/settings" component={Settings}>
+          <Settings/>
+          </Route>
+          <Route exact path="/grades" component={Grades}>
+          <Grades/>
+          </Route>
         </Switch>
       </Router>
-    </>
+    </Context.Provider>
   );
 }
 

@@ -1,8 +1,9 @@
-import React , { useState } from 'react'
+import axios from "axios";
+import React, { useEffect, useState, useContext } from "react";
 import { FaPowerOff, FaWrench, FaSearch } from 'react-icons/fa'
 import { useHistory } from "react-router-dom";
-
-
+import useApi from "../../api/useApi";
+import { Context } from '../../pages/Context';
 import {
   HeaderLocTree,
   HeaderProfile,
@@ -26,25 +27,38 @@ const dataJson = {
 };
 
 const HeaderBar = () => {
+  const [context, setContext] = useContext(Context);
   const history = useHistory();
-  const [formData, setFormData] = useState({
-    FirstName: dataJson.content[0].FirstName,
-    Surname: dataJson.content[0].Surname,
-  })
+  const [employee, setEmployee] = useState();
+  const [formFirstName, setFirstName] = useState(" ");
+  const [formSurname, setSurname] = useState(" ");
+  useEffect (()=>{
+    context && axios.get(`https://localhost:5001/api/Dto/emp/${localStorage.getItem("employeeId")}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}` }}).then(({data}) => {setEmployee(data); setFirstName(data.firstName);
+    setSurname(data.lastName);});
+  },[context]);
+
+  // useEffect (()=>{
+  //   const timer = setTimeout(()=>{
+  //     setFirstName(employee.firstName);
+  //     setSurname(employee.lastName);
+  //   },11);
+  //   return () => clearTimeout(timer);
+  // },[employee])
+  let pathName = history.location.pathname;
   return(
   <HeaderWrapper>
     <HeaderBtnProfileWrapper>
       <HeaderBtnSignOut to="/welcome">
         <FaPowerOff />
       </HeaderBtnSignOut>
-      <HeaderBtnTol>  
+      <HeaderBtnTol to="/settings">  
         <FaWrench  />
       </HeaderBtnTol>
       <HeaderProfile activeStyle>
         <HeaderProfilePhoto to="/profile">
           <img src="prof.png" alt="" width="100%" />
         </HeaderProfilePhoto>
-        <HeaderName to="/profile">{formData.FirstName + " " + formData.Surname}</HeaderName>
+        <HeaderName to="/profile">{formFirstName + " " + formSurname}</HeaderName>
       </HeaderProfile>
     </HeaderBtnProfileWrapper>
     <HeaderSearch>
@@ -53,7 +67,7 @@ const HeaderBar = () => {
       </HeaderSearchIcon>
     </HeaderSearch>
     <HeaderLocTree activeStyle>
-    {history.location.pathname}
+    {pathName=pathName.substring(0).charAt(1).toUpperCase() + pathName.substring(2)}
     </HeaderLocTree>
   </HeaderWrapper>
   )

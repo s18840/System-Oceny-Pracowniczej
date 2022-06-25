@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   MailIcon,
   PhoneIcon,
@@ -19,56 +19,65 @@ import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
 import { useTranslation } from "react-i18next";
+import useApi from "../../api/useApi";
+import { Context } from '../../pages/Context';
+import axios from "axios";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
   marginBottom: "-5px",
-};
-const dataJson = {
-  titles: [
-    "Name",
-    "Surname",
-    "Department",
-    "Job",
-    "PhoneNumber",
-    "PersonalNumber",
-    "Mail",
-  ],
-  content: [
-    {
-      Name: "Amadeusz",
-      Surname: "Jarząbkowski",
-      Department: "IT",
-      Job: "Junior Java Developer",
-      PhoneNumber: "+48 506123412",
-      PersonalNumber: "172",
-      Mail: "a.jarzab@gmail.com",
-    },
-  ],
 };
 
 function ProfileInfo() {
   const BASIC_INFO = "BASIC_INFO";
   const EMPLOYMENT_INFO = "EMPLOYMENT_INFO";
   const EDUCATION_INFO = "EDUCATION_INFO";
-
+  const [context, setContext] = useContext(Context);
+  const [employee, setEmployee] = useState();
   const [contentType, setContentType] = useState(BASIC_INFO);
   const { t } = useTranslation();
   const switchType = (conType) => {
     setContentType(conType);
-    console.log("state change to: " + conType);
+    //console.log("state change to: " + conType);
   };
-
-  const [profileData, setProfileData] = useState({
-    Name: dataJson.content[0].Name,
-    Surname: dataJson.content[0].Surname,
-    Department: dataJson.content[0].Department,
-    Job: dataJson.content[0].Job,
-    PhoneNumber: dataJson.content[0].PhoneNumber,
-    PersonalNumber: dataJson.content[0].PersonalNumber,
-    Mail: dataJson.content[0].Mail,
-  })
-
+  useEffect (()=>{
+    context && axios.get(`https://localhost:5001/api/Dto/emp/${localStorage.getItem("employeeId")}`, {headers: {Authorization: `Bearer ${localStorage.getItem("token")}` }}).then(({data}) => {setEmployee(data); 
+    setFirstName(data.firstName);
+    setSurname(data.lastName);
+    setDepartment(data.departmentName);
+    //setTeam(data.);
+    setPhoneNumber(data.cellPhoneNumber);
+    setMail(data.email);
+    setStatus(data.status);
+    setPersonalNumber(context.employeeId)});
+  },[context]);
+  const [formFirstName, setFirstName] = useState(" ");
+  const [formSurname, setSurname] = useState(" ");
+  const [formDepartment, setDepartment] = useState(" ");
+  const [formTeam, setTeam] = useState("PMI");
+  const [formPhoneNumber, setPhoneNumber] = useState(" ");
+  const [formPersonalNumber, setPersonalNumber] = useState(" ");
+  const [formMail, setMail] = useState(" ");
+  const [status, setStatus] = useState(" ");
+  // useEffect (()=>{
+  //   const timer = setTimeout(()=>{
+  //     setFirstName(emp.firstName);
+  //     setSurname(emp.lastName);
+  //     setDepartment(emp.departmentName);
+  //     //setTeam(emp.);
+  //     setPhoneNumber(emp.cellPhoneNumber);
+  //     setMail(emp.email);
+  //     setPersonalNumber(empId)
+  //   },11);
+  //   return () => clearTimeout(timer);
+  // },[emp])
+  function checkStatus(){
+    if(status===1){
+      return true
+    }else{
+      return false
+    }
+  }
   return (
     <PageWrapper>
       <>
@@ -80,30 +89,30 @@ function ProfileInfo() {
             </ProfilePhoto>
             <ProfileTextWrapper>
               <ProfileHeaderText>
-                {profileData.Name + " " + profileData.Surname}
+                {formFirstName + " " + formSurname}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
               {t("Department")+": "}
                 <ProfileText>
-                  {" " + profileData.Department}
+                  {" " + formDepartment}
                 </ProfileText>
               </ProfileSubHeaderText>
               <ProfileSubHeaderText>
-              {t("Job")+": "}
+              {t("Team")+": "}
                 <ProfileText>
-                 {" " + profileData.Job}
+                 {" " + formTeam}
                 </ProfileText>
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 <PhoneIcon />
-                {profileData.PhoneNumber}
+                {formPhoneNumber}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
               {t("Personal number")+": "}
                 <ProfileText>
-                  {" " + profileData.PersonalNumber}
+                  {" " + formPersonalNumber}
                 </ProfileText>
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
@@ -111,11 +120,11 @@ function ProfileInfo() {
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 <MailIcon />
-                {profileData.Mail}
+                {formMail}
               </ProfileHeaderText>
               <ProfileSubHeaderText>
               {t("Status")+": "}
-                <StatusIcon />
+                <StatusIcon style={status>0 ? { backgroundColor:"#55ff11"}:{backgroundColor:"#ff5511"}} />
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
           </ProfileInfoDiv>

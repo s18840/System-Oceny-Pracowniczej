@@ -133,7 +133,7 @@ export const FamilyName = styled.div`
   font-style: italic;
 `;
 export const DateOfBirth = styled.div`
-  grid-row: 6;
+  grid-row: 5;
   grid-column: 1;
   font-size: 28px;
   font-style: italic;
@@ -145,14 +145,14 @@ export const Street = styled.div`
   font-style: italic;
 `;
 export const HouseNumber = styled.div`
-  grid-row: 4;
-  grid-column: 3;
+  grid-row: 5;
+  grid-column: 2;
   font-size: 28px;
   font-style: italic;
 `;
 export const City = styled.div`
-  grid-row: 5;
-  grid-column: 2;
+  grid-row: 4;
+  grid-column: 3;
   font-size: 28px;
   font-style: italic;
 `;
@@ -174,6 +174,12 @@ export const Country = styled.div`
   font-size: 28px;
   font-style: italic;
 `;
+export const CompanyMail = styled.div`
+  grid-row: 7;
+  grid-column: 1;
+  font-size: 28px;
+  font-style: italic;
+`;
 export const Mail = styled.div`
   grid-row: 8;
   grid-column: 1;
@@ -181,10 +187,13 @@ export const Mail = styled.div`
   font-style: italic;
 `;
 export const PhoneNumber = styled.div`
-  grid-row: 7;
+  grid-row: 6;
   grid-column: 1;
   font-size: 28px;
   font-style: italic;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
 export const FormButton = styled.button`
   grid-row: 1;
@@ -294,7 +303,7 @@ export const PhoneIcon = styled(BsFillTelephoneFill)`
 `;
 export const StatusIcon = styled(BsCircle)`
   overflow: visible;
-  background-color: #55ff11;
+  //background-color: #55ff11;
   //dla statusu nieaktywnego #ff5511
   border-color: black;
   border-radius: 50%;
