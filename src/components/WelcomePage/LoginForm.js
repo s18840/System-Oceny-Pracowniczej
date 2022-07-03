@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next'
 import {useForm} from "react-hook-form";
 import {Login, LoginButton, LoginFormWrapper,} from '../../styles/LoginStyle'
 import {InputField, InputWrapper, Span} from '../../styles/GlobalStyle'
-import {hashPassword, isPasswordCorrect} from '../../Utils/PasswordUtils'
+import {hashPassword, isPasswordCorrect} from '../../utils/PasswordUtils'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Context } from '../../pages/Context';

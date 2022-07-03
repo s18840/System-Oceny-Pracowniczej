@@ -62,10 +62,10 @@ function App() {
           </Route>
           <Route exact path="/competenceList" component={CompetenceList}>
             <Competences/>
-          </Route>   
+          </Route>
           <Route exact path="/roleList" component={RolesList}>
             <Roles/>
-          </Route>      
+          </Route>
           <Route exact path="/newCompetence" component={NewCompetence}>
             <NewCompetenceView/>
           </Route>
@@ -92,6 +92,9 @@ function App() {
           </Route>
           <Route exact path="/grades" component={Grades}>
             <Grades />
+          </Route>
+          <Route exact path="/targets">
+            <Targets/>
           </Route>
         </Switch>
       </Router>

@@ -1,18 +1,8 @@
-import React from 'react';
-import {
-  ActionButton,
-  TargetForm,
-  TargetInputField,
-  TargetTextField,
-} from '../../styles/TargetsStyles';
-import {
-  GlobalButton,
-  InputField,
-  InputWrapper,
-  Span,
-} from '../../styles/GlobalStyle';
-import {useForm} from 'react-hook-form';
-import {useTranslation} from 'react-i18next';
+import React from 'react'
+import {ActionButton, TargetForm, TargetInputField, TargetTextField} from "../../styles/TargetsStyles";
+import {GlobalButton, InputField, InputWrapper, Span} from "../../styles/GlobalStyle";
+import {useTranslation} from "react-i18next";
+import {useForm} from "react-hook-form";
 
 const AddTarget = ({onAdd, onCancel}) => {
   const {t} = useTranslation();
@@ -77,4 +67,4 @@ const AddTarget = ({onAdd, onCancel}) => {
   );
 };
 
-export default AddTarget;
+export default AddTarget

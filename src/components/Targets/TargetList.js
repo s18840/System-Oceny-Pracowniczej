@@ -1,15 +1,18 @@
 import React from 'react';
 import {
+  AcceptButtonWrapper,
   AddTargetContainer,
   PlusIcon,
   TargetContainer,
-  TargetsListWrapper,
+  TargetDate, TargetImportance, TargetListTitlesWrapper,
+  TargetName, TargetNameTitle,
+  TargetsListWrapper, TargetTitle,
 } from '../../styles/TargetsStyles';
 import {GlobalButton} from '../../styles/GlobalStyle';
 
 const MAX_TARGET_NUMBER = 3;
 
-function TargetList({targetList, switchContent}) {
+function TargetList({targetList, switchContent, onAccept}) {
   console.log(targetList);
   let addTargetElements = [];
 
@@ -23,20 +26,27 @@ function TargetList({targetList, switchContent}) {
 
   return (
     <>
+      <TargetListTitlesWrapper>
+        <TargetNameTitle>nazwa celu</TargetNameTitle>
+        <TargetTitle>termin realizacji</TargetTitle>
+        <TargetTitle>waga realizacji</TargetTitle>
+      </TargetListTitlesWrapper>
       <TargetsListWrapper>
         {
           targetList.map(target => (
               <TargetContainer>
-                <span>{target.name}</span>
-                <span>{target.endDate}</span>
-                <span>{target.importance}</span>
+                <TargetName>{target.name}</TargetName>
+                <TargetDate>{target.endDate}</TargetDate>
+                <TargetImportance>{target.importance}%</TargetImportance>
               </TargetContainer>
             ),
           )
         }
         {addTargetElements}
       </TargetsListWrapper>
-      <GlobalButton>Accept</GlobalButton>
+      <AcceptButtonWrapper>
+        <GlobalButton onClick={onAccept}> Accept</GlobalButton>
+      </AcceptButtonWrapper>
     </>
   );
 }

@@ -1,11 +1,6 @@
 import styled from "styled-components";
-import {
-  GlobalButton,
-  InputField,
-  OrangeInputButton,
-  TextField,
-} from './GlobalStyle';
-import {GoCalendar, ImPlus} from 'react-icons/all';
+import {InputField, OrangeInputButton, Span, TextField} from "./GlobalStyle";
+import {GoCalendar, ImPlus} from "react-icons/all";
 
 export const TargetForm = styled.form`
   display: flex;
@@ -31,13 +26,20 @@ export const ActionButton = styled(OrangeInputButton)`
 
 export const CalendarIcon = styled(GoCalendar)`
   overflow: visible;
-  color:  #ff4e01;
+  color: #ff4e01;
   transform: scale(5);
   margin: 60px;
 `
 
 export const PlusIcon = styled(ImPlus)`
-  color:  #ff4e01;
+  color: #ff4e01;
+`
+
+export const TargetListTitlesWrapper = styled.div`
+  margin: 0 17.5%;
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
 `
 
 export const TargetsListWrapper = styled.div`
@@ -53,11 +55,65 @@ export const TargetContainer = styled.div`
   margin: 2% 10%;
   border: 2px solid #3D098A;
   border-radius: 5px;
-  padding: 2.5em;
-  align-content: space-around;
+  padding: 2.5em 0;
+  justify-content: space-evenly;
 `
 
 export const AddTargetContainer = styled(TargetContainer)`
   justify-content: center;
-  
+
+`
+
+export const TargetDate = styled(Span)`
+  color: #3D098A;
+  width: 15%;
+  text-align: center;
+`
+
+export const TargetImportance = styled(Span)`
+  width: 15%;
+  text-align: center;
+`
+
+export const TargetName = styled.div`
+  width: 33%;
+  text-align: center;
+`
+
+export const TargetNameTitle = styled.div`
+  width: 33%;
+  text-align: center;
+`
+
+export const TargetTitle = styled.div`
+  width: 15%;
+  text-align: center;
+`
+
+export const AcceptButtonWrapper = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: end;
+  margin-right: 10%;
+`
+export const TargetsGradeSummaryWrapper = styled.div`
+  border: 2px solid #3D098A;
+  margin: 2% 10%;
+`
+
+export const GradeTargetElement = styled.div`
+  margin: 0;
+  padding: 0;
+  border: 2px solid #3D098A;
+  border-radius: 5px;
+`
+
+export const GradeTargetContainer = styled(TargetContainer)`
+  border: none;
+`
+
+export const GradeDetails = styled.div`
+  width: 100%;
+  border-top: 2px solid #3D098A;
+  padding: 2.5em;
 `

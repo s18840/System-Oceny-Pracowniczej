@@ -3,9 +3,8 @@ import AddTarget from "../components/Targets/AddTarget";
 import Navbar from "../components/Navigation/NavBar";
 import Header from "../components/Header/Header";
 import {PageWrapper, SubTitle, Title} from "../styles/GlobalStyle";
-import TargetList from '../components/Targets/TargetList';
-import GradeTargets from '../components/Targets/GradeTargets';
-
+import GradeTargets from "../components/Targets/GradeTargets";
+import TargetList from "../components/Targets/TargetList";
 
 
 function Targets() {
@@ -30,6 +29,10 @@ function Targets() {
     switchType(ADD_TARGET)
   }
 
+  const showGradeTargets = () => {
+    switchType(GRADE_TARGETS)
+  }
+
   const addTarget = (target) => {
     console.log(target)
     let tempTargetArray = targets
@@ -38,6 +41,8 @@ function Targets() {
     console.log(targets)
     returnToList()
   }
+
+  //pobieranie targets z api i sprawdzanie czy jakies sa
 
   return (
     <>
@@ -51,12 +56,15 @@ function Targets() {
              case TARGET_LIST: return <TargetList
                targetList={targets}
                switchContent={showAddTarget}
+               onAccept={showGradeTargets}
              />;
              case ADD_TARGET: return <AddTarget
                onCancel={returnToList}
                onAdd={addTarget}
              />;
-             case GRADE_TARGETS:  return <GradeTargets/>;
+             case GRADE_TARGETS:  return <GradeTargets
+               targetList={targets}
+             />;
            }
          })()}
         </div>
