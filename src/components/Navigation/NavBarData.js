@@ -30,24 +30,25 @@ export const NavBarData = [
         title: 'Your goals',
         path: '/yourGoals',
       },
+      {
+        title: 'Create new employee',
+        path: '/newEmp',
+      },
     ],
   },
   {
     title: 'Teams',
-    path: '/teams',
+    path: '/teamList',
     icon: <FaUsers/>,
     iconClosed: <MDIcons.MdKeyboardArrowDown />,
     iconOpened: <MDIcons.MdKeyboardArrowUp />,
-    subnav: [
-      {
-        title: 'Your Teams',
-        path: '/yourTeams',
-      },
-      {
-        title: 'Teams History',
-        path: '/hisoryTeams',
-      },
-    ],
+  },
+  {
+    title: 'Departments',
+    path: '/departmentList',
+    icon: <FaUsers/>,
+    iconClosed: <MDIcons.MdKeyboardArrowDown />,
+    iconOpened: <MDIcons.MdKeyboardArrowUp />,
   },
   {
     title: 'Competences',
@@ -55,12 +56,6 @@ export const NavBarData = [
     icon: <FaRegObjectGroup/>,
     iconClosed: <MDIcons.MdKeyboardArrowDown />,
     iconOpened: <MDIcons.MdKeyboardArrowUp />,
-    subnav: [
-      {
-        title: 'Markers',
-        path: '/markersList',
-      },
-    ],
   },
   {
     title: 'Grades',

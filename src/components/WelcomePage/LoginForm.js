@@ -1,21 +1,24 @@
-import React from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {useTranslation} from 'react-i18next'
 import {useForm} from "react-hook-form";
 import {Login, LoginButton, LoginFormWrapper,} from '../../styles/LoginStyle'
 import {InputField, InputWrapper, Span} from '../../styles/GlobalStyle'
 import {hashPassword, isPasswordCorrect} from '../../Utils/PasswordUtils'
 import { useHistory } from 'react-router-dom';
-
-
+import axios from 'axios';
+import { Context } from '../../pages/Context';
 //TODO add errors for form validation
 function LoginForm() {
+  const [context, setContext] = useContext(Context);
   let history = useHistory()
   const {t} = useTranslation()
   const {register, handleSubmit, formState: {errors}} = useForm();
   const submitForm = (data) => {
     // let hashedPassword = hashPassword(data.password)
-
+    console.log("logowanie",data)
     history.push("/dashboard")
+    //axios.post("https://localhost:5001/api/Account/login", data).then(({data}) => console.log(data));
+    axios.post("https://localhost:5001/api/Account/login", data).then(({data}) => setContext(data));
   };
 
 
@@ -23,17 +26,18 @@ function LoginForm() {
     <LoginFormWrapper onSubmit={handleSubmit(submitForm)}>
       <Login>{t('LOGIN')}</Login>
       <InputWrapper>
-        <Span fontSize="20px">{t('USERNAME')}</Span>
+        <Span fontSize="20px">{t('Email')}</Span>
         <InputField
-          {...register("username", ({required: true}))}
+          {...register("email", ({required: true}))}
           width="357px"
           height="50px"
           type="text"
         />
-        {errors.username && errors.username.type === "required" && <Span>{t('REQUIRED')}</Span>}
+        {errors.email && errors.email.type === "required" && <Span>{t('REQUIRED')}</Span>}
 
         <Span fontSize="20px">{t('PASSWD')}</Span>
         <InputField
+          value={"Pa$$w0rd"}
           {...register("password", ({required: true}))}
           width="357px"
           height="50px"

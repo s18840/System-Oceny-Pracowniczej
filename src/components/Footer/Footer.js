@@ -1,8 +1,6 @@
 import React from 'react'
 
-import {
-FooterBackground, FooterWrapper
-} from './FooterElements'
+import {FooterWrapper} from './FooterElements'
 
 
 const FooterBar = () => (

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
-import { FormWrapper, InputField } from "../../styles/ProfilePageFormStyle";
+import { useForm } from "react-hook-form";
+import { FormWrapper } from "../../styles/ProfilePageFormStyle";
+import { InputField, Span } from "../../styles/GlobalStyle";
+import useApi from "../../api/useApi";
 import {
   AddressHeadingText,
   City,
@@ -21,174 +22,313 @@ import {
   Street,
   SurName,
   FormButton,
-  AcceptButton,
   PhoneNumber,
   Mail,
+  CompanyMail,
 } from "../../styles/ProfilePageStyle";
-const dataJson = {
-  content: [
-    {
-      FirstName: "Andrzej",
-      SecondName: "Artur",
-      Surname: "Jarząbkowski",
-      FamilyName: "-",
-      DateOfBirth: "24.12.1991",
-      Street: "Akacjowa",
-      HouseNumber: "12",
-      City: "Warszawa",
-      District: "Mazowieckie",
-      PostalCode: "01-100",
-      Country: "Poland",
-      PhoneNumber: "+48 506123412",
-      Mail: "a.jarzab@gmail.com",
-    },
-  ],
-};
+import { Context } from "../../pages/Context";
 
 function BasicInformation() {
-  let history = useHistory();
+  const [context, setContext] = useContext(Context);
+  const [employee, setEmployee] = useState();
+  const [firstName, setFirstName] = useState(" ");
+  const [secondName, setSecondName] = useState(" ");
+  const [lastName, setLastName] = useState(" ");
+  const [birthDate, setBirthDate] = useState(" ");
+  const [street, setStreet] = useState(" ");
+  const [buildingNumber, setBuildingNumber] = useState(" ");
+  const [apartmentNumber, setApartmentNumber] = useState();
+  const [city, setCity] = useState(" ");
+  const [postalCode, setPostalCode] = useState(" ");
+  const [country, setCountry] = useState(" ");
+  const [cellPhoneNumber, setCellPhoneNumber] = useState(" ");
+  const [companyMail, setCompanyMail] = useState(" ");
+  const [email, setEmail] = useState(" ");
+  const { t } = useTranslation();
+  useEffect(() => {
+    context &&
+      axios
+        .get(
+          `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+            "employeeId"
+          )}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setEmployee(data);
+          setValue("firstName", data.firstName, { shouldValidate: true });
+          setValue("secondName", data.secondName ? data.secondName : "-", {
+            shouldValidate: true,
+          });
+          setValue("lastName", data.lastName, { shouldValidate: true });
+          setValue(
+            "birthDate",
+            data?.birthDate.split("T")[0] ? data?.birthDate.split("T")[0] : "",
+            { shouldValidate: true }
+          );
+          setValue("street", data.street, { shouldValidate: true });
+          setValue("buildingNumber", data.buildingNumber, {
+            shouldValidate: true,
+          });
+          setValue(
+            "apartmentNumber",
+            data.apartmentNumber ? data.apartmentNumber : "-",
+            { shouldValidate: true }
+          );
+          setValue("city", data.city, { shouldValidate: true });
+          setValue("postalCode", data.postalCode, { shouldValidate: true });
+          setValue("country", data.country, { shouldValidate: true });
+          setValue("cellPhoneNumber", data.cellPhoneNumber, {
+            shouldValidate: true,
+          });
+          setValue("companyMail", data.companyMail ? data.companyMail : "-", {
+            shouldValidate: true,
+          });
+        });
+  }, [context]);
 
-  const [formState, setFormState] = useState(true);
-
-  const switchForm = () => {
-    setFormState(!formState);
-  };
+  // useEffect (()=>{
+  //   const timer = setTimeout(()=>{
+  //     setValue("firstName",emp.firstName,{shouldValidate: true});
+  //     setValue("secondName",emp.secondName ? emp.secondName : "-",{shouldValidate: true});
+  //     setValue("lastName",emp.lastName,{shouldValidate: true});
+  //     setValue("birthDate",emp?.birthDate.split('T')[0]?emp?.birthDate.split('T')[0] :'',{shouldValidate: true});
+  //     setValue("street",emp.street,{shouldValidate: true});
+  //     setValue("buildingNumber",emp.buildingNumber,{shouldValidate: true});
+  //     setValue("apartmentNumber",emp.apartmentNumber ? emp.apartmentNumber : "-",{shouldValidate: true});
+  //     setValue("city",emp.city,{shouldValidate: true});
+  //     setValue("postalCode",emp.postalCode,{shouldValidate: true});
+  //     setValue("country",emp.country,{shouldValidate: true});
+  //     setValue("cellPhoneNumber",emp.cellPhoneNumber,{shouldValidate: true});
+  //     setValue("companyMail",emp.companyMail ? emp.companyMail : "-",{shouldValidate: true});
+  //     //setEmail("email",emp.email);
+  //   },11);
+  //   return () => clearTimeout(timer);
+  // },[emp])
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const submitForm = (data) => {
-    
-    //history.push("/basicInformationForm");
-    console.log(data);
+    setValue,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange" });
+  const [formReady, setFormReady] = useState(false);
+
+  const switchForm = () => {
+    //console.log(formReady,isValid)
+    setFormReady((currentFormReady) => !(currentFormReady && isValid));
   };
-  const { t } = useTranslation();
+
+  const prepareUser = () => {
+    const obj = {
+      firstName: firstName,
+      secondName: secondName,
+      lastName: lastName,
+      birthDate: birthDate,
+      street: street,
+      buildingNumber: buildingNumber,
+      apartmentNumber: apartmentNumber,
+      city: city,
+      postalCode: postalCode,
+      country: country,
+      cellPhoneNumber: cellPhoneNumber,
+      companyMail: companyMail,
+      //email: email
+    };
+
+    return obj;
+  };
+  const submitForm = (data) => {
+    if (!formReady) {
+      console.log(data);
+      //   //TUTAJ BĘDZIE AXIOS.PUT
+    }
+  };
+
   let button;
-  if (formState) {
-    button=<FormButton onClick={switchForm}>{t("Edit")}</FormButton>;
-  } else {
-    button=<FormButton onClick={switchForm}>{t("Save")}</FormButton>;
-  }
+
+  button = (
+    <FormButton onClick={switchForm}>
+      {!formReady ? t("Edit") : t("Save")}
+    </FormButton>
+  );
 
   return (
     <>
-      {dataJson.content.map((content) => (
-        <FormWrapper onSubmit={handleSubmit(submitForm)}>
-          <ProfileDetailedInfoWrapper>
-            <PersonalDataHeadingText>
-              {t("Personal Data")}
-            </PersonalDataHeadingText>
-            <AddressHeadingText>{t("Address")}</AddressHeadingText>
-            <FirstName>
-              <ProfileDataText>{t("First name")}</ProfileDataText>
-              <InputField
-                value={content.FirstName}
-                disabled={formState}
-                {...register("FirstName", { required: true })}
-              ></InputField>
-            </FirstName>
-            <SecondName>
-              <ProfileDataText>{t("Second name")}</ProfileDataText>
-              <InputField
-                value={content.SecondName}
-                disabled={formState}
-                {...register("SecondName", { required: true })}
-              ></InputField>
-            </SecondName>
-            <SurName>
-              <ProfileDataText>{t("Surname")}</ProfileDataText>
-              <InputField
-                value={content.Surname}
-                disabled={formState}
-                {...register("Surname", { required: true })}
-              ></InputField>
-            </SurName>
-            <FamilyName>
-              <ProfileDataText>{t("Family name")}</ProfileDataText>
-              <InputField
-                value={content.FamilyName}
-                disabled={formState}
-                {...register("FamilyName", { required: false })}
-              ></InputField>
-            </FamilyName>
-            <DateOfBirth>
-              <ProfileDataText>{t("Date of birth")}</ProfileDataText>
-              <InputField
-                value={content.DateOfBirth}
-                disabled={formState}
-                {...register("DateOfBirth", { required: true })}
-              ></InputField>
-            </DateOfBirth>
-            <PhoneNumber>
-              <ProfileDataText>{t("Phone number")}</ProfileDataText>
-              <InputField
-                value={content.PhoneNumber}
-                disabled={formState}
-                {...register("PhoneNumber", { required: true })}
-              ></InputField>
-            </PhoneNumber>
-            <Mail>
-              <ProfileDataText>{t("Mail")}</ProfileDataText>
-              <InputField
-                value={content.Mail}
-                disabled={formState}
-                {...register("Mail", { required: true })}
-              ></InputField>
-            </Mail>
-            <Street>
-              <ProfileDataText>{t("Street")}</ProfileDataText>
-              <InputField
-                value={content.Street}
-                disabled={formState}
-                {...register("Street", { required: true })}
-              ></InputField>
-            </Street>
-            <HouseNumber>
-              <ProfileDataText>{t("House number")}</ProfileDataText>
-              <InputField
-                value={content.HouseNumber}
-                disabled={formState}
-                {...register("HouseNumber", { required: true })}
-              ></InputField>
-            </HouseNumber>
-            <City>
-              <ProfileDataText>{t("City")}</ProfileDataText>
-              <InputField
-                value={content.City}
-                disabled={formState}
-                {...register("City", { required: true })}
-              ></InputField>
-            </City>
-            <District>
-              <ProfileDataText>{t("District")}</ProfileDataText>
-              <InputField
-                value={content.District}
-                disabled={formState}
-                {...register("District", { required: true })}
-              ></InputField>
-            </District>
-            <PostalCode>
-              <ProfileDataText>{t("Postal code")}</ProfileDataText>
-              <InputField
-                value={content.PostalCode}
-                disabled={formState}
-                {...register("PostalCode", { required: true })}
-              ></InputField>
-            </PostalCode>
-            <Country>
-              <ProfileDataText>{t("Country")}</ProfileDataText>
-              <InputField
-                value={content.Country}
-                disabled={formState}
-                {...register("Country", { required: true })}
-              ></InputField>
-            </Country>
-            {button}
-          </ProfileDetailedInfoWrapper>
-        </FormWrapper>
-      ))}
+      <FormWrapper onSubmit={handleSubmit(submitForm)}>
+        <ProfileDetailedInfoWrapper>
+          <PersonalDataHeadingText>
+            {t("Personal Data")}
+          </PersonalDataHeadingText>
+          <AddressHeadingText>{t("Address")}</AddressHeadingText>
+          <FirstName>
+            <ProfileDataText>{t("First name")}</ProfileDataText>
+            <InputField
+              {...register("firstName", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            />
+            {errors.username && errors.username.type === "required" && (
+              <Span style={{ color: "red" }}>{"REQUIRED"}</Span>
+            )}
+          </FirstName>
+          <SecondName>
+            <ProfileDataText>{t("Second name")}</ProfileDataText>
+            <InputField
+              {...register("secondName", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </SecondName>
+          <SurName>
+            <ProfileDataText>{t("Surname")}</ProfileDataText>
+            <InputField
+              {...register("lastName", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </SurName>
+          <DateOfBirth>
+            <ProfileDataText>{t("Date of birth")}</ProfileDataText>
+            <InputField
+              type="date"
+              {...register("birthDate", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </DateOfBirth>
+          <PhoneNumber>
+            <ProfileDataText>{t("Phone number")}</ProfileDataText>
+            <InputField
+              type="number"
+              {...register("cellPhoneNumber", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { "-webkit-appearance": "none", backgroundColor: "white" }
+                  : { "-webkit-appearance": "none", backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </PhoneNumber>
+          {/*<Mail>
+            <ProfileDataText>{"Mail"}</ProfileDataText>
+            <InputField
+              {...register("email", ({required: true}))}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+            </Mail>*/}
+          <CompanyMail>
+            <ProfileDataText>{t("Company Mail")}</ProfileDataText>
+            <InputField
+              {...register("companyMail", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </CompanyMail>
+          <Street>
+            <ProfileDataText>{t("Street")}</ProfileDataText>
+            <InputField
+              {...register("street", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </Street>
+          <HouseNumber>
+            <ProfileDataText>{t("House number")}</ProfileDataText>
+            <InputField
+              {...register("buildingNumber", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </HouseNumber>
+          <City>
+            <ProfileDataText>{t("City")}</ProfileDataText>
+            <InputField
+              {...register("city", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </City>
+          <District>
+            <ProfileDataText>{t("Apartment number")}</ProfileDataText>
+            <InputField
+              {...register("apartmentNumber", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </District>
+          <PostalCode>
+            <ProfileDataText>{t("Postal code")}</ProfileDataText>
+            <InputField
+              {...register("postalCode", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </PostalCode>
+          <Country>
+            <ProfileDataText>{t("Country")}</ProfileDataText>
+            <InputField
+              {...register("country", { required: true })}
+              disabled={!formReady}
+              style={
+                !formReady
+                  ? { backgroundColor: "white" }
+                  : { backgroundColor: "#DDDDDD" }
+              }
+            ></InputField>
+          </Country>
+          {button}
+        </ProfileDetailedInfoWrapper>
+      </FormWrapper>
     </>
   );
 }

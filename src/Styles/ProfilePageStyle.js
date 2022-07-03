@@ -44,7 +44,7 @@ export const ProfileTab = styled.button`
   color: #ffffff;
   background-color: #6137a0;
   border-radius: 45px;
-  border-bottom: 0;
+  border: 0;
   margin-top: 10px;
   margin-right: 15px;
   font-size: 28px;
@@ -74,16 +74,17 @@ export const ProfileTabWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  
+  margin-left: 10px;
 `;
 
 export const ProfileDetailedInfoWrapper = styled.div`
+padding-bottom: 5px ;
   border: 2px solid #dfdfdf;
   margin:10px 10px 10px 10px;
   border-radius: 20px ;
   display: grid;
   justify-content: space-evenly;
-  row-gap: 2px;
+  row-gap: 1px;
   grid-template-columns: 280px 200px 200px;
   grid-template-rows: 50px 70px 70px 70px 70px 70px 70px 70px;
   color: blue;
@@ -132,7 +133,7 @@ export const FamilyName = styled.div`
   font-style: italic;
 `;
 export const DateOfBirth = styled.div`
-  grid-row: 6;
+  grid-row: 5;
   grid-column: 1;
   font-size: 28px;
   font-style: italic;
@@ -144,14 +145,14 @@ export const Street = styled.div`
   font-style: italic;
 `;
 export const HouseNumber = styled.div`
-  grid-row: 4;
-  grid-column: 3;
+  grid-row: 5;
+  grid-column: 2;
   font-size: 28px;
   font-style: italic;
 `;
 export const City = styled.div`
-  grid-row: 5;
-  grid-column: 2;
+  grid-row: 4;
+  grid-column: 3;
   font-size: 28px;
   font-style: italic;
 `;
@@ -173,6 +174,12 @@ export const Country = styled.div`
   font-size: 28px;
   font-style: italic;
 `;
+export const CompanyMail = styled.div`
+  grid-row: 7;
+  grid-column: 1;
+  font-size: 28px;
+  font-style: italic;
+`;
 export const Mail = styled.div`
   grid-row: 8;
   grid-column: 1;
@@ -180,10 +187,13 @@ export const Mail = styled.div`
   font-style: italic;
 `;
 export const PhoneNumber = styled.div`
-  grid-row: 7;
+  grid-row: 6;
   grid-column: 1;
   font-size: 28px;
   font-style: italic;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 `;
 export const FormButton = styled.button`
   grid-row: 1;
@@ -193,7 +203,7 @@ export const FormButton = styled.button`
   background-color: #FF4E01;
   color: white;
   border-radius: 45px;
-  border-style: solid;
+  border: 0;
   font-size: 28px;
   font-family: 'Ubuntu';
   justify-self: center;
@@ -293,7 +303,7 @@ export const PhoneIcon = styled(BsFillTelephoneFill)`
 `;
 export const StatusIcon = styled(BsCircle)`
   overflow: visible;
-  background-color: #55ff11;
+  //background-color: #55ff11;
   //dla statusu nieaktywnego #ff5511
   border-color: black;
   border-radius: 50%;

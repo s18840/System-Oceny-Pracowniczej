@@ -1,5 +1,4 @@
 import React from "react";
-import { TableInfo } from "../../styles/ProfilePageStyle";
 import EmploymentTable from "./EmploymentTable";
 const EmploymentInformation = () => (
   <>

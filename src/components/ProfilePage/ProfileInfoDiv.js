@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   MailIcon,
   PhoneIcon,
@@ -12,108 +12,136 @@ import {
   ProfileText,
   ProfileTextWrapper,
   StatusIcon,
-  NavLink
+  NavLink,
 } from "../../styles/ProfilePageStyle";
 import { PageWrapper } from "../../styles/GlobalStyle";
 import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
-import BasicInformationForm from "./BasicInformationForm";
 import { useTranslation } from "react-i18next";
+import useApi from "../../api/useApi";
+import { Context } from "../../pages/Context";
+import axios from "axios";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
   marginBottom: "-5px",
-};
-const dataJson = {
-  titles: [
-    "Name",
-    "Surname",
-    "Department",
-    "Job",
-    "PhoneNumber",
-    "PersonalNumber",
-    "Mail",
-  ],
-  content: [
-    {
-      Name: "Amadeusz",
-      Surname: "Jarząbkowski",
-      Department: "IT",
-      Job: "Junior Java Developer",
-      PhoneNumber: "+48 506123412",
-      PersonalNumber: "172",
-      Mail: "a.jarzab@gmail.com",
-    },
-  ],
 };
 
 function ProfileInfo() {
   const BASIC_INFO = "BASIC_INFO";
   const EMPLOYMENT_INFO = "EMPLOYMENT_INFO";
   const EDUCATION_INFO = "EDUCATION_INFO";
-  const BASIC_INFO_EDIT = "BASIC_INFO_EDIT";
-
+  const [context, setContext] = useContext(Context);
+  const [employee, setEmployee] = useState();
   const [contentType, setContentType] = useState(BASIC_INFO);
   const { t } = useTranslation();
   const switchType = (conType) => {
     setContentType(conType);
-    console.log("state change to: " + conType);
+    //console.log("state change to: " + conType);
   };
-
+  useEffect(() => {
+    context &&
+      axios
+        .get(
+          `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+            "employeeId"
+          )}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setEmployee(data);
+          setFirstName(data.firstName);
+          setSurname(data.lastName);
+          setDepartment(data.departmentName);
+          //setTeam(data.);
+          setPhoneNumber(data.cellPhoneNumber);
+          setMail(data.email);
+          setStatus(data.status);
+          setPersonalNumber(context.employeeId);
+        });
+  }, [context]);
+  const [formFirstName, setFirstName] = useState(" ");
+  const [formSurname, setSurname] = useState(" ");
+  const [formDepartment, setDepartment] = useState(" ");
+  const [formTeam, setTeam] = useState("PMI");
+  const [formPhoneNumber, setPhoneNumber] = useState(" ");
+  const [formPersonalNumber, setPersonalNumber] = useState(" ");
+  const [formMail, setMail] = useState(" ");
+  const [status, setStatus] = useState(" ");
+  // useEffect (()=>{
+  //   const timer = setTimeout(()=>{
+  //     setFirstName(emp.firstName);
+  //     setSurname(emp.lastName);
+  //     setDepartment(emp.departmentName);
+  //     //setTeam(emp.);
+  //     setPhoneNumber(emp.cellPhoneNumber);
+  //     setMail(emp.email);
+  //     setPersonalNumber(empId)
+  //   },11);
+  //   return () => clearTimeout(timer);
+  // },[emp])
+  function checkStatus() {
+    if (status === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   return (
     <PageWrapper>
       <>
-        {dataJson.content.map((content) => (
-          <ProfileInfoDiv>
-            <ProfilePhoto>
-              <NavLink to="/profile">
-                <img src="prof.png" alt="" width="100%" />
-              </NavLink>
-            </ProfilePhoto>
-            <ProfileTextWrapper>
-              <ProfileHeaderText>
-                {content.Name + " " + content.Surname}
-              </ProfileHeaderText>
-              <ProfileSubHeaderText>
-              {t("Department")+": "}
-                <ProfileText>
-                  {" " + content.Department}
-                </ProfileText>
-              </ProfileSubHeaderText>
-              <ProfileSubHeaderText>
-              {t("Job")+": "}
-                <ProfileText>
-                 {" " + content.Job}
-                </ProfileText>
-              </ProfileSubHeaderText>
-            </ProfileTextWrapper>
+        <ProfileInfoDiv>
+          <ProfilePhoto>
+            <NavLink to="/profile">
+              <img src="prof.png" alt="" width="100%" />
+            </NavLink>
+          </ProfilePhoto>
+          <ProfileTextWrapper>
+            <ProfileHeaderText>
+              {formFirstName + " " + formSurname}
+            </ProfileHeaderText>
+            <ProfileSubHeaderText>
+              {t("Department") + ": "}
+              <ProfileText>{" " + formDepartment}</ProfileText>
+            </ProfileSubHeaderText>
+            <ProfileSubHeaderText>
+              {t("Team") + ": "}
+              <ProfileText>{" " + formTeam}</ProfileText>
+            </ProfileSubHeaderText>
+          </ProfileTextWrapper>
+          <ProfileTextWrapper>
+            <ProfileHeaderText>
+              <PhoneIcon />
+              {formPhoneNumber}
+            </ProfileHeaderText>
+            <ProfileSubHeaderText>
+              {t("Personal number") + ": "}
+              <ProfileText>{" " + formPersonalNumber}</ProfileText>
+            </ProfileSubHeaderText>
+          </ProfileTextWrapper>
 
-            <ProfileTextWrapper>
-              <ProfileHeaderText>
-                <PhoneIcon />
-                {content.PhoneNumber}
-              </ProfileHeaderText>
-              <ProfileSubHeaderText>
-              {t("Personal number")+": "}
-                <ProfileText>
-                  {" " + content.PersonalNumber}
-                </ProfileText>
-              </ProfileSubHeaderText>
-            </ProfileTextWrapper>
-
-            <ProfileTextWrapper>
-              <ProfileHeaderText>
-                <MailIcon />
-                {content.Mail}
-              </ProfileHeaderText>
-              <ProfileSubHeaderText>
-              {t("Status")+": "}
-                <StatusIcon />
-              </ProfileSubHeaderText>
-            </ProfileTextWrapper>
-          </ProfileInfoDiv>
-        ))}
+          <ProfileTextWrapper>
+            <ProfileHeaderText>
+              <MailIcon />
+              {formMail}
+            </ProfileHeaderText>
+            <ProfileSubHeaderText>
+              {t("Status") + ": "}
+              <StatusIcon
+                style={
+                  status > 0
+                    ? { backgroundColor: "#55ff11" }
+                    : { backgroundColor: "#ff5511" }
+                }
+              />
+            </ProfileSubHeaderText>
+          </ProfileTextWrapper>
+        </ProfileInfoDiv>
       </>
       <ProfileTabWrapper>
         <ProfileTab
@@ -145,8 +173,6 @@ function ProfileInfo() {
               return <EmploymentInformation />;
             case EDUCATION_INFO:
               return <EducationInformation />;
-            case BASIC_INFO_EDIT:
-              return <BasicInformationForm />;
           }
         })()}
       </div>
