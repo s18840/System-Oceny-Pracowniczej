@@ -99,10 +99,12 @@ export const AcceptButtonWrapper = styled.div`
 export const TargetsGradeSummaryWrapper = styled.div`
   border: 2px solid #3D098A;
   margin: 2% 10%;
+  text-align: center;
+  display: flex;
 `
 
 export const GradeTargetElement = styled.div`
-  margin: 0;
+  margin: 2% 10%;
   padding: 0;
   border: 2px solid #3D098A;
   border-radius: 5px;
@@ -112,8 +114,33 @@ export const GradeTargetContainer = styled(TargetContainer)`
   border: none;
 `
 
-export const GradeDetails = styled.div`
-  width: 100%;
+export const GradeDetailsWrapper = styled.div`
+  width: 90%;
   border-top: 2px solid #3D098A;
   padding: 2.5em;
+`
+
+export const GradeDetails = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`
+
+export const GradeDetailsContent = styled.div`
+  width: 40%;
+`
+
+export const GradeForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+`
+
+export const TargetGrade = styled.div`
+//  TODO
+`
+
+export const TargetGradeComment = styled.div`
+//  TODO
 `
