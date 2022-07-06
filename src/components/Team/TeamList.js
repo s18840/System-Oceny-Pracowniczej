@@ -1,5 +1,6 @@
-import React from "react";
-import { 
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import {
   TableInfo,
   Row,
   TableDetailsDate,
@@ -7,68 +8,70 @@ import {
   PersonalDataHeadingText,
   TableDetailsMarker,
   MarkersTable,
-  MarkersRow, 
+  MarkersRow,
   NewButton,
   EditButton,
-} from '../../styles/GlobalStyle';
+} from "../../styles/GlobalStyle";
 import { useTranslation } from "react-i18next";
+import useApi from "../../api/useApi";
+import { Context } from "../../pages/Context";
 
-const dataJson = {
-  titles: ["Team name:", "Team Manager:","Employees:"],
-  content: [
-    {
-      teamName: "Team 1",
-      manager: "Andrzej Kowal",
-      emp: ["Anna Zajko", "Krzysztof Tomczyk", "Andrzej Stonczyk"]
-    },
-    {
-      teamName: "Team 2",
-      manager: "Wojciech Zator",
-      emp: ["Anna Zajko", "Krzysztof Tomczyk", "Andrzej Stonczyk"]
-    },    {
-      teamName: "Team 3",
-      manager: "Andrzej Kowal",
-      emp: ["Anna Zajko", "Krzysztof Tomczyk", "Andrzej Stonczyk"]
-    },
-    {
-      teamName: "Team 4",
-      manager: "Jan Adamczyk",
-      emp: ["Krzysztof Tomczyk", "Andrzej Stonczyk"]
-    },
-  ],
-};
+const dataJson = [
+  "Team name:",
+  "Department name:",
+  "Team Manager:",
+  " Employees:",
+];
 
-function DepartmentList() {
+function TeamList() {
   const { t } = useTranslation();
+  const [context, setContext] = useContext(Context);
+  const [teams, setTeams] = useState();
+  useEffect(() => {
+    context &&
+      axios
+        .get(`https://localhost:5001/api/Dto/teams`, {
+          headers: {
+            Authorization: `Bearer ${
+              localStorage.getItem("token")
+            }`,
+          },
+        })
+        .then(({ data }) => {
+          setTeams(data);
+          console.log(data);
+        });
+  }, [context]);
   return (
     <>
       <PersonalDataHeadingText>{t("Teams List")}</PersonalDataHeadingText>
-      <EditButton>{t("Edit")}</EditButton>
-      <NewButton onClick={event =>  window.location.href='/newTeam'}>{t("New")}</NewButton>
+      {/* <EditButton>{t("Edit")}</EditButton> */}
+      <NewButton onClick={(event) => (window.location.href = "/newTeam")}>
+        {t("New")}
+      </NewButton>
+      {console.log(teams)}
       <TableInfo className="table">
         <thead>
           <tr>
-            {dataJson.titles.map((title) => (
-              <th>{title}</th>
+            {dataJson.map((title) => (
+              <th>{t(title)}</th>
             ))}
           </tr>
         </thead>
-        {dataJson.content.map((content) => (
+        {teams?.map((content) => (
           <Row>
             <TableDetailsDate>{content.teamName}</TableDetailsDate>
+            <TableDetailsDate>{content.departmentName}</TableDetailsDate>
             <TableDetails>
-              {content.manager}
+              {content.managerFirstName + " " + content.managerLastName}
             </TableDetails>
             <TableDetailsMarker>
               <MarkersTable>
-                {content.emp?.map(emp =>(
-                  <MarkersRow>
-                    {emp}
-                  </MarkersRow>
+                {content?.employees?.slice(0, 3).map((emp) => (
+                  <MarkersRow>{emp.firstName + " " + emp.lastName}</MarkersRow>
                 ))}
               </MarkersTable>
             </TableDetailsMarker>
-
           </Row>
         ))}
       </TableInfo>
@@ -76,4 +79,4 @@ function DepartmentList() {
   );
 }
 
-export default DepartmentList;
+export default TeamList;

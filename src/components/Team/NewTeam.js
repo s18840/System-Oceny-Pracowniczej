@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import {  
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import {
   Heading,
   PersonalDataHeadingText,
   ProfileDataText,
@@ -13,67 +14,12 @@ import {
   NewButton,
   EditButton,
   AddButton,
-} from '../../styles/GlobalStyle';
+} from "../../styles/GlobalStyle";
 import { TextField } from "../../styles/GlobalStyle";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-
-const dataJson = {
-  content: [
-    {
-      competenceName: "Competence 1",
-    },
-    {
-      competenceName: "Competence 2",
-    },
-    {
-      competenceName: "Competence 3",
-    },
-    {
-      competenceName: "Competence 4",
-    },
-    {
-      competenceName: "Competence 5",
-    },
-    {
-      competenceName: "Competence 6",
-    },
-  ],
-};
-const dataJsonEmp = {
-  content: [
-    {
-      emp: "Andrzej Kowalski",
-    },
-    {
-      emp: "Antek Król",
-    },
-    {
-      emp: "Anna Zbojna",
-    },
-    {
-      emp: "Andrzej Kowalski",
-    },
-    {
-      emp: "Antek Król",
-    },
-    {
-      emp: "Anna Zbojna",
-    },
-  ],
-};
-const dataJsonMan = {
-  content: [
-    {
-      man: "Wojciech Antczak",
-    },
-    {
-      man: "Joanna Bajko",
-    },
-
-
-  ],
-};
+import useApi from "../../api/useApi";
+import { Context } from "../../pages/Context";
 
 const Button = (props) => {
   const [added, setAdded] = useState(false);
@@ -83,13 +29,14 @@ const Button = (props) => {
         props.onClick();
         setAdded((prev) => !prev);
       }}
+      disabled={added ? true : false}
     >
       {added ? "Added" : "Add"}
     </AddButton>
   );
 };
 
-const NewCompetence = (props)=> {
+const NewCompetence = (props) => {
   const { t } = useTranslation();
   const {
     register,
@@ -99,15 +46,61 @@ const NewCompetence = (props)=> {
   const submitForm = (data) => {
     console.log(data);
   };
-  const { content } = dataJson;
   const [comps, setComps] = useState([]);
   const [emps, setEmps] = useState([]);
   const [mans, setMans] = useState([]);
+  const [context, setContext] = useContext(Context);
+  useEffect(() => {
+    context &&
+      axios
+        .get(`https://localhost:5001/api/Employee/avaiMana`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then(({ data }) => {
+          setMans(data);
+          console.log(data);
+        });
+  }, [context]);
+  useEffect(() => {
+    context &&
+      axios
+        .get(`https://localhost:5001/api/Employee/avaiEmps`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then(({ data }) => {
+          setEmps(data);
+          console.log(data);
+        });
+  }, [context]);
+  useEffect(() => {
+    context &&
+      axios
+        .get(`https://localhost:5001/api/Competence`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then(({ data }) => {
+          setComps(data);
+          console.log(data);
+        });
+  }, [context]);
   return (
     <>
       <PersonalDataHeadingText>
         {t("Creating new team")}
-        <NewButton onClick={() => {alert(comps.toString()+"\n"+emps.toString()+"\n"+mans.toString());window.location.href='/teamList'}}>{t("Add")}</NewButton>
+        <NewButton
+          onClick={() => {
+            console.log("Managerowie ", mans, "Pracownicy", emps, "Kompetencje ",comps);
+            //window.location.href = "/teamList";
+          }}
+        >
+          {t("Add")}
+        </NewButton>
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
@@ -120,13 +113,17 @@ const NewCompetence = (props)=> {
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
-              {dataJsonMan.content.map((el) => (
+              {mans?.map((el) => (
                 <tr>
                   <td>
-                      <RowLi>
-                        {el.man}
-                        <Button onClick={() => {setMans((prev) => [...prev, el.man])}}/> 
-                      </RowLi>
+                    <RowLi>
+                      {el.firstName + " " + el.lastName}
+                      <Button
+                        onClick={() => {
+                          setMans((prev) => [...prev, el.personalNumber]);
+                        }}
+                      />
+                    </RowLi>
                   </td>
                 </tr>
               ))}
@@ -137,30 +134,40 @@ const NewCompetence = (props)=> {
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
-              {dataJsonEmp.content.map((el) => (
+              {emps?.map((el) => (
                 <tr>
                   <td>
-                      <RowLi>
-                        {el.emp}
-                        <Button onClick={() => {setEmps((prev) => [...prev, el.emp])}}/> 
-                      </RowLi>
+                    <RowLi>
+                      {el.firstName + " " + el.lastName}
+                      <Button
+                        onClick={() => {
+                          setEmps((prev) => [...prev, el.personal_Number]);
+                        }}
+                      />
+                    </RowLi>
                   </td>
                 </tr>
               ))}
             </TableMarkers>
           </MarkersWrapper>
           <Heading>
-            <ProfileDataText>{t("Add required competences") + ": "}</ProfileDataText>
+            <ProfileDataText>
+              {t("Add required competences") + ": "}
+            </ProfileDataText>
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
-              {content.map((el) => (
+              {comps?.map((el) => (
                 <tr>
                   <td>
-                      <RowLi>
-                        {el.competenceName}
-                        <Button onClick={() => {setComps((prev) => [...prev, el.competenceName])}}/> 
-                      </RowLi>
+                    <RowLi>
+                      {el.name}
+                      <Button
+                        onClick={() => {
+                          setComps((prev) => [...prev, el.competence_Id]);
+                        }}
+                      />
+                    </RowLi>
                   </td>
                 </tr>
               ))}
@@ -168,9 +175,8 @@ const NewCompetence = (props)=> {
           </MarkersWrapper>
         </InsideWrapper>
       </Wrapper>
-
     </>
   );
-}
+};
 
 export default NewCompetence;
