@@ -49,6 +49,9 @@ const NewCompetence = (props) => {
   const [comps, setComps] = useState([]);
   const [emps, setEmps] = useState([]);
   const [mans, setMans] = useState([]);
+  const [chosenMan, setChosenMan] = useState([]);
+  const [chosenEmp, setChosenEmp] = useState([]);
+  const [chosenCom, setChosenCom] = useState([]);
   const [context, setContext] = useContext(Context);
   useEffect(() => {
     context &&
@@ -95,7 +98,7 @@ const NewCompetence = (props) => {
         {t("Creating new team")}
         <NewButton
           onClick={() => {
-            console.log("Managerowie ", mans, "Pracownicy", emps, "Kompetencje ",comps);
+            console.log("Managerowie ", chosenMan, "Pracownicy", chosenEmp, "Kompetencje ",chosenCom);
             //window.location.href = "/teamList";
           }}
         >
@@ -120,7 +123,7 @@ const NewCompetence = (props) => {
                       {el.firstName + " " + el.lastName}
                       <Button
                         onClick={() => {
-                          setMans((prev) => [...prev, el.personalNumber]);
+                          setChosenMan((prev) => [...prev, el.personalNumber]);
                         }}
                       />
                     </RowLi>
@@ -141,7 +144,7 @@ const NewCompetence = (props) => {
                       {el.firstName + " " + el.lastName}
                       <Button
                         onClick={() => {
-                          setEmps((prev) => [...prev, el.personal_Number]);
+                          setChosenEmp((prev) => [...prev, el.personal_Number]);
                         }}
                       />
                     </RowLi>
@@ -164,7 +167,7 @@ const NewCompetence = (props) => {
                       {el.name}
                       <Button
                         onClick={() => {
-                          setComps((prev) => [...prev, el.competence_Id]);
+                          setChosenCom((prev) => [...prev, el.competence_Id]);
                         }}
                       />
                     </RowLi>
