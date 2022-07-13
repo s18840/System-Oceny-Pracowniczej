@@ -62,7 +62,7 @@ function ProfileInfo() {
           setPhoneNumber(data.cellPhoneNumber);
           setMail(data.email);
           setStatus(data.status);
-          setPersonalNumber(context.employeeId);
+          setPersonalNumber(localStorage.getItem("employeeId"));
         });
   }, [context]);
   const [formFirstName, setFirstName] = useState(" ");

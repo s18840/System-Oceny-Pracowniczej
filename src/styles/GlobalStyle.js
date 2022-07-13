@@ -50,6 +50,13 @@ export const Span = styled.div`
   font-size: ${(props) => props.fontSize};
   color: #ff4e01;
 `
+export const ErrorsSpan = styled.span`
+  position: absolute;
+  margin-top: -71px;
+  margin-left: 200px;
+  font-size: 20px;
+  color: #ff4e01;
+`
 
 export const HighlightText = styled.a`
   color: #ff4e01;
