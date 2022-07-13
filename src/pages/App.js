@@ -31,6 +31,7 @@ import NewRole from "../components/Role/NewRole";
 import NewRoleView from "./NewRoleView";
 import Settings from "./Settings";
 import Grades from "./Grades";
+import EmployeeList from "./EmployeeList";
 import { Context } from "./Context.js";
 function App() {
   //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
@@ -53,6 +54,9 @@ function App() {
           <Route exact path="/profile" component={ProfilePage}>
             <ProfilePage />
           </Route>
+          {/* <Route exact path="/profile/:id" component={ProfilePage}>
+            <ProfilePage />
+          </Route> */}
           <Route exact path="/projectList" component={ProjectList}>
             <Projects />
           </Route>
@@ -88,6 +92,9 @@ function App() {
           </Route>
           <Route exact path="/grades" component={Grades}>
             <Grades />
+          </Route>
+          <Route exact path="/employees" component={EmployeeList}>
+            <EmployeeList />
           </Route>
         </Switch>
       </Router>
