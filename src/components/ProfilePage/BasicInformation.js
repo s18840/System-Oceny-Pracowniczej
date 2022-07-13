@@ -112,7 +112,7 @@ function BasicInformation() {
       birthDate: e.birthDate,
       cellPhoneNumber: e.cellPhoneNumber,
       stationaryPhoneNumber: null,
-      email: employee.email,
+      email: "0000000@at.xxx",
       companyEmail: e.companyMail,
       country: e.country,
       city: e.city,
