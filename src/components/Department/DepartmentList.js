@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
 
-const dataJson = ["Department name:", "Department Teams:", "Director:"];
+const dataJson = ["Department name:", "Department Teams:", " Director:"];
 
 function DepartmentList() {
   const { t } = useTranslation();

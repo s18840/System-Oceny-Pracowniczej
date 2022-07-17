@@ -17,7 +17,12 @@ function LoginForm() {
     console.log("logowanie",data)
     history.push("/dashboard")
     //axios.post("https://localhost:5001/api/Account/login", data).then(({data}) => console.log(data));
-    axios.post("https://localhost:5001/api/Account/login", data).then(({data}) => setContext(data));
+    axios.post("https://localhost:5001/api/Account/login", data).then(({data}) => 
+    {setContext(data);    
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("avatar", data.avatar);
+    localStorage.setItem("employeeId", data.employeeId);
+    localStorage.setItem("username", data.username);});
   };
 
 
