@@ -13,18 +13,21 @@ import {
   DescriptionField,
   NewButton,
   EditButton,
-  AddButton,
+  AddTeamButton,
+  TeamsWrapper,
+  TableTeams
 } from "../../styles/GlobalStyle";
 import { TextField } from "../../styles/GlobalStyle";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
+import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 
 const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
-    <AddButton
+    <AddTeamButton
       onClick={() => {
         props.onClick();
         setAdded((prev) => !prev);
@@ -32,11 +35,11 @@ const Button = (props) => {
       disabled={added ? true : false}
     >
       {added ? "Added" : "Add"}
-    </AddButton>
+    </AddTeamButton>
   );
 };
 
-const NewCompetence = (props) => {
+const NewTeam = (props) => {
   const { t } = useTranslation();
   const {
     register,
@@ -45,11 +48,41 @@ const NewCompetence = (props) => {
   } = useForm();
   const submitForm = (data) => {
     console.log(data);
+    const team = prepareTeam(data);
+    axios.post(`https://localhost:5001/api/Dto/teams/add`, team, 
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
   };
   const [comps, setComps] = useState([]);
   const [emps, setEmps] = useState([]);
   const [mans, setMans] = useState([]);
+  const [deps, setDeps] = useState([]);
+  const [comps1, setComps1] = useState([]);
+  const [emps1, setEmps1] = useState([]);
+  const [mans1, setMans1] = useState();
+  const [deps1, setDeps1] = useState();
+  const [abbreviation, setAbreviation] = useState("");
   const [context, setContext] = useContext(Context);
+  //setAbreviation(e.name.subString(0,2))
+  const prepareTeam = (e) => {
+    console.log(e.name)
+    setAbreviation(e.name.substring(0,2));
+    const obj = {
+      teamId : 0,
+      name : e.name,
+      abbreviation : e.name.substring(0,2),
+      departmentId : deps1,
+      managerId : mans1,
+      employeeIDS: emps1,
+      competenceIDS: comps1
+    };
+    console.log(obj)
+
+    return obj;
+  };
   useEffect(() => {
     context &&
       axios
@@ -89,51 +122,87 @@ const NewCompetence = (props) => {
           console.log(data);
         });
   }, [context]);
+  useEffect(() => {
+    context &&
+      axios
+        .get(`https://localhost:5001/api/Department`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then(({ data }) => {
+          setDeps(data);
+          console.log(data);
+        });
+  }, [context]);
+
   return (
-    <>
+    <FormWrapper onSubmit={handleSubmit(submitForm)}>
+      {console.log("Managerowie ", mans1, "Pracownicy", emps1, "Kompetencje ",comps1, "Departament ",deps1)}
       <PersonalDataHeadingText>
         {t("Creating new team")}
         <NewButton
           onClick={() => {
-            console.log("Managerowie ", mans, "Pracownicy", emps, "Kompetencje ",comps);
+            {console.log("Managerowie ", mans1, "Pracownicy", emps1, "Kompetencje ",comps1, "Departament ",deps1)}
             //window.location.href = "/teamList";
           }}
         >
-          {t("Add")}
+          {"Add"}
         </NewButton>
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
           <Heading>
-            <ProfileDataText>{t("Name") + ": "}</ProfileDataText>
-            <InputField placeholder="np: ING Team"></InputField>
+            <ProfileDataText>{"Name" + ": "}</ProfileDataText>
+            <InputField placeholder="ING Team" {...register("name", { required: true })}></InputField>
           </Heading>
           <Heading>
-            <ProfileDataText>{t("Add managers") + ": "}</ProfileDataText>
+            <ProfileDataText>{"Add Department" + ": "}</ProfileDataText>
           </Heading>
-          <MarkersWrapper>
-            <TableMarkers className="table">
-              {mans?.map((el) => (
+          <TeamsWrapper>
+            <TableTeams className="table">
+              {deps?.map((el) => (
                 <tr>
                   <td>
                     <RowLi>
-                      {el.firstName + " " + el.lastName}
+                      {el.name}
                       <Button
                         onClick={() => {
-                          setMans((prev) => [...prev, el.personalNumber]);
+                          setDeps1(el.departmentId);
                         }}
                       />
                     </RowLi>
                   </td>
                 </tr>
               ))}
-            </TableMarkers>
-          </MarkersWrapper>
+            </TableTeams>
+          </TeamsWrapper>
           <Heading>
-            <ProfileDataText>{t("Add Employees") + ": "}</ProfileDataText>
+            <ProfileDataText>{"Add manager" + ": "}</ProfileDataText>
           </Heading>
-          <MarkersWrapper>
-            <TableMarkers className="table">
+          <TeamsWrapper>
+            <TableTeams className="table">
+              {mans.map((el) => (
+                <tr>
+                  <td>
+                    <RowLi>
+                      {el.firstName + " " + el.lastName}
+                      <Button
+                        onClick={() => {
+                          setMans1(el.personalNumber);
+                        }}
+                      />
+                    </RowLi>
+                  </td>
+                </tr>
+              ))}
+            </TableTeams>
+          </TeamsWrapper>
+          <Heading>
+            <ProfileDataText>{"Add Employees" + ": "}</ProfileDataText>
+          </Heading>
+          <TeamsWrapper>
+            <TableTeams className="table">
               {emps?.map((el) => (
                 <tr>
                   <td>
@@ -141,22 +210,22 @@ const NewCompetence = (props) => {
                       {el.firstName + " " + el.lastName}
                       <Button
                         onClick={() => {
-                          setEmps((prev) => [...prev, el.personal_Number]);
+                          setEmps1((prev) => [...prev, el.personalNumber]);
                         }}
                       />
                     </RowLi>
                   </td>
                 </tr>
               ))}
-            </TableMarkers>
-          </MarkersWrapper>
+            </TableTeams>
+          </TeamsWrapper>
           <Heading>
             <ProfileDataText>
-              {t("Add required competences") + ": "}
+              {"Add required competences" + ": "}
             </ProfileDataText>
           </Heading>
-          <MarkersWrapper>
-            <TableMarkers className="table">
+          <TeamsWrapper>
+            <TableTeams className="table">
               {comps?.map((el) => (
                 <tr>
                   <td>
@@ -164,19 +233,19 @@ const NewCompetence = (props) => {
                       {el.name}
                       <Button
                         onClick={() => {
-                          setComps((prev) => [...prev, el.competence_Id]);
+                          setComps1((prev) => [...prev, el.competenceId]);
                         }}
                       />
                     </RowLi>
                   </td>
                 </tr>
               ))}
-            </TableMarkers>
-          </MarkersWrapper>
+            </TableTeams>
+          </TeamsWrapper>
         </InsideWrapper>
       </Wrapper>
-    </>
+    </FormWrapper>
   );
 };
 
-export default NewCompetence;
+export default NewTeam;

@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import useApi from "../api/useApi";
 import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
-import { InputField} from "../styles/GlobalStyle";
+import { InputField,DescriptionInputField} from "../styles/GlobalStyle";
 
 function ModalCompetences({ closeModal, addMarker }){
     const [context, setContext] = useContext(Context);
@@ -93,7 +93,7 @@ function ModalCompetences({ closeModal, addMarker }){
             </div>
             <div>
               <ProfileDataText>{"Marker description"}</ProfileDataText>
-              <InputField
+              <DescriptionInputField
                 {...register("description", { required: true })}
                 style={
                   !formReady

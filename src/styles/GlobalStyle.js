@@ -30,6 +30,18 @@ export const InputField = styled.input`
   max-lines: 1;
 `
 
+export const DescriptionInputField = styled.input`
+  width: ${(props) => props.width};
+  height: 200px;
+  font-size: 30px;
+  line-height: 40px;
+  border-radius: 44px;
+  border: 2px solid #cccccc;
+  box-sizing: border-box;
+  padding-left: 20px;
+  max-lines:5;
+`
+
 export const TextField = styled.textarea`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -112,6 +124,26 @@ export const EditButton = styled.button`
   font-family: "Ubuntu";
 `;
 export const AddButton = styled.button`
+  width: 100px;
+  height: 40px;
+  background-color: #efaa8c;
+  color: white;
+  border: 2px solid #cccccc;
+  border-radius: 45px;
+  font-size: 24px;
+  font-family: "Ubuntu";
+  justify-self: center;
+  align-self: center;
+  margin-left: 110px;
+  :hover {background-color: #EA6E38}
+
+  :active {
+    background-color: #EA6E38;
+    transform: translateY(1px);
+  }
+`;
+
+export const AddTeamButton = styled.button`
   width: 100px;
   height: 40px;
   background-color: #efaa8c;
@@ -253,7 +285,14 @@ export const MarkersWrapper = styled.div`
   border-radius: 20px;
   border-style: solid;
   width: 35%;
-  min-width: 400px;
+  min-width: 500px;
+`;
+export const TeamsWrapper = styled.div`
+  border: 0.25px gray;
+  border-radius: 20px;
+  border-style: solid;
+  width: 35%;
+  min-width: 500px;
 `;
 export const MarkersSmallWrapper = styled.div`
   border: 0.25px gray;
@@ -300,6 +339,13 @@ export const TableMarkers = styled.table`
   font-size: 24px;
   font-weight: bold;
   color: #522d8a;
+`;
+
+export const TableTeams = styled.table`
+  font-size: 24px;
+  font-weight: bold;
+  color: #522d8a;
+  width: 100%;
 `;
 
 export const RowLi = styled.li`

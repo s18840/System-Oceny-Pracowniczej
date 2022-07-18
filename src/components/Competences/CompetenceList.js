@@ -38,7 +38,7 @@ function CompetenceList() {
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
-      <EditButton>Edit</EditButton>
+      {/* <EditButton>Edit</EditButton> */}
       <NewButton onClick={event =>  window.location.href='/newCompetence'}>New</NewButton>
       <TableInfo className="table">
       <thead>
