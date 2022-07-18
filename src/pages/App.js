@@ -31,6 +31,7 @@ import NewRole from "../components/Role/NewRole";
 import NewRoleView from "./NewRoleView";
 import Settings from "./Settings";
 import Grades from "./Grades";
+import Targets from './Targets';
 import { Context } from "./Context.js";
 function App() {
   //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
@@ -39,31 +40,31 @@ function App() {
   return (
     <Context.Provider value={[context, setContext]}>
       <Router>
-        <GlobalStyle />
+        <GlobalStyle/>
         <Switch>
           <Route exact path="/" component={WelcomePage}>
             <Redirect to="/welcome" />
           </Route>
           <Route exact path="/welcome" component={WelcomePage}>
-            <WelcomePage />
+            <WelcomePage/>
           </Route>
           <Route exact path="/dashboard" component={Dashboard}>
-            <Dashboard />
+            <Dashboard/>
           </Route>
           <Route exact path="/profile" component={ProfilePage}>
             <ProfilePage />
           </Route>
           <Route exact path="/projectList" component={ProjectList}>
-            <Projects />
+            <Projects/>
           </Route>
           <Route exact path="/competenceList" component={CompetenceList}>
-            <Competences />
+            <Competences/>
           </Route>
           <Route exact path="/roleList" component={RolesList}>
-            <Roles />
+            <Roles/>
           </Route>
           <Route exact path="/newCompetence" component={NewCompetence}>
-            <NewCompetenceView />
+            <NewCompetenceView/>
           </Route>
           <Route exact path="/departmentList" component={DepartmentList}>
             <Department />
@@ -88,6 +89,9 @@ function App() {
           </Route>
           <Route exact path="/grades" component={Grades}>
             <Grades />
+          </Route>
+          <Route exact path="/targets">
+            <Targets/>
           </Route>
         </Switch>
       </Router>

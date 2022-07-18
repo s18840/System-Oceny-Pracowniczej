@@ -7,7 +7,7 @@ import {
   PersonalDataHeadingText,
   TableDetailsMarker,
   MarkersTable,
-  MarkersRow,  
+  MarkersRow,
   NewButton,
   EditButton,
 } from '../../styles/GlobalStyle';
