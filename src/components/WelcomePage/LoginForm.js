@@ -73,7 +73,6 @@ function LoginForm() {
         )}
         <Span fontSize="20px"> {t("PASSWD")} </Span>{" "}
         <InputField
-          value={"Pa$$w0rd"}
           {...register("password", {
             required: true,
           })}

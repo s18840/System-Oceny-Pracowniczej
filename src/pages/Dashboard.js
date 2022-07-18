@@ -43,7 +43,7 @@ function Dashboard() {
       <PageWrapper>
         <DashboardWrapper>
           <DashboardContentWrapper>
-            <Title>Witaj, {firstName}</Title>
+            <Title>Hi, {firstName}</Title>
             <SubTitle>grading</SubTitle>
             <NextGrading />
             <SubTitle>your targets</SubTitle>

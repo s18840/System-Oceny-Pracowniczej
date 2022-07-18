@@ -55,7 +55,7 @@ function EmploymentTable() {
         <thead>
           <tr>
             {dataJson.map((title) => (
-              <th>{t(title)}</th>
+              <th>{title}</th>
             ))}
           </tr>
         </thead>

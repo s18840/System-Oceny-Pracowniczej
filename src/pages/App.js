@@ -31,6 +31,7 @@ import NewRole from "../components/Role/NewRole";
 import NewRoleView from "./NewRoleView";
 import Settings from "./Settings";
 import Grades from "./Grades";
+import EmployeeList from "./EmployeeList";
 import Targets from './Targets';
 import { Context } from "./Context.js";
 function App() {
@@ -54,6 +55,9 @@ function App() {
           <Route exact path="/profile" component={ProfilePage}>
             <ProfilePage />
           </Route>
+          {/* <Route exact path="/profile/:id" component={ProfilePage}>
+            <ProfilePage />
+          </Route> */}
           <Route exact path="/projectList" component={ProjectList}>
             <Projects/>
           </Route>
@@ -90,6 +94,8 @@ function App() {
           <Route exact path="/grades" component={Grades}>
             <Grades />
           </Route>
+          <Route exact path="/employees" component={EmployeeList}>
+            <EmployeeList />
           <Route exact path="/targets">
             <Targets/>
           </Route>

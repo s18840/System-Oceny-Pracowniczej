@@ -8,7 +8,7 @@ export const Nav = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   width: 400px;
-  height: 940px;
+  height: 100%;
   font-size: 20px;
   top: 0;
   z-index: 15;

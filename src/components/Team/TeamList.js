@@ -44,17 +44,17 @@ function TeamList() {
   }, [context]);
   return (
     <>
-      <PersonalDataHeadingText>{t("Teams List")}</PersonalDataHeadingText>
+      <PersonalDataHeadingText>{"Teams List"}</PersonalDataHeadingText>
       {/* <EditButton>{t("Edit")}</EditButton> */}
       <NewButton onClick={(event) => (window.location.href = "/newTeam")}>
-        {t("New")}
+        {"New"}
       </NewButton>
       {console.log(teams)}
       <TableInfo className="table">
         <thead>
           <tr>
             {dataJson.map((title) => (
-              <th>{t(title)}</th>
+              <th>{title}</th>
             ))}
           </tr>
         </thead>

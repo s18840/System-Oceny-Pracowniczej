@@ -1,15 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import {
-  DateWrapper,
-  EmploymentTableDateLine,
   Row,
-  TableDetailsDate,
   TableInfo,
+  FormButton,
+  ProfileDataText,
+  AddButton,
+  ModalOpenButton
 } from "../../styles/ProfilePageStyle";
+import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 import { useTranslation } from "react-i18next";
 import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
+import { useForm } from "react-hook-form";
+import { InputField} from "../../styles/GlobalStyle";
+import Modal from "../Modal";
 //const today = new Date();
 
 const dataJson = ["Graduation Date", "Institution", "Degree"];
@@ -20,6 +25,15 @@ function EducationInformation() {
   const [degree, setDegree] = useState(" ");
   const [placeOfEducation, setPlaceOfEducation] = useState(" ");
   const { t } = useTranslation();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange" });
+  const [formReady, setFormReady] = useState(false);
+  const [openModal,setOpenModal] = useState(false);
+
   useEffect(() => {
     context &&
       axios
@@ -53,7 +67,7 @@ function EducationInformation() {
         <thead>
           <tr>
             {dataJson.map((title) => (
-              <th>{t(title)}</th>
+              <th>{title}</th>
             ))}
           </tr>
         </thead>
@@ -71,6 +85,17 @@ function EducationInformation() {
           </Row>
         ))}
       </TableInfo>
+      <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
+        {"Add"}
+      </ModalOpenButton>
+      {openModal && <Modal closeModal={setOpenModal} 
+      style={{    
+        width: 100,
+        height: 100,
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column"
+        }} />}
     </>
   );
 }

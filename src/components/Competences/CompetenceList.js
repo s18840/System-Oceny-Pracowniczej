@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import {
   TableInfo,
   Row,
@@ -11,74 +12,59 @@ import {
   NewButton,
   EditButton,
 } from '../../styles/GlobalStyle';
+import { useTranslation } from "react-i18next";
+import useApi from "../../api/useApi";
+import { Context } from "../../pages/Context";
 
-const dataJson = {
-  titles: ["Competence name:", "Markers required", "Description"],
-  content: [
-    {
-      competenceName: "Competence 1",
-      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
-    },
-    {
-      competenceName: "Competence 2",
-      markersRequired: ["Marker 2"],
-    },
-    {
-      competenceName: "Competence 3",
-      markersRequired: ["Marker 11"],
-    },
-    {
-      competenceName: "Competence 4",
-      markersRequired: ["Marker 15"],
-    },
-    {
-      competenceName: "Competence 6",
-      markersRequired: ["Marker 15"],
-    },
-    {
-      competenceName: "Competence 7",
-      markersRequired: ["Marker 22"],
-    },
-    {
-      competenceName: "Competence 8",
-      markersRequired: ["Marker 25"],
-    },
-    {
-      competenceName: "Competence 9",
-      markersRequired: ["Marker 1", "Marker 2", "Marker 3"],
-    },
-  ],
-};
+const dataJson = ["Competence name:", "Markers required", "Description"];
 
 function CompetenceList() {
+  const { t } = useTranslation();
+  const [context, setContext] = useContext(Context);
+  const [competences, setCompetences] = useState();
+  useEffect(() => {
+    context &&
+      axios
+        .get(`https://localhost:5001/api/Dto/comps`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then(({ data }) => {
+          setCompetences(data);
+          console.log(data);
+        });
+  }, [context]);
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
       <EditButton>Edit</EditButton>
       <NewButton onClick={event =>  window.location.href='/newCompetence'}>New</NewButton>
       <TableInfo className="table">
-        <thead>
+      <thead>
           <tr>
-            {dataJson.titles.map((title) => (
+            {dataJson.map((title) => (
               <th>{title}</th>
             ))}
           </tr>
         </thead>
-        {dataJson.content.map((content) => (
+        {console.log(competences)}
+        {competences?.map((content) => (
           <Row>
-            <TableDetailsDate>{content.competenceName}</TableDetailsDate>
+            <TableDetailsDate>{content.name}</TableDetailsDate>
             <TableDetailsMarker>
               <MarkersTable>
-                {content.markersRequired?.map(marker =>(
+                {content.markers?.map(marker =>(
                   <MarkersRow>
-                    {marker}
+                    {marker.name}
                   </MarkersRow>
                 ))}
               </MarkersTable>
             </TableDetailsMarker>
-            <TableDetails>
-              For {content.competenceName}, you will need{" "}
-              {content.markersRequired+" "}.
+            <TableDetails>              
+              <div>
+                {content.description + "."}
+              </div>
             </TableDetails>
           </Row>
         ))}

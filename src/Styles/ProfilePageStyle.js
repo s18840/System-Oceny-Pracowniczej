@@ -209,6 +209,79 @@ export const FormButton = styled.button`
   justify-self: center;
   align-self: center;
 `;
+export const AddButton = styled.input`
+  width: 110px;
+  height: 40px;
+  background-color: #FF4E01;
+  color: white;
+  border-radius: 45px;
+  border: 0;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+  justify-self: center;
+  align-self: center;
+`;
+
+export const ModalButton = styled.button`
+  width: 110px;
+  height: 40px;
+  background-color: #FF4E01;
+  color: white;
+  border-radius: 45px;
+  border: 0;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+  justify-self: center;
+  align-self: center;
+`;
+export const ModalInput = styled.input`
+  width: 110px;
+  height: 40px;
+  background-color: #FF4E01;
+  color: white;
+  border-radius: 45px;
+  border: 0;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+  justify-self: center;
+  align-self: center;
+`;
+
+export const ModalOpenButton = styled.button`
+  width: 110px;
+  height: 40px;
+  background-color: #FF4E01;
+  color: white;
+  border-radius: 45px;
+  border: 0;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+  justify-self: center;
+  align-self: center;
+  position: fixed;
+  right: 20px;
+`;
+
+export const ModalCompetencesOpenButton = styled.button`
+  width: 110px;
+  height: 40px;
+  background-color: #FF4E01;
+  color: white;
+  border-radius: 45px;
+  border: 0;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+  justify-self: center;
+  align-self: center;
+  margin-left: 40px ;
+`;
+export const ModalTitleDiv = styled.div`
+  font-size: 30px;
+  font-weight: bold;
+  color: purple;
+  font-family: 'Ubuntu';
+`;
+
 export const AcceptButton = styled.button`
   grid-row: 1;
   grid-column: 3;
