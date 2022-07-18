@@ -114,11 +114,11 @@ const NewCompetence = (props)=> {
       <Wrapper>
         <InsideWrapper>
           <Heading>
-            <ProfileDataText>{t("Name") + ": "}</ProfileDataText>
+            <ProfileDataText>{"Name" + ": "}</ProfileDataText>
             <InputField placeholder="np: Departament Finansów"></InputField>
           </Heading>
           <Heading>
-            <ProfileDataText>{t("Add Directors") + ": "}</ProfileDataText>
+            <ProfileDataText>{"Add Directors" + ": "}</ProfileDataText>
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
@@ -152,7 +152,7 @@ const NewCompetence = (props)=> {
             </TableMarkers>
           </MarkersWrapper> */}
           <Heading>
-            <ProfileDataText>{t("Add Teams") + ": "}</ProfileDataText>
+            <ProfileDataText>{"Add Teams" + ": "}</ProfileDataText>
           </Heading>
           <MarkersSmallWrapper>
             <TableMarkers className="table">

@@ -106,11 +106,11 @@ function ProfileInfo() {
               {formFirstName + " " + formSurname}
             </ProfileHeaderText>
             <ProfileSubHeaderText>
-              {t("Department") + ": "}
+              {"Department" + ": "}
               <ProfileText>{" " + formDepartment}</ProfileText>
             </ProfileSubHeaderText>
             <ProfileSubHeaderText>
-              {t("Team") + ": "}
+              {"Team" + ": "}
               <ProfileText>{" " + formTeam}</ProfileText>
             </ProfileSubHeaderText>
           </ProfileTextWrapper>
@@ -120,7 +120,7 @@ function ProfileInfo() {
               {formPhoneNumber}
             </ProfileHeaderText>
             <ProfileSubHeaderText>
-              {t("Personal number") + ": "}
+              {"Personal number" + ": "}
               <ProfileText>{" " + formPersonalNumber}</ProfileText>
             </ProfileSubHeaderText>
           </ProfileTextWrapper>
@@ -131,7 +131,7 @@ function ProfileInfo() {
               {formMail}
             </ProfileHeaderText>
             <ProfileSubHeaderText>
-              {t("Status") + ": "}
+              {"Status" + ": "}
               <StatusIcon
                 style={
                   status > 0
@@ -148,19 +148,19 @@ function ProfileInfo() {
           onClick={() => switchType(BASIC_INFO)}
           style={contentType === BASIC_INFO ? activeStyle : {}}
         >
-          {t("Basic Information")}
+          {"Basic Information"}
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EMPLOYMENT_INFO)}
           style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
         >
-          {t("Employment")}
+          {"Employment"}
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EDUCATION_INFO)}
           style={contentType === EDUCATION_INFO ? activeStyle : {}}
         >
-          {t("Education")}
+          {"Education"}
         </ProfileTab>
       </ProfileTabWrapper>
       <ProfileTabBar />

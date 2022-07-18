@@ -142,7 +142,7 @@ function BasicInformation() {
 
   button = (
     <FormButton onClick={switchForm}>
-      {!formReady ? t("Edit") : t("Save")}
+      {!formReady ? "Edit" : "Save"}
     </FormButton>
   );
 
@@ -151,11 +151,11 @@ function BasicInformation() {
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
         <ProfileDetailedInfoWrapper>
           <PersonalDataHeadingText>
-            {t("Personal Data")}
+            {"Personal Data"}
           </PersonalDataHeadingText>
-          <AddressHeadingText>{t("Address")}</AddressHeadingText>
+          <AddressHeadingText>{"Address"}</AddressHeadingText>
           <FirstName>
-            <ProfileDataText>{t("First name")}</ProfileDataText>
+            <ProfileDataText>{"First name"}</ProfileDataText>
             <InputField
               {...register("firstName", { 
                 required: 'Required',
@@ -186,7 +186,7 @@ function BasicInformation() {
             )}
           </FirstName>
           <SecondName>
-            <ProfileDataText>{t("Second name")}</ProfileDataText>
+            <ProfileDataText>{"Second name"}</ProfileDataText>
             <InputField
               {...register("secondName", {maxLength : {
                 value: 32,
@@ -212,7 +212,7 @@ function BasicInformation() {
             )}
           </SecondName>
           <SurName>
-            <ProfileDataText>{t("Surname")}</ProfileDataText>
+            <ProfileDataText>{"Surname"}</ProfileDataText>
             <InputField
               {...register("lastName", { 
                 required: 'Required',
@@ -244,7 +244,7 @@ function BasicInformation() {
           </SurName>
           {/* Walidacja do dorobienia */}
           <DateOfBirth>
-            <ProfileDataText>{t("Date of birth")}</ProfileDataText>
+            <ProfileDataText>{"Date of birth"}</ProfileDataText>
             <InputField
               type="date"
               {...register("birthDate", { required: true })}
@@ -260,7 +260,7 @@ function BasicInformation() {
             )}
           </DateOfBirth>
           <PhoneNumber>
-            <ProfileDataText>{t("Phone number")}</ProfileDataText>
+            <ProfileDataText>{"Phone number"}</ProfileDataText>
             <InputField
               type="number"
               {...register("cellPhoneNumber", { 
@@ -304,7 +304,7 @@ function BasicInformation() {
             ></InputField>
             </Mail>*/}
           <CompanyMail>
-            <ProfileDataText>{t("Company Mail")}</ProfileDataText>
+            <ProfileDataText>{"Company Mail"}</ProfileDataText>
             <InputField
             
               {...register("companyMail", { 
@@ -329,7 +329,7 @@ function BasicInformation() {
             )}
           </CompanyMail>
           <Street>
-            <ProfileDataText>{t("Street")}</ProfileDataText>
+            <ProfileDataText>{"Street"}</ProfileDataText>
             <InputField
               {...register("street", { 
                 required: 'Required',
@@ -360,7 +360,7 @@ function BasicInformation() {
             )}
           </Street>
           <HouseNumber>
-            <ProfileDataText>{t("House number")}</ProfileDataText>
+            <ProfileDataText>{"House number"}</ProfileDataText>
             <InputField
               {...register("buildingNumber", { 
                 required: 'Required',
@@ -391,7 +391,7 @@ function BasicInformation() {
             )}
           </HouseNumber>
           <City>
-            <ProfileDataText>{t("City")}</ProfileDataText>
+            <ProfileDataText>{"City"}</ProfileDataText>
             <InputField
               {...register("city", { 
                 required: 'Required',
@@ -422,7 +422,7 @@ function BasicInformation() {
             )}
           </City>
           <District>
-            <ProfileDataText>{t("Apartment number")}</ProfileDataText>
+            <ProfileDataText>{"Apartment number"}</ProfileDataText>
             <InputField
             type="number"
               {...register("apartmentNumber", { 
@@ -444,7 +444,7 @@ function BasicInformation() {
             )}
           </District>
           <PostalCode>
-            <ProfileDataText>{t("Postal code")}</ProfileDataText>
+            <ProfileDataText>{"Postal code"}</ProfileDataText>
             <InputField
               {...register("postalCode", { 
                 required: 'Required',
@@ -475,7 +475,7 @@ function BasicInformation() {
             )}
           </PostalCode>
           <Country>
-            <ProfileDataText>{t("Country")}</ProfileDataText>
+            <ProfileDataText>{"Country"}</ProfileDataText>
             <InputField
               {...register("country", { 
                 required: 'Required',
