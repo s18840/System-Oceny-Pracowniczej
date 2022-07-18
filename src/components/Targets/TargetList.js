@@ -4,20 +4,29 @@ import {
   AddTargetContainer,
   PlusIcon,
   TargetContainer,
-  TargetDate, TargetImportance, TargetListTitlesWrapper,
-  TargetName, TargetNameTitle,
-  TargetsListWrapper, TargetTitle,
+  TargetDate,
+  TargetImportance,
+  TargetListTitlesWrapper,
+  TargetName,
+  TargetNameTitle,
+  TargetsListWrapper,
+  TargetTitle,
 } from '../../styles/TargetsStyles';
 import {GlobalButton} from '../../styles/GlobalStyle';
 
-const MAX_TARGET_NUMBER = 3;
+let maxTargetAmount = 3;
 
-function TargetList({targetList, switchContent, onAccept}) {
+function TargetList({targetList, switchContent, onAccept, onSelect}) {
   console.log(targetList);
+
+  if(targetList.length > 0 && targetList[0].goalID !== 0){
+    maxTargetAmount = targetList.length
+  }
+
   let addTargetElements = [];
 
   (() => {
-    for (let i = 0; i < MAX_TARGET_NUMBER - targetList.length; i++) {
+    for (let i = 0; i < maxTargetAmount - targetList.length; i++) {
       addTargetElements.push(<AddTargetContainer onClick={switchContent}>
         <PlusIcon/>
       </AddTargetContainer>);
@@ -28,16 +37,16 @@ function TargetList({targetList, switchContent, onAccept}) {
     <>
       <TargetListTitlesWrapper>
         <TargetNameTitle>nazwa celu</TargetNameTitle>
-        <TargetTitle>termin realizacji</TargetTitle>
+        <TargetTitle>kwartał</TargetTitle>
         <TargetTitle>waga realizacji</TargetTitle>
       </TargetListTitlesWrapper>
       <TargetsListWrapper>
         {
-          targetList.map(target => (
-              <TargetContainer>
+          targetList.map((target, index) => (
+              <TargetContainer onClick={(() => onSelect(index))}>
                 <TargetName>{target.name}</TargetName>
-                <TargetDate>{target.endDate}</TargetDate>
-                <TargetImportance>{target.importance}%</TargetImportance>
+                <TargetDate>{target.quarter}</TargetDate>
+                <TargetImportance>{target.importance}</TargetImportance>
               </TargetContainer>
             ),
           )

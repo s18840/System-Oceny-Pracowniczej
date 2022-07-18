@@ -18,6 +18,10 @@ export const PageWrapper = styled.div`
     margin-top: 80px;
 `;
 
+export const ContentWrapper = styled.div`
+  margin: 5%
+`
+
 export const InputWrapper = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
