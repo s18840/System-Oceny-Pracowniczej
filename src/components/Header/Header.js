@@ -63,7 +63,12 @@ const HeaderBar = () => {
   return (
     <HeaderWrapper>
       <HeaderBtnProfileWrapper>
-        <HeaderBtnSignOut to="/welcome">
+        <HeaderBtnSignOut
+          to="/welcome"
+          onClick={() => {
+            localStorage.clear();
+          }}
+        >
           <FaPowerOff />
         </HeaderBtnSignOut>
         <HeaderBtnTol to="/settings">
