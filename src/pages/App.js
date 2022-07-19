@@ -95,15 +95,14 @@ function App() {
           <Route exact path="/grades" component={Grades}>
             <Grades />
           </Route>
-<<<<<<< HEAD
           <Route exact path="/newEmp" component={NewEmpView}>
             <NewEmpView />
-=======
+            </Route>
           <Route exact path="/employees" component={EmployeeList}>
             <EmployeeList />
+            </Route>
           <Route exact path="/targets">
             <Targets/>
->>>>>>> bb6c6a69a7490c184d8b0e25756f724bf07e5070
           </Route>
         </Switch>
       </Router>
