@@ -18,6 +18,17 @@ export const PageWrapper = styled.div`
     margin-top: 80px;
 `;
 
+export const ContentWrapper = styled.div`
+  margin: 5%
+`
+
+export const InputWrapper = styled.div`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  display: flex;
+  flex-direction: column;
+`
+
 export const InputField = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -48,6 +59,13 @@ export const Span = styled.div`
   text-decoration: ${(props) => (props.underlined ? 'underline' : '')};
   margin-left: 15px;
   font-size: ${(props) => props.fontSize};
+  color: #ff4e01;
+`
+export const ErrorsSpan = styled.span`
+  position: absolute;
+  margin-top: -71px;
+  margin-left: 200px;
+  font-size: 20px;
   color: #ff4e01;
 `
 
@@ -303,3 +321,14 @@ export const RowLi = styled.li`
   align-items: center;
   list-style: none;
 `;
+
+export const GlobalButton = styled.button`
+  width: 243px;
+  height: 67px;
+  background-color:  #3d098a;
+  color: white;
+  border-radius: 45px;
+  font-size: 42px;
+  line-height: 67px;
+  text-align: center;
+`

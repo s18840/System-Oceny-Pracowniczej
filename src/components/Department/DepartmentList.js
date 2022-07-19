@@ -37,14 +37,14 @@ function DepartmentList() {
   }, [context]);
   return (
     <>
-      <PersonalDataHeadingText>{t("Department List")}</PersonalDataHeadingText>
+      <PersonalDataHeadingText>{"Department List"}</PersonalDataHeadingText>
       {/*<EditButton>{t("Edit")}</EditButton>*/}
       {/* <NewButton onClick={event =>  window.location.href='/newDepartment'}>{t("New")}</NewButton> */}
       <TableInfo className="table">
         <thead>
           <tr>
             {dataJson.map((title) => (
-              <th>{t(title)}</th>
+              <th>{title}</th>
             ))}
           </tr>
         </thead>
