@@ -38,6 +38,7 @@ function LoginForm() {
         localStorage.setItem("avatar", data.avatar);
         localStorage.setItem("employeeId", data.employeeId);
         localStorage.setItem("username", data.username);
+        localStorage.setItem("roles", data.roles);
         history.push("/dashboard");
       })
       .catch((error) => {

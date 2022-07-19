@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { SidebarLabel, SidebarLink, DropdownLink } from "./NavBarElements";
 const SubMenu = ({ item }) => {
-    const [subnav, setSubnav ] = useState(false)
-    const showSubnav = () => setSubnav(!subnav)
+  const [subnav, setSubnav] = useState(false);
+  const showSubnav = () => setSubnav(!subnav);
   return (
     <>
       <SidebarLink to={item.path} onClick={item.subnav && showSubnav}>
@@ -18,15 +18,16 @@ const SubMenu = ({ item }) => {
             : null}
         </div>
       </SidebarLink>
-      {subnav && item.subnav.map((item,index) => {
-          return(
-              <DropdownLink to ={item.path} key={index}>
-                  {item.icon}
-                <SidebarLabel>{item.title}</SidebarLabel>
-              </DropdownLink>
-          )
-      }
-      )}
+      {subnav &&
+        item.subnav.map((item, index) => {
+          return item.role === "all" ||
+            localStorage.getItem("roles").includes(item.role) ? (
+            <DropdownLink to={item.path} key={index}>
+              {item.icon}
+              <SidebarLabel>{item.title}</SidebarLabel>
+            </DropdownLink>
+          ) : null;
+        })}
     </>
   );
 };

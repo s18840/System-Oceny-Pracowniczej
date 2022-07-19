@@ -31,6 +31,7 @@ import NewRole from "../components/Role/NewRole";
 import NewRoleView from "./NewRoleView";
 import Settings from "./Settings";
 import Grades from "./Grades";
+import NewEmpView from "./NewEmpView";
 import { Context } from "./Context.js";
 function App() {
   //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
@@ -88,6 +89,9 @@ function App() {
           </Route>
           <Route exact path="/grades" component={Grades}>
             <Grades />
+          </Route>
+          <Route exact path="/newEmp" component={NewEmpView}>
+            <NewEmpView />
           </Route>
         </Switch>
       </Router>
