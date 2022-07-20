@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {ClockWrapper, TimeView, DateView} from '../../styles/DashboardStyles';
-import {HighlightText} from '../../styles/GlobalStyle';
-import {useTranslation} from 'react-i18next';
+import React, {useEffect, useState} from "react";
+import {ClockWrapper, TimeView, DateView} from "../../styles/DashboardStyles";
+import {HighlightText} from "../../styles/GlobalStyle";
 
-const addZero = n => n < 10 ? '0' + n : n;
+const addZero = n => n < 10 ? "0" + n : n;
 
 function Clock() {
   const [time, setTime] = useState({time: "00:00:00",dayOfWeek: "monday", date: "date"});
@@ -21,7 +20,7 @@ function Clock() {
     hour = addZero(date.getHours());
     minute = addZero(date.getMinutes());
     second = addZero(date.getSeconds());
-    time = hour + ':' + minute + ':' + second;
+    time = hour + ":" + minute + ":" + second;
 
     dayOfWeek = date.getDay();
     dayOfMonth = addZero(date.getDate());
@@ -40,30 +39,28 @@ function Clock() {
 
   };
 
-  const {t} = useTranslation();
-
   const getDayOfWeekString = (dayOfWeek) => {
     switch(dayOfWeek){
-      case 0:
-        return t('DAY_7')
-      case 1:
-        return t('DAY_1')
-      case 2:
-        return t('DAY_2')
-      case 3:
-        return t('DAY_3')
-      case 4:
-        return t('DAY_4')
-      case 5:
-        return t('DAY_5')
-      case 6:
-        return t('DAY_6')
+    case 0:
+      return "Monday"
+    case 1:
+      return "Tuesday"
+    case 2:
+      return "Wednesday"
+    case 3:
+      return "Thursday"
+    case 4:
+      return "Friday"
+    case 5:
+      return "Saturday"
+    case 6:
+      return "Sunday"
     }
   };
 
   useEffect(() => {
     startClock();
-  }, []);
+  });
 
   return (
     <ClockWrapper>

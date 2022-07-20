@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  
+import {
   Heading,
   PersonalDataHeadingText,
   ProfileDataText,
@@ -10,13 +10,9 @@ import {
   InsideWrapper,
   TableMarkers,
   RowLi,
-  DescriptionField,
   NewButton,
   AddButton,
-} from '../../styles/GlobalStyle';
-import { TextField } from "../../styles/GlobalStyle";
-import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
+} from "../../styles/GlobalStyle";
 
 const dataJson = {
   content: [
@@ -40,30 +36,7 @@ const dataJson = {
     },
   ],
 };
-/*
-const dataJsonEmp = {
-  content: [
-    {
-      emp: "Andrzej Kowalski",
-    },
-    {
-      emp: "Antek Król",
-    },
-    {
-      emp: "Anna Zbojna",
-    },
-    {
-      emp: "Andrzej Kowalski",
-    },
-    {
-      emp: "Antek Król",
-    },
-    {
-      emp: "Anna Zbojna",
-    },
-  ],
-};
-*/
+
 const dataJsonDir = {
   content: [
     {
@@ -72,8 +45,6 @@ const dataJsonDir = {
     {
       dir: "Joanna Bajko",
     },
-
-
   ],
 };
 
@@ -91,78 +62,52 @@ const Button = (props) => {
   );
 };
 
-const NewCompetence = (props)=> {
-  const { t } = useTranslation();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const submitForm = (data) => {
-    console.log(data);
-  };
+const NewCompetence = () => {
+
   const { content } = dataJson;
   const [marks, setMarks] = useState([]);
-  //const [emps, setEmps] = useState([]);
   const [dirs, setDirs] = useState([]);
   return (
     <>
       <PersonalDataHeadingText>
-        {t("Creating new department")}
-        <NewButton onClick={() => {alert(marks.toString()+"\n"+dirs.toString());window.location.href='/departmentList'}}>{t("Add")}</NewButton>
+        Creating new department
+        <NewButton onClick={() => {alert(marks.toString()+"\n"+dirs.toString());window.location.href="/departmentList"}}>Add</NewButton>
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
           <Heading>
-            <ProfileDataText>{"Name" + ": "}</ProfileDataText>
-            <InputField placeholder="np: Departament Finansów"></InputField>
+            <ProfileDataText>Name: </ProfileDataText>
+            <InputField placeholder="np: Departament Finansów"/>
           </Heading>
           <Heading>
-            <ProfileDataText>{"Add Directors" + ": "}</ProfileDataText>
+            <ProfileDataText>Add Directors: </ProfileDataText>
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
               {dataJsonDir.content.map((el) => (
                 <tr>
                   <td>
-                      <RowLi>
-                        {el.dir}
-                        <Button onClick={() => {setDirs((prev) => [...prev, el.dir])}}/> 
-                      </RowLi>
+                    <RowLi>
+                      {el.dir}
+                      <Button onClick={() => {setDirs((prev) => [...prev, el.dir])}}/>
+                    </RowLi>
                   </td>
                 </tr>
               ))}
             </TableMarkers>
           </MarkersWrapper>
-          {/* <Heading>
-            <ProfileDataText>{t("Add Employees") + ": "}</ProfileDataText>
-          </Heading>
-          <MarkersWrapper>
-            <TableMarkers className="table">
-              {dataJsonEmp.content.map((el) => (
-                <tr>
-                  <td>
-                      <RowLi>
-                        {el.emp}
-                        <Button onClick={() => {setEmps((prev) => [...prev, el.emp])}}/> 
-                      </RowLi>
-                  </td>
-                </tr>
-              ))}
-            </TableMarkers>
-          </MarkersWrapper> */}
           <Heading>
-            <ProfileDataText>{"Add Teams" + ": "}</ProfileDataText>
+            <ProfileDataText>Add Teams: </ProfileDataText>
           </Heading>
           <MarkersSmallWrapper>
             <TableMarkers className="table">
               {content.map((el) => (
                 <tr>
                   <td>
-                      <RowLi>
-                        {el.team}
-                        <Button onClick={() => {setMarks((prev) => [...prev, el.team])}}/> 
-                      </RowLi>
+                    <RowLi>
+                      {el.team}
+                      <Button onClick={() => {setMarks((prev) => [...prev, el.team])}}/>
+                    </RowLi>
                   </td>
                 </tr>
               ))}

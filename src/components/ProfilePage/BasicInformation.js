@@ -1,17 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 import { InputField, ErrorsSpan } from "../../styles/GlobalStyle";
-import useApi from "../../api/useApi";
 import {
   AddressHeadingText,
   City,
   Country,
   DateOfBirth,
   District,
-  FamilyName,
   FirstName,
   HouseNumber,
   PersonalDataHeadingText,
@@ -23,28 +20,19 @@ import {
   SurName,
   FormButton,
   PhoneNumber,
-  Mail,
   CompanyMail,
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
 
 function BasicInformation() {
-  const [context, setContext] = useContext(Context);
-  const [employee, setEmployee] = useState();
-  const [firstName, setFirstName] = useState(" ");
-  const [secondName, setSecondName] = useState(" ");
-  const [lastName, setLastName] = useState(" ");
-  const [birthDate, setBirthDate] = useState(" ");
-  const [street, setStreet] = useState(" ");
-  const [buildingNumber, setBuildingNumber] = useState(" ");
-  const [apartmentNumber, setApartmentNumber] = useState();
-  const [city, setCity] = useState(" ");
-  const [postalCode, setPostalCode] = useState(" ");
-  const [country, setCountry] = useState(" ");
-  const [cellPhoneNumber, setCellPhoneNumber] = useState(" ");
-  const [companyMail, setCompanyMail] = useState(" ");
-  const [email, setEmail] = useState(" ");
-  const { t } = useTranslation();
+  const [context] = useContext(Context);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange" });
+
   useEffect(() => {
     context &&
       axios
@@ -59,7 +47,6 @@ function BasicInformation() {
           }
         )
         .then(({ data }) => {
-          setEmployee(data);
           setValue("firstName", data.firstName, { shouldValidate: true });
           setValue("secondName", data.secondName ? data.secondName : null, {
             shouldValidate: true,
@@ -89,14 +76,8 @@ function BasicInformation() {
             shouldValidate: true,
           });
         });
-  }, [context]);
+  }, [context, setValue]);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
   const [formReady, setFormReady] = useState(false);
 
   const switchForm = () => {
@@ -129,7 +110,7 @@ function BasicInformation() {
       const employeeReady = prepareUser(data);
       axios.put(`https://localhost:5001/api/Dto/emp/${localStorage.getItem(
         "employeeId"
-      )}`, employeeReady, 
+      )}`, employeeReady,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -151,22 +132,22 @@ function BasicInformation() {
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
         <ProfileDetailedInfoWrapper>
           <PersonalDataHeadingText>
-            {"Personal Data"}
+            Personal Data
           </PersonalDataHeadingText>
-          <AddressHeadingText>{"Address"}</AddressHeadingText>
+          <AddressHeadingText>Address</AddressHeadingText>
           <FirstName>
-            <ProfileDataText>{"First name"}</ProfileDataText>
+            <ProfileDataText>First name</ProfileDataText>
             <InputField
-              {...register("firstName", { 
-                required: 'Required',
+              {...register("firstName", {
+                required: "Required",
                 maxLength : {
                   value: 32,
-                  message: 'Too long name'
+                  message: "Too long name"
                 },
                 pattern: {
                   value: /^[a-zA-Z\s]*$/,
-                  message: 'Provide correct name'
-                  } 
+                  message: "Provide correct name"
+                }
               })}
               disabled={!formReady}
               style={
@@ -186,17 +167,17 @@ function BasicInformation() {
             )}
           </FirstName>
           <SecondName>
-            <ProfileDataText>{"Second name"}</ProfileDataText>
+            <ProfileDataText>Second name</ProfileDataText>
             <InputField
               {...register("secondName", {maxLength : {
                 value: 32,
-                message: 'Too long name'
+                message: "Too long name"
               },
               pattern: {
                 value: /^[a-zA-Z\s]*$/,
-                message: 'Provide correct name'
-                } 
-            })}
+                message: "Provide correct name"
+              }
+              })}
               disabled={!formReady}
               style={
                 !formReady
@@ -212,18 +193,18 @@ function BasicInformation() {
             )}
           </SecondName>
           <SurName>
-            <ProfileDataText>{"Surname"}</ProfileDataText>
+            <ProfileDataText>Surname</ProfileDataText>
             <InputField
-              {...register("lastName", { 
-                required: 'Required',
+              {...register("lastName", {
+                required: "Required",
                 maxLength : {
                   value: 64,
-                  message: 'Too long surname'
+                  message: "Too long surname"
                 },
                 pattern: {
                   value: /^[a-zA-Z\s]*$/,
-                  message: 'Provide correct surname'
-                  } 
+                  message: "Provide correct surname"
+                }
               })}
               disabled={!formReady}
               style={
@@ -244,7 +225,7 @@ function BasicInformation() {
           </SurName>
           {/* Walidacja do dorobienia */}
           <DateOfBirth>
-            <ProfileDataText>{"Date of birth"}</ProfileDataText>
+            <ProfileDataText>Date of birth</ProfileDataText>
             <InputField
               type="date"
               {...register("birthDate", { required: true })}
@@ -256,23 +237,23 @@ function BasicInformation() {
               }
             />
             {errors.birthDate && errors.birthDate.type === "required" && (
-              <ErrorsSpan font-size="20" style={{ color: "red" }}>{"required"}</ErrorsSpan>
+              <ErrorsSpan font-size="20" style={{ color: "red" }}>required</ErrorsSpan>
             )}
           </DateOfBirth>
           <PhoneNumber>
-            <ProfileDataText>{"Phone number"}</ProfileDataText>
+            <ProfileDataText>Phone number</ProfileDataText>
             <InputField
               type="number"
-              {...register("cellPhoneNumber", { 
-                required: 'Required',
+              {...register("cellPhoneNumber", {
+                required: "Required",
                 maxLength : {
                   value: 9,
-                  message: 'Number is too long'
+                  message: "Number is too long"
                 },
                 minLength : {
                   value: 9,
-                  message: 'Number is too short'
-                } 
+                  message: "Number is too short"
+                }
               })}
               disabled={!formReady}
               style={
@@ -282,7 +263,7 @@ function BasicInformation() {
               }
             />
             {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "required" && (
-              <ErrorsSpan font-size="20" style={{ color: "red" }}>{"required"}</ErrorsSpan>
+              <ErrorsSpan font-size="20" style={{ color: "red" }}>required</ErrorsSpan>
             )}
             {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
@@ -304,15 +285,15 @@ function BasicInformation() {
             ></InputField>
             </Mail>*/}
           <CompanyMail>
-            <ProfileDataText>{"Company Mail"}</ProfileDataText>
+            <ProfileDataText>Company Mail</ProfileDataText>
             <InputField
-            
-              {...register("companyMail", { 
-                required: 'Required',
+
+              {...register("companyMail", {
+                required: "Required",
                 pattern: {
-                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                message: 'It is not email'
-                } 
+                  value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                  message: "It is not email"
+                }
               })}
               disabled={!formReady}
               style={
@@ -329,18 +310,18 @@ function BasicInformation() {
             )}
           </CompanyMail>
           <Street>
-            <ProfileDataText>{"Street"}</ProfileDataText>
+            <ProfileDataText>Street</ProfileDataText>
             <InputField
-              {...register("street", { 
-                required: 'Required',
+              {...register("street", {
+                required: "Required",
                 maxLength : {
                   value: 30,
-                  message: 'Too long street'
+                  message: "Too long street"
                 },
                 pattern: {
                   value: /^[a-zA-Z\s]*$/,
-                  message: 'Provide correct street'
-                  } 
+                  message: "Provide correct street"
+                }
               })}
               disabled={!formReady}
               style={
@@ -360,18 +341,18 @@ function BasicInformation() {
             )}
           </Street>
           <HouseNumber>
-            <ProfileDataText>{"House number"}</ProfileDataText>
+            <ProfileDataText>House number</ProfileDataText>
             <InputField
-              {...register("buildingNumber", { 
-                required: 'Required',
+              {...register("buildingNumber", {
+                required: "Required",
                 maxLength : {
                   value: 5,
-                  message: 'Too long number'
+                  message: "Too long number"
                 },
                 pattern: {
                   value: /(?!0)\d[0-3]{0,2}[a-zA-Z]{0,2}/,
-                  message: 'Provide correct number'
-                  }  
+                  message: "Provide correct number"
+                }
               })}
               disabled={!formReady}
               style={
@@ -391,18 +372,18 @@ function BasicInformation() {
             )}
           </HouseNumber>
           <City>
-            <ProfileDataText>{"City"}</ProfileDataText>
+            <ProfileDataText>City</ProfileDataText>
             <InputField
-              {...register("city", { 
-                required: 'Required',
+              {...register("city", {
+                required: "Required",
                 maxLength : {
                   value: 20,
-                  message: 'Too long city'
+                  message: "Too long city"
                 },
                 pattern: {
                   value: /^[a-zA-Z\s]*$/,
-                  message: 'Provide correct city'
-                  }  
+                  message: "Provide correct city"
+                }
               })}
               disabled={!formReady}
               style={
@@ -422,15 +403,15 @@ function BasicInformation() {
             )}
           </City>
           <District>
-            <ProfileDataText>{"Apartment number"}</ProfileDataText>
+            <ProfileDataText>Apartment number</ProfileDataText>
             <InputField
-            type="number"
-              {...register("apartmentNumber", { 
+              type="number"
+              {...register("apartmentNumber", {
                 maxLength : {
                   value: 5,
-                  message: 'Too big number'
+                  message: "Too big number"
                 },
- 
+
               })}
               disabled={!formReady}
               style={
@@ -444,18 +425,18 @@ function BasicInformation() {
             )}
           </District>
           <PostalCode>
-            <ProfileDataText>{"Postal code"}</ProfileDataText>
+            <ProfileDataText>Postal code</ProfileDataText>
             <InputField
-              {...register("postalCode", { 
-                required: 'Required',
+              {...register("postalCode", {
+                required: "Required",
                 maxLength : {
                   value: 10,
-                  message: 'Too long code'
+                  message: "Too long code"
                 },
                 pattern: {
                   value: /\d{2}-\d{3}/,
-                  message: 'Provide correct code'
-                  }  
+                  message: "Provide correct code"
+                }
               })}
               disabled={!formReady}
               style={
@@ -475,18 +456,18 @@ function BasicInformation() {
             )}
           </PostalCode>
           <Country>
-            <ProfileDataText>{"Country"}</ProfileDataText>
+            <ProfileDataText>Country</ProfileDataText>
             <InputField
-              {...register("country", { 
-                required: 'Required',
+              {...register("country", {
+                required: "Required",
                 maxLength : {
                   value: 20,
-                  message: 'Too long country'
+                  message: "Too long country"
                 },
                 pattern: {
                   value: /^[a-zA-Z\s]*$/,
-                  message: 'Provide correct country'
-                  }  
+                  message: "Provide correct country"
+                }
               })}
               disabled={!formReady}
               style={

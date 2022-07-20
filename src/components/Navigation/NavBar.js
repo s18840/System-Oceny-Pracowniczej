@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Nav, NavLogo, NavMenu } from "./NavBarElements";
 import { NavBarData } from "./NavBarData";
 import SubMenu from "./SubMenu";
 
 const Navbar = () => {
-  const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
   return (
     <Nav>
       <NavLogo to="/dashboard">

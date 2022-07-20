@@ -10,15 +10,9 @@ import {
   InsideWrapper,
   TableMarkers,
   RowLi,
-  DescriptionField,
   NewButton,
-  EditButton,
   AddButton,
 } from "../../styles/GlobalStyle";
-import { TextField } from "../../styles/GlobalStyle";
-import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
-import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
 
 const Button = (props) => {
@@ -36,27 +30,19 @@ const Button = (props) => {
   );
 };
 
-const NewCompetence = (props) => {
-  const { t } = useTranslation();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const submitForm = (data) => {
-    console.log(data);
-  };
+const NewCompetence = () => {
+
   const [comps, setComps] = useState([]);
   const [emps, setEmps] = useState([]);
   const [mans, setMans] = useState([]);
   const [chosenMan, setChosenMan] = useState([]);
   const [chosenEmp, setChosenEmp] = useState([]);
   const [chosenCom, setChosenCom] = useState([]);
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Employee/avaiMana`, {
+        .get("https://localhost:5001/api/Employee/avaiMana", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -69,7 +55,7 @@ const NewCompetence = (props) => {
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Employee/avaiEmps`, {
+        .get("https://localhost:5001/api/Employee/avaiEmps", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -82,7 +68,7 @@ const NewCompetence = (props) => {
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Competence`, {
+        .get("https://localhost:5001/api/Competence", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -95,24 +81,24 @@ const NewCompetence = (props) => {
   return (
     <>
       <PersonalDataHeadingText>
-        {t("Creating new team")}
+        Creating new team
         <NewButton
           onClick={() => {
             console.log("Managerowie ", chosenMan, "Pracownicy", chosenEmp, "Kompetencje ",chosenCom);
             //window.location.href = "/teamList";
           }}
         >
-          {t("Add")}
+          Add
         </NewButton>
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
           <Heading>
-            <ProfileDataText>{t("Name") + ": "}</ProfileDataText>
+            <ProfileDataText>Name: </ProfileDataText>
             <InputField placeholder="np: ING Team"></InputField>
           </Heading>
           <Heading>
-            <ProfileDataText>{t("Add managers") + ": "}</ProfileDataText>
+            <ProfileDataText>Add managers: </ProfileDataText>
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
@@ -133,7 +119,7 @@ const NewCompetence = (props) => {
             </TableMarkers>
           </MarkersWrapper>
           <Heading>
-            <ProfileDataText>{t("Add Employees") + ": "}</ProfileDataText>
+            <ProfileDataText>Add employees: </ProfileDataText>
           </Heading>
           <MarkersWrapper>
             <TableMarkers className="table">
@@ -155,7 +141,7 @@ const NewCompetence = (props) => {
           </MarkersWrapper>
           <Heading>
             <ProfileDataText>
-              {t("Add required competences") + ": "}
+              Add required competences:
             </ProfileDataText>
           </Heading>
           <MarkersWrapper>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   AcceptButtonWrapper,
   AddTargetContainer,
@@ -11,8 +11,8 @@ import {
   TargetNameTitle,
   TargetsListWrapper,
   TargetTitle,
-} from '../../styles/TargetsStyles';
-import {GlobalButton} from '../../styles/GlobalStyle';
+} from "../../styles/TargetsStyles";
+import {GlobalButton} from "../../styles/GlobalStyle";
 
 let maxTargetAmount = 3;
 
@@ -43,12 +43,12 @@ function TargetList({targetList, switchContent, onAccept, onSelect}) {
       <TargetsListWrapper>
         {
           targetList.map((target, index) => (
-              <TargetContainer onClick={(() => onSelect(index))}>
-                <TargetName>{target.name}</TargetName>
-                <TargetDate>{target.quarter}</TargetDate>
-                <TargetImportance>{target.importance}</TargetImportance>
-              </TargetContainer>
-            ),
+            <TargetContainer onClick={(() => onSelect(index))}>
+              <TargetName>{target.name}</TargetName>
+              <TargetDate>{target.quarter}</TargetDate>
+              <TargetImportance>{target.importance}</TargetImportance>
+            </TargetContainer>
+          ),
           )
         }
         {addTargetElements}

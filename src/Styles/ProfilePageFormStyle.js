@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import styled from "styled-components"
 export const InputField = styled.input`
   width: ${(props) => props.width};
   height: ${(props) => props.height};

@@ -6,12 +6,12 @@ import ProfileInfo from "../components/ProfilePage/ProfileInfoDiv";
 
 function ProfilePage() {
   return (
-<>
+    <>
       <NavBar/>
       <Header/>
       <Footer/>
       <ProfileInfo/>
-</>
+    </>
 
   );
 }

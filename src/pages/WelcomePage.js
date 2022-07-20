@@ -1,16 +1,14 @@
-import React from 'react';
-import {Link} from 'react-scroll';
-import {useTranslation} from 'react-i18next';
-import logo from '../assets/img/feeDBack_logo.png';
-import grade_1 from '../assets/img/Grade_A+.png';
-import grade_2 from '../assets/img/Grade_C.png';
-import grade_3 from '../assets/img/Grade_B.png';
-import about_img from '../assets/img/about_img.png';
-import LoginForm from '../components/WelcomePage/LoginForm';
-import WelcomeNav from '../components/WelcomePage/WelcomeNav';
-import ContactForm from '../components/WelcomePage/ContactForm';
-import ContactInfo from '../components/WelcomePage/ContactInfo';
-import {HighlightText, Title} from '../styles/GlobalStyle';
+import React from "react";
+import {Link} from "react-scroll";
+import logo from "../assets/img/feeDBack_logo.png";
+import grade_1 from "../assets/img/Grade_A+.png";
+import grade_2 from "../assets/img/Grade_C.png";
+import grade_3 from "../assets/img/Grade_B.png";
+import about_img from "../assets/img/about_img.png";
+import LoginForm from "../components/WelcomePage/LoginForm";
+import WelcomeNav from "../components/WelcomePage/WelcomeNav";
+import ContactInfo from "../components/WelcomePage/ContactInfo";
+import {HighlightText, Title} from "../styles/GlobalStyle";
 import {
   AboutInfoWrapper,
   AboutWrapper,
@@ -22,10 +20,9 @@ import {
   Logo,
   WelcomeTextWrapper,
   WelcomeTopWrapper,
-} from '../styles/WelcomePageStyle';
+} from "../styles/WelcomePageStyle";
 
 function WelcomePage() {
-  const {t} = useTranslation();
 
   return (
     <>
@@ -49,7 +46,7 @@ function WelcomePage() {
       <AboutWrapper>
         <ContactRightSide>
           <Title id="About" marginLeft="150px">
-            {t('ABOUT')}
+            About
           </Title>
           <AboutInfoWrapper>
             {/* TODO make text with translation */}
@@ -75,14 +72,13 @@ function WelcomePage() {
         <ContactInfo/>
         <ContactRightSide>
           <Title id="Contact" textAligment="right" marginRight="150px">
-            {t('CONTACT')}
+            Contact
           </Title>
-          <ContactForm/>
         </ContactRightSide>
       </ConctactContentWrapper>
       <HomeDiv>
         <Link smooth spy to="top">
-          {t('HOME')}
+          Home
         </Link>
       </HomeDiv>
       <Footer/>

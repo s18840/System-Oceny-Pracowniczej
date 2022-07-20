@@ -1,12 +1,3 @@
-import React from 'react'
-
-// class Quarter{
-//   constructor(label, year) {
-//     this.label = label + year.toString()
-//     this.start = new Date()
-//   }
-// }
-
 const currentYear = new Date().getFullYear()
 
 const Q1 = {label: `Q1${currentYear}`, start: new Date(currentYear, 0, 1), end: new Date(currentYear, 2, 31)}
@@ -15,8 +6,6 @@ const Q3 = {label: `Q3${currentYear}`, start: new Date(currentYear, 6, 1), end: 
 const Q4 = {label: `Q4${currentYear}`, start: new Date(currentYear, 9, 1), end: new Date(currentYear, 11, 31)}
 
 const quarters = [Q1, Q2, Q3, Q4]
-
-
 
 function getCurrentQuarter(){
 
@@ -30,9 +19,5 @@ function getCurrentQuarter(){
 
   return result
 }
-
-// function labelToQuarter(label){
-//
-// }
 
 export default getCurrentQuarter

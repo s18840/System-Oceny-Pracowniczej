@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -56,7 +56,7 @@ export const TextField = styled.textarea`
 export const Span = styled.div`
   margin-top: 5px;
   margin-bottom: 5px;
-  text-decoration: ${(props) => (props.underlined ? 'underline' : '')};
+  text-decoration: ${(props) => (props.underlined ? "underline" : "")};
   margin-left: 15px;
   font-size: ${(props) => props.fontSize};
   color: #ff4e01;
