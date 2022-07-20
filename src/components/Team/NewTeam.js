@@ -18,7 +18,6 @@ import {
   TableTeams
 } from "../../styles/GlobalStyle";
 import { TextField } from "../../styles/GlobalStyle";
-import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
@@ -40,7 +39,6 @@ const Button = (props) => {
 };
 
 const NewTeam = (props) => {
-  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -60,10 +58,10 @@ const NewTeam = (props) => {
   const [emps, setEmps] = useState([]);
   const [mans, setMans] = useState([]);
   const [deps, setDeps] = useState([]);
-  const [comps1, setComps1] = useState([]);
-  const [emps1, setEmps1] = useState([]);
-  const [mans1, setMans1] = useState();
-  const [deps1, setDeps1] = useState();
+  const [choosenComps, setChoosenComps] = useState([]);
+  const [choosenEmps, setChoosenEmps] = useState([]);
+  const [choosenMans, setChoosenMans] = useState();
+  const [choosenDeps, setChoosenDeps] = useState();
   const [abbreviation, setAbreviation] = useState("");
   const [context, setContext] = useContext(Context);
   //setAbreviation(e.name.subString(0,2))
@@ -74,10 +72,10 @@ const NewTeam = (props) => {
       teamId : 0,
       name : e.name,
       abbreviation : e.name.substring(0,2),
-      departmentId : deps1,
-      managerId : mans1,
-      employeeIDS: emps1,
-      competenceIDS: comps1
+      departmentId : choosenDeps,
+      managerId : choosenMans,
+      employeeIDS: choosenEmps,
+      competenceIDS: choosenComps
     };
     console.log(obj)
 
@@ -138,26 +136,26 @@ const NewTeam = (props) => {
 
   return (
     <FormWrapper onSubmit={handleSubmit(submitForm)}>
-      {console.log("Managerowie ", mans1, "Pracownicy", emps1, "Kompetencje ",comps1, "Departament ",deps1)}
+      {console.log("Managerowie ", choosenMans, "Pracownicy", choosenEmps, "Kompetencje ",choosenComps, "Departament ",choosenDeps)}
       <PersonalDataHeadingText>
-        {t("Creating new team")}
+        Creating new team
         <NewButton
           onClick={() => {
-            {console.log("Managerowie ", mans1, "Pracownicy", emps1, "Kompetencje ",comps1, "Departament ",deps1)}
+            {console.log("Managerowie ", choosenMans, "Pracownicy", choosenEmps, "Kompetencje ",choosenComps, "Departament ",choosenDeps)}
             //window.location.href = "/teamList";
           }}
         >
-          {"Add"}
+          Add
         </NewButton>
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
           <Heading>
-            <ProfileDataText>{"Name" + ": "}</ProfileDataText>
+            <ProfileDataText>Name: </ProfileDataText>
             <InputField placeholder="ING Team" {...register("name", { required: true })}></InputField>
           </Heading>
           <Heading>
-            <ProfileDataText>{"Add Department" + ": "}</ProfileDataText>
+            <ProfileDataText>Add Department: </ProfileDataText>
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
@@ -168,7 +166,7 @@ const NewTeam = (props) => {
                       {el.name}
                       <Button
                         onClick={() => {
-                          setDeps1(el.departmentId);
+                          setChoosenDeps(el.departmentId);
                         }}
                       />
                     </RowLi>
@@ -178,7 +176,7 @@ const NewTeam = (props) => {
             </TableTeams>
           </TeamsWrapper>
           <Heading>
-            <ProfileDataText>{"Add manager" + ": "}</ProfileDataText>
+            <ProfileDataText>Add manager: </ProfileDataText>
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
@@ -189,7 +187,7 @@ const NewTeam = (props) => {
                       {el.firstName + " " + el.lastName}
                       <Button
                         onClick={() => {
-                          setMans1(el.personalNumber);
+                          setChoosenMans(el.personalNumber);
                         }}
                       />
                     </RowLi>
@@ -199,7 +197,7 @@ const NewTeam = (props) => {
             </TableTeams>
           </TeamsWrapper>
           <Heading>
-            <ProfileDataText>{"Add Employees" + ": "}</ProfileDataText>
+            <ProfileDataText>Add Employees: </ProfileDataText>
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
@@ -210,7 +208,7 @@ const NewTeam = (props) => {
                       {el.firstName + " " + el.lastName}
                       <Button
                         onClick={() => {
-                          setEmps1((prev) => [...prev, el.personalNumber]);
+                          setChoosenEmps((prev) => [...prev, el.personalNumber]);
                         }}
                       />
                     </RowLi>
@@ -221,7 +219,7 @@ const NewTeam = (props) => {
           </TeamsWrapper>
           <Heading>
             <ProfileDataText>
-              {"Add required competences" + ": "}
+              Add required competences: 
             </ProfileDataText>
           </Heading>
           <TeamsWrapper>
@@ -233,7 +231,7 @@ const NewTeam = (props) => {
                       {el.name}
                       <Button
                         onClick={() => {
-                          setComps1((prev) => [...prev, el.competenceId]);
+                          setChoosenComps((prev) => [...prev, el.competenceId]);
                         }}
                       />
                     </RowLi>
