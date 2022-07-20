@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Modal from "../components/Modal";
 
 export const ModalContent = styled.div`
     width: 100px;
@@ -10,8 +9,8 @@ export const ModalContent = styled.div`
     background-color: red ;
     //font-family: "Nunito", sans-serif;
   `
-  
-  export const ModalButton = styled.button`
+
+export const ModalButton = styled.button`
     width: 200px;
     height: 40px;
     border: none;

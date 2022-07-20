@@ -1,26 +1,20 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import {
-  DateWrapper,
-  EmploymentTableDateLine,
   Row,
-  TableDetailsDate,
   TableInfo,
 } from "../../styles/ProfilePageStyle";
-import { useTranslation } from "react-i18next";
-import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
 
 const dataJson = ["Start date", "End date", "Job", "Time basis"];
 
 function EmploymentTable() {
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const [employee, setEmployee] = useState();
   const [hireDate, sethireDate] = useState(" ");
   const [expirationDate, setExpirationDate] = useState(" ");
   const [timeBasis, setTimeBasis] = useState(" ");
   const [job, setJob] = useState(" ");
-  const { t } = useTranslation();
   useEffect(() => {
     context &&
       axios

@@ -6,12 +6,12 @@ import DepartmentList from "../components/Department/DepartmentList";
 
 function Department() {
   return (
-<>
+    <>
       <NavBar/>
       <Header/>
       <Footer/>
       <DepartmentList/>
-</>
+    </>
 
   );
 }

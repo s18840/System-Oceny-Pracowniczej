@@ -10,10 +10,10 @@ function NextGrading(){
   return (
     <>
       <NextGradingWrapper>
-        <a>
-          Days to grading: <br/> <HighlightText fontSize={"118px"}>{daysLeft}</HighlightText>
-        </a>
-        <img src={unknownGrade} alt={""}/>
+        <div>
+          Days to grading: <br/> <HighlightText fontSize="118px">{daysLeft}</HighlightText>
+        </div>
+        <img src={unknownGrade} alt=""/>
       </NextGradingWrapper>
     </>
   );

@@ -8,12 +8,11 @@ import {
   DashboardWrapper,
 } from "../styles/DashboardStyles";
 import NextGrading from "../components/Dashboard/NextGrading";
-import TargetList from "../components/Dashboard/TargetList";
 import { useLocation } from "react-router-dom";
 import { Context } from "../pages/Context";
 import axios from "axios";
 function Dashboard() {
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const location = useLocation();
   const [employee, setEmployee] = useState();
   const [firstName, setFirstName] = useState(" ");
@@ -47,7 +46,6 @@ function Dashboard() {
             <SubTitle>grading</SubTitle>
             <NextGrading />
             <SubTitle>your targets</SubTitle>
-            <TargetList/>
           </DashboardContentWrapper>
           <Clock />
         </DashboardWrapper>

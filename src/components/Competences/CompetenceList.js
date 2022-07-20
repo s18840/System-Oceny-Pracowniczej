@@ -11,21 +11,18 @@ import {
   MarkersRow,
   NewButton,
   EditButton,
-} from '../../styles/GlobalStyle';
-import { useTranslation } from "react-i18next";
-import useApi from "../../api/useApi";
+} from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 
 const dataJson = ["Competence name:", "Markers required", "Description"];
 
 function CompetenceList() {
-  const { t } = useTranslation();
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const [competences, setCompetences] = useState();
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Dto/comps`, {
+        .get("https://localhost:5001/api/Dto/comps", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -35,20 +32,20 @@ function CompetenceList() {
           console.log(data);
         });
   }, [context]);
+  {console.log(competences)}
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
-      {/* <EditButton>Edit</EditButton> */}
-      <NewButton onClick={event =>  window.location.href='/newCompetence'}>New</NewButton>
+      <EditButton>Edit</EditButton>
+      <NewButton onClick={window.location.href="/newCompetence"}>New</NewButton>
       <TableInfo className="table">
-      <thead>
+        <thead>
           <tr>
             {dataJson.map((title) => (
               <th>{title}</th>
             ))}
           </tr>
         </thead>
-        {console.log(competences)}
         {competences?.map((content) => (
           <Row>
             <TableDetailsDate>{content.name}</TableDetailsDate>
@@ -61,7 +58,7 @@ function CompetenceList() {
                 ))}
               </MarkersTable>
             </TableDetailsMarker>
-            <TableDetails>              
+            <TableDetails>
               <div>
                 {content.description + "."}
               </div>

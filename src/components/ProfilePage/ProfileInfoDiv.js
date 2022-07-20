@@ -18,8 +18,6 @@ import { PageWrapper } from "../../styles/GlobalStyle";
 import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
-import { useTranslation } from "react-i18next";
-import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
 import axios from "axios";
 const activeStyle = {
@@ -32,13 +30,11 @@ function ProfileInfo() {
   const BASIC_INFO = "BASIC_INFO";
   const EMPLOYMENT_INFO = "EMPLOYMENT_INFO";
   const EDUCATION_INFO = "EDUCATION_INFO";
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const [employee, setEmployee] = useState();
   const [contentType, setContentType] = useState(BASIC_INFO);
-  const { t } = useTranslation();
   const switchType = (conType) => {
     setContentType(conType);
-    //console.log("state change to: " + conType);
   };
   useEffect(() => {
     context &&
@@ -148,31 +144,31 @@ function ProfileInfo() {
           onClick={() => switchType(BASIC_INFO)}
           style={contentType === BASIC_INFO ? activeStyle : {}}
         >
-          {"Basic Information"}
+          Basic Information
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EMPLOYMENT_INFO)}
           style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
         >
-          {"Employment"}
+          Employment
         </ProfileTab>
         <ProfileTab
           onClick={() => switchType(EDUCATION_INFO)}
           style={contentType === EDUCATION_INFO ? activeStyle : {}}
         >
-          {"Education"}
+          Education
         </ProfileTab>
       </ProfileTabWrapper>
       <ProfileTabBar />
       <div>
         {(() => {
           switch (contentType) {
-            case BASIC_INFO:
-              return <BasicInformation />;
-            case EMPLOYMENT_INFO:
-              return <EmploymentInformation />;
-            case EDUCATION_INFO:
-              return <EducationInformation />;
+          case BASIC_INFO:
+            return <BasicInformation />;
+          case EMPLOYMENT_INFO:
+            return <EmploymentInformation />;
+          case EDUCATION_INFO:
+            return <EducationInformation />;
           }
         })()}
       </div>

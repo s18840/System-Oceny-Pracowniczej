@@ -10,7 +10,6 @@ import {
   InsideWrapper,
   TableMarkers,
   RowLi,
-  DescriptionField,
   NewButton,
   EditButton,
   AddTeamButton,
@@ -84,7 +83,7 @@ const NewTeam = (props) => {
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Employee/avaiMana`, {
+        .get("https://localhost:5001/api/Employee/avaiMana", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -97,7 +96,7 @@ const NewTeam = (props) => {
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Employee/avaiEmps`, {
+        .get("https://localhost:5001/api/Employee/avaiEmps", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -110,7 +109,7 @@ const NewTeam = (props) => {
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Competence`, {
+        .get("https://localhost:5001/api/Competence", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

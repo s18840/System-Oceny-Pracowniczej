@@ -9,12 +9,12 @@ function ProfilePage() {
   //const {id} = useParams();
   //console.log(id);
   return (
-<>
+    <>
       <NavBar/>
       <Header/>
       <Footer/>
       <ProfileInfo/>
-</>
+    </>
 
   );
 }

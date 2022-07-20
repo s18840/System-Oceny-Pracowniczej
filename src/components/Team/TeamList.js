@@ -10,10 +10,7 @@ import {
   MarkersTable,
   MarkersRow,
   NewButton,
-  EditButton,
 } from "../../styles/GlobalStyle";
-import { useTranslation } from "react-i18next";
-import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
 
 const dataJson = [
@@ -24,13 +21,12 @@ const dataJson = [
 ];
 
 function TeamList() {
-  const { t } = useTranslation();
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const [teams, setTeams] = useState();
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Dto/teams`, {
+        .get("https://localhost:5001/api/Dto/teams", {
           headers: {
             Authorization: `Bearer ${
               localStorage.getItem("token")
@@ -42,14 +38,16 @@ function TeamList() {
           console.log(data);
         });
   }, [context]);
+
+  console.log(teams)
   return (
     <>
-      <PersonalDataHeadingText>{"Teams List"}</PersonalDataHeadingText>
+      <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>
       {/* <EditButton>{t("Edit")}</EditButton> */}
-      <NewButton onClick={(event) => (window.location.href = "/newTeam")}>
-        {"New"}
+      <NewButton onClick={window.location.href = "/newTeam"}>
+        New
       </NewButton>
-      {console.log(teams)}
+
       <TableInfo className="table">
         <thead>
           <tr>

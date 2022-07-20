@@ -1,8 +1,8 @@
-import styled from 'styled-components'
-import { FiMail } from 'react-icons/fi'
-import { BsFillTelephoneFill } from 'react-icons/bs'
-import { Link } from 'react-scroll'
-import backgroundImage from '../assets/img/InterfaceMainPage.png'
+import styled from "styled-components"
+import { FiMail } from "react-icons/fi"
+import { BsFillTelephoneFill } from "react-icons/bs"
+import { Link } from "react-scroll"
+import backgroundImage from "../assets/img/InterfaceMainPage.png"
 
 export const Logo = styled.img`
   grid-area: logo;

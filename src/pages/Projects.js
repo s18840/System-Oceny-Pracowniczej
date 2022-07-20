@@ -6,12 +6,12 @@ import ProjectList from "../components/Project/ProjectList";
 
 function Projects() {
   return (
-<>
+    <>
       <NavBar/>
       <Header/>
       <Footer/>
       <ProjectList/>
-</>
+    </>
 
   );
 }
