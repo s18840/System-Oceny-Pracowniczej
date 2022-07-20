@@ -5,6 +5,8 @@ import {
   TargetListHeader,
   TargetListWrapper
 } from "../../styles/DashboardStyles"
+import {DateWrapper, EmploymentTableDateLine, Row, TableDetailsDate, TableInfo} from "../../styles/ProfilePageStyle";
+import {HighlightText} from "../../styles/GlobalStyle";
 
 const dataJson =
   {
@@ -18,17 +20,17 @@ const dataJson =
       [
         {
           "name": "nazwa1",
-          "weight": "weight1",
+          "weight": 100,
           "completion": 71
         },
         {
           "name": "nazwa2",
-          "weight": "weight2",
+          "weight": 100,
           "completion": 72
         },
         {
           "name": "nazwa3",
-          "weight": "weight3",
+          "weight": 100,
           "completion": 73
         }
       ]
