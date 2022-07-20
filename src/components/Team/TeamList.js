@@ -44,8 +44,8 @@ function TeamList() {
     <>
       <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>
       {/* <EditButton>{t("Edit")}</EditButton> */}
-      <NewButton onClick={window.location.href = "/newTeam"}>
-        New
+      <NewButton onClick={() => (window.location.href = "/newTeam")}>
+        {"New"}
       </NewButton>
 
       <TableInfo className="table">

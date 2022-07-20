@@ -54,9 +54,9 @@ function ProfileInfo() {
           setFirstName(data.firstName);
           setSurname(data.lastName);
           setDepartment(data.departmentName);
-          //setTeam(data.);
+          setTeam(data.teamName);
           setPhoneNumber(data.cellPhoneNumber);
-          setMail(data.email);
+          setMail(data.companyEmail);
           setStatus(data.status);
           setPersonalNumber(localStorage.getItem("employeeId"));
         });

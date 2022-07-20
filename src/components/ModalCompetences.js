@@ -64,22 +64,12 @@ function ModalCompetences({ closeModal, addMarker }){
               <ProfileDataText>Marker name</ProfileDataText>
               <InputField
                 {...register("name", { required: true })}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
-                }
               />
             </div>
             <div>
               <ProfileDataText>Marker description</ProfileDataText>
               <DescriptionInputField
                 {...register("description", { required: true })}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
-                }
               />
             </div>
             <div style={{display: "flex", justifyContent:"end", padding: "20px 0px 20px 20px"}}>

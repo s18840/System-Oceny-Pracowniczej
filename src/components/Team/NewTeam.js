@@ -18,7 +18,6 @@ import {
 } from "../../styles/GlobalStyle";
 import { TextField } from "../../styles/GlobalStyle";
 import { useForm } from "react-hook-form";
-import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 
@@ -141,7 +140,7 @@ const NewTeam = (props) => {
         <NewButton
           onClick={() => {
             {console.log("Managerowie ", choosenMans, "Pracownicy", choosenEmps, "Kompetencje ",choosenComps, "Departament ",choosenDeps)}
-            //window.location.href = "/teamList";
+            window.location.href = "/teamList";
           }}
         >
           Add
