@@ -10,7 +10,6 @@ import {
   MarkersTable,
   MarkersRow,
   NewButton,
-  EditButton,
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 

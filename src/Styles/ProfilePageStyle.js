@@ -3,9 +3,21 @@ import {NavLink as Link} from "react-router-dom";
 import {FiMail} from "react-icons/fi";
 import {BsCircle, BsFillTelephoneFill} from "react-icons/bs";
 
-export const ProfilePhoto = styled.div`
-  border-radius: 100%;
-`;
+export const ProfileAvatar = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  font-size: 100px;
+  color: #FFFFFF;
+  margin-right: 10px;
+  line-height: 50px;
+  text-align: center;
+  background: #FFA500;
+  text-decoration: none ;
+  `
 
 
 export const ProfileTextWrapper = styled.div`
@@ -85,7 +97,7 @@ padding-bottom: 5px ;
   display: grid;
   justify-content: space-evenly;
   row-gap: 1px;
-  grid-template-columns: 280px 200px 200px;
+  grid-template-columns: 280px 200px 220px;
   grid-template-rows: 50px 70px 70px 70px 70px 70px 70px 70px;
   color: blue;
 `;

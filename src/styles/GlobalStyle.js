@@ -81,6 +81,11 @@ export const ErrorsSpan = styled.span`
   color: #ff4e01;
 `
 
+export const ErrorsLoginSpan = styled.span`
+  font-size: 20px;
+  color: #ff4e01;
+`
+
 export const HighlightText = styled.a`
   color: #ff4e01;
   font-size: ${(props => props.fontSize)};

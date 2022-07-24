@@ -65,7 +65,7 @@ function Modal({ closeModal }){
       }}>
         <FormWrapper onSubmit={handleSubmit(submitForm)}>
           <div style={{display: "flex", justifyContent: "space-between"}}>
-            <ModalTitleDiv>Add employment</ModalTitleDiv>
+            <ModalTitleDiv>Add education</ModalTitleDiv>
             <ModalButton onClick={() => closeModal(false) }style={{alignSelf: "end"}}> X </ModalButton>
           </div>
           <div>
