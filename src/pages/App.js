@@ -29,6 +29,7 @@ import NewEmpView from "./NewEmpView";
 import EmployeeList from "./EmployeeList";
 import Targets from "./Targets";
 import { Context } from "./Context.js";
+import Grade from "./Grade";
 function App() {
   //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
   const [context, setContext] = useState("default context value");
@@ -83,7 +84,10 @@ function App() {
           <Route exact path="/employees" component={EmployeeList}>
             <EmployeeList />
           </Route>
-          <Route exact path="/targets">
+          <Route exact path="/grade/:id" component={Grade}>
+            <Grade/>
+          </Route>
+          <Route exact path="/targets" component={Targets}>
             <Targets/>
           </Route>
         </Switch>

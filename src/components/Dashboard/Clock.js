@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {ClockWrapper, TimeView, DateView} from "../../styles/DashboardStyles";
 import {HighlightText} from "../../styles/GlobalStyle";
 
@@ -7,12 +7,7 @@ const addZero = n => n < 10 ? "0" + n : n;
 function Clock() {
   const [time, setTime] = useState({time: "00:00:00",dayOfWeek: "monday", date: "date"});
 
-  const startClock = () => {
-    setTime(getTime)
-    setInterval(() => setTime(getTime), 1000);
-  };
-
-  const getTime = () => {
+  const getTime = useCallback(() => {
     let date, hour, minute, second, time;
     let dayOfWeek, dayOfMonth, month, year, dateInfo;
 
@@ -37,7 +32,12 @@ function Clock() {
       date: dateInfo
     };
 
-  };
+  }, []);
+
+  const startClock = useCallback(()=>{
+    setTime(getTime)
+    setInterval(() => setTime(getTime), 1000);
+  }, [getTime])
 
   const getDayOfWeekString = (dayOfWeek) => {
     switch(dayOfWeek){
@@ -60,7 +60,7 @@ function Clock() {
 
   useEffect(() => {
     startClock();
-  });
+  }, [startClock]);
 
   return (
     <ClockWrapper>
