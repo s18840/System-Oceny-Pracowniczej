@@ -14,6 +14,7 @@ import { Context } from "./Context";
 import Header from "../components/Header/Header";
 import NavBar from "../components/Navigation/NavBar";
 import Footer from "../components/Footer/Footer";
+import { Link } from "react-router-dom";
 
 const dataJson = ["Name: ", "Personal number:", "Team number:", "Status: "];
 
@@ -30,7 +31,6 @@ function EmployeeList() {
         })
         .then(({ data }) => {
           setEmployee(data);
-          console.log(data);
         });
   }, [context]);
   return (
@@ -49,7 +49,15 @@ function EmployeeList() {
         </thead>
         {employee?.map((content) => (
           <Row>
-            <TableDetailsDate>{content.firstName + " " + content.lastName}</TableDetailsDate>
+            <TableDetailsDate>
+              <Link to={`/profile/${content.personalNumber}`} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
+                {content.firstName + " " + content.lastName}
+              </Link>
+            </TableDetailsDate>
             <TableDetails>
               {content.personalNumber}
             </TableDetails>

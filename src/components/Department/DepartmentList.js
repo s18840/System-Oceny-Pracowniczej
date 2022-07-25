@@ -8,7 +8,8 @@ import {
   PersonalDataHeadingText,
   TableDetailsMarker,
   MarkersTable,
-  MarkersRow
+  MarkersRow,
+  NewButton
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 
@@ -34,7 +35,7 @@ function DepartmentList() {
     <>
       <PersonalDataHeadingText>Department List</PersonalDataHeadingText>
       {/*<EditButton>{t("Edit")}</EditButton>*/}
-      {/* <NewButton onClick={event =>  window.location.href='/newDepartment'}>{t("New")}</NewButton> */}
+      <NewButton onClick={event =>  window.location.href='/newDepartment'}>New</NewButton>
       <TableInfo className="table">
         <thead>
           <tr>

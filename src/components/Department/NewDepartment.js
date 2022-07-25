@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
 import {
   Heading,
   PersonalDataHeadingText,
@@ -6,118 +7,121 @@ import {
   InputField,
   Wrapper,
   MarkersWrapper,
-  MarkersSmallWrapper,
   InsideWrapper,
   TableMarkers,
   RowLi,
   NewButton,
-  AddButton,
+  EditButton,
+  AddTeamButton,
+  TeamsWrapper,
+  TableTeams
 } from "../../styles/GlobalStyle";
-
-const dataJson = {
-  content: [
-    {
-      team: "Team 1",
-    },
-    {
-      team: "Team 2",
-    },
-    {
-      team: "Team 3",
-    },
-    {
-      team: "Team 4",
-    },
-    {
-      team: "Team 5",
-    },
-    {
-      team: "Team 6",
-    },
-  ],
-};
-
-const dataJsonDir = {
-  content: [
-    {
-      dir: "Wojciech Antczak",
-    },
-    {
-      dir: "Joanna Bajko",
-    },
-  ],
-};
+import { TextField } from "../../styles/GlobalStyle";
+import { useForm } from "react-hook-form";
+import { Context } from "../../pages/Context";
+import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 
 const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
-    <AddButton
+    <AddTeamButton
       onClick={() => {
         props.onClick();
         setAdded((prev) => !prev);
       }}
+      disabled={added ? true : false}
     >
       {added ? "Added" : "Add"}
-    </AddButton>
+    </AddTeamButton>
   );
 };
 
-const NewCompetence = () => {
-
-  const { content } = dataJson;
-  const [marks, setMarks] = useState([]);
+const NewTeam = (props) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const submitForm = (data) => {
+    console.log(data);
+    const department = prepareDepartment(data);
+    axios.post(`https://localhost:5001/api/Department`, department, 
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+  };
   const [dirs, setDirs] = useState([]);
+  const [choosenDirs, setChoosenDirs] = useState();
+  const [context, setContext] = useContext(Context);
+  const prepareDepartment = (e) => {
+    const obj = {
+      departmentId : 0,
+      name : e.name,
+      directorId : choosenDirs,
+    };
+    console.log(obj)
+
+    return obj;
+  };
+  useEffect(() => {
+    context &&
+      axios
+        .get("https://localhost:5001/api/Employee/avaiDir", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then(({ data }) => {
+          setDirs(data);
+          console.log(data);
+        });
+  }, [context]);
+
   return (
-    <>
+    <FormWrapper onSubmit={handleSubmit(submitForm)}>
       <PersonalDataHeadingText>
         Creating new department
-        <NewButton onClick={() => {alert(marks.toString()+"\n"+dirs.toString());window.location.href="/departmentList"}}>Add</NewButton>
+        <NewButton
+          onClick={() => {
+            window.location.href = "/Departments";
+          }}
+        >
+          Add
+        </NewButton>
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
           <Heading>
             <ProfileDataText>Name: </ProfileDataText>
-            <InputField placeholder="np: Departament Finansów"/>
+            <InputField placeholder="Accounting" {...register("name", { required: true })}></InputField>
           </Heading>
           <Heading>
-            <ProfileDataText>Add Directors: </ProfileDataText>
+            <ProfileDataText>Add director: </ProfileDataText>
           </Heading>
-          <MarkersWrapper>
-            <TableMarkers className="table">
-              {dataJsonDir.content.map((el) => (
+          <TeamsWrapper>
+            <TableTeams className="table">
+              {dirs.map((el) => (
                 <tr>
                   <td>
                     <RowLi>
-                      {el.dir}
-                      <Button onClick={() => {setDirs((prev) => [...prev, el.dir])}}/>
+                      {el.firstName + " " + el.lastName}
+                      <Button
+                        onClick={() => {
+                          setChoosenDirs(el.personalNumber);
+                        }}
+                      />
                     </RowLi>
                   </td>
                 </tr>
               ))}
-            </TableMarkers>
-          </MarkersWrapper>
-          <Heading>
-            <ProfileDataText>Add Teams: </ProfileDataText>
-          </Heading>
-          <MarkersSmallWrapper>
-            <TableMarkers className="table">
-              {content.map((el) => (
-                <tr>
-                  <td>
-                    <RowLi>
-                      {el.team}
-                      <Button onClick={() => {setMarks((prev) => [...prev, el.team])}}/>
-                    </RowLi>
-                  </td>
-                </tr>
-              ))}
-            </TableMarkers>
-          </MarkersSmallWrapper>
+            </TableTeams>
+          </TeamsWrapper>
         </InsideWrapper>
       </Wrapper>
-
-    </>
+    </FormWrapper>
   );
-}
+};
 
-export default NewCompetence;
+export default NewTeam;

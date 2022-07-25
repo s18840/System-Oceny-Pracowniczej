@@ -33,3 +33,16 @@ export const Login = styled.a`
   text-align: center;
   color: #ff4e01;
 `;
+
+export const ModalPasswordBtton = styled.button`
+  width: 240px;
+  height: 40px;
+  background-color: #FF4E01;
+  color: white;
+  border-radius: 45px;
+  border: 0;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+  justify-self: center;
+  align-self: center;
+`;

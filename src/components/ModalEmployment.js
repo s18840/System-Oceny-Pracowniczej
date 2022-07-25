@@ -10,7 +10,7 @@ import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
 import { InputField} from "../styles/GlobalStyle";
 
-function Modal({ closeModal }){
+function ModalEmployment({ closeModal }){
   const [context] = useContext(Context);
   const {
     register,
@@ -18,13 +18,15 @@ function Modal({ closeModal }){
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-  const prepareEducation = (e) => {
+  const prepareEmployment = (e) => {
     const obj = {
-      educationid : 0,
-      degree : e.degree,
-      placeOfEducation : e.placeOfEducation,
-      graduationDate : e.graduationDate,
-      personal_Number : context.employeeId,
+      personalNumber: localStorage.getItem("employeeId"),
+      hireDate : e.hireDate,
+      terminationDate : null,
+      timeBasis : e.timeBasis,
+      contractType : e.contractType,
+      contractExpirationDate: e.expirationDate ,
+      jobName: e.jobName
     };
     console.log(obj)
 
@@ -33,8 +35,9 @@ function Modal({ closeModal }){
 
   function submitForm(data){
     console.log(data)
-    const education = prepareEducation(data);
-    axios.post("https://localhost:5001/api/Education", education,
+    const employment = prepareEmployment(data);
+    console.log(employment)
+    axios.post("https://localhost:5001/api/Employee/addEmployment", employment,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -65,25 +68,39 @@ function Modal({ closeModal }){
       }}>
         <FormWrapper onSubmit={handleSubmit(submitForm)}>
           <div style={{display: "flex", justifyContent: "space-between"}}>
-            <ModalTitleDiv>Add education</ModalTitleDiv>
+            <ModalTitleDiv>Add employment</ModalTitleDiv>
             <ModalButton onClick={() => closeModal(false) }style={{alignSelf: "end"}}> X </ModalButton>
           </div>
           <div>
-            <ProfileDataText>Graduation date</ProfileDataText>
+            <ProfileDataText>Hire date</ProfileDataText>
             <InputField
-              {...register("graduationDate", { required: true })}
+              type="date"
+              {...register("hireDate", { required: true })}
             />
           </div>
           <div>
-            <ProfileDataText>Degree</ProfileDataText>
+            <ProfileDataText>Job name</ProfileDataText>
             <InputField
-              {...register("degree", { required: true })}
+              {...register("jobName", { required: true })}
             />
           </div>
           <div>
-            <ProfileDataText>Place of education</ProfileDataText>
+            <ProfileDataText>Time basis</ProfileDataText>
             <InputField
-              {...register("placeOfEducation", { required: true })}
+              {...register("timeBasis", { required: true })}
+            />
+          </div>
+          <div>
+            <ProfileDataText>Contract type</ProfileDataText>
+            <InputField
+              {...register("contractType", { required: true })}
+            />
+          </div>
+          <div>
+            <ProfileDataText>Expiration date</ProfileDataText>
+            <InputField
+            type="date"
+              {...register("expirationDate", { required: true })}
             />
           </div>
           <div style={{display: "flex", justifyContent:"end", padding: "20px 0px 20px 20px"}}>
@@ -96,4 +113,4 @@ function Modal({ closeModal }){
   )
 }
 
-export default Modal
+export default ModalEmployment

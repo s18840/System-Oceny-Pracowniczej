@@ -3,18 +3,18 @@ import axios from "axios";
 import {
   Row,
   TableInfo,
+  ModalOpenButton
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
+import Modal from "../Modal";
+import ModalEmployment from "../ModalEmployment";
 
 const dataJson = ["Start date", "End date", "Job", "Time basis"];
 
 function EmploymentTable() {
   const [context] = useContext(Context);
   const [employee, setEmployee] = useState();
-  const [hireDate, sethireDate] = useState(" ");
-  const [expirationDate, setExpirationDate] = useState(" ");
-  const [timeBasis, setTimeBasis] = useState(" ");
-  const [job, setJob] = useState(" ");
+  const [openModal,setOpenModal] = useState(false);
   useEffect(() => {
     context &&
       axios
@@ -30,10 +30,6 @@ function EmploymentTable() {
         )
         .then(({ data }) => {
           setEmployee(data);
-          sethireDate(data.employmentsJobs.hireDate);
-          setExpirationDate(data.employmentsJobs.contractExpirationDate);
-          setJob(data.employmentsJobs.jobName);
-          setTimeBasis(data.employmentsJobs.timeBasis);
         });
   }, [context]);
 
@@ -74,6 +70,17 @@ function EmploymentTable() {
           </Row>
         ))}
       </TableInfo>
+      <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
+        Add
+      </ModalOpenButton>
+      {openModal && <ModalEmployment closeModal={setOpenModal}
+        style={{
+          width: 100,
+          height: 100,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column"
+        }} />}
     </>
   );
 }

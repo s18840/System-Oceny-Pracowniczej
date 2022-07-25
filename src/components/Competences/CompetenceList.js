@@ -10,7 +10,6 @@ import {
   MarkersTable,
   MarkersRow,
   NewButton,
-  EditButton,
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 
@@ -36,8 +35,7 @@ function CompetenceList() {
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
-      <EditButton>Edit</EditButton>
-      <NewButton onClick={window.location.href="/newCompetence"}>New</NewButton>
+      <NewButton onClick={() =>  window.location.href='/newCompetence'}>New</NewButton>
       <TableInfo className="table">
         <thead>
           <tr>

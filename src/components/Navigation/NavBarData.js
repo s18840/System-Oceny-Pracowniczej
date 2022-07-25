@@ -9,23 +9,18 @@ import * as MDIcons from "react-icons/md"
 
 export const NavBarData = [{
   title: "Dashboard",
-  path: "/dashboard",
+  path: "/Dashboard",
   icon: < FaIdCard /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
 },
 {
   title: "Profile",
-  path: "/profile",
+  path: "/Profile",
   icon: < FaRegUser /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
   subnav: [{
-    title: "Personal Information",
-    path: "/profile",
-    role: "all"
-  },
-  {
     title: "Your goals",
     path: "/yourGoals",
     role: "all"
@@ -39,21 +34,28 @@ export const NavBarData = [{
 },
 {
   title: "Teams",
-  path: "/teamList",
+  path: "/Teams",
+  icon: < FaUsers /> ,
+  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
+  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+},
+{
+  title: "Employees",
+  path: "/Employees",
   icon: < FaUsers /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
 },
 {
   title: "Departments",
-  path: "/departmentList",
+  path: "/Departments",
   icon: < FaUsers /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
 },
 {
   title: "Competences",
-  path: "/competenceList",
+  path: "/Competences",
   icon: < FaRegObjectGroup /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,

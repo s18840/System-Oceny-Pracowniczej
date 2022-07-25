@@ -12,6 +12,7 @@ import {
   NewButton,
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
+import { Link } from "react-router-dom";
 
 const dataJson = [
   "Team name:",
@@ -43,9 +44,8 @@ function TeamList() {
   return (
     <>
       <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>
-      {/* <EditButton>{t("Edit")}</EditButton> */}
-      <NewButton onClick={window.location.href = "/newTeam"}>
-        New
+      <NewButton onClick={() => (window.location.href = "/newTeam")}>
+        {"New"}
       </NewButton>
 
       <TableInfo className="table">
@@ -58,14 +58,31 @@ function TeamList() {
         </thead>
         {teams?.map((content) => (
           <Row>
-            <TableDetailsDate>{content.teamName}</TableDetailsDate>
+            <TableDetailsDate
+              nameOfTeam ={content.teamName}
+              departmentOfTeam ={content.departmentId}
+              managerOfTeam ={content.managerId}>
+              <Link to={`/teamDetails`} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
+                {content.teamName}
+              </Link>
+            </TableDetailsDate>
             <TableDetailsDate>{content.departmentName}</TableDetailsDate>
             <TableDetails>
-              {content.managerFirstName + " " + content.managerLastName}
+              <Link to={`/profile/${content.managerId}`} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
+                {content.managerFirstName + " " + content.managerLastName}
+              </Link>
             </TableDetails>
             <TableDetailsMarker>
               <MarkersTable>
-                {content?.employees?.slice(0, 3).map((emp) => (
+                {content?.employees?.map((emp) => (
                   <MarkersRow>{emp.firstName + " " + emp.lastName}</MarkersRow>
                 ))}
               </MarkersTable>
