@@ -22,6 +22,7 @@ import EmployeeList from "./EmployeeList";
 import Targets from "./Targets";
 import { Context } from "./Context.js";
 import Jobs from "./Jobs";
+import DepartmentJobsList from "./DepartmentJobs";
 import NewJobView from "./NewJobsView";
 import TeamDetails from "./TeamDetails";
 function App() {
@@ -89,6 +90,10 @@ function App() {
           </Route>
           <Route exact path="/teamDetails">
             <TeamDetails />
+          </Route>
+          {/*For Director job lists */}
+          <Route exact path="/DepartmentJobs">
+            <DepartmentJobsList />
           </Route>
         </Switch>
       </Router>

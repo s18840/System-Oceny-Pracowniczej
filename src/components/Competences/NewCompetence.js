@@ -54,13 +54,13 @@ const NewCompetence = () => {
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
         <PersonalDataHeadingText>
           Creating new competence
-          <NewButton onClick={() => {window.location.href="/competenceList"}}>Add</NewButton>
+          <NewButton onClick={() => {window.location.href="/Competences"}}>Add</NewButton>
         </PersonalDataHeadingText>
         <Wrapper>
           <InsideWrapper>
             <Heading>
               <ProfileDataText>Name: </ProfileDataText>
-              <InputField placeholder="Nazwa kompetencji" {...register("name", { required: true })}/>
+              <InputField placeholder="Competenece name" {...register("name", { required: true })}/>
             </Heading>
             <Heading style={{display: "flex", alignItems: "center"}}>
               <ProfileDataText>Markers required: </ProfileDataText>
