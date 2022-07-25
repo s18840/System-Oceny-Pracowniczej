@@ -6,7 +6,6 @@ import {
   ModalOpenButton
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
-import Modal from "../Modal";
 import ModalEmployment from "../ModalEmployment";
 
 const dataJson = ["Start date", "End date", "Job", "Time basis"];

@@ -45,7 +45,7 @@ function TeamList() {
     <>
       <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>
       <NewButton onClick={() => (window.location.href = "/newTeam")}>
-        {"New"}
+        New
       </NewButton>
 
       <TableInfo className="table">
@@ -62,7 +62,7 @@ function TeamList() {
               nameOfTeam ={content.teamName}
               departmentOfTeam ={content.departmentId}
               managerOfTeam ={content.managerId}>
-              <Link to={`/teamDetails`} style={{  
+              <Link to="/teamDetails" style={{  
                 fontSize: "25px",
                 fontWeight: "bold",
                 color: "#ff4e01",

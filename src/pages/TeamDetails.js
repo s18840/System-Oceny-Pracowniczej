@@ -2,19 +2,18 @@ import React, { useEffect, useState, useContext } from "react";
 import Header from "../components/Header/Header";
 import NavBar from "../components/Navigation/NavBar";
 import Footer from "../components/Footer/Footer";
-import ProfileInfo from "../components/ProfilePage/ProfileInfoDiv";
 import { Context } from "../pages/Context";
 import axios from "axios";
 import {
-    ProfileHeaderText,
-    ProfileInfoDiv,
-    ProfileSubHeaderText,
-    ProfileText,
-    ProfileTextWrapper,
-    StatusIcon,
-    ProfileAvatar,
+  ProfileHeaderText,
+  ProfileInfoDiv,
+  ProfileSubHeaderText,
+  ProfileText,
+  ProfileTextWrapper,
+  StatusIcon,
+  ProfileAvatar,
 
-  } from "../styles/ProfilePageStyle";
+} from "../styles/ProfilePageStyle";
 import { 
   PageWrapper,
   TeamsWrapper,
@@ -25,14 +24,14 @@ import {
 } from "../styles/GlobalStyle";
 import { Link } from "react-router-dom";
 
-function TeamDetails(props) {
-    const [context] = useContext(Context);
-    const [employee, setEmployee] = useState([]);
-    const [competences, setCompetences] = useState([]);
-    const [status, setStatus] = useState(" ");
+function TeamDetails() {
+  const [context] = useContext(Context);
+  const [employee, setEmployee] = useState([]);
+  const [competences, setCompetences] = useState([]);
+  const [status, setStatus] = useState(" ");
 
-    useEffect(() => {
-        context &&
+  useEffect(() => {
+    context &&
           axios
             .get(
               `https://localhost:5001/api/Employee/team/${localStorage.getItem(
@@ -49,9 +48,9 @@ function TeamDetails(props) {
               setEmployee(data);
               setStatus(data.status);
             });
-      }, [context]);
-    useEffect(() => {
-      context &&
+  }, [context]);
+  useEffect(() => {
+    context &&
         axios
           .get(
             `https://localhost:5001/api/Dto/comps/${localStorage.getItem(
@@ -67,8 +66,8 @@ function TeamDetails(props) {
             console.log(data)
             setCompetences(data);
           });
-    }, [context]);
-    console.log(competences)
+  }, [context]);
+  console.log(competences)
 
   return (
     <>
@@ -80,38 +79,38 @@ function TeamDetails(props) {
           <ProfileDataText>Members of this team: </ProfileDataText>
         </Heading>
         {employee?.map((emp) => (
-        <ProfileInfoDiv style={{marginTop:20}}>
-          <ProfileAvatar to={`/profile/${emp.personalNumber}`}>
-            {(emp.firstName[0]) + (emp.lastName[0])}
-          </ProfileAvatar>
-          <ProfileTextWrapper>
-            <ProfileHeaderText>
-              <Link to={`/profile/${emp.personalNumber}`} style={{  
-                fontSize: "25px",
-                fontWeight: "bold",
-                color: "#ff4e01",
-                textDecoration: "none"}}>
-              {emp.firstName + " " + emp.lastName}
-              </Link>
-            </ProfileHeaderText>
-          </ProfileTextWrapper>
-          <ProfileTextWrapper>
-          <ProfileSubHeaderText>
-              {"Status" + ": "}
-              <StatusIcon
-                style={
-                  status > 0
-                    ? { backgroundColor: "#55ff11" }
-                    : { backgroundColor: "#ff5511" }
-                }
-              />
-            </ProfileSubHeaderText>
-            <ProfileSubHeaderText>
-              {"Personal number" + ": "}
-              <ProfileText>{" " + emp.personalNumber}</ProfileText>
-            </ProfileSubHeaderText>
-          </ProfileTextWrapper>
-        </ProfileInfoDiv>
+          <ProfileInfoDiv style={{marginTop:20}}>
+            <ProfileAvatar to={`/profile/${emp.personalNumber}`}>
+              {(emp.firstName[0]) + (emp.lastName[0])}
+            </ProfileAvatar>
+            <ProfileTextWrapper>
+              <ProfileHeaderText>
+                <Link to={`/profile/${emp.personalNumber}`} style={{  
+                  fontSize: "25px",
+                  fontWeight: "bold",
+                  color: "#ff4e01",
+                  textDecoration: "none"}}>
+                  {emp.firstName + " " + emp.lastName}
+                </Link>
+              </ProfileHeaderText>
+            </ProfileTextWrapper>
+            <ProfileTextWrapper>
+              <ProfileSubHeaderText>
+                {"Status" + ": "}
+                <StatusIcon
+                  style={
+                    status > 0
+                      ? { backgroundColor: "#55ff11" }
+                      : { backgroundColor: "#ff5511" }
+                  }
+                />
+              </ProfileSubHeaderText>
+              <ProfileSubHeaderText>
+                {"Personal number" + ": "}
+                <ProfileText>{" " + emp.personalNumber}</ProfileText>
+              </ProfileSubHeaderText>
+            </ProfileTextWrapper>
+          </ProfileInfoDiv>
         ))}
         <Heading style={{marginLeft:30, marginTop:30}}>
           <ProfileDataText>Competences in this team: </ProfileDataText>
