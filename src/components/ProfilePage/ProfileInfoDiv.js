@@ -12,8 +12,8 @@ import {
   ProfileTextWrapper,
   StatusIcon,
   ProfileAvatar,
-} from "../../Styles/ProfilePageStyle";
-import { PageWrapper } from "../../Styles/GlobalStyle";
+} from "../../styles/ProfilePageStyle";
+import { PageWrapper } from "../../styles/GlobalStyle";
 import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";

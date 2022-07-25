@@ -4,7 +4,7 @@ import {
   Row,
   TableInfo,
   ModalOpenButton
-} from "../../Styles/ProfilePageStyle";
+} from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
 import Modal from "../Modal";
 import ModalEmployment from "../ModalEmployment";

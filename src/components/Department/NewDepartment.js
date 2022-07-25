@@ -15,11 +15,11 @@ import {
   AddTeamButton,
   TeamsWrapper,
   TableTeams
-} from "../../Styles/GlobalStyle";
-import { TextField } from "../../Styles/GlobalStyle";
+} from "../../styles/GlobalStyle";
+import { TextField } from "../../styles/GlobalStyle";
 import { useForm } from "react-hook-form";
 import { Context } from "../../pages/Context";
-import { FormWrapper } from "../../Styles/ProfilePageFormStyle";
+import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 
 const Button = (props) => {
   const [added, setAdded] = useState(false);
