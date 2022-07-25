@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {InputField, OrangeInputButton, Span, TextField} from "./GlobalStyle";
-import {GoCalendar, ImPlus} from "react-icons/all";
+import { ImPlus } from "react-icons/im";
+import { GoCalendar } from "react-icons/go";
 
 export const TargetForm = styled.form`
   display: flex;
