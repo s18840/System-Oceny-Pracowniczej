@@ -23,6 +23,7 @@ import {
   Heading,
   ProfileDataText,
 } from "../styles/GlobalStyle";
+import { Link } from "react-router-dom";
 
 function TeamDetails(props) {
     const [context] = useContext(Context);
@@ -68,6 +69,7 @@ function TeamDetails(props) {
           });
     }, [context]);
     console.log(competences)
+
   return (
     <>
       <NavBar/>
@@ -79,12 +81,18 @@ function TeamDetails(props) {
         </Heading>
         {employee?.map((emp) => (
         <ProfileInfoDiv style={{marginTop:20}}>
-          <ProfileAvatar to="/profile">
+          <ProfileAvatar to={`/profile/${emp.personalNumber}`}>
             {(emp.firstName[0]) + (emp.lastName[0])}
           </ProfileAvatar>
           <ProfileTextWrapper>
             <ProfileHeaderText>
+              <Link to={`/profile/${emp.personalNumber}`} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
               {emp.firstName + " " + emp.lastName}
+              </Link>
             </ProfileHeaderText>
           </ProfileTextWrapper>
           <ProfileTextWrapper>

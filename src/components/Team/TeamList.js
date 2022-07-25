@@ -72,7 +72,13 @@ function TeamList() {
             </TableDetailsDate>
             <TableDetailsDate>{content.departmentName}</TableDetailsDate>
             <TableDetails>
-              {content.managerFirstName + " " + content.managerLastName}
+              <Link to={`/profile/${content.managerId}`} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
+                {content.managerFirstName + " " + content.managerLastName}
+              </Link>
             </TableDetails>
             <TableDetailsMarker>
               <MarkersTable>
