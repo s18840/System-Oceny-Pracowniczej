@@ -127,7 +127,7 @@ const NewTeam = () => {
           console.log(data);
         });
   }, [context]);
-
+  
   return (
     <FormWrapper onSubmit={handleSubmit(submitForm)}>
       {console.log("Managerowie ", choosenMans, "Pracownicy", choosenEmps, "Kompetencje ",choosenComps, "Departament ",choosenDeps)}
@@ -157,7 +157,7 @@ const NewTeam = () => {
                 <tr>
                   <td>
                     <RowLi>
-                      {el.name}
+                      {el.departmentName}
                       <Button
                         onClick={() => {
                           setChoosenDeps(el.departmentId);

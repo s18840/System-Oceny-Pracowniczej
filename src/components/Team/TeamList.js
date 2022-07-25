@@ -62,7 +62,7 @@ function TeamList() {
               nameOfTeam ={content.teamName}
               departmentOfTeam ={content.departmentId}
               managerOfTeam ={content.managerId}>
-              <Link to="/teamDetails" style={{  
+              <Link to={{pathname:`/teamDetails`, state: content.managerId}} style={{  
                 fontSize: "25px",
                 fontWeight: "bold",
                 color: "#ff4e01",

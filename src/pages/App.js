@@ -21,8 +21,9 @@ import NewEmpView from "./NewEmpView";
 import EmployeeList from "./EmployeeList";
 import Targets from "./Targets";
 import { Context } from "./Context.js";
-// import Jobs from "./Jobs";
-// import NewJobView from "./NewJobsView";
+import Jobs from "./Jobs";
+import DepartmentJobsList from "./DepartmentJobs";
+import NewJobView from "./NewJobsView";
 import TeamDetails from "./TeamDetails";
 function App() {
   //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
@@ -81,14 +82,18 @@ function App() {
           <Route exact path="/targets">
             <Targets/>
           </Route>
-//           <Route exact path="/Jobs">
-//             <Jobs />
-//           </Route>
-//           <Route exact path="/newJob">
-//             <NewJobView />
-//           </Route>
+           <Route exact path="/Jobs">
+             <Jobs />
+           </Route>
+           <Route exact path="/newJob">
+             <NewJobView />
+           </Route>
           <Route exact path="/teamDetails">
             <TeamDetails />
+          </Route>
+          {/*For Director job lists */}
+          <Route exact path="/DepartmentJobs">
+            <DepartmentJobsList />
           </Route>
         </Switch>
       </Router>

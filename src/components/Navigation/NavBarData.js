@@ -61,6 +61,18 @@ export const NavBarData = [{
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
 },
 {
+  title: "Jobs",
+  path: "/Jobs",
+  icon: < FaUsers /> ,
+  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
+  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+  subnav: [{
+    title: "Department jobs",
+    path: "/DepartmentJobs",
+    role: "Director"
+  },]
+},
+{
   title: "Grades",
   path: "/grades",
   icon: < FaStar /> ,
