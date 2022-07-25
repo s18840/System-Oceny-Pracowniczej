@@ -13,7 +13,6 @@ import {
     ProfileTextWrapper,
     StatusIcon,
     ProfileAvatar,
-
   } from "../styles/ProfilePageStyle";
 import { 
   PageWrapper,
@@ -23,21 +22,20 @@ import {
   Heading,
   ProfileDataText,
 } from "../styles/GlobalStyle";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function TeamDetails(props) {
     const [context] = useContext(Context);
     const [employee, setEmployee] = useState([]);
     const [competences, setCompetences] = useState([]);
     const [status, setStatus] = useState(" ");
-
+    const location = useLocation();
+    console.log(44,location)
     useEffect(() => {
         context &&
           axios
             .get(
-              `https://localhost:5001/api/Employee/team/${localStorage.getItem(
-                "employeeId"
-              )}`,
+              `https://localhost:5001/api/Employee/team/${location.state}`,
               {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -54,9 +52,7 @@ function TeamDetails(props) {
       context &&
         axios
           .get(
-            `https://localhost:5001/api/Dto/comps/${localStorage.getItem(
-              "employeeId"
-            )}`,
+            `https://localhost:5001/api/Dto/comps/${location.state}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
