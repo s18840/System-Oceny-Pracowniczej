@@ -82,12 +82,12 @@ function App() {
           <Route exact path="/targets">
             <Targets/>
           </Route>
-          <Route exact path="/Jobs">
-            <Jobs />
-          </Route>
-          <Route exact path="/newJob">
-            <NewJobView />
-          </Route>
+           <Route exact path="/Jobs">
+             <Jobs />
+           </Route>
+           <Route exact path="/newJob">
+             <NewJobView />
+           </Route>
           <Route exact path="/teamDetails">
             <TeamDetails />
           </Route>

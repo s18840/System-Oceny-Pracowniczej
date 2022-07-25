@@ -99,7 +99,7 @@ function ModalEmployment({ closeModal }){
           <div>
             <ProfileDataText>Expiration date</ProfileDataText>
             <InputField
-            type="date"
+              type="date"
               {...register("expirationDate", { required: true })}
             />
           </div>

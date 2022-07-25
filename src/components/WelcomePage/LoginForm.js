@@ -46,45 +46,45 @@ function LoginForm() {
   };
 
   return (
-      <LoginFormWrapper
-        onSubmit={handleSubmit(submitForm)}
-        onChange={() => {
-          setCredentialsCorrect(true);
-        }}
-      >
-        <Login> Login </Login>{" "}
-        <InputWrapper>
-          <Span fontSize="20px"> e-mail </Span>{" "}
-          <InputField
-            {...register("email", {
-              required: true,
-            })}
-            width="357px"
-            height="50px"
-            type="text"
-          />
-          {errors.email && errors.email.type === "required" && (
-            <Span> Required </Span>
-          )}
-          <Span fontSize="20px"> Password </Span>{" "}
-          <InputField
-            {...register("password", {
-              required: true,
-            })}
-            width="357px"
-            height="50px"
-            type="password"
-          />
-          {errors.password && errors.password.type === "required" && (
-            <Span> Required </Span>
-          )}{" "}
-          {credentialsCorrect === false && (
-            <Span> Bad credentials </Span>
-          )}
-        </InputWrapper>
-        <LoginButton type="submit" value="login" />
-      </LoginFormWrapper>
-    );
+    <LoginFormWrapper
+      onSubmit={handleSubmit(submitForm)}
+      onChange={() => {
+        setCredentialsCorrect(true);
+      }}
+    >
+      <Login> Login </Login>{" "}
+      <InputWrapper>
+        <Span fontSize="20px"> e-mail </Span>{" "}
+        <InputField
+          {...register("email", {
+            required: true,
+          })}
+          width="357px"
+          height="50px"
+          type="text"
+        />
+        {errors.email && errors.email.type === "required" && (
+          <Span> Required </Span>
+        )}
+        <Span fontSize="20px"> Password </Span>{" "}
+        <InputField
+          {...register("password", {
+            required: true,
+          })}
+          width="357px"
+          height="50px"
+          type="password"
+        />
+        {errors.password && errors.password.type === "required" && (
+          <Span> Required </Span>
+        )}{" "}
+        {credentialsCorrect === false && (
+          <Span> Bad credentials </Span>
+        )}
+      </InputWrapper>
+      <LoginButton type="submit" value="login" />
+    </LoginFormWrapper>
+  );
 }
 
 export default LoginForm;

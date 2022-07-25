@@ -143,42 +143,42 @@ function ProfileInfo(props) {
           </ProfileInfoDiv>
         </>
         {!props.id && <>
-        <ProfileTabWrapper>
-          <ProfileTab
-            onClick={() => switchType(BASIC_INFO)}
-            style={contentType === BASIC_INFO ? activeStyle : {}}
-          >
+          <ProfileTabWrapper>
+            <ProfileTab
+              onClick={() => switchType(BASIC_INFO)}
+              style={contentType === BASIC_INFO ? activeStyle : {}}
+            >
             Basic Information
-          </ProfileTab>
-          <ProfileTab
-            onClick={() => switchType(EMPLOYMENT_INFO)}
-            style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
-          >
+            </ProfileTab>
+            <ProfileTab
+              onClick={() => switchType(EMPLOYMENT_INFO)}
+              style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
+            >
             Employment
-          </ProfileTab>
-          <ProfileTab
-            onClick={() => switchType(EDUCATION_INFO)}
-            style={contentType === EDUCATION_INFO ? activeStyle : {}}
-          >
+            </ProfileTab>
+            <ProfileTab
+              onClick={() => switchType(EDUCATION_INFO)}
+              style={contentType === EDUCATION_INFO ? activeStyle : {}}
+            >
             Education
-          </ProfileTab>
-        </ProfileTabWrapper>
-        <ProfileTabBar />
-        <div>
-          {(() => {
-            switch (contentType) {
-            case BASIC_INFO:
-              return <BasicInformation />;
-            case EMPLOYMENT_INFO:
-              return <EmploymentInformation />;
-            case EDUCATION_INFO:
-              return <EducationInformation />;
-            }
-          })()}
-        </div>
+            </ProfileTab>
+          </ProfileTabWrapper>
+          <ProfileTabBar />
+          <div>
+            {(() => {
+              switch (contentType) {
+              case BASIC_INFO:
+                return <BasicInformation />;
+              case EMPLOYMENT_INFO:
+                return <EmploymentInformation />;
+              case EDUCATION_INFO:
+                return <EducationInformation />;
+              }
+            })()}
+          </div>
         </>}
       </PageWrapper>
-        {location.pathname=="/Profile" && openModal && <ModalLogin closeModal={setOpenModal} emp={employee}
+      {location.pathname=="/Profile" && openModal && <ModalLogin closeModal={setOpenModal} emp={employee}
         style={{
           width: 100,
           height: 100,

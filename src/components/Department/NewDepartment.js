@@ -6,17 +6,13 @@ import {
   ProfileDataText,
   InputField,
   Wrapper,
-  MarkersWrapper,
   InsideWrapper,
-  TableMarkers,
   RowLi,
   NewButton,
-  EditButton,
   AddTeamButton,
   TeamsWrapper,
   TableTeams
 } from "../../styles/GlobalStyle";
-import { TextField } from "../../styles/GlobalStyle";
 import { useForm } from "react-hook-form";
 import { Context } from "../../pages/Context";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
@@ -36,7 +32,7 @@ const Button = (props) => {
   );
 };
 
-const NewTeam = (props) => {
+const NewTeam = () => {
   const {
     register,
     handleSubmit,
@@ -45,12 +41,12 @@ const NewTeam = (props) => {
   const submitForm = (data) => {
     console.log(data);
     const department = prepareDepartment(data);
-    axios.post(`https://localhost:5001/api/Department`, department, 
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
+    axios.post("https://localhost:5001/api/Department", department, 
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
   };
   const [dirs, setDirs] = useState([]);
   const [choosenDirs, setChoosenDirs] = useState();

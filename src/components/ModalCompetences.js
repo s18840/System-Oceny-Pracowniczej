@@ -44,16 +44,16 @@ function ModalCompetences({ closeModal, addMarker }){
         alignItems: "center",
         top: 0,
         left: 200
-        }}>
+      }}>
         <div style={{    
-            width: "500px",
-            height: "500px",
-            borderRadius: "12px",
-            backgroundColor: "white",
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            display: "flex",
-            flexDirection: "column",
-            padding: "25px",
+          width: "500px",
+          height: "500px",
+          borderRadius: "12px",
+          backgroundColor: "white",
+          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+          display: "flex",
+          flexDirection: "column",
+          padding: "25px",
         }}>
           <FormWrapper onSubmit={handleSubmit(submitForm)}>
             <div style={{display: "flex", justifyContent: "space-between"}}>
@@ -76,7 +76,7 @@ function ModalCompetences({ closeModal, addMarker }){
               <ModalButton onClick={() => closeModal(false)}> Close </ModalButton>
               <ModalInput id="inputModal" type="submit" style={{marginLeft:20, width:140}} value="Continue"/>
             </div>
-            </FormWrapper>
+          </FormWrapper>
         </div>
       </div>
     </div>

@@ -45,7 +45,7 @@ function TeamList() {
     <>
       <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>
       <NewButton onClick={() => (window.location.href = "/newTeam")}>
-        {"New"}
+        New
       </NewButton>
 
       <TableInfo className="table">

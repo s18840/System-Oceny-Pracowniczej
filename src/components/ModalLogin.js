@@ -1,14 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import axios from "axios";
 import {
   ProfileDataText,
-  ModalButton,
   ModalTitleDiv,
   ModalInput
 } from "../styles/ProfilePageStyle";
 import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { useForm } from "react-hook-form";
-import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
+import { InputField, ErrorsLoginSpan } from "../styles/GlobalStyle";
 
 function ModalLogin({ closeModal }){
   const {
@@ -63,16 +62,16 @@ function ModalLogin({ closeModal }){
         alignItems: "center",
         top: 0,
         left: 200
-        }}>
+      }}>
         <div style={{    
-            width: "500px",
-            height: "380px",
-            borderRadius: "12px",
-            backgroundColor: "white",
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            display: "flex",
-            flexDirection: "column",
-            padding: "25px",
+          width: "500px",
+          height: "380px",
+          borderRadius: "12px",
+          backgroundColor: "white",
+          boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+          display: "flex",
+          flexDirection: "column",
+          padding: "25px",
         }}>
           <FormWrapper onSubmit={handleSubmit(submitForm)}>
             <div style={{display: "flex", justifyContent: "space-between"}}>
@@ -81,7 +80,7 @@ function ModalLogin({ closeModal }){
             <div>
               <ProfileDataText>Old password</ProfileDataText>
               <InputField
-              type="password"
+                type="password"
                 {...register("oldPassword", { 
                   required: "Required",
                   minLength : {
@@ -132,7 +131,7 @@ function ModalLogin({ closeModal }){
             <div style={{display: "flex", justifyContent:"end", padding: "20px 0px 20px 20px"}}>
               <ModalInput id="inputModal" type="submit" style={{marginLeft:20, width:140}} value="Continue"/>
             </div>
-            </FormWrapper>
+          </FormWrapper>
         </div>
       </div>
     </div>
