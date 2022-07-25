@@ -14,7 +14,7 @@ import {
     StatusIcon,
     ProfileAvatar,
 
-  } from "../styles/ProfilePageStyle";
+  } from "../Styles/ProfilePageStyle";
 import { 
   PageWrapper,
   TeamsWrapper,
@@ -22,7 +22,7 @@ import {
   RowLi,
   Heading,
   ProfileDataText,
-} from "../styles/GlobalStyle";
+} from "../Styles/GlobalStyle";
 import { Link } from "react-router-dom";
 
 function TeamDetails(props) {

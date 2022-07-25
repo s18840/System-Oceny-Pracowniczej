@@ -10,7 +10,7 @@ import {
   MarkersTable,
   MarkersRow,
   NewButton
-} from "../../styles/GlobalStyle";
+} from "../../Styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 
 const dataJson = ["Department name:", "Department Teams:", " Director:"];

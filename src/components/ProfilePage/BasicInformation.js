@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { FormWrapper } from "../../styles/ProfilePageFormStyle";
-import { InputField, ErrorsSpan } from "../../styles/GlobalStyle";
+import { FormWrapper } from "../../Styles/ProfilePageFormStyle";
+import { InputField, ErrorsSpan } from "../../Styles/GlobalStyle";
 import {
   AddressHeadingText,
   City,
@@ -21,7 +21,7 @@ import {
   FormButton,
   PhoneNumber,
   CompanyMail,
-} from "../../styles/ProfilePageStyle";
+} from "../../Styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
 
 function BasicInformation() {

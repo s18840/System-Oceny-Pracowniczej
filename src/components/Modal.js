@@ -4,11 +4,11 @@ import {
   ProfileDataText,
   ModalButton,
   ModalTitleDiv
-} from "../styles/ProfilePageStyle";
-import { FormWrapper } from "../styles/ProfilePageFormStyle";
+} from "../Styles/ProfilePageStyle";
+import { FormWrapper } from "../Styles/ProfilePageFormStyle";
 import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
-import { InputField} from "../styles/GlobalStyle";
+import { InputField} from "../Styles/GlobalStyle";
 
 function Modal({ closeModal }){
   const [context] = useContext(Context);

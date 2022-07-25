@@ -5,10 +5,10 @@ import {
   ModalButton,
   ModalTitleDiv,
   ModalInput
-} from "../styles/ProfilePageStyle";
-import { FormWrapper } from "../styles/ProfilePageFormStyle";
+} from "../Styles/ProfilePageStyle";
+import { FormWrapper } from "../Styles/ProfilePageFormStyle";
 import { useForm } from "react-hook-form";
-import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
+import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../Styles/GlobalStyle";
 
 function ModalLogin({ closeModal }){
   const {
