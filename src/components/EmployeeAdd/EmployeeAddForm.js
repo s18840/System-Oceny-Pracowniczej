@@ -149,6 +149,7 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
               />
               {errors.username && errors.username.type === "required" && (
                 <Span style={{ color: "red" }}>{"REQUIRED"}</Span>
