@@ -1,37 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
-import { FaPowerOff, FaWrench, FaSearch } from "react-icons/fa";
+import { FaPowerOff, FaWrench } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
-import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
 import {
   HeaderLocTree,
   HeaderProfile,
-  HeaderSearch,
-  HeaderProfilePhoto,
   HeaderWrapper,
   HeaderBtnProfileWrapper,
   HeaderBtnSignOut,
   HeaderBtnTol,
-  HeaderSearchIcon,
   HeaderName,
+  HeaderAvatar
 } from "./HeaderElements";
 
-const dataJson = {
-  content: [
-    {
-      FirstName: "Andrzej",
-      Surname: "Jarząbkowski",
-    },
-  ],
-};
-
 const HeaderBar = () => {
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const history = useHistory();
-  const [employee, setEmployee] = useState();
   const [formFirstName, setFirstName] = useState(" ");
   const [formSurname, setSurname] = useState(" ");
+  const initials = (formFirstName[0]) + (formSurname[0]);
   useEffect(() => {
     context &&
       axios
@@ -46,19 +34,11 @@ const HeaderBar = () => {
           }
         )
         .then(({ data }) => {
-          setEmployee(data);
           setFirstName(data.firstName);
           setSurname(data.lastName);
         });
   }, [context]);
 
-  // useEffect (()=>{
-  //   const timer = setTimeout(()=>{
-  //     setFirstName(employee.firstName);
-  //     setSurname(employee.lastName);
-  //   },11);
-  //   return () => clearTimeout(timer);
-  // },[employee])
   let pathName = history.location.pathname;
   return (
     <HeaderWrapper>
@@ -75,23 +55,17 @@ const HeaderBar = () => {
           <FaWrench />
         </HeaderBtnTol>
         <HeaderProfile activeStyle>
-          <HeaderProfilePhoto to="/profile">
-            <img src="prof.png" alt="" width="100%" />
-          </HeaderProfilePhoto>
+          <HeaderAvatar to="/profile">
+            {initials}
+          </HeaderAvatar>
           <HeaderName to="/profile">
             {formFirstName + " " + formSurname}
           </HeaderName>
         </HeaderProfile>
       </HeaderBtnProfileWrapper>
-      <HeaderSearch>
-        <HeaderSearchIcon>
-          <FaSearch />
-        </HeaderSearchIcon>
-      </HeaderSearch>
       <HeaderLocTree activeStyle>
         {
-          (pathName =
-            pathName.substring(0).charAt(1).toUpperCase() +
+          (pathName.substring(0).charAt(1).toUpperCase() +
             pathName.substring(2))
         }
       </HeaderLocTree>

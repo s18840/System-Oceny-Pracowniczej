@@ -6,39 +6,31 @@ import {
   TableDetailsDate,
   TableDetails,
   PersonalDataHeadingText,
-  TableDetailsMarker,
-  MarkersTable,
-  MarkersRow,  
-  NewButton,
-  EditButton,
-} from '../styles/GlobalStyle';
+} from "../styles/GlobalStyle";
 import {
   StatusIcon,
 } from "../styles/ProfilePageStyle";
-import { useTranslation } from "react-i18next";
-import useApi from "../api/useApi";
 import { Context } from "./Context";
 import Header from "../components/Header/Header";
 import NavBar from "../components/Navigation/NavBar";
 import Footer from "../components/Footer/Footer";
+import { Link } from "react-router-dom";
 
 const dataJson = ["Name: ", "Personal number:", "Team number:", "Status: "];
 
 function EmployeeList() {
-  const { t } = useTranslation();
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const [employee, setEmployee] = useState();
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Employee`, {
+        .get("https://localhost:5001/api/Employee", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
         .then(({ data }) => {
-            setEmployee(data);
-          console.log(data);
+          setEmployee(data);
         });
   }, [context]);
   return (
@@ -48,16 +40,24 @@ function EmployeeList() {
       <Footer/>
       <PersonalDataHeadingText>Employee List</PersonalDataHeadingText>
       <TableInfo className="table">
-      <thead>
+        <thead>
           <tr>
             {dataJson.map((title) => (
-              <th>{t(title)}</th>
+              <th>{title}</th>
             ))}
           </tr>
         </thead>
         {employee?.map((content) => (
           <Row>
-            <TableDetailsDate>{content.firstName + " " + content.lastName}</TableDetailsDate>
+            <TableDetailsDate>
+              <Link to={`/profile/${content.personalNumber}`} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
+                {content.firstName + " " + content.lastName}
+              </Link>
+            </TableDetailsDate>
             <TableDetails>
               {content.personalNumber}
             </TableDetails>
@@ -65,7 +65,7 @@ function EmployeeList() {
               {content.team_ID}
             </TableDetails>
             <TableDetails>
-            <StatusIcon
+              <StatusIcon
                 style={
                   content.status > 0
                     ? { backgroundColor: "#55ff11" }

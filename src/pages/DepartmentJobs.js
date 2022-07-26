@@ -2,17 +2,18 @@ import React from "react";
 import Header from "../components/Header/Header";
 import NavBar from "../components/Navigation/NavBar";
 import Footer from "../components/Footer/Footer";
-import NewRole from "../components/Role/NewRole";
+import DepartmentJobsList from "../components/Job/DepartmentJobsList";
 
-function NewRoleView() {
+function Jobs() {
   return (
     <>
-      <NavBar />
-      <Header />
-      <Footer />
-      <NewRole />
+      <NavBar/>
+      <Header/>
+      <Footer/>
+      <DepartmentJobsList/>
     </>
+
   );
 }
 
-export default NewRoleView;
+export default Jobs;

@@ -6,12 +6,12 @@ import CompetenceList from "../components/Competences/CompetenceList";
 
 function Competences() {
   return (
-<>
+    <>
       <NavBar/>
       <Header/>
       <Footer/>
       <CompetenceList/>
-</>
+    </>
 
   );
 }

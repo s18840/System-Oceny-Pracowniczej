@@ -9,23 +9,19 @@ import {
   TableDetailsMarker,
   MarkersTable,
   MarkersRow,
-  NewButton,
-  EditButton,
+  NewButton
 } from "../../styles/GlobalStyle";
-import { useTranslation } from "react-i18next";
-import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
 
 const dataJson = ["Department name:", "Department Teams:", " Director:"];
 
 function DepartmentList() {
-  const { t } = useTranslation();
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const [departments, setDepartments] = useState();
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Dto/deps`, {
+        .get("https://localhost:5001/api/Dto/deps", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -37,9 +33,8 @@ function DepartmentList() {
   }, [context]);
   return (
     <>
-      <PersonalDataHeadingText>{"Department List"}</PersonalDataHeadingText>
-      {/*<EditButton>{t("Edit")}</EditButton>*/}
-      {/* <NewButton onClick={event =>  window.location.href='/newDepartment'}>{t("New")}</NewButton> */}
+      <PersonalDataHeadingText>Department List</PersonalDataHeadingText>
+      <NewButton onClick={event =>  window.location.href="/newDepartment"}>New</NewButton>
       <TableInfo className="table">
         <thead>
           <tr>

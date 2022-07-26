@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 import { InputField, Span } from "../../styles/GlobalStyle";
-import useApi from "../../api/useApi";
 import { EmployeeAddWrapper } from "../../styles/FormEmpStyles";
 import {
   AddressHeadingText,
@@ -12,13 +10,10 @@ import {
   Country,
   DateOfBirth,
   District,
-  FamilyName,
   FirstName,
   HouseNumber,
-  PersonalDataHeadingText,
   PostalCode,
   ProfileDataText,
-  ProfileDetailedInfoWrapper,
   SecondName,
   Street,
   SurName,
@@ -30,8 +25,7 @@ import {
 import { Context } from "../../pages/Context";
 
 function BasicInformation() {
-  const [context, setContext] = useContext(Context);
-  const [employee, setEmployee] = useState();
+  const [context] = useContext(Context);
   const [firstName, setFirstName] = useState(" ");
   const [secondName, setSecondName] = useState(" FD");
   const [lastName, setLastName] = useState(" ");
@@ -46,19 +40,16 @@ function BasicInformation() {
   const [companyMail, setCompanyMail] = useState(" ");
   const [email, setEmail] = useState(" ");
   const [stationaryPhoneNumber, setStationaryPhoneNumber] = useState("12345");
-  const { t } = useTranslation();
 
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
   const [formReady, setFormReady] = useState(false);
   const [isSucceed, setIsSucceed] = useState(false);
 
   const switchForm = () => {
-    //console.log(formReady,isValid)
     setFormReady((currentFormReady) => !(currentFormReady && isValid));
   };
 
@@ -120,7 +111,7 @@ function BasicInformation() {
 
   button = (
     <FormButton onClick={switchForm}>
-      {!formReady ? t("Edit") : t("Dodaj")}
+      {!formReady ? "Edit" : "Add"}
     </FormButton>
   );
 
@@ -137,9 +128,9 @@ function BasicInformation() {
       >
         <FormWrapper onSubmit={handleSubmit(submitForm)}>
           <EmployeeAddWrapper>
-            <AddressHeadingText>{t("Create New Employee")}</AddressHeadingText>
+            <AddressHeadingText>Create New Employee</AddressHeadingText>
             <FirstName>
-              <ProfileDataText>{t("First name")}</ProfileDataText>
+              <ProfileDataText>First name</ProfileDataText>
               <InputField
                 {...register("firstName", { required: true })}
                 disabled={!formReady}
@@ -152,11 +143,11 @@ function BasicInformation() {
                 value={firstName}
               />
               {errors.username && errors.username.type === "required" && (
-                <Span style={{ color: "red" }}>{"REQUIRED"}</Span>
+                <Span style={{ color: "red" }}>REQUIRED</Span>
               )}
             </FirstName>
             <SecondName>
-              <ProfileDataText>{t("Second name")}</ProfileDataText>
+              <ProfileDataText>Second name</ProfileDataText>
               <InputField
                 {...register("secondName", { required: true })}
                 disabled={!formReady}
@@ -166,10 +157,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setSecondName(e.target.value)}
-              ></InputField>
+              />
             </SecondName>
             <SurName>
-              <ProfileDataText>{t("Surname")}</ProfileDataText>
+              <ProfileDataText>Surname</ProfileDataText>
               <InputField
                 {...register("lastName", { required: true })}
                 disabled={!formReady}
@@ -179,10 +170,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setLastName(e.target.value)}
-              ></InputField>
+              />
             </SurName>
             <DateOfBirth>
-              <ProfileDataText>{t("Date of birth")}</ProfileDataText>
+              <ProfileDataText>Date of birth</ProfileDataText>
               <InputField
                 type="date"
                 {...register("birthDate", { required: true })}
@@ -193,10 +184,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setBirthDate(e.target.value)}
-              ></InputField>
+              />
             </DateOfBirth>
             <PhoneNumber>
-              <ProfileDataText>{t("Phone number")}</ProfileDataText>
+              <ProfileDataText>Phone number</ProfileDataText>
               <InputField
                 type="number"
                 {...register("cellPhoneNumber", { required: true })}
@@ -205,15 +196,15 @@ function BasicInformation() {
                   !formReady
                     ? { "-webkit-appearance": "none", backgroundColor: "white" }
                     : {
-                        "-webkit-appearance": "none",
-                        backgroundColor: "#DDDDDD",
-                      }
+                      "-webkit-appearance": "none",
+                      backgroundColor: "#DDDDDD",
+                    }
                 }
                 onChange={(e) => setCellPhoneNumber(e.target.value)}
-              ></InputField>
+              />
             </PhoneNumber>
             <Mail>
-              <ProfileDataText>{"Mail"}</ProfileDataText>
+              <ProfileDataText>Mail</ProfileDataText>
               <InputField
                 {...register("email", { required: true })}
                 disabled={!formReady}
@@ -223,10 +214,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setEmail(e.target.value)}
-              ></InputField>
+              />
             </Mail>
             <CompanyMail>
-              <ProfileDataText>{t("Company Mail")}</ProfileDataText>
+              <ProfileDataText>Company Mail</ProfileDataText>
               <InputField
                 {...register("companyMail", { required: true })}
                 disabled={!formReady}
@@ -236,10 +227,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setCompanyMail(e.target.value)}
-              ></InputField>
+              />
             </CompanyMail>
             <Street>
-              <ProfileDataText>{t("Street")}</ProfileDataText>
+              <ProfileDataText>Street</ProfileDataText>
               <InputField
                 {...register("street", { required: true })}
                 disabled={!formReady}
@@ -249,10 +240,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setStreet(e.target.value)}
-              ></InputField>
+              />
             </Street>
             <HouseNumber>
-              <ProfileDataText>{t("House number")}</ProfileDataText>
+              <ProfileDataText>House number</ProfileDataText>
               <InputField
                 {...register("buildingNumber", { required: true })}
                 disabled={!formReady}
@@ -262,10 +253,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setBuildingNumber(e.target.value)}
-              ></InputField>
+              />
             </HouseNumber>
             <City>
-              <ProfileDataText>{t("City")}</ProfileDataText>
+              <ProfileDataText>City</ProfileDataText>
               <InputField
                 {...register("city", { required: true })}
                 disabled={!formReady}
@@ -275,10 +266,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setCity(e.target.value)}
-              ></InputField>
+              />
             </City>
             <District>
-              <ProfileDataText>{t("Apartment number")}</ProfileDataText>
+              <ProfileDataText>Apartment number</ProfileDataText>
               <InputField
                 {...register("apartmentNumber", { required: true })}
                 disabled={!formReady}
@@ -288,10 +279,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setApartmentNumber(e.target.value)}
-              ></InputField>
+              />
             </District>
             <PostalCode>
-              <ProfileDataText>{t("Postal code")}</ProfileDataText>
+              <ProfileDataText>Postal code</ProfileDataText>
               <InputField
                 {...register("postalCode", { required: true })}
                 disabled={!formReady}
@@ -301,10 +292,10 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setPostalCode(e.target.value)}
-              ></InputField>
+              />
             </PostalCode>
             <Country>
-              <ProfileDataText>{t("Country")}</ProfileDataText>
+              <ProfileDataText>Country</ProfileDataText>
               <InputField
                 {...register("country", { required: true })}
                 disabled={!formReady}
@@ -314,7 +305,7 @@ function BasicInformation() {
                     : { backgroundColor: "#DDDDDD" }
                 }
                 onChange={(e) => setCountry(e.target.value)}
-              ></InputField>
+              />
             </Country>
             {isSucceed && <p>Dodałeś pracownika</p>}
             {button}

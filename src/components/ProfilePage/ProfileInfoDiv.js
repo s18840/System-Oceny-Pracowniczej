@@ -4,7 +4,6 @@ import {
   PhoneIcon,
   ProfileHeaderText,
   ProfileInfoDiv,
-  ProfilePhoto,
   ProfileSubHeaderText,
   ProfileTab,
   ProfileTabBar,
@@ -12,39 +11,38 @@ import {
   ProfileText,
   ProfileTextWrapper,
   StatusIcon,
-  NavLink,
+  ProfileAvatar,
 } from "../../styles/ProfilePageStyle";
 import { PageWrapper } from "../../styles/GlobalStyle";
 import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
-import { useTranslation } from "react-i18next";
-import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
 import axios from "axios";
+import ModalLogin from "../ModalLogin";
+import { useLocation } from "react-router-dom";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
   marginBottom: "-5px",
 };
 
-function ProfileInfo() {
+function ProfileInfo(props) {
   const BASIC_INFO = "BASIC_INFO";
   const EMPLOYMENT_INFO = "EMPLOYMENT_INFO";
   const EDUCATION_INFO = "EDUCATION_INFO";
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const [employee, setEmployee] = useState();
   const [contentType, setContentType] = useState(BASIC_INFO);
-  const { t } = useTranslation();
   const switchType = (conType) => {
     setContentType(conType);
-    //console.log("state change to: " + conType);
   };
   useEffect(() => {
+    setLoading(true);
     context &&
       axios
         .get(
-          `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+          `https://localhost:5001/api/Dto/emp/${props.id ? props.id : localStorage.getItem(
             "employeeId"
           )}`,
           {
@@ -58,11 +56,12 @@ function ProfileInfo() {
           setFirstName(data.firstName);
           setSurname(data.lastName);
           setDepartment(data.departmentName);
-          //setTeam(data.);
+          setTeam(data.teamName);
           setPhoneNumber(data.cellPhoneNumber);
-          setMail(data.email);
+          setMail(data.companyEmail);
           setStatus(data.status);
-          setPersonalNumber(localStorage.getItem("employeeId"));
+          setPersonalNumber(props.id? props.id : localStorage.getItem("employeeId"));
+          setLoading(false);
         });
   }, [context]);
   const [formFirstName, setFirstName] = useState(" ");
@@ -73,18 +72,14 @@ function ProfileInfo() {
   const [formPersonalNumber, setPersonalNumber] = useState(" ");
   const [formMail, setMail] = useState(" ");
   const [status, setStatus] = useState(" ");
-  // useEffect (()=>{
-  //   const timer = setTimeout(()=>{
-  //     setFirstName(emp.firstName);
-  //     setSurname(emp.lastName);
-  //     setDepartment(emp.departmentName);
-  //     //setTeam(emp.);
-  //     setPhoneNumber(emp.cellPhoneNumber);
-  //     setMail(emp.email);
-  //     setPersonalNumber(empId)
-  //   },11);
-  //   return () => clearTimeout(timer);
-  // },[emp])
+  const initials = (formFirstName[0]) + (formSurname[0]);
+  const [openModal,setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  useEffect (()=>{
+    setOpenModal(status == 0);  
+  },[status])
+
   function checkStatus() {
     if (status === 1) {
       return true;
@@ -92,91 +87,106 @@ function ProfileInfo() {
       return false;
     }
   }
+  console.log(status,openModal)
+  console.log(location.pathname)
+  if(loading){
+    return(<></>)
+  }
   return (
-    <PageWrapper>
-      <>
-        <ProfileInfoDiv>
-          <ProfilePhoto>
-            <NavLink to="/profile">
-              <img src="prof.png" alt="" width="100%" />
-            </NavLink>
-          </ProfilePhoto>
-          <ProfileTextWrapper>
-            <ProfileHeaderText>
-              {formFirstName + " " + formSurname}
-            </ProfileHeaderText>
-            <ProfileSubHeaderText>
-              {"Department" + ": "}
-              <ProfileText>{" " + formDepartment}</ProfileText>
-            </ProfileSubHeaderText>
-            <ProfileSubHeaderText>
-              {"Team" + ": "}
-              <ProfileText>{" " + formTeam}</ProfileText>
-            </ProfileSubHeaderText>
-          </ProfileTextWrapper>
-          <ProfileTextWrapper>
-            <ProfileHeaderText>
-              <PhoneIcon />
-              {formPhoneNumber}
-            </ProfileHeaderText>
-            <ProfileSubHeaderText>
-              {"Personal number" + ": "}
-              <ProfileText>{" " + formPersonalNumber}</ProfileText>
-            </ProfileSubHeaderText>
-          </ProfileTextWrapper>
+    <>
+      <PageWrapper>
+        <>
+          <ProfileInfoDiv>
+            <ProfileAvatar to="/profile">
+              {initials}
+            </ProfileAvatar>
+            <ProfileTextWrapper>
+              <ProfileHeaderText>
+                {formFirstName + " " + formSurname}
+              </ProfileHeaderText>
+              <ProfileSubHeaderText>
+                {"Department" + ": "}
+                <ProfileText>{" " + formDepartment}</ProfileText>
+              </ProfileSubHeaderText>
+              <ProfileSubHeaderText>
+                {"Team" + ": "}
+                <ProfileText>{" " + formTeam}</ProfileText>
+              </ProfileSubHeaderText>
+            </ProfileTextWrapper>
+            <ProfileTextWrapper>
+              <ProfileHeaderText>
+                <PhoneIcon />
+                {formPhoneNumber}
+              </ProfileHeaderText>
+              <ProfileSubHeaderText>
+                {"Personal number" + ": "}
+                <ProfileText>{" " + formPersonalNumber}</ProfileText>
+              </ProfileSubHeaderText>
+            </ProfileTextWrapper>
 
-          <ProfileTextWrapper>
-            <ProfileHeaderText>
-              <MailIcon />
-              {formMail}
-            </ProfileHeaderText>
-            <ProfileSubHeaderText>
-              {"Status" + ": "}
-              <StatusIcon
-                style={
-                  status > 0
-                    ? { backgroundColor: "#55ff11" }
-                    : { backgroundColor: "#ff5511" }
-                }
-              />
-            </ProfileSubHeaderText>
-          </ProfileTextWrapper>
-        </ProfileInfoDiv>
-      </>
-      <ProfileTabWrapper>
-        <ProfileTab
-          onClick={() => switchType(BASIC_INFO)}
-          style={contentType === BASIC_INFO ? activeStyle : {}}
-        >
-          {"Basic Information"}
-        </ProfileTab>
-        <ProfileTab
-          onClick={() => switchType(EMPLOYMENT_INFO)}
-          style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
-        >
-          {"Employment"}
-        </ProfileTab>
-        <ProfileTab
-          onClick={() => switchType(EDUCATION_INFO)}
-          style={contentType === EDUCATION_INFO ? activeStyle : {}}
-        >
-          {"Education"}
-        </ProfileTab>
-      </ProfileTabWrapper>
-      <ProfileTabBar />
-      <div>
-        {(() => {
-          switch (contentType) {
-            case BASIC_INFO:
-              return <BasicInformation />;
-            case EMPLOYMENT_INFO:
-              return <EmploymentInformation />;
-            case EDUCATION_INFO:
-              return <EducationInformation />;
-          }
-        })()}
-      </div>
-    </PageWrapper>
+            <ProfileTextWrapper>
+              <ProfileHeaderText>
+                <MailIcon />
+                {formMail}
+              </ProfileHeaderText>
+              <ProfileSubHeaderText>
+                {"Status" + ": "}
+                <StatusIcon
+                  style={
+                    status > 0
+                      ? { backgroundColor: "#55ff11" }
+                      : { backgroundColor: "#ff5511" }
+                  }
+                />
+              </ProfileSubHeaderText>
+            </ProfileTextWrapper>
+          </ProfileInfoDiv>
+        </>
+        {!props.id && <>
+          <ProfileTabWrapper>
+            <ProfileTab
+              onClick={() => switchType(BASIC_INFO)}
+              style={contentType === BASIC_INFO ? activeStyle : {}}
+            >
+            Basic Information
+            </ProfileTab>
+            <ProfileTab
+              onClick={() => switchType(EMPLOYMENT_INFO)}
+              style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
+            >
+            Employment
+            </ProfileTab>
+            <ProfileTab
+              onClick={() => switchType(EDUCATION_INFO)}
+              style={contentType === EDUCATION_INFO ? activeStyle : {}}
+            >
+            Education
+            </ProfileTab>
+          </ProfileTabWrapper>
+          <ProfileTabBar />
+          <div>
+            {(() => {
+              switch (contentType) {
+              case BASIC_INFO:
+                return <BasicInformation />;
+              case EMPLOYMENT_INFO:
+                return <EmploymentInformation />;
+              case EDUCATION_INFO:
+                return <EducationInformation />;
+              }
+            })()}
+          </div>
+        </>}
+      </PageWrapper>
+      {location.pathname=="/Profile" && openModal && <ModalLogin closeModal={setOpenModal} emp={employee}
+        style={{
+          width: 100,
+          height: 100,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column"
+        }} />}
+    </>
   );
 }
 export default ProfileInfo;

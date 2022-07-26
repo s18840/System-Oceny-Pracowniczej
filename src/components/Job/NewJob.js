@@ -32,7 +32,7 @@ const Button = (props) => {
   );
 };
 
-const NewTeam = () => {
+const NewJob = (props) => {
   const {
     register,
     handleSubmit,
@@ -40,22 +40,24 @@ const NewTeam = () => {
   } = useForm();
   const submitForm = (data) => {
     console.log(data);
-    const department = prepareDepartment(data);
-    axios.post("https://localhost:5001/api/Department", department, 
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    const job = prepareJob(data);
+    console.log(job)
+    axios.post(`https://localhost:5001/api/Dto/jobs/add`, job, 
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
   };
-  const [dirs, setDirs] = useState([]);
-  const [choosenDirs, setChoosenDirs] = useState();
-  const [context, setContext] = useContext(Context);
-  const prepareDepartment = (e) => {
+  const [deps, setDeps] = useState([]);
+  const [choosenDeps, setChoosenDeps] = useState([]);
+  const [context] = useContext(Context);
+  const prepareJob = (e) => {
+    console.log(e.jobName)
     const obj = {
-      departmentId : 0,
+      jobID : 0,
       name : e.name,
-      directorId : choosenDirs,
+      departmentIDs : choosenDeps,
     };
     console.log(obj)
 
@@ -64,24 +66,26 @@ const NewTeam = () => {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Employee/avaiDir", {
+        .get("https://localhost:5001/api/Department", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
         .then(({ data }) => {
-          setDirs(data);
+          setDeps(data);
           console.log(data);
         });
   }, [context]);
 
   return (
     <FormWrapper onSubmit={handleSubmit(submitForm)}>
+      {console.log("Departament ",choosenDeps)}
       <PersonalDataHeadingText>
-        Creating new department
+        Creating new job
         <NewButton
           onClick={() => {
-            window.location.href = "/Departments";
+            {console.log("Departament ",choosenDeps)}
+            //window.location.href = "/teamList";
           }}
         >
           Add
@@ -90,22 +94,24 @@ const NewTeam = () => {
       <Wrapper>
         <InsideWrapper>
           <Heading>
-            <ProfileDataText>Name: </ProfileDataText>
-            <InputField placeholder="Accounting" {...register("name", { required: true })}></InputField>
+            <ProfileDataText>Job name: </ProfileDataText>
+            <InputField placeholder="Junior Developer" {...register("name", { required: true })}></InputField>
           </Heading>
           <Heading>
-            <ProfileDataText>Add director: </ProfileDataText>
+            <ProfileDataText>
+              Add job to departments: 
+            </ProfileDataText>
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {dirs.map((el) => (
+              {deps?.map((el) => (
                 <tr>
                   <td>
                     <RowLi>
-                      {el.firstName + " " + el.lastName}
+                      {el.departmentName}
                       <Button
                         onClick={() => {
-                          setChoosenDirs(el.personalNumber);
+                          setChoosenDeps((prev) => [...prev, el.departmentId]);
                         }}
                       />
                     </RowLi>
@@ -120,4 +126,4 @@ const NewTeam = () => {
   );
 };
 
-export default NewTeam;
+export default NewJob;

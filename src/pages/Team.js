@@ -6,12 +6,12 @@ import TeamList from "../components/Team/TeamList";
 
 function Team() {
   return (
-<>
+    <>
       <NavBar/>
       <Header/>
       <Footer/>
       <TeamList/>
-</>
+    </>
 
   );
 }

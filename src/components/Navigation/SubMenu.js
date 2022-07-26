@@ -14,19 +14,19 @@ const SubMenu = ({ item }) => {
           {item.subnav && subnav
             ? item.iconOpened
             : item.subnav
-            ? item.iconClosed
-            : null}
+              ? item.iconClosed
+              : null}
         </div>
       </SidebarLink>
       {subnav &&
         item.subnav.map((item, index) => {
           return item.role === "all" ||
             localStorage.getItem("roles").includes(item.role) ? (
-            <DropdownLink to={item.path} key={index}>
-              {item.icon}
-              <SidebarLabel>{item.title}</SidebarLabel>
-            </DropdownLink>
-          ) : null;
+              <DropdownLink to={item.path} key={index}>
+                {item.icon}
+                <SidebarLabel>{item.title}</SidebarLabel>
+              </DropdownLink>
+            ) : null;
         })}
     </>
   );

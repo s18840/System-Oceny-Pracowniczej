@@ -10,11 +10,9 @@ import {
   MarkersTable,
   MarkersRow,
   NewButton,
-  EditButton,
 } from "../../styles/GlobalStyle";
-import { useTranslation } from "react-i18next";
-import useApi from "../../api/useApi";
 import { Context } from "../../pages/Context";
+import { Link } from "react-router-dom";
 
 const dataJson = [
   "Team name:",
@@ -24,13 +22,12 @@ const dataJson = [
 ];
 
 function TeamList() {
-  const { t } = useTranslation();
-  const [context, setContext] = useContext(Context);
+  const [context] = useContext(Context);
   const [teams, setTeams] = useState();
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Dto/teams`, {
+        .get("https://localhost:5001/api/Dto/teams", {
           headers: {
             Authorization: `Bearer ${
               localStorage.getItem("token")
@@ -42,14 +39,15 @@ function TeamList() {
           console.log(data);
         });
   }, [context]);
+
+  console.log(teams)
   return (
     <>
-      <PersonalDataHeadingText>{"Teams List"}</PersonalDataHeadingText>
-      {/* <EditButton>{t("Edit")}</EditButton> */}
-      <NewButton onClick={(event) => (window.location.href = "/newTeam")}>
-        {"New"}
+      <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>
+      <NewButton onClick={() => (window.location.href = "/newTeam")}>
+        New
       </NewButton>
-      {console.log(teams)}
+
       <TableInfo className="table">
         <thead>
           <tr>
@@ -60,14 +58,31 @@ function TeamList() {
         </thead>
         {teams?.map((content) => (
           <Row>
-            <TableDetailsDate>{content.teamName}</TableDetailsDate>
+            <TableDetailsDate
+              nameOfTeam ={content.teamName}
+              departmentOfTeam ={content.departmentId}
+              managerOfTeam ={content.managerId}>
+              <Link to={{pathname:`/teamDetails`, state: content.managerId}} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
+                {content.teamName}
+              </Link>
+            </TableDetailsDate>
             <TableDetailsDate>{content.departmentName}</TableDetailsDate>
             <TableDetails>
-              {content.managerFirstName + " " + content.managerLastName}
+              <Link to={`/profile/${content.managerId}`} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
+                {content.managerFirstName + " " + content.managerLastName}
+              </Link>
             </TableDetails>
             <TableDetailsMarker>
               <MarkersTable>
-                {content?.employees?.slice(0, 3).map((emp) => (
+                {content?.employees?.map((emp) => (
                   <MarkersRow>{emp.firstName + " " + emp.lastName}</MarkersRow>
                 ))}
               </MarkersTable>
