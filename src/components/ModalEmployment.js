@@ -8,7 +8,7 @@ import {
 import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
-import { InputField} from "../styles/GlobalStyle";
+import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
 
 function ModalEmployment({ closeModal }){
   const [context] = useContext(Context);
@@ -43,6 +43,7 @@ function ModalEmployment({ closeModal }){
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
+    closeModal(false)
   }
   return (
     <div style={{
@@ -58,7 +59,7 @@ function ModalEmployment({ closeModal }){
     }}>
       <div style={{
         width: "500px",
-        height: "500px",
+        height: "550px",
         borderRadius: "12px",
         backgroundColor: "white",
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
@@ -81,20 +82,32 @@ function ModalEmployment({ closeModal }){
           <div>
             <ProfileDataText>Job name</ProfileDataText>
             <InputField
-              {...register("jobName", { required: true })}
+              {...register("jobName", { required: "Please provide job name that already exists in database" })}
             />
+            {errors.jobName && errors.jobName.type === "minLength" && (
+              <ErrorsLoginSpan font-size="20" style={{ color: "red" }}>{errors.jobName.message}</ErrorsLoginSpan>
+            )}
+            {errors.jobName && errors.jobName.type === "required" && (
+                <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.jobName.message}</ErrorsLoginSpan>
+              )}
           </div>
           <div>
             <ProfileDataText>Time basis</ProfileDataText>
             <InputField
-              {...register("timeBasis", { required: true })}
+              {...register("timeBasis", { required: "Please provide correct time basis" })}
             />
+              {errors.timeBasis && errors.timeBasis.type === "required" && (
+                <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.timeBasis.message}</ErrorsLoginSpan>
+              )}
           </div>
           <div>
             <ProfileDataText>Contract type</ProfileDataText>
             <InputField
-              {...register("contractType", { required: true })}
+              {...register("contractType", { required: "Please provide correct contract type" })}
             />
+              {errors.contractType && errors.contractType.type === "required" && (
+                <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.contractType.message}</ErrorsLoginSpan>
+              )}
           </div>
           <div>
             <ProfileDataText>Expiration date</ProfileDataText>

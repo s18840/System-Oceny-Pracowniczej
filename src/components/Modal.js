@@ -8,7 +8,7 @@ import {
 import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
-import { InputField} from "../styles/GlobalStyle";
+import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
 
 function Modal({ closeModal }){
   const [context] = useContext(Context);
@@ -40,6 +40,7 @@ function Modal({ closeModal }){
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
+    closeModal(false)
   }
   return (
     <div style={{
@@ -55,7 +56,7 @@ function Modal({ closeModal }){
     }}>
       <div style={{
         width: "500px",
-        height: "500px",
+        height: "350px",
         borderRadius: "12px",
         backgroundColor: "white",
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
@@ -71,24 +72,31 @@ function Modal({ closeModal }){
           <div>
             <ProfileDataText>Graduation date</ProfileDataText>
             <InputField
+            type="date"
               {...register("graduationDate", { required: true })}
             />
           </div>
           <div>
             <ProfileDataText>Degree</ProfileDataText>
             <InputField
-              {...register("degree", { required: true })}
+              {...register("degree", { required: "Please provide correct degree" })}
             />
+            {errors.degree && errors.degree.type === "required" && (
+                <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.degree.message}</ErrorsLoginSpan>
+              )}
           </div>
           <div>
             <ProfileDataText>Place of education</ProfileDataText>
             <InputField
-              {...register("placeOfEducation", { required: true })}
+              {...register("placeOfEducation", { required: "Please provide correct education" })}
             />
+            {errors.placeOfEducation && errors.placeOfEducation.type === "required" && (
+              <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.placeOfEducation.message}</ErrorsLoginSpan>
+            )}
           </div>
           <div style={{display: "flex", justifyContent:"end", padding: "20px 0px 20px 20px"}}>
             <ModalButton onClick={() => closeModal(false)}> Close </ModalButton>
-            <ModalButton style={{marginLeft:20, width:140}} > Continue </ModalButton>
+            <ModalButton style={{marginLeft:20, width:140}} type="submit"> Continue </ModalButton>
           </div>
         </FormWrapper>
       </div>
