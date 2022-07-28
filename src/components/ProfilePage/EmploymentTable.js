@@ -69,9 +69,10 @@ function EmploymentTable() {
           </Row>
         ))}
       </TableInfo>
-      <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
+      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin")) && <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
         Add
       </ModalOpenButton>
+      }
       {openModal && <ModalEmployment closeModal={setOpenModal}
         style={{
           width: 100,

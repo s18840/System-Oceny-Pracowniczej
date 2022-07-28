@@ -41,10 +41,10 @@ function JobList() {
   return (
     <>
       <PersonalDataHeadingText>Jobs List</PersonalDataHeadingText>
-      <NewButton onClick={() => (window.location.href = "/newJob")}>
+      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") ) && <NewButton onClick={() => (window.location.href = "/newJob")}>
         New
       </NewButton>
-
+      }
       <TableInfo className="table">
         <thead>
           <tr>
