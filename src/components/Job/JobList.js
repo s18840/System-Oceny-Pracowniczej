@@ -33,11 +33,9 @@ function JobList() {
         })
         .then(({ data }) => {
           setJobs(data);
-          console.log(data);
         });
   }, [context]);
 
-  console.log(jobs)
   return (
     <>
       <PersonalDataHeadingText>Jobs List</PersonalDataHeadingText>

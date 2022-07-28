@@ -28,10 +28,8 @@ function CompetenceList() {
         })
         .then(({ data }) => {
           setCompetences(data);
-          console.log(data);
         });
   }, [context]);
-  {console.log(competences)}
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>

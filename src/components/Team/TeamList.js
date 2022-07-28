@@ -36,11 +36,9 @@ function TeamList() {
         })
         .then(({ data }) => {
           setTeams(data);
-          console.log(data);
         });
   }, [context]);
 
-  console.log(teams)
   return (
     <>
       <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>

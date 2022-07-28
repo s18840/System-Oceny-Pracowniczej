@@ -39,7 +39,6 @@ const NewTeam = () => {
     formState: { errors },
   } = useForm();
   const submitForm = (data) => {
-    console.log(data);
     const department = prepareDepartment(data);
     axios.post("https://localhost:5001/api/Department", department, 
       {
@@ -57,7 +56,6 @@ const NewTeam = () => {
       name : e.name,
       directorId : choosenDirs,
     };
-    console.log(obj)
 
     return obj;
   };
@@ -71,7 +69,6 @@ const NewTeam = () => {
         })
         .then(({ data }) => {
           setDirs(data);
-          console.log(data);
         });
   }, [context]);
 

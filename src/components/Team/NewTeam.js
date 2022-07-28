@@ -39,7 +39,6 @@ const NewTeam = () => {
     formState: { errors },
   } = useForm();
   const submitForm = (data) => {
-    console.log(data);
     const team = prepareTeam(data);
     axios.post("https://localhost:5001/api/Dto/teams/add", team, 
       {
@@ -60,7 +59,6 @@ const NewTeam = () => {
   const [context, setContext] = useContext(Context);
   //setAbreviation(e.name.subString(0,2))
   const prepareTeam = (e) => {
-    console.log(e.name)
     setAbreviation(e.name.substring(0,2));
     const obj = {
       teamId : 0,
@@ -71,7 +69,6 @@ const NewTeam = () => {
       employeeIDS: choosenEmps,
       competenceIDS: choosenComps
     };
-    console.log(obj)
 
     return obj;
   };
@@ -85,7 +82,6 @@ const NewTeam = () => {
         })
         .then(({ data }) => {
           setMans(data);
-          console.log(data);
         });
   }, [context]);
   useEffect(() => {
@@ -98,7 +94,6 @@ const NewTeam = () => {
         })
         .then(({ data }) => {
           setEmps(data);
-          console.log(data);
         });
   }, [context]);
   useEffect(() => {
@@ -111,7 +106,6 @@ const NewTeam = () => {
         })
         .then(({ data }) => {
           setComps(data);
-          console.log(data);
         });
   }, [context]);
   useEffect(() => {
@@ -124,18 +118,15 @@ const NewTeam = () => {
         })
         .then(({ data }) => {
           setDeps(data);
-          console.log(data);
         });
   }, [context]);
   
   return (
     <FormWrapper onSubmit={handleSubmit(submitForm)}>
-      {console.log("Managerowie ", choosenMans, "Pracownicy", choosenEmps, "Kompetencje ",choosenComps, "Departament ",choosenDeps)}
       <PersonalDataHeadingText>
         Creating new team
         <NewButton
           onClick={() => {
-            {console.log("Managerowie ", choosenMans, "Pracownicy", choosenEmps, "Kompetencje ",choosenComps, "Departament ",choosenDeps)}
             window.location.href = "/teamList";
           }}
         >

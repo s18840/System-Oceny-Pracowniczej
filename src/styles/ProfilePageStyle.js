@@ -396,3 +396,21 @@ export const StatusIcon = styled(BsCircle)`
   margin-left: 20px;
   border-width: 1px;
 `;
+
+export const SelectJobs = styled.select`
+  font-size: 30px;
+  line-height: 40px;
+  border-radius: 44px;
+  border: 2px solid #cccccc;
+  box-sizing: border-box;
+  padding-left: 20px;
+`;
+
+export const OptionJobs = styled.option`
+  font-size: 30px;
+  line-height: 40px;
+  border-radius: "30px 30px 0 0";
+  border: 2px solid #cccccc;
+  box-sizing: border-box;
+  padding-left: 20px;
+`;

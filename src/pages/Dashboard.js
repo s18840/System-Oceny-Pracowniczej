@@ -16,7 +16,6 @@ function Dashboard() {
   const location = useLocation();
   const [employee, setEmployee] = useState();
   const [firstName, setFirstName] = useState(" ");
-  console.log(location);
   useEffect(() => {
     context &&
       axios

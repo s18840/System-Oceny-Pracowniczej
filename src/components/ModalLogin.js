@@ -24,12 +24,10 @@ function ModalLogin({ closeModal }){
       oldPassword : e.oldPassword,
       newPassword : e.password,
     };
-    console.log(obj)
 
     return obj;
   };
   function submitForm(data){
-    console.log(data)
     const pswd = preparePassword(data);
     axios.put("https://localhost:5001/api/Account/password", pswd,
       {

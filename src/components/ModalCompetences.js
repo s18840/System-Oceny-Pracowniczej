@@ -17,7 +17,6 @@ function ModalCompetences({ closeModal, addMarker }){
   } = useForm({ mode: "onChange" });
 
   function submitForm(data){
-    console.log(data)
     addMarker((prev) => [...prev, data]);
     closeModal(false)
   }

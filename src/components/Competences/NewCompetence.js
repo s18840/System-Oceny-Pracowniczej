@@ -26,7 +26,6 @@ const NewCompetence = () => {
     handleSubmit
   } = useForm();
   const submitForm = (data) => {
-    console.log(data);
     const competence = prepareCompetence(data);
     axios.post("https://localhost:5001/api/Dto/comps/add", competence,
       {
@@ -45,7 +44,6 @@ const NewCompetence = () => {
       description : e.description,
       markers : markers,
     };
-    console.log(obj)
 
     return obj;
   };

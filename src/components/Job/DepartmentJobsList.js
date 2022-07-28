@@ -32,7 +32,6 @@ function DepartmentJobList() {
         })
         .then(({ data }) => {
           setJobs(data);
-          console.log(data);
         });
   }, [context]);
 

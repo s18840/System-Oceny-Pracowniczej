@@ -3,7 +3,9 @@ import axios from "axios";
 import {
   ProfileDataText,
   ModalButton,
-  ModalTitleDiv
+  ModalTitleDiv,
+  SelectJobs,
+  OptionJobs
 } from "../styles/ProfilePageStyle";
 import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { Context } from "../pages/Context";
@@ -29,15 +31,12 @@ function ModalEmployment({ closeModal }){
       contractExpirationDate: e.expirationDate ,
       jobName: e.jobName
     };
-    console.log(obj)
 
     return obj;
   };
 
   function submitForm(data){
-    console.log(data)
     const employment = prepareEmployment(data);
-    console.log(employment)
     axios.post("https://localhost:5001/api/Employee/addEmployment", employment,
       {
         headers: {
@@ -58,7 +57,6 @@ function ModalEmployment({ closeModal }){
         })
         .then(({ data }) => {
           setJobs(data);
-          console.log(data);
         });
   }, [context]);
   return (
@@ -97,9 +95,9 @@ function ModalEmployment({ closeModal }){
           </div>
           <div>
             <ProfileDataText>Job name</ProfileDataText>
-            <select>{jobs?.map((job)=>{
-              <option value={job.name}>{job.name}</option>
-            })}</select>
+            <SelectJobs>{jobs?.map((job)=>(
+              <OptionJobs value={job.name} {...register("jobName", { required: true })}>{job.name}</OptionJobs>
+            ))}</SelectJobs>
             {/* <InputField
               {...register("jobName", { required: "Please provide job name that already exists in database" })}
             />

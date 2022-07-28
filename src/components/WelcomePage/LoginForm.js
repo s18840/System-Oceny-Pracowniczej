@@ -22,7 +22,6 @@ function LoginForm() {
   const [credentialsCorrect, setCredentialsCorrect] = useState(true);
 
   const submitForm = (data) => {
-    console.log("logowanie", data);
 
     axios
       .post("https://localhost:5001/api/Account/login", data)

@@ -85,7 +85,6 @@ function BasicInformation() {
           setTimeout(() => {
             setIsSucceed(false);
           }, 3000);
-          console.log(resp);
         })
         .catch((err) => {
           console.log(err);

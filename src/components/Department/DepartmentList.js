@@ -28,7 +28,6 @@ function DepartmentList() {
         })
         .then(({ data }) => {
           setDepartments(data);
-          console.log(data);
         });
   }, [context]);
   return (

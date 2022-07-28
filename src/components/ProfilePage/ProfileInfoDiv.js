@@ -87,8 +87,6 @@ function ProfileInfo(props) {
       return false;
     }
   }
-  console.log(status,openModal)
-  console.log(location.pathname)
   if(loading){
     return(<></>)
   }

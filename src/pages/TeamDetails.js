@@ -41,7 +41,6 @@ function TeamDetails(props) {
               }
             )
             .then(({ data }) => {
-              console.log(data)
               setEmployee(data);
               setStatus(data.status);
             });
@@ -58,11 +57,9 @@ function TeamDetails(props) {
             }
           )
           .then(({ data }) => {
-            console.log(data)
             setCompetences(data);
           });
   }, [context]);
-  console.log(competences)
 
   return (
     <>

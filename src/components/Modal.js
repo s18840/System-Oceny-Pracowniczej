@@ -26,13 +26,11 @@ function Modal({ closeModal }){
       graduationDate : e.graduationDate,
       personal_Number : context.employeeId,
     };
-    console.log(obj)
 
     return obj;
   };
 
   function submitForm(data){
-    console.log(data)
     const education = prepareEducation(data);
     axios.post("https://localhost:5001/api/Education", education,
       {

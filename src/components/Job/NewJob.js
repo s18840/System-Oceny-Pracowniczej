@@ -39,9 +39,7 @@ const NewJob = (props) => {
     formState: { errors },
   } = useForm();
   const submitForm = (data) => {
-    console.log(data);
     const job = prepareJob(data);
-    console.log(job)
     axios.post(`https://localhost:5001/api/Dto/jobs/add`, job, 
     {
       headers: {
@@ -53,13 +51,11 @@ const NewJob = (props) => {
   const [choosenDeps, setChoosenDeps] = useState([]);
   const [context] = useContext(Context);
   const prepareJob = (e) => {
-    console.log(e.jobName)
     const obj = {
       jobID : 0,
       name : e.name,
       departmentIDs : choosenDeps,
     };
-    console.log(obj)
 
     return obj;
   };
@@ -73,19 +69,16 @@ const NewJob = (props) => {
         })
         .then(({ data }) => {
           setDeps(data);
-          console.log(data);
         });
   }, [context]);
 
   return (
     <FormWrapper onSubmit={handleSubmit(submitForm)}>
-      {console.log("Departament ",choosenDeps)}
       <PersonalDataHeadingText>
         Creating new job
         <NewButton
           onClick={() => {
-            {console.log("Departament ",choosenDeps)}
-            //window.location.href = "/teamList";
+            window.location.href = "/Jobs";
           }}
         >
           Add
