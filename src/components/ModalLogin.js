@@ -37,6 +37,7 @@ function ModalLogin({ closeModal }){
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
+    window.location.reload();
     closeModal(false)
   }
   return (

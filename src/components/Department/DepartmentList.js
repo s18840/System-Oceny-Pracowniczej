@@ -34,7 +34,7 @@ function DepartmentList() {
   return (
     <>
       <PersonalDataHeadingText>Department List</PersonalDataHeadingText>
-      <NewButton onClick={event =>  window.location.href="/newDepartment"}>New</NewButton>
+      {(localStorage.getItem("roles").includes("Admin")) && <NewButton onClick={event =>  window.location.href="/newDepartment"}>New</NewButton>}
       <TableInfo className="table">
         <thead>
           <tr>

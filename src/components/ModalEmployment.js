@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import {
   ProfileDataText,
@@ -12,6 +12,7 @@ import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
 
 function ModalEmployment({ closeModal }){
   const [context] = useContext(Context);
+  const [jobs, setJobs] = useState([]);
   const {
     register,
     handleSubmit,
@@ -43,8 +44,23 @@ function ModalEmployment({ closeModal }){
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
+    window.location.reload();
     closeModal(false)
   }
+
+  useEffect(() => {
+    context &&
+      axios
+        .get("https://localhost:5001/api/Dto/avaijobs", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then(({ data }) => {
+          setJobs(data);
+          console.log(data);
+        });
+  }, [context]);
   return (
     <div style={{
       width: "100%",
@@ -81,7 +97,10 @@ function ModalEmployment({ closeModal }){
           </div>
           <div>
             <ProfileDataText>Job name</ProfileDataText>
-            <InputField
+            <select>{jobs?.map((job)=>{
+              <option value={job.name}>{job.name}</option>
+            })}</select>
+            {/* <InputField
               {...register("jobName", { required: "Please provide job name that already exists in database" })}
             />
             {errors.jobName && errors.jobName.type === "minLength" && (
@@ -89,7 +108,7 @@ function ModalEmployment({ closeModal }){
             )}
             {errors.jobName && errors.jobName.type === "required" && (
                 <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.jobName.message}</ErrorsLoginSpan>
-              )}
+              )} */}
           </div>
           <div>
             <ProfileDataText>Time basis</ProfileDataText>

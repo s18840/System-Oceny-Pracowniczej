@@ -44,10 +44,10 @@ function TeamList() {
   return (
     <>
       <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>
-      <NewButton onClick={() => (window.location.href = "/newTeam")}>
+      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") || localStorage.getItem("roles").includes("Director")) && <NewButton onClick={() => (window.location.href = "/newTeam")}>
         New
       </NewButton>
-
+      }
       <TableInfo className="table">
         <thead>
           <tr>

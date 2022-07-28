@@ -35,7 +35,7 @@ function CompetenceList() {
   return (
     <>
       <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
-      <NewButton onClick={() =>  window.location.href="/newCompetence"}>New</NewButton>
+      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") || localStorage.getItem("roles").includes("Director") || localStorage.getItem("roles").includes("Manager")) && <NewButton onClick={() =>  window.location.href="/newCompetence"}>New</NewButton> }
       <TableInfo className="table">
         <thead>
           <tr>
