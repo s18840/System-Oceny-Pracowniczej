@@ -59,6 +59,8 @@ export const TargetListElement = styled.div`
 `
 
 export const ClockWrapper = styled.div`
+  position: fixed;
+  right: 30px;
   width: 500px;
   height: 500px;
   border: 10px solid #3D098A;

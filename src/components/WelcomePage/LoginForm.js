@@ -32,6 +32,7 @@ function LoginForm() {
         localStorage.setItem("employeeId", data.employeeId);
         localStorage.setItem("username", data.username);
         localStorage.setItem("roles", data.roles);
+        localStorage.setItem("fullName", data.fullName)
         history.push("/dashboard");
       })
       .catch((error) => {
