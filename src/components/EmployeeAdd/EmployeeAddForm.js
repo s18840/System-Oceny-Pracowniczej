@@ -62,6 +62,7 @@ function EmployeeAddForm() {
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          ContentType: "application/json",
         },
       }).then((resp) => {
         setIsSucceed(true);

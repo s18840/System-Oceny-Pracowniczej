@@ -36,6 +36,7 @@ function Modal(props){
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          ContentType: "application/json",
         },
       })
     window.location.reload();

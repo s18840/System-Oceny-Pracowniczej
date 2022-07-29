@@ -31,6 +31,7 @@ const NewCompetence = () => {
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          ContentType: "application/json",
         },
       })
   };

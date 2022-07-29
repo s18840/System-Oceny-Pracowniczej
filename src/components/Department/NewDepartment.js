@@ -44,6 +44,7 @@ const NewDepartment = () => {
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          ContentType: "application/json",
         },
       })
   };
