@@ -58,7 +58,7 @@ const NewCompetence = () => {
           <InsideWrapper>
             <Heading>
               <ProfileDataText>Name: </ProfileDataText>
-              <InputField placeholder="Competenece name" {...register("name", { required: true })}/>
+              <InputField placeholder="Competence name" {...register("name", { required: true })}/>
             </Heading>
             <Heading style={{display: "flex", alignItems: "center"}}>
               <ProfileDataText>Markers required: </ProfileDataText>

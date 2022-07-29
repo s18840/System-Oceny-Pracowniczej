@@ -51,9 +51,6 @@ const HeaderBar = () => {
         >
           <FaPowerOff />
         </HeaderBtnSignOut>
-        <HeaderBtnTol to="/settings">
-          <FaWrench />
-        </HeaderBtnTol>
         <HeaderProfile activeStyle>
           <HeaderAvatar to="/profile">
             {initials}

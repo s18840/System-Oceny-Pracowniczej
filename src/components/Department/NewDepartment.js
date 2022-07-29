@@ -32,7 +32,7 @@ const Button = (props) => {
   );
 };
 
-const NewTeam = () => {
+const NewDepartment = () => {
   const {
     register,
     handleSubmit,
@@ -53,10 +53,9 @@ const NewTeam = () => {
   const prepareDepartment = (e) => {
     const obj = {
       departmentId : 0,
-      name : e.name,
+      departmentName : e.name,
       directorId : choosenDirs,
     };
-
     return obj;
   };
   useEffect(() => {
@@ -117,4 +116,4 @@ const NewTeam = () => {
   );
 };
 
-export default NewTeam;
+export default NewDepartment;

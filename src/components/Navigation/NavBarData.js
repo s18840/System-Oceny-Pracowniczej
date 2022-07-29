@@ -20,11 +20,7 @@ export const NavBarData = [{
   icon: < FaRegUser /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  subnav: [{
-    title: "Your goals",
-    path: "/yourGoals",
-    role: "all"
-  },
+  subnav: [
   {
     title: "Create new employee",
     path: "/newEmp",
@@ -38,6 +34,11 @@ export const NavBarData = [{
   icon: < FaUsers /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+  subnav: [{
+    title: "Your team",
+    path: "/YourTeam",
+    role: "Manager"
+  },]
 },
 {
   title: "Employees",
