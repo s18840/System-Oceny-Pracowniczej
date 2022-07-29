@@ -24,7 +24,7 @@ function EmployeeList() {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Employee", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Employee`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

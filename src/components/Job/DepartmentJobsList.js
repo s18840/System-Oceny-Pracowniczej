@@ -21,7 +21,7 @@ function DepartmentJobList() {
   useEffect(() => {
     context &&
       axios
-        .get(`https://localhost:5001/api/Dto/jobs/${localStorage.getItem(
+        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/jobs/${localStorage.getItem(
             "employeeId"
           )}`, {
           headers: {

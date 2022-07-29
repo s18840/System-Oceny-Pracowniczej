@@ -40,7 +40,7 @@ const NewJob = (props) => {
   } = useForm();
   const submitForm = (data) => {
     const job = prepareJob(data);
-    axios.post(`https://localhost:5001/api/Dto/jobs/add`, job, 
+    axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/jobs/add`, job, 
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -62,7 +62,7 @@ const NewJob = (props) => {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Department", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Department`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

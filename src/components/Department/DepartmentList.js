@@ -18,10 +18,11 @@ const dataJson = ["Department name:", "Department Teams:", " Director:"];
 function DepartmentList() {
   const [context] = useContext(Context);
   const [departments, setDepartments] = useState();
+  console.log(process.env.REACT_APP_API_ADDRESS)
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Dto/deps", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/deps`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

@@ -32,7 +32,7 @@ function Modal(props){
 
   function submitForm(data){
     const education = prepareEducation(data);
-    axios.post("https://localhost:5001/api/Education", education,
+    axios.post(`${process.env.REACT_APP_API_ADDRESS}Education`, education,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

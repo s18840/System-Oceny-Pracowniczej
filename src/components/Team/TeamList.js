@@ -27,7 +27,7 @@ function TeamList() {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Dto/teams", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/teams`, {
           headers: {
             Authorization: `Bearer ${
               localStorage.getItem("token")

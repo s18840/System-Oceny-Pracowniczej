@@ -18,7 +18,7 @@ function EmploymentTable(props) {
     context && !props.empId &&
       axios
         .get(
-          `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
             "employeeId"
           )}`,
           {
@@ -36,7 +36,7 @@ function EmploymentTable(props) {
     context && props.empId &&
       axios
         .get(
-          `https://localhost:5001/api/Dto/emp/${props.empId}`,
+          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.empId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

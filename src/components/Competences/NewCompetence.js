@@ -27,7 +27,7 @@ const NewCompetence = () => {
   } = useForm();
   const submitForm = (data) => {
     const competence = prepareCompetence(data);
-    axios.post("https://localhost:5001/api/Dto/comps/add", competence,
+    axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/comps/add`, competence,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

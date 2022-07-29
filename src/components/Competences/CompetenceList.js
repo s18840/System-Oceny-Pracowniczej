@@ -21,7 +21,7 @@ function CompetenceList() {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Dto/comps", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/comps`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

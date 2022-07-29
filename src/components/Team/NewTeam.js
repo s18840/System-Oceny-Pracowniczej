@@ -40,7 +40,7 @@ const NewTeam = () => {
   } = useForm();
   const submitForm = (data) => {
     const team = prepareTeam(data);
-    axios.post("https://localhost:5001/api/Dto/teams/add", team, 
+    axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/teams/add`, team, 
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -75,7 +75,7 @@ const NewTeam = () => {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Employee/avaiMana", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Employee/avaiMana`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -87,7 +87,7 @@ const NewTeam = () => {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Employee/avaiEmps", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Employee/avaiEmps`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -99,7 +99,7 @@ const NewTeam = () => {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Competence", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Competence`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -111,7 +111,7 @@ const NewTeam = () => {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Department", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Department`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

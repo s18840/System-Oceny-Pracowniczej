@@ -44,7 +44,7 @@ function ProfileInfo(props) {
     context &&
       axios
         .get(
-          `https://localhost:5001/api/Dto/emp/${props.id ? props.id : localStorage.getItem(
+          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.id ? props.id : localStorage.getItem(
             "employeeId"
           )}`,
           {
@@ -91,7 +91,7 @@ function ProfileInfo(props) {
 
   const resetPassword = () => {
     const userId =prepareUserId();
-    axios.put(`https://localhost:5001/api/Account/passwordreset`, userId,
+    axios.put(`${process.env.REACT_APP_API_ADDRESS}Account/passwordreset`, userId,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

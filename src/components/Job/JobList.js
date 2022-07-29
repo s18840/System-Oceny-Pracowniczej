@@ -24,7 +24,7 @@ function JobList() {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Dto/jobs", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/jobs`, {
           headers: {
             Authorization: `Bearer ${
               localStorage.getItem("token")

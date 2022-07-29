@@ -36,7 +36,7 @@ function ModalEmployment( props ){
 
   function submitForm(data){
     const employment = prepareEmployment(data);
-    axios.post("https://localhost:5001/api/Employee/addEmployment", employment,
+    axios.post(`${process.env.REACT_APP_API_ADDRESS}Employee/addEmployment`, employment,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -49,7 +49,7 @@ function ModalEmployment( props ){
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Dto/avaijobs", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/avaijobs1`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

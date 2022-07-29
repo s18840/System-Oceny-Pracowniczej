@@ -29,7 +29,7 @@ function ModalLogin({ closeModal }){
   };
   function submitForm(data){
     const pswd = preparePassword(data);
-    axios.put("https://localhost:5001/api/Account/password", pswd,
+    axios.put(`${process.env.REACT_APP_API_ADDRESS}Account/password`, pswd,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

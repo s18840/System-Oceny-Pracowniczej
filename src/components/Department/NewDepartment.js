@@ -40,7 +40,7 @@ const NewDepartment = () => {
   } = useForm();
   const submitForm = (data) => {
     const department = prepareDepartment(data);
-    axios.post("https://localhost:5001/api/Department", department, 
+    axios.post(`${process.env.REACT_APP_API_ADDRESS}Department`, department, 
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -61,7 +61,7 @@ const NewDepartment = () => {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Employee/avaiDir", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Employee/avaiDir`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

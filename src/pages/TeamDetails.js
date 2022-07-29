@@ -33,7 +33,7 @@ function TeamDetails(props) {
         context &&
           axios
             .get(
-              `https://localhost:5001/api/Employee/team/${location.state}`,
+              `${process.env.REACT_APP_API_ADDRESS}Employee/team/${location.state}`,
               {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -49,7 +49,7 @@ function TeamDetails(props) {
     context &&
         axios
           .get(
-            `https://localhost:5001/api/Dto/comps/${location.state}`,
+            `${process.env.REACT_APP_API_ADDRESS}Dto/comps/${location.state}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,

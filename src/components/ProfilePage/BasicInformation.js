@@ -38,7 +38,7 @@ function BasicInformation(props) {
     context && !props.empId &&
       axios
         .get(
-          `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
             "employeeId"
           )}`,
           {
@@ -83,7 +83,7 @@ function BasicInformation(props) {
     context && props.empId &&
       axios
         .get(
-          `https://localhost:5001/api/Dto/emp/${props.empId}`,
+          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.empId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -149,7 +149,7 @@ function BasicInformation(props) {
   const submitForm = (data) => {
     if (!formReady && !props.empId) {
       const employeeReady = prepareUser(data);
-      axios.put(`https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+      axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
         "employeeId"
       )}`, employeeReady,
       {
@@ -160,7 +160,7 @@ function BasicInformation(props) {
     }
     if (!formReady && props.empId) {
       const employeeReady = prepareUser(data);
-      axios.put(`https://localhost:5001/api/Dto/emp/${props.empId}`, employeeReady,
+      axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.empId}`, employeeReady,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

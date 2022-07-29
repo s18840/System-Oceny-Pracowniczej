@@ -25,7 +25,7 @@ function Targets() {
   useEffect(() => {
     if (targets.length === 0) {
       context && axios.get(
-        `https://localhost:5001/api/Goal/emp/${localStorage.getItem("employeeId")}`,
+        `${process.env.REACT_APP_API_ADDRESS}Goal/emp/${localStorage.getItem("employeeId")}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -73,7 +73,7 @@ function Targets() {
       });
       console.log(JSON.stringify(targetsPostData));
       axios.post(
-        `https://localhost:5001/api/Dto/goals/add/${localStorage.getItem("employeeId")}`,
+        `${process.env.REACT_APP_API_ADDRESS}Dto/goals/add/${localStorage.getItem("employeeId")}`,
         targetsPostData,
         {
           headers: {
@@ -103,7 +103,7 @@ function Targets() {
     console.log(target);
     if (isUpdatableInDB) {
       axios.put(
-        `https://localhost:5001/api/Goal/emp/${localStorage.getItem("employeeId")}/${target.goalID}`,
+        `${process.env.REACT_APP_API_ADDRESS}Goal/emp/${localStorage.getItem("employeeId")}/${target.goalID}`,
         target,
         {
           headers: {
