@@ -50,7 +50,7 @@ function ModalEmployment( props ){
   useEffect(() => {
     context &&
       axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/avaijobs1`, {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/avaijobs`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

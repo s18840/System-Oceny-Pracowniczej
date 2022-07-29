@@ -42,7 +42,6 @@ function EmployeeAddForm() {
       lastName: e.lastName,
       birthDate: e.birthDate,
       cellPhoneNumber: e.cellPhoneNumber,
-      stationaryPhoneNumber: null,
       email: e.email,
       companyEmail: e.email,
       country: e.country,
