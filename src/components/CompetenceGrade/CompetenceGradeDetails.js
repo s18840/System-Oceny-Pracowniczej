@@ -1,19 +1,34 @@
 import React from "react";
-import {ContentWrapper, SubTitle} from "../../styles/GlobalStyle";
 import {
   CompetenceGradeDetailContent,
   CompetenceGradeDetailContentBold,
+  CompetenceGradeDetailsHeader,
+  CompetenceGradeDetailsHeaderContent,
   CompetenceGradeDetailWrapper,
 } from "../../styles/CompetencesGradeStyles";
+import {Span, TextField} from "../../styles/GlobalStyle";
 
 function CompetenceGradeDetails({grade}) {
 
-  console.log(grade)
+  console.log(grade);
+  if (Object.entries(grade).length === 0) {
+    return <></>;
+  }
 
   return (
-    <ContentWrapper>
-      <SubTitle>Competences Grade</SubTitle>
-      { grade.competenceGrades.map((value, index) => (
+    <>
+      <CompetenceGradeDetailsHeader>
+        <CompetenceGradeDetailsHeaderContent>
+          competence
+        </CompetenceGradeDetailsHeaderContent>
+        <CompetenceGradeDetailsHeaderContent>
+          description
+        </CompetenceGradeDetailsHeaderContent>
+        <CompetenceGradeDetailsHeaderContent>
+          grade
+        </CompetenceGradeDetailsHeaderContent>
+      </CompetenceGradeDetailsHeader>
+      {grade.competenceGrades.map((value, index) => (
         <CompetenceGradeDetailWrapper key={value.competenceId}>
           <CompetenceGradeDetailContentBold>
             {(index + 1) + ". " + value.competenceName}
@@ -26,7 +41,13 @@ function CompetenceGradeDetails({grade}) {
           </CompetenceGradeDetailContent>
         </CompetenceGradeDetailWrapper>
       ))}
-    </ContentWrapper>
+      <Span>Grade conclusion</Span>
+      <TextField
+        readOnly
+        value={grade.conclusion}
+        width="100%"
+      />
+    </>
   );
 }
 

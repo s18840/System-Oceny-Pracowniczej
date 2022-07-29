@@ -78,6 +78,9 @@ function App() {
           <Route exact path="/grades" component={Grades}>
             <Grades />
           </Route>
+          <Route exact path="/grades/:id" component={Grades}>
+            <Grades />
+          </Route>
           <Route exact path="/newEmp" component={NewEmpView}>
             <NewEmpView />
           </Route>

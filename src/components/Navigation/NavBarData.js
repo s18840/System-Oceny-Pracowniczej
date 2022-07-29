@@ -27,7 +27,7 @@ export const NavBarData = [{
   },
   {
     title: "Your goals",
-    path: "/yourGoals",
+    path: "/targets",
     role: "all"
   },
   {

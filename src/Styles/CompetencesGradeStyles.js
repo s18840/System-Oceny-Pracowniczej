@@ -77,12 +77,24 @@ export const AcceptButtonWrapper = styled.div`
   display: flex;
   justify-content: end;
 `
+export const CompetenceGradeDetailsHeader = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 3%;
+`
+
+export const CompetenceGradeDetailsHeaderContent = styled.div`
+  width: 33%;
+  text-align: center;
+`
 
 export const CompetenceGradeDetailWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   border: 2px solid black;
   border-radius: 5px;
+  margin: 2% 0;
+  padding: 3%;
 `
 
 export const CompetenceGradeDetailContent = styled.div`
@@ -91,4 +103,18 @@ export const CompetenceGradeDetailContent = styled.div`
 `
 export const CompetenceGradeDetailContentBold = styled(CompetenceGradeDetailContent)`
   font-weight: bold;
+`
+
+export const ErrorLabel = styled.div`
+  display: flex;
+  justify-content: space-around;
+  color: red;
+  font-size: 3rem;
+  font-weight: bold;
+`
+
+export const QuarterSelect = styled.select`
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
 `
