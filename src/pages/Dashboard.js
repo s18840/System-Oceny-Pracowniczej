@@ -1,43 +1,22 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import Navbar from "../components/Navigation/NavBar";
 import Header from "../components/Header/Header";
-import { PageWrapper, SubTitle, Title } from "../styles/GlobalStyle";
+import {PageWrapper, SubTitle, Title} from "../styles/GlobalStyle";
 import Clock from "../components/Dashboard/Clock";
 import {
   DashboardContentWrapper,
   DashboardWrapper,
 } from "../styles/DashboardStyles";
 import NextGrading from "../components/Dashboard/NextGrading";
-import { useLocation } from "react-router-dom";
-import { Context } from "../pages/Context";
-import axios from "axios";
+
 function Dashboard() {
-  const [context] = useContext(Context);
-  const location = useLocation();
-  const [employee, setEmployee] = useState();
-  const [firstName, setFirstName] = useState(" ");
-  useEffect(() => {
-    context &&
-      axios
-        .get(
-          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
-            "employeeId"
-          )}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then(({ data }) => {
-          setEmployee(data);
-          setFirstName(data.firstName);
-        });
-  }, [context]);
+
+  const firstName = localStorage.getItem("fullName").split(" ")[0];
+
   return (
     <>
-      <Navbar />
-      <Header />
+      <Navbar/>
+      <Header/>
       <PageWrapper>
         <DashboardWrapper>
           <DashboardContentWrapper>

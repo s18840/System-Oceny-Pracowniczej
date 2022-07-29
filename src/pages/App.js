@@ -15,7 +15,6 @@ import Department from "./Department";
 import NewDepartmentView from "./NewDepartmentView";
 import Team from "./Team";
 import NewTeamView from "./NewTeamView";
-import Settings from "./Settings";
 import Grades from "./Grades";
 import NewEmpView from "./NewEmpView";
 import EmployeeList from "./EmployeeList";
@@ -35,7 +34,7 @@ function App() {
     <h1>
       Not authorized
     </h1>
-    <button onClick={() => history.push('/dashboard')}>dashboard</button>
+    <button onClick={() => history.goForward()}>Go back</button>
     </>
 
   const checkRoles = useCallback((...acceptedRoles)=>{
@@ -64,43 +63,40 @@ function App() {
             <Dashboard/>
           </Route>
           <Route path="/Profile/:id">
-            <ProfilePage />
+            <ProfilePage/>
           </Route>
           <Route path="/Profile">
-            <ProfilePage />
+            <ProfilePage/>
           </Route>
-          <Route exact path="/Competences">
-            <Competences/>
-          </Route>
-          <Route exact path="/newCompetence">
-            <NewCompetenceView/>
-          </Route>
-          <Route exact path="/Departments">
-            <Department />
-          </Route>
-          <Route exact path="/newDepartment">
-            <NewDepartmentView />
-          </Route>
-          <Route exact path="/Teams">
-            <Team />
-          </Route>
-          <Route exact path="/newTeam">
-            <NewTeamView />
-          </Route>
-          <Route exact path="/settings">
-            <Settings />
-          </Route>
-          <Route exact path="/grades">
-            <Grades />
-          </Route>
-          <Route exact path="/grades/:id">
-            <Grades />
-          </Route>
-          <Route exact path="/newEmp">
-            <NewEmpView />
-          </Route>
+          <Route exact path="/Competences" render={()=>
+            checkRoles("Manager", "HR", "Director", "Admin") ? <Competences/> : notAuthorized
+          }/>
+          <Route exact path="/newCompetence" render={()=>
+            checkRoles("HR") ? <NewCompetenceView/> : notAuthorized
+          }/>
+          <Route exact path="/Departments" render={()=>
+            checkRoles("HR", "Manager", "Director", "Admin") ? <Department/> : notAuthorized
+          }/>
+          <Route exact path="/newDepartment" render={()=>
+            checkRoles("Admin") ? <NewDepartmentView/> : notAuthorized
+          }/>
+          <Route exact path="/Teams" render={()=>
+            checkRoles("HR", "Manager", "Director", "Admin") ? <Team/> : notAuthorized
+          }/>
+          <Route exact path="/newTeam" render={()=>
+            checkRoles("HR", "Director", "Admin") ? <NewTeamView/> : notAuthorized
+          }/>
+          <Route exact path="/grades" render={()=>
+            checkRoles("Manager", "User", "HR") ? <Grades/> : notAuthorized
+          }/>
+          <Route exact path="/grades/:id" render={()=>
+            checkRoles("HR", "Manager", "Director", "Admin") ? <Grades/> : notAuthorized
+          }/>
+          <Route exact path="/newEmp" render={()=>
+            checkRoles("Admin") ? <NewEmpView/> : notAuthorized
+          }/>
           <Route exact path="/employees">
-            <EmployeeList />
+            <EmployeeList/>
           </Route>
           <Route exact path="/grade/:id" render={()=>
             checkRoles("Manager", "HR") ? <Grade/> : notAuthorized
@@ -108,22 +104,22 @@ function App() {
           <Route exact path="/targets">
             <Targets/>
           </Route>
-           <Route exact path="/Jobs">
-             <Jobs />
-           </Route>
-           <Route exact path="/newJob">
-             <NewJobView />
-           </Route>
+           <Route exact path="/Jobs" render={()=>
+             checkRoles("HR", "Director", "Admin") ? <Jobs/> : notAuthorized
+           }/>
+           <Route exact path="/newJob" render={()=>
+             checkRoles("HR", "Director", "Admin") ? <NewJobView/> : notAuthorized
+           }/>
           <Route exact path="/teamDetails">
-            <TeamDetails />
+            <TeamDetails/>
           </Route>
-          {/*For Director job lists */}
-          <Route exact path="/DepartmentJobs">
-            <DepartmentJobsList />
-          </Route>
-          <Route exact path="/Team">
-            <UserTeam />
-          </Route>
+          <Route exact path="/DepartmentJobs" render={()=>
+            checkRoles("Director") ? <DepartmentJobsList/> : notAuthorized
+          }/>
+          <Route exact path="/Team" render={()=>
+            checkRoles("Manager", "User") ? <UserTeam/> : notAuthorized
+          }/>
+          
         </Switch>
       </Router>
     </Context.Provider>

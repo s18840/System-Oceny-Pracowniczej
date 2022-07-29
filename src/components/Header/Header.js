@@ -15,29 +15,9 @@ import {
 } from "./HeaderElements";
 
 const HeaderBar = () => {
-  const [context] = useContext(Context);
   const history = useHistory();
-  const [formFirstName, setFirstName] = useState(" ");
-  const [formSurname, setSurname] = useState(" ");
-  const initials = (formFirstName[0]) + (formSurname[0]);
-  useEffect(() => {
-    context &&
-      axios
-        .get(
-          `${process.env.REACT_APP_API_ADDRESS}Employee/${localStorage.getItem(
-            "employeeId"
-          )}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then(({ data }) => {
-          setFirstName(data.firstName);
-          setSurname(data.lastName);
-        });
-  }, [context]);
+  const fullName = localStorage.getItem("fullName")
+  const initials = (fullName.split(" ")[0][0]) + (fullName.split(" ")[1][0]);
 
   let pathName = history.location.pathname;
   return (
@@ -56,7 +36,7 @@ const HeaderBar = () => {
             {initials}
           </HeaderAvatar>
           <HeaderName to="/profile">
-            {formFirstName + " " + formSurname}
+            {fullName}
           </HeaderName>
         </HeaderProfile>
       </HeaderBtnProfileWrapper>

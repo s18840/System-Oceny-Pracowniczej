@@ -24,7 +24,6 @@ function Clock() {
 
     dayOfWeek = getDayOfWeekString(dayOfWeek)
     dateInfo = `${dayOfMonth}.${month}.${year}`
-    //TODO fix string with html tags
 
     return {
       time: time,
