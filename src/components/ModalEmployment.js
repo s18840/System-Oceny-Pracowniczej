@@ -12,7 +12,7 @@ import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
 import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
 
-function ModalEmployment({ closeModal }){
+function ModalEmployment( props ){
   const [context] = useContext(Context);
   const [jobs, setJobs] = useState([]);
   const {
@@ -20,10 +20,9 @@ function ModalEmployment({ closeModal }){
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
-
   const prepareEmployment = (e) => {
     const obj = {
-      personalNumber: localStorage.getItem("employeeId"),
+      personalNumber: props.empId ? props.empId : localStorage.getItem("employeeId"),
       hireDate : e.hireDate,
       terminationDate : null,
       timeBasis : e.timeBasis,
@@ -43,8 +42,8 @@ function ModalEmployment({ closeModal }){
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-    window.location.reload();
-    closeModal(false)
+    //window.location.reload();
+    props.closeModal(false)
   }
 
   useEffect(() => {
@@ -84,7 +83,7 @@ function ModalEmployment({ closeModal }){
         <FormWrapper onSubmit={handleSubmit(submitForm)}>
           <div style={{display: "flex", justifyContent: "space-between"}}>
             <ModalTitleDiv>Add employment</ModalTitleDiv>
-            <ModalButton onClick={() => closeModal(false) }style={{alignSelf: "end"}}> X </ModalButton>
+            <ModalButton onClick={() => props.closeModal(false) }style={{alignSelf: "end"}}> X </ModalButton>
           </div>
           <div>
             <ProfileDataText>Hire date</ProfileDataText>
@@ -95,8 +94,8 @@ function ModalEmployment({ closeModal }){
           </div>
           <div>
             <ProfileDataText>Job name</ProfileDataText>
-            <SelectJobs>{jobs?.map((job)=>(
-              <OptionJobs value={job.name} {...register("jobName", { required: true })}>{job.name}</OptionJobs>
+            <SelectJobs {...register("jobName", { required: true })}>{jobs?.map((job)=>(
+              <OptionJobs value={job.name} >{job.name}</OptionJobs>
             ))}</SelectJobs>
             {/* <InputField
               {...register("jobName", { required: "Please provide job name that already exists in database" })}
@@ -134,7 +133,7 @@ function ModalEmployment({ closeModal }){
             />
           </div>
           <div style={{display: "flex", justifyContent:"end", padding: "20px 0px 20px 20px"}}>
-            <ModalButton onClick={() => closeModal(false)}> Close </ModalButton>
+            <ModalButton onClick={() => props.closeModal(false)}> Close </ModalButton>
             <ModalButton style={{marginLeft:20, width:140}} > Continue </ModalButton>
           </div>
         </FormWrapper>

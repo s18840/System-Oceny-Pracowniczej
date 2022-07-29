@@ -10,7 +10,7 @@ import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
 import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
 
-function Modal({ closeModal }){
+function Modal(props){
   const [context] = useContext(Context);
   const {
     register,
@@ -24,7 +24,7 @@ function Modal({ closeModal }){
       degree : e.degree,
       placeOfEducation : e.placeOfEducation,
       graduationDate : e.graduationDate,
-      personal_Number : context.employeeId,
+      personal_Number : props.empId ? props.empId : localStorage.getItem("employeeId"),
     };
 
     return obj;
@@ -39,7 +39,7 @@ function Modal({ closeModal }){
         },
       })
     window.location.reload();
-    closeModal(false)
+    props.closeModal(false)
   }
   return (
     <div style={{
@@ -66,7 +66,7 @@ function Modal({ closeModal }){
         <FormWrapper onSubmit={handleSubmit(submitForm)}>
           <div style={{display: "flex", justifyContent: "space-between"}}>
             <ModalTitleDiv>Add education</ModalTitleDiv>
-            <ModalButton onClick={() => closeModal(false) }style={{alignSelf: "end"}}> X </ModalButton>
+            <ModalButton onClick={() => props.closeModal(false) }style={{alignSelf: "end"}}> X </ModalButton>
           </div>
           <div>
             <ProfileDataText>Graduation date</ProfileDataText>
@@ -94,7 +94,7 @@ function Modal({ closeModal }){
             )}
           </div>
           <div style={{display: "flex", justifyContent:"end", padding: "20px 0px 20px 20px"}}>
-            <ModalButton onClick={() => closeModal(false)}> Close </ModalButton>
+            <ModalButton onClick={() => props.closeModal(false)}> Close </ModalButton>
             <ModalButton style={{marginLeft:20, width:140}} type="submit"> Continue </ModalButton>
           </div>
         </FormWrapper>

@@ -9,18 +9,34 @@ import { Context } from "../../pages/Context";
 import Modal from "../Modal";
 
 const dataJson = ["Graduation Date", "Institution", "Degree"];
-function EducationInformation() {
+function EducationInformation(props) {
   const [context] = useContext(Context);
   const [employee, setEmployee] = useState();
   const [openModal,setOpenModal] = useState(false);
 
   useEffect(() => {
-    context &&
+    context && !props.empId &&
       axios
         .get(
           `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
             "employeeId"
           )}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setEmployee(data);
+        });
+  }, [context]);
+
+  useEffect(() => {
+    context && props.empId &&
+      axios
+        .get(
+          `https://localhost:5001/api/Dto/emp/${props.empId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -65,7 +81,7 @@ function EducationInformation() {
       <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
         Add
       </ModalOpenButton>
-      {openModal && <Modal closeModal={setOpenModal}
+      {openModal && <Modal empId={props.empId} closeModal={setOpenModal}
         style={{
           width: 100,
           height: 100,
