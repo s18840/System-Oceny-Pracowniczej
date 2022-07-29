@@ -19,6 +19,7 @@ import Settings from "./Settings";
 import Grades from "./Grades";
 import NewEmpView from "./NewEmpView";
 import EmployeeList from "./EmployeeList";
+import UserTeam from "./UserTeam";
 import Targets from "./Targets";
 import { Context } from "./Context.js";
 import Grade from "./Grade";
@@ -26,9 +27,7 @@ import Jobs from "./Jobs";
 import DepartmentJobsList from "./DepartmentJobs";
 import NewJobView from "./NewJobsView";
 import TeamDetails from "./TeamDetails";
-import YourTeam from "../components/Team/YourTeam";
 function App() {
-  //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
   const [context, setContext] = useState("default context value");
   const history = useHistory()
 
@@ -122,8 +121,8 @@ function App() {
           <Route exact path="/DepartmentJobs">
             <DepartmentJobsList />
           </Route>
-          <Route exact path="/YourTeam">
-            <YourTeam />
+          <Route exact path="/Team">
+            <UserTeam />
           </Route>
         </Switch>
       </Router>

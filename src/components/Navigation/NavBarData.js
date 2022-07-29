@@ -38,11 +38,14 @@ export const NavBarData = [{
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
   role: ["Manager","Director","HR","Admin"],
-  subnav: {
-    title: "Your team",
-    path: "/YourTeam",
-    role: ["Manager"]
-  }
+},
+{
+  title: "Your Team",
+  path: "/Team",
+  icon: < BsPeopleFill /> ,
+  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
+  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+  role: ["User","Manager"],
 },
 {
   title: "Employees",
