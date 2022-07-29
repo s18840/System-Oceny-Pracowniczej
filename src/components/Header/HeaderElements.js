@@ -99,3 +99,16 @@ export const HeaderProfilePhoto = styled(Link)`
   border-radius: 100%;
   cursor: pointer;
 `
+
+export const HeaderAvatar = styled(Link)`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 30px;
+  color: #FFFFFF;
+  margin-right: 10px;
+  line-height: 50px;
+  text-align: center;
+  background: #FFA500;
+  text-decoration: none ;
+  `

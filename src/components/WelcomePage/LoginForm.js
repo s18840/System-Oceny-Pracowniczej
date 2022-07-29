@@ -22,10 +22,9 @@ function LoginForm() {
   const [credentialsCorrect, setCredentialsCorrect] = useState(true);
 
   const submitForm = (data) => {
-    console.log("logowanie", data);
 
     axios
-      .post("https://localhost:5001/api/Account/login", data)
+      .post(`${process.env.REACT_APP_API_ADDRESS}Account/login`, data)
       .then(({ data }) => {
         setContext(data);
         localStorage.setItem("token", data.token);
@@ -84,9 +83,6 @@ function LoginForm() {
         )}
       </InputWrapper>
       <LoginButton type="submit" value="login" />
-      <Span fontSize="20px" underlined>
-        Forgot password
-      </Span>
     </LoginFormWrapper>
   );
 }

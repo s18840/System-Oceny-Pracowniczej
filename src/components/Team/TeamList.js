@@ -12,6 +12,7 @@ import {
   NewButton,
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
+import { Link } from "react-router-dom";
 
 const dataJson = [
   "Team name:",
@@ -26,7 +27,7 @@ function TeamList() {
   useEffect(() => {
     context &&
       axios
-        .get("https://localhost:5001/api/Dto/teams", {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/teams`, {
           headers: {
             Authorization: `Bearer ${
               localStorage.getItem("token")
@@ -35,19 +36,16 @@ function TeamList() {
         })
         .then(({ data }) => {
           setTeams(data);
-          console.log(data);
         });
   }, [context]);
 
-  console.log(teams)
   return (
     <>
       <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>
-      {/* <EditButton>{t("Edit")}</EditButton> */}
-      <NewButton onClick={window.location.href = "/newTeam"}>
+      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") || localStorage.getItem("roles").includes("Director")) && <NewButton onClick={() => (window.location.href = "/newTeam")}>
         New
       </NewButton>
-
+      }
       <TableInfo className="table">
         <thead>
           <tr>
@@ -58,14 +56,35 @@ function TeamList() {
         </thead>
         {teams?.map((content) => (
           <Row>
-            <TableDetailsDate>{content.teamName}</TableDetailsDate>
+            <TableDetailsDate
+              nameOfTeam ={content.teamName}
+              departmentOfTeam ={content.departmentId}
+              managerOfTeam ={content.managerId}>
+              {(localStorage.getItem("roles").includes("Manager") || localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") || localStorage.getItem("roles").includes("Director")) && <Link to={{pathname:`/teamDetails`, state: content.managerId}} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
+                {content.teamName}
+              </Link>
+              }
+              {/* {(localStorage.getItem("roles").includes("Manager")) && <TableDetails>
+              {content.teamName}
+              </TableDetails>} */}
+            </TableDetailsDate>
             <TableDetailsDate>{content.departmentName}</TableDetailsDate>
             <TableDetails>
-              {content.managerFirstName + " " + content.managerLastName}
+              <Link to={`/profile/${content.managerId}`} style={{  
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#ff4e01",
+                textDecoration: "none"}}>
+                {content.managerFirstName + " " + content.managerLastName}
+              </Link>
             </TableDetails>
             <TableDetailsMarker>
               <MarkersTable>
-                {content?.employees?.slice(0, 3).map((emp) => (
+                {content?.employees?.map((emp) => (
                   <MarkersRow>{emp.firstName + " " + emp.lastName}</MarkersRow>
                 ))}
               </MarkersTable>

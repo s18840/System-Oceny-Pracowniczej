@@ -26,12 +26,12 @@ const NewCompetence = () => {
     handleSubmit
   } = useForm();
   const submitForm = (data) => {
-    console.log(data);
     const competence = prepareCompetence(data);
-    axios.post("https://localhost:5001/api/Dto/comps/add", competence,
+    axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/comps/add`, competence,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
+          ContentType: "application/json",
         },
       })
   };
@@ -45,7 +45,6 @@ const NewCompetence = () => {
       description : e.description,
       markers : markers,
     };
-    console.log(obj)
 
     return obj;
   };
@@ -54,13 +53,13 @@ const NewCompetence = () => {
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
         <PersonalDataHeadingText>
           Creating new competence
-          <NewButton onClick={() => {window.location.href="/competenceList"}}>Add</NewButton>
+          <NewButton onClick={() => {window.location.href="/Competences"}}>Add</NewButton>
         </PersonalDataHeadingText>
         <Wrapper>
           <InsideWrapper>
             <Heading>
               <ProfileDataText>Name: </ProfileDataText>
-              <InputField placeholder="Nazwa kompetencji" {...register("name", { required: true })}/>
+              <InputField placeholder="Competence name" {...register("name", { required: true })}/>
             </Heading>
             <Heading style={{display: "flex", alignItems: "center"}}>
               <ProfileDataText>Markers required: </ProfileDataText>

@@ -1,19 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
-import { FaPowerOff, FaWrench, FaSearch } from "react-icons/fa";
+import { FaPowerOff, FaWrench } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { Context } from "../../pages/Context";
 import {
   HeaderLocTree,
   HeaderProfile,
-  HeaderSearch,
-  HeaderProfilePhoto,
   HeaderWrapper,
   HeaderBtnProfileWrapper,
   HeaderBtnSignOut,
   HeaderBtnTol,
-  HeaderSearchIcon,
   HeaderName,
+  HeaderAvatar
 } from "./HeaderElements";
 
 const HeaderBar = () => {
@@ -21,11 +19,12 @@ const HeaderBar = () => {
   const history = useHistory();
   const [formFirstName, setFirstName] = useState(" ");
   const [formSurname, setSurname] = useState(" ");
+  const initials = (formFirstName[0]) + (formSurname[0]);
   useEffect(() => {
     context &&
       axios
         .get(
-          `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
             "employeeId"
           )}`,
           {
@@ -52,23 +51,15 @@ const HeaderBar = () => {
         >
           <FaPowerOff />
         </HeaderBtnSignOut>
-        <HeaderBtnTol to="/settings">
-          <FaWrench />
-        </HeaderBtnTol>
         <HeaderProfile activeStyle>
-          <HeaderProfilePhoto to="/profile">
-            <img src="prof.png" alt="" width="100%" />
-          </HeaderProfilePhoto>
+          <HeaderAvatar to="/profile">
+            {initials}
+          </HeaderAvatar>
           <HeaderName to="/profile">
             {formFirstName + " " + formSurname}
           </HeaderName>
         </HeaderProfile>
       </HeaderBtnProfileWrapper>
-      <HeaderSearch>
-        <HeaderSearchIcon>
-          <FaSearch />
-        </HeaderSearchIcon>
-      </HeaderSearch>
       <HeaderLocTree activeStyle>
         {
           (pathName.substring(0).charAt(1).toUpperCase() +

@@ -32,53 +32,54 @@ const Button = (props) => {
   );
 };
 
-const NewDepartment = () => {
+const NewJob = (props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const submitForm = (data) => {
-    const department = prepareDepartment(data);
-    axios.post(`${process.env.REACT_APP_API_ADDRESS}Department`, department, 
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          ContentType: "application/json",
-        },
-      })
+    const job = prepareJob(data);
+    axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/jobs/add`, job, 
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        ContentType: "application/json",
+      },
+    })
   };
-  const [dirs, setDirs] = useState([]);
-  const [choosenDirs, setChoosenDirs] = useState();
-  const [context, setContext] = useContext(Context);
-  const prepareDepartment = (e) => {
+  const [deps, setDeps] = useState([]);
+  const [choosenDeps, setChoosenDeps] = useState([]);
+  const [context] = useContext(Context);
+  const prepareJob = (e) => {
     const obj = {
-      departmentId : 0,
-      departmentName : e.name,
-      directorId : choosenDirs,
+      jobID : 0,
+      name : e.name,
+      departmentIDs : choosenDeps,
     };
+
     return obj;
   };
   useEffect(() => {
     context &&
       axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Employee/avaiDir`, {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Department`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
         .then(({ data }) => {
-          setDirs(data);
+          setDeps(data);
         });
   }, [context]);
 
   return (
     <FormWrapper onSubmit={handleSubmit(submitForm)}>
       <PersonalDataHeadingText>
-        Creating new department
+        Creating new job
         <NewButton
           onClick={() => {
-            window.location.href = "/Departments";
+            window.location.href = "/Jobs";
           }}
         >
           Add
@@ -87,22 +88,24 @@ const NewDepartment = () => {
       <Wrapper>
         <InsideWrapper>
           <Heading>
-            <ProfileDataText>Name: </ProfileDataText>
-            <InputField placeholder="Accounting" {...register("name", { required: true })}></InputField>
+            <ProfileDataText>Job name: </ProfileDataText>
+            <InputField placeholder="Junior Developer" {...register("name", { required: true })}></InputField>
           </Heading>
           <Heading>
-            <ProfileDataText>Add director: </ProfileDataText>
+            <ProfileDataText>
+              Add job to departments: 
+            </ProfileDataText>
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {dirs.map((el) => (
+              {deps?.map((el) => (
                 <tr>
                   <td>
                     <RowLi>
-                      {el.firstName + " " + el.lastName}
+                      {el.departmentName}
                       <Button
                         onClick={() => {
-                          setChoosenDirs(el.personalNumber);
+                          setChoosenDeps((prev) => [...prev, el.departmentId]);
                         }}
                       />
                     </RowLi>
@@ -117,4 +120,4 @@ const NewDepartment = () => {
   );
 };
 
-export default NewDepartment;
+export default NewJob;

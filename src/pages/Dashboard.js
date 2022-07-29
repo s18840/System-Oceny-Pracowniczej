@@ -16,12 +16,11 @@ function Dashboard() {
   const location = useLocation();
   const [employee, setEmployee] = useState();
   const [firstName, setFirstName] = useState(" ");
-  console.log(location);
   useEffect(() => {
     context &&
       axios
         .get(
-          `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
             "employeeId"
           )}`,
           {

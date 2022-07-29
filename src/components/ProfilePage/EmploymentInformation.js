@@ -1,8 +1,8 @@
 import React from "react";
 import EmploymentTable from "./EmploymentTable";
-const EmploymentInformation = () => (
+const EmploymentInformation = (props) => (
   <>
-    <EmploymentTable></EmploymentTable>
+    <EmploymentTable empId={props.empId}></EmploymentTable>
   </>
 );
 export default EmploymentInformation;

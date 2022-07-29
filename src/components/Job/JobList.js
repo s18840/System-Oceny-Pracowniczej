@@ -4,7 +4,6 @@ import {
   TableInfo,
   Row,
   TableDetailsDate,
-  TableDetails,
   PersonalDataHeadingText,
   TableDetailsMarker,
   MarkersTable,
@@ -13,27 +12,37 @@ import {
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 
-const dataJson = ["Competence name:", "Markers required", "Description"];
+const dataJson = [
+  "Job name:",
+  "Department name:",
+  "Department number:",
+];
 
-function CompetenceList() {
+function JobList() {
   const [context] = useContext(Context);
-  const [competences, setCompetences] = useState();
+  const [jobs, setJobs] = useState();
   useEffect(() => {
     context &&
       axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/comps`, {
+        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/jobs`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${
+              localStorage.getItem("token")
+            }`,
           },
         })
         .then(({ data }) => {
-          setCompetences(data);
+          setJobs(data);
         });
   }, [context]);
+
   return (
     <>
-      <PersonalDataHeadingText>Competence List</PersonalDataHeadingText>
-      {(localStorage.getItem("roles").includes("HR")) && <NewButton onClick={() =>  window.location.href="/newCompetence"}>New</NewButton> }
+      <PersonalDataHeadingText>Jobs List</PersonalDataHeadingText>
+      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") ) && <NewButton onClick={() => (window.location.href = "/newJob")}>
+        New
+      </NewButton>
+      }
       <TableInfo className="table">
         <thead>
           <tr>
@@ -42,23 +51,27 @@ function CompetenceList() {
             ))}
           </tr>
         </thead>
-        {competences?.map((content) => (
+        {jobs?.map((content) => (
           <Row>
             <TableDetailsDate>{content.name}</TableDetailsDate>
             <TableDetailsMarker>
               <MarkersTable>
-                {content.markers?.map(marker =>(
+                {content.jobDepartments?.map(dep =>(
                   <MarkersRow>
-                    {marker.name}
+                    {dep.departmentName}
                   </MarkersRow>
                 ))}
               </MarkersTable>
             </TableDetailsMarker>
-            <TableDetails>
-              <div>
-                {content.description + "."}
-              </div>
-            </TableDetails>
+            <TableDetailsMarker>
+              <MarkersTable>
+                {content.jobDepartments?.map(dep =>(
+                  <MarkersRow>
+                    {dep.departmentId}
+                  </MarkersRow>
+                ))}
+              </MarkersTable>
+            </TableDetailsMarker>
           </Row>
         ))}
       </TableInfo>
@@ -66,4 +79,4 @@ function CompetenceList() {
   );
 }
 
-export default CompetenceList;
+export default JobList;

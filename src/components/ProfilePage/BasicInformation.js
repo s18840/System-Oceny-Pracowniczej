@@ -23,8 +23,9 @@ import {
   CompanyMail,
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
+import moment from 'moment';
 
-function BasicInformation() {
+function BasicInformation(props) {
   const [context] = useContext(Context);
   const {
     register,
@@ -34,10 +35,10 @@ function BasicInformation() {
   } = useForm({ mode: "onChange" });
 
   useEffect(() => {
-    context &&
+    context && !props.empId &&
       axios
         .get(
-          `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
             "employeeId"
           )}`,
           {
@@ -72,16 +73,57 @@ function BasicInformation() {
           setValue("cellPhoneNumber", data.cellPhoneNumber, {
             shouldValidate: true,
           });
-          setValue("companyMail", data.companyEmail ? data.companyEmail : null, {
+          setValue("email", data.email ? data.email : null, {
             shouldValidate: true,
           });
         });
   }, [context, setValue]);
 
+  useEffect(() => {
+    context && props.empId &&
+      axios
+        .get(
+          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.empId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setValue("firstName", data.firstName, { shouldValidate: true });
+          setValue("secondName", data.secondName ? data.secondName : null, {
+            shouldValidate: true,
+          });
+          setValue("lastName", data.lastName, { shouldValidate: true });
+          setValue(
+            "birthDate",
+            data?.birthDate.split("T")[0] ? data?.birthDate.split("T")[0] : null,
+            { shouldValidate: true }
+          );
+          setValue("street", data.street, { shouldValidate: true });
+          setValue("buildingNumber", data.buildingNumber, {
+            shouldValidate: true,
+          });
+          setValue(
+            "apartmentNumber",
+            data.apartmentNumber ? data.apartmentNumber : null,
+            { shouldValidate: true }
+          );
+          setValue("city", data.city, { shouldValidate: true });
+          setValue("postalCode", data.postalCode, { shouldValidate: true });
+          setValue("country", data.country, { shouldValidate: true });
+          setValue("cellPhoneNumber", data.cellPhoneNumber, {
+            shouldValidate: true,
+          });
+          setValue("email", data.email ? data.email : null, {
+            shouldValidate: true,
+          });
+        });
+  }, [context, setValue]);
   const [formReady, setFormReady] = useState(false);
 
   const switchForm = () => {
-    //console.log(formReady,isValid)
     setFormReady((currentFormReady) => !(currentFormReady && isValid));
   };
 
@@ -94,7 +136,7 @@ function BasicInformation() {
       cellPhoneNumber: e.cellPhoneNumber,
       stationaryPhoneNumber: null,
       email: "0000000@at.xxx",
-      companyEmail: e.companyMail,
+      companyEmail: e.email,
       country: e.country,
       city: e.city,
       street: e.street,
@@ -102,15 +144,23 @@ function BasicInformation() {
       apartmentNumber: e.apartmentNumber,
       postalCode: e.postalCode,
     };
-
     return obj;
   };
   const submitForm = (data) => {
-    if (!formReady) {
+    if (!formReady && !props.empId) {
       const employeeReady = prepareUser(data);
-      axios.put(`https://localhost:5001/api/Dto/emp/${localStorage.getItem(
+      axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
         "employeeId"
       )}`, employeeReady,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+    }
+    if (!formReady && props.empId) {
+      const employeeReady = prepareUser(data);
+      axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.empId}`, employeeReady,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -126,7 +176,7 @@ function BasicInformation() {
       {!formReady ? "Edit" : "Save"}
     </FormButton>
   );
-
+  const dateNow = moment(moment.now()).format('YYYY-MM-DD');
   return (
     <>
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
@@ -156,13 +206,13 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.firstName && errors.firstName.type === "required" && (
+            {formReady && errors.firstName && errors.firstName.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.firstName.message}</ErrorsSpan>
             )}
-            {errors.firstName && errors.firstName.type === "maxLength" && (
+            {formReady && errors.firstName && errors.firstName.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.firstName.message}</ErrorsSpan>
             )}
-            {errors.firstName && errors.firstName.type === "pattern" && (
+            {formReady && errors.firstName && errors.firstName.type === "pattern" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.firstName.message}</ErrorsSpan>
             )}
           </FirstName>
@@ -185,10 +235,10 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.secondName && errors.secondName.type === "maxLength" && (
+            {formReady && errors.secondName && errors.secondName.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.secondName.message}</ErrorsSpan>
             )}
-            {errors.secondName && errors.secondName.type === "pattern" && (
+            {formReady && errors.secondName && errors.secondName.type === "pattern" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.secondName.message}</ErrorsSpan>
             )}
           </SecondName>
@@ -213,22 +263,26 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.lastName && errors.lastName.type === "required" && (
+            {formReady && errors.lastName && errors.lastName.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.lastName.message}</ErrorsSpan>
             )}
-            {errors.lastName && errors.lastName.type === "maxLength" && (
+            {formReady && errors.lastName && errors.lastName.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.lastName.message}</ErrorsSpan>
             )}
-            {errors.lastName && errors.lastName.type === "pattern" && (
+            {formReady && errors.lastName && errors.lastName.type === "pattern" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.lastName.message}</ErrorsSpan>
             )}
           </SurName>
-          {/* Walidacja do dorobienia */}
           <DateOfBirth>
             <ProfileDataText>Date of birth</ProfileDataText>
             <InputField
               type="date"
-              {...register("birthDate", { required: true })}
+              {...register("birthDate", { 
+                required: "Required",
+                validate: {
+                  over18: value => moment(value, "YYYY-MM-DD").diff(dateNow, 'years', true)<-18,
+                }
+               })}
               disabled={!formReady}
               style={
                 !formReady
@@ -236,8 +290,11 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.birthDate && errors.birthDate.type === "required" && (
+            {formReady && errors.birthDate && errors.birthDate.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>required</ErrorsSpan>
+            )}
+            {formReady &&errors.birthDate && errors.birthDate.type !== "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: "-23px", marginLeft: "-64px" }}>You must be over 18</ErrorsSpan>
             )}
           </DateOfBirth>
           <PhoneNumber>
@@ -262,33 +319,20 @@ function BasicInformation() {
                   : { "-webkit-appearance": "none", backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "required" && (
+            {formReady && errors.cellPhoneNumber && errors.cellPhoneNumber.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>required</ErrorsSpan>
             )}
-            {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "maxLength" && (
+            {formReady && errors.cellPhoneNumber && errors.cellPhoneNumber.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
             )}
-            {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "minLength" && (
+            {formReady && errors.cellPhoneNumber && errors.cellPhoneNumber.type === "minLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
             )}
           </PhoneNumber>
-          {/*<Mail>
-            <ProfileDataText>{"Mail"}</ProfileDataText>
-            <InputField
-              {...register("email", ({required: true}))}
-              disabled={!formReady}
-              style={
-                !formReady
-                  ? { backgroundColor: "white" }
-                  : { backgroundColor: "#DDDDDD" }
-              }
-            ></InputField>
-            </Mail>*/}
           <CompanyMail>
-            <ProfileDataText>Company Mail</ProfileDataText>
+            <ProfileDataText>E-mail</ProfileDataText>
             <InputField
-
-              {...register("companyMail", {
+              {...register("email", {
                 required: "Required",
                 pattern: {
                   value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
@@ -302,11 +346,11 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.companyMail && errors.companyMail.type === "pattern" && (
-              <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.companyMail.message}</ErrorsSpan>
+            {formReady && errors.email && errors.email.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.email.message}</ErrorsSpan>
             )}
-            {errors.companyMail && errors.companyMail.type === "required" && (
-              <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.companyMail.message}</ErrorsSpan>
+            {formReady && errors.email && errors.email.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.email.message}</ErrorsSpan>
             )}
           </CompanyMail>
           <Street>
@@ -330,13 +374,13 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.street && errors.street.type === "required" && (
+            {formReady && errors.street && errors.street.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.street.message}</ErrorsSpan>
             )}
-            {errors.street && errors.street.type === "maxLength" && (
+            {formReady && errors.street && errors.street.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.street.message}</ErrorsSpan>
             )}
-            {errors.street && errors.street.type === "pattern" && (
+            {formReady && errors.street && errors.street.type === "pattern" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.street.message}</ErrorsSpan>
             )}
           </Street>
@@ -361,13 +405,13 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.buildingNumber && errors.buildingNumber.type === "required" && (
+            {formReady && errors.buildingNumber && errors.buildingNumber.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.buildingNumber.message}</ErrorsSpan>
             )}
-            {errors.buildingNumber && errors.buildingNumber.type === "maxLength" && (
+            {formReady && errors.buildingNumber && errors.buildingNumber.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.buildingNumber.message}</ErrorsSpan>
             )}
-            {errors.buildingNumber && errors.buildingNumber.type === "pattern" && (
+            {formReady && errors.buildingNumber && errors.buildingNumber.type === "pattern" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.buildingNumber.message}</ErrorsSpan>
             )}
           </HouseNumber>
@@ -392,13 +436,13 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.city && errors.city.type === "required" && (
+            {formReady && errors.city && errors.city.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.city.message}</ErrorsSpan>
             )}
-            {errors.city && errors.city.type === "maxLength" && (
+            {formReady && errors.city && errors.city.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.city.message}</ErrorsSpan>
             )}
-            {errors.city && errors.city.type === "pattern" && (
+            {formReady && errors.city && errors.city.type === "pattern" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.city.message}</ErrorsSpan>
             )}
           </City>
@@ -420,7 +464,7 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.apartmentNumber && errors.apartmentNumber.type === "maxLength" && (
+            {formReady && errors.apartmentNumber && errors.apartmentNumber.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.apartmentNumber.message}</ErrorsSpan>
             )}
           </District>
@@ -445,13 +489,13 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.postalCode && errors.postalCode.type === "required" && (
+            {formReady && errors.postalCode && errors.postalCode.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.postalCode.message}</ErrorsSpan>
             )}
-            {errors.postalCode && errors.postalCode.type === "maxLength" && (
+            {formReady && errors.postalCode && errors.postalCode.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.postalCode.message}</ErrorsSpan>
             )}
-            {errors.postalCode && errors.postalCode.type === "pattern" && (
+            {formReady && errors.postalCode && errors.postalCode.type === "pattern" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.postalCode.message}</ErrorsSpan>
             )}
           </PostalCode>
@@ -476,13 +520,13 @@ function BasicInformation() {
                   : { backgroundColor: "#DDDDDD" }
               }
             />
-            {errors.country && errors.country.type === "required" && (
+            {formReady && errors.country && errors.country.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.country.message}</ErrorsSpan>
             )}
-            {errors.country && errors.country.type === "maxLength" && (
+            {formReady && errors.country && errors.country.type === "maxLength" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.country.message}</ErrorsSpan>
             )}
-            {errors.country && errors.country.type === "pattern" && (
+            {formReady && errors.country && errors.country.type === "pattern" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.country.message}</ErrorsSpan>
             )}
           </Country>

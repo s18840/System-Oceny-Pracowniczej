@@ -1,317 +1,404 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
-import { InputField, Span } from "../../styles/GlobalStyle";
-import { EmployeeAddWrapper } from "../../styles/FormEmpStyles";
+import { InputField, ErrorsSpan } from "../../styles/GlobalStyle";
 import {
-  AddressHeadingText,
   City,
   Country,
   DateOfBirth,
   District,
   FirstName,
   HouseNumber,
+  PersonalDataHeadingText,
   PostalCode,
   ProfileDataText,
   SecondName,
   Street,
   SurName,
-  FormButton,
   PhoneNumber,
-  Mail,
   CompanyMail,
+  AddButton
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
+import { EmployeeAddWrapper } from "../../styles/FormEmpStyles";
+import moment from 'moment';
 
-function BasicInformation() {
+function EmployeeAddForm() {
   const [context] = useContext(Context);
-  const [firstName, setFirstName] = useState(" ");
-  const [secondName, setSecondName] = useState(" FD");
-  const [lastName, setLastName] = useState(" ");
-  const [birthDate, setBirthDate] = useState(" ");
-  const [street, setStreet] = useState(" ");
-  const [buildingNumber, setBuildingNumber] = useState(" ");
-  const [apartmentNumber, setApartmentNumber] = useState();
-  const [city, setCity] = useState(" ");
-  const [postalCode, setPostalCode] = useState(" ");
-  const [country, setCountry] = useState(" ");
-  const [cellPhoneNumber, setCellPhoneNumber] = useState(" ");
-  const [companyMail, setCompanyMail] = useState(" ");
-  const [email, setEmail] = useState(" ");
-  const [stationaryPhoneNumber, setStationaryPhoneNumber] = useState("12345");
-
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
-  const [formReady, setFormReady] = useState(false);
+
+
   const [isSucceed, setIsSucceed] = useState(false);
-
-  const switchForm = () => {
-    setFormReady((currentFormReady) => !(currentFormReady && isValid));
+  const prepareUser = (e) => {
+    const obj = {
+      firstName: e.firstName,
+      secondName: e.secondName,
+      lastName: e.lastName,
+      birthDate: e.birthDate,
+      cellPhoneNumber: e.cellPhoneNumber,
+      stationaryPhoneNumber: null,
+      email: e.email,
+      companyEmail: e.email,
+      country: e.country,
+      city: e.city,
+      street: e.street,
+      buildingNumber: e.buildingNumber,
+      apartmentNumber: e.apartmentNumber,
+      postalCode: e.postalCode,
+      stationaryPhoneNumber: "12345"
+    };
+    return obj;
   };
-
-  const obj = {
-    firstName: firstName,
-    secondName: secondName,
-    lastName: lastName,
-    birthDate: birthDate,
-    cellPhoneNumber: cellPhoneNumber,
-    stationaryPhoneNumber: stationaryPhoneNumber,
-    email: email,
-    companyEmail: companyMail,
-    country: country,
-    city: city,
-    street: street,
-    buildingNumber: buildingNumber,
-    apartmentNumber: apartmentNumber,
-    postalCode: postalCode,
-  };
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      ContentType: "application/json",
-    },
-  };
-  const submitForm = () => {
-    context &&
-      axios
-        .post("http://localhost:5000/api/Dto/addEmp", obj, headers)
-        .then((resp) => {
-          setIsSucceed(true);
-          clearForm();
-          setTimeout(() => {
-            setIsSucceed(false);
-          }, 3000);
-          console.log(resp);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  const submitForm = (data) => {
+    if (isValid) {
+      const employeeReady = prepareUser(data);
+      context && axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/addEmp`, employeeReady,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          ContentType: "application/json",
+        },
+      }).then((resp) => {
+        setIsSucceed(true);
+        clearForm();
+        setTimeout(() => {
+          setIsSucceed(false);
+        }, 3000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
   };
   const clearForm = () => {
-    setFirstName(" ");
-    setSecondName(" ");
-    setLastName(" ");
-    setBirthDate(" ");
-    setStreet(" ");
-    setBuildingNumber(" ");
-    setApartmentNumber(" ");
-    setCity(" ");
-    setCountry(" ");
-    setEmail(" ");
-    setPostalCode(" ");
-    setCellPhoneNumber(" ");
-    setCompanyMail(" ");
-    setStationaryPhoneNumber(" ");
+    setValue("firstName"," ");
+    setValue("secondName"," ");
+    setValue("lastName"," ");
+    setValue("birthDate"," ");
+    setValue("cellPhoneNumber"," ");
+    setValue("email"," ");
+    setValue("street"," ");
+    setValue("buildingNumber"," ");
+    setValue("city"," ");
+    setValue("apartmentNumber"," ");
+    setValue("postalCode"," ");
+    setValue("country"," ");
   };
-  let button;
 
-  button = (
-    <FormButton onClick={switchForm}>
-      {!formReady ? "Edit" : "Add"}
-    </FormButton>
-  );
-
+  const dateNow = moment(moment.now()).format('YYYY-MM-DD');
   return (
     <>
       <div
         style={{
           display: "flex",
-          height: "200px",
           width: "500px",
           marginLeft: "600px",
           marginTop: "100px",
+          paddingBottom: "40px"
         }}
       >
-        <FormWrapper onSubmit={handleSubmit(submitForm)}>
-          <EmployeeAddWrapper>
-            <AddressHeadingText>Create New Employee</AddressHeadingText>
-            <FirstName>
-              <ProfileDataText>First name</ProfileDataText>
-              <InputField
-                {...register("firstName", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
+      <FormWrapper onSubmit={handleSubmit(submitForm)}>
+        <EmployeeAddWrapper>
+          <PersonalDataHeadingText>
+            Create New Employee
+          </PersonalDataHeadingText>
+          <FirstName>
+            <ProfileDataText>First name</ProfileDataText>
+            <InputField
+              {...register("firstName", {
+                required: "Required",
+                maxLength : {
+                  value: 32,
+                  message: "Too long name"
+                },
+                pattern: {
+                  value: /^[a-zA-Z\s]*$/,
+                  message: "Provide correct name"
                 }
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              {errors.username && errors.username.type === "required" && (
-                <Span style={{ color: "red" }}>REQUIRED</Span>
-              )}
-            </FirstName>
-            <SecondName>
-              <ProfileDataText>Second name</ProfileDataText>
-              <InputField
-                {...register("secondName", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.firstName && errors.firstName.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.firstName.message}</ErrorsSpan>
+            )}
+            {errors.firstName && errors.firstName.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.firstName.message}</ErrorsSpan>
+            )}
+            {errors.firstName && errors.firstName.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.firstName.message}</ErrorsSpan>
+            )}
+          </FirstName>
+          <SecondName>
+            <ProfileDataText>Second name</ProfileDataText>
+            <InputField
+              {...register("secondName", {maxLength : {
+                value: 32,
+                message: "Too long name"
+              },
+              pattern: {
+                value: /^[a-zA-Z\s]*$/,
+                message: "Provide correct name"
+              }
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.secondName && errors.secondName.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.secondName.message}</ErrorsSpan>
+            )}
+            {errors.secondName && errors.secondName.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.secondName.message}</ErrorsSpan>
+            )}
+          </SecondName>
+          <SurName>
+            <ProfileDataText>Surname</ProfileDataText>
+            <InputField
+              {...register("lastName", {
+                required: "Required",
+                maxLength : {
+                  value: 64,
+                  message: "Too long surname"
+                },
+                pattern: {
+                  value: /^[a-zA-Z\s]*$/,
+                  message: "Provide correct surname"
                 }
-                onChange={(e) => setSecondName(e.target.value)}
-              />
-            </SecondName>
-            <SurName>
-              <ProfileDataText>Surname</ProfileDataText>
-              <InputField
-                {...register("lastName", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.lastName && errors.lastName.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.lastName.message}</ErrorsSpan>
+            )}
+            {errors.lastName && errors.lastName.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.lastName.message}</ErrorsSpan>
+            )}
+            {errors.lastName && errors.lastName.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.lastName.message}</ErrorsSpan>
+            )}
+          </SurName>
+          <DateOfBirth>
+            <ProfileDataText>Date of birth</ProfileDataText>
+            <InputField
+              type="date"
+              {...register("birthDate", { 
+                required: "Required",
+                validate: {
+                  over18: value => moment(value, "YYYY-MM-DD").diff(dateNow, 'years', true)<-18,
                 }
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </SurName>
-            <DateOfBirth>
-              <ProfileDataText>Date of birth</ProfileDataText>
-              <InputField
-                type="date"
-                {...register("birthDate", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
+               })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.birthDate && errors.birthDate.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.birthDate.message}</ErrorsSpan>
+            )}
+            {errors.birthDate && errors.birthDate.type !== "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>Employee must be over 18</ErrorsSpan>
+            )}
+          </DateOfBirth>
+          <PhoneNumber>
+            <ProfileDataText>Phone number</ProfileDataText>
+            <InputField
+              type="number"
+              {...register("cellPhoneNumber", {
+                required: "Required",
+                maxLength : {
+                  value: 9,
+                  message: "Number is too long"
+                },
+                minLength : {
+                  value: 9,
+                  message: "Number is too short"
                 }
-                onChange={(e) => setBirthDate(e.target.value)}
-              />
-            </DateOfBirth>
-            <PhoneNumber>
-              <ProfileDataText>Phone number</ProfileDataText>
-              <InputField
-                type="number"
-                {...register("cellPhoneNumber", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { "-webkit-appearance": "none", backgroundColor: "white" }
-                    : {
-                      "-webkit-appearance": "none",
-                      backgroundColor: "#DDDDDD",
-                    }
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
+            )}
+            {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
+            )}
+            {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "minLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
+            )}
+          </PhoneNumber>
+          <CompanyMail>
+            <ProfileDataText>E-mail</ProfileDataText>
+            <InputField
+              {...register("email", {
+                required: "Required",
+                pattern: {
+                  value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                  message: "It is not email"
                 }
-                onChange={(e) => setCellPhoneNumber(e.target.value)}
-              />
-            </PhoneNumber>
-            <Mail>
-              <ProfileDataText>Mail</ProfileDataText>
-              <InputField
-                {...register("email", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.email && errors.email.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.email.message}</ErrorsSpan>
+            )}
+            {errors.email && errors.email.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.email.message}</ErrorsSpan>
+            )}
+          </CompanyMail>
+          <Street>
+            <ProfileDataText>Street</ProfileDataText>
+            <InputField
+              {...register("street", {
+                required: "Required",
+                maxLength : {
+                  value: 30,
+                  message: "Too long street"
+                },
+                pattern: {
+                  value: /^[a-zA-Z\s]*$/,
+                  message: "Provide correct street"
                 }
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Mail>
-            <CompanyMail>
-              <ProfileDataText>Company Mail</ProfileDataText>
-              <InputField
-                {...register("companyMail", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.street && errors.street.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.street.message}</ErrorsSpan>
+            )}
+            {errors.street && errors.street.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.street.message}</ErrorsSpan>
+            )}
+            {errors.street && errors.street.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.street.message}</ErrorsSpan>
+            )}
+          </Street>
+          <HouseNumber>
+            <ProfileDataText>House number</ProfileDataText>
+            <InputField
+              {...register("buildingNumber", {
+                required: "Required",
+                maxLength : {
+                  value: 5,
+                  message: "Too long number"
+                },
+                pattern: {
+                  value: /(?!0)\d[0-3]{0,2}[a-zA-Z]{0,2}/,
+                  message: "Provide correct number"
                 }
-                onChange={(e) => setCompanyMail(e.target.value)}
-              />
-            </CompanyMail>
-            <Street>
-              <ProfileDataText>Street</ProfileDataText>
-              <InputField
-                {...register("street", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.buildingNumber && errors.buildingNumber.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.buildingNumber.message}</ErrorsSpan>
+            )}
+            {errors.buildingNumber && errors.buildingNumber.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.buildingNumber.message}</ErrorsSpan>
+            )}
+            {errors.buildingNumber && errors.buildingNumber.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.buildingNumber.message}</ErrorsSpan>
+            )}
+          </HouseNumber>
+          <City>
+            <ProfileDataText>City</ProfileDataText>
+            <InputField
+              {...register("city", {
+                required: "Required",
+                maxLength : {
+                  value: 20,
+                  message: "Too long city"
+                },
+                pattern: {
+                  value: /^[a-zA-Z\s]*$/,
+                  message: "Provide correct city"
                 }
-                onChange={(e) => setStreet(e.target.value)}
-              />
-            </Street>
-            <HouseNumber>
-              <ProfileDataText>House number</ProfileDataText>
-              <InputField
-                {...register("buildingNumber", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.city && errors.city.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.city.message}</ErrorsSpan>
+            )}
+            {errors.city && errors.city.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.city.message}</ErrorsSpan>
+            )}
+            {errors.city && errors.city.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.city.message}</ErrorsSpan>
+            )}
+          </City>
+          <District>
+            <ProfileDataText>Apartment number</ProfileDataText>
+            <InputField
+              type="number"
+              {...register("apartmentNumber", {
+                maxLength : {
+                  value: 5,
+                  message: "Too big number"
+                },
+
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.apartmentNumber && errors.apartmentNumber.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.apartmentNumber.message}</ErrorsSpan>
+            )}
+          </District>
+          <PostalCode>
+            <ProfileDataText>Postal code</ProfileDataText>
+            <InputField
+              {...register("postalCode", {
+                required: "Required",
+                maxLength : {
+                  value: 10,
+                  message: "Too long code"
+                },
+                pattern: {
+                  value: /\d{2}-\d{3}/,
+                  message: "Provide correct code"
                 }
-                onChange={(e) => setBuildingNumber(e.target.value)}
-              />
-            </HouseNumber>
-            <City>
-              <ProfileDataText>City</ProfileDataText>
-              <InputField
-                {...register("city", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.postalCode && errors.postalCode.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.postalCode.message}</ErrorsSpan>
+            )}
+            {errors.postalCode && errors.postalCode.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.postalCode.message}</ErrorsSpan>
+            )}
+            {errors.postalCode && errors.postalCode.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.postalCode.message}</ErrorsSpan>
+            )}
+          </PostalCode>
+          <Country>
+            <ProfileDataText>Country</ProfileDataText>
+            <InputField
+              {...register("country", {
+                required: "Required",
+                maxLength : {
+                  value: 20,
+                  message: "Too long country"
+                },
+                pattern: {
+                  value: /^[a-zA-Z\s]*$/,
+                  message: "Provide correct country"
                 }
-                onChange={(e) => setCity(e.target.value)}
-              />
-            </City>
-            <District>
-              <ProfileDataText>Apartment number</ProfileDataText>
-              <InputField
-                {...register("apartmentNumber", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
-                }
-                onChange={(e) => setApartmentNumber(e.target.value)}
-              />
-            </District>
-            <PostalCode>
-              <ProfileDataText>Postal code</ProfileDataText>
-              <InputField
-                {...register("postalCode", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
-                }
-                onChange={(e) => setPostalCode(e.target.value)}
-              />
-            </PostalCode>
-            <Country>
-              <ProfileDataText>Country</ProfileDataText>
-              <InputField
-                {...register("country", { required: true })}
-                disabled={!formReady}
-                style={
-                  !formReady
-                    ? { backgroundColor: "white" }
-                    : { backgroundColor: "#DDDDDD" }
-                }
-                onChange={(e) => setCountry(e.target.value)}
-              />
-            </Country>
-            {isSucceed && <p>Dodałeś pracownika</p>}
-            {button}
-          </EmployeeAddWrapper>
-        </FormWrapper>
+              })}
+              style={{ backgroundColor: "#DDDDDD" }}
+            />
+            {errors.country && errors.country.type === "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.country.message}</ErrorsSpan>
+            )}
+            {errors.country && errors.country.type === "maxLength" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.country.message}</ErrorsSpan>
+            )}
+            {errors.country && errors.country.type === "pattern" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.country.message}</ErrorsSpan>
+            )}
+          </Country>
+          {isSucceed && <p>You have added a user</p>}
+          <AddButton type="submit" value="Add"/>
+        </EmployeeAddWrapper>
+      </FormWrapper>
       </div>
     </>
   );
 }
-export default BasicInformation;
+export default EmployeeAddForm;
