@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { SidebarLabel, SidebarLink, DropdownLink } from "./NavBarElements";
 const SubMenu = ({ item }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
+
+  const checkRoles = useCallback((acceptedRoles)=>{
+    let isAuthorized = false;
+    const userRoles = localStorage.getItem("roles").split(",")
+    userRoles.forEach((value)=> {
+      if (acceptedRoles.includes(value)) {
+        isAuthorized = true
+      }
+    })
+    return isAuthorized
+  }, [])
+
   return (
     <>
       <SidebarLink to={item.path} onClick={item.subnav && showSubnav}>
@@ -11,23 +23,20 @@ const SubMenu = ({ item }) => {
           <SidebarLabel>{item.title}</SidebarLabel>
         </div>
         <div>
-          {item.subnav && subnav
-            ? item.iconOpened
+          {item.subnav && checkRoles(item.subnav.role)
+            ? item.iconClosed
             : item.subnav
-              ? item.iconClosed
+              ? null
               : null}
         </div>
       </SidebarLink>
-      {subnav &&
-        item.subnav.map((item, index) => {
-          return item.role === "all" ||
-            localStorage.getItem("roles").includes(item.role) ? (
-              <DropdownLink to={item.path} key={index}>
-                {item.icon}
-                <SidebarLabel>{item.title}</SidebarLabel>
-              </DropdownLink>
-            ) : null;
-        })}
+      {subnav && item.subnav && 
+        checkRoles(item.subnav.role) ? (
+          <DropdownLink to={item.subnav.path} >
+            <SidebarLabel>{item.subnav.title}</SidebarLabel>
+          </DropdownLink>
+        ) : null
+        }
     </>
   );
 };

@@ -5,6 +5,7 @@ import grade_1 from "../assets/img/Grade_A+.png";
 import grade_2 from "../assets/img/Grade_C.png";
 import grade_3 from "../assets/img/Grade_B.png";
 import about_img from "../assets/img/about_img.png";
+import about_img2 from "../assets/img/about_img2.png";
 import LoginForm from "../components/WelcomePage/LoginForm";
 import WelcomeNav from "../components/WelcomePage/WelcomeNav";
 import ContactInfo from "../components/WelcomePage/ContactInfo";
@@ -20,6 +21,10 @@ import {
   Logo,
   WelcomeTextWrapper,
   WelcomeTopWrapper,
+  MailIcon,
+  PhoneIcon,
+  ContactInfoWrapper,
+  Contact,
 } from "../styles/WelcomePageStyle";
 
 function WelcomePage() {
@@ -49,23 +54,24 @@ function WelcomePage() {
             About
           </Title>
           <AboutInfoWrapper>
-            {/* TODO make text with translation */}
-            aliquip vehicula. aliqua. varius, minim consequat. etiam elit sapien
-            aenean elit, luctus congue, tempor est reprehenderit nullam ut donec
-            ea
-            turpis, nisi a risus ad adipiscing varius, pharetra, vulputate
-            consequat
-            est scelerisque eget, ut commodo. aliquip vehicula. aliqua. varius,
-            minim consequat. etiam elit sapien aenean elit, luctus congue,
-            tempor
-            est reprehenderit nullam ut donec ea turpis, nisi a risus ad
-            adipiscing
-            varius, pharetra, vulputate consequat est scelerisque eget, ut
-            commodo
+            <p>
+          In current world employee is the most important, it is the basis of the company and allows it to achieve profit.
+          In order to ensure development, the company must first of all ensure the employee's development - these are things that are closely related to each other.
+          </p>
+          <p>
+          FeeDBack enables and supports companies in assessing employees according to their competences. 
+          Additionally, it is an easy-to-use tool for storing and processing employees personal data. 
+          FeeDBack supports Human Resources department in quaterly grading. 
+          You can be sure that after each team work you will be graded - system automaticly will generate feedback request.
+          </p>
+          <p style={{fontWeight: "bold"}}>
+          Does it sound equal? With FeeDBack it does!
+          </p>
           </AboutInfoWrapper>
         </ContactRightSide>
         <ImageStack>
           <img src={about_img} alt=""/>
+          <img src={about_img2} alt=""/>
         </ImageStack>
       </AboutWrapper>
       <ConctactContentWrapper>
@@ -74,6 +80,14 @@ function WelcomePage() {
           <Title id="Contact" textAligment="right" marginRight="150px">
             Contact
           </Title>
+          <ContactInfoWrapper>
+        <MailIcon />
+        <Contact>mail@support.com</Contact>
+      </ContactInfoWrapper>
+      <ContactInfoWrapper>
+        <PhoneIcon />
+        <Contact>504123323</Contact>
+      </ContactInfoWrapper>
         </ContactRightSide>
       </ConctactContentWrapper>
       <HomeDiv>

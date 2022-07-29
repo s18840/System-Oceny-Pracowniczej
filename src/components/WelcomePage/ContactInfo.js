@@ -14,14 +14,7 @@ function ContactInfo() {
   return (
     <ContactListWrapper>
       <img src={contact_img} alt=""/>
-      <ContactInfoWrapper>
-        <MailIcon />
-        <Contact>mail@mail.com</Contact>
-      </ContactInfoWrapper>
-      <ContactInfoWrapper>
-        <PhoneIcon />
-        <Contact>1827398172937</Contact>
-      </ContactInfoWrapper>
+
     </ContactListWrapper>
   )
 }

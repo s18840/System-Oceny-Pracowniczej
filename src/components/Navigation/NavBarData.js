@@ -1,9 +1,12 @@
 import React from "react"
-import { FaStar } from "react-icons/fa" // grades
+import { FaStar, FaUser } from "react-icons/fa" // grades
 import { FaUsers } from "react-icons/fa" // teams
+import { BsPeopleFill } from "react-icons/bs" // teams
 import { FaRegUser } from "react-icons/fa" // profile
 import { FaRegObjectGroup } from "react-icons/fa" // projects
 import { FaIdCard } from "react-icons/fa" // dashboard
+import { FaBuilding } from "react-icons/fa" // department
+import { MdWork } from "react-icons/md" // department
 import * as MDIcons from "react-icons/md"
 
 
@@ -13,32 +16,33 @@ export const NavBarData = [{
   icon: < FaIdCard /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+  role: "all"
 },
 {
   title: "Profile",
   path: "/Profile",
-  icon: < FaRegUser /> ,
+  icon: < FaUser /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  subnav: [
-  {
+  role: "all",
+  subnav:{
     title: "Create new employee",
     path: "/newEmp",
-    role: "Admin"
-  },
-  ],
+    role: ["Admin"]
+  }
 },
 {
   title: "Teams",
   path: "/Teams",
-  icon: < FaUsers /> ,
+  icon: < BsPeopleFill /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  subnav: [{
+  role: ["Manager","Director","HR","Admin"],
+  subnav: {
     title: "Your team",
     path: "/YourTeam",
-    role: "Manager"
-  },]
+    role: ["Manager"]
+  }
 },
 {
   title: "Employees",
@@ -46,13 +50,15 @@ export const NavBarData = [{
   icon: < FaUsers /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+  role: "all"
 },
 {
   title: "Departments",
   path: "/Departments",
-  icon: < FaUsers /> ,
+  icon: < FaBuilding /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+  role: ["Manager","Director","Admin","HR"]
 },
 {
   title: "Competences",
@@ -60,18 +66,20 @@ export const NavBarData = [{
   icon: < FaRegObjectGroup /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+  role: ["Manager","HR","Admin"]
 },
 {
   title: "Jobs",
   path: "/Jobs",
-  icon: < FaUsers /> ,
+  icon: < MdWork /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  subnav: [{
+  role: ["Director", "HR","Admin"],
+  subnav: {
     title: "Department jobs",
     path: "/DepartmentJobs",
-    role: "Director"
-  },]
+    role: ["Director"],
+  }
 },
 {
   title: "Grades",
@@ -79,14 +87,6 @@ export const NavBarData = [{
   icon: < FaStar /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  subnav: [{
-    title: "Competences",
-    path: "/competences",
-  },
-  {
-    title: "Your Grades",
-    path: "/historyGrades",
-  },
-  ],
+  role: ["Manager","User","HR"],
 },
 ]

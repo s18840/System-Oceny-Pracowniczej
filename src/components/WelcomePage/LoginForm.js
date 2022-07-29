@@ -53,7 +53,7 @@ function LoginForm() {
     >
       <Login> Login </Login>{" "}
       <InputWrapper>
-        <Span fontSize="20px"> e-mail </Span>{" "}
+        <Span fontSize="20px"> E-mail </Span>{" "}
         <InputField
           {...register("email", {
             required: true,
