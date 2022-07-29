@@ -52,7 +52,7 @@ function ModalLogin({ closeModal }){
     }}>
       <div style={{
         width: "500px",
-        height: "380px",
+        height: "450px",
         borderRadius: "12px",
         backgroundColor: "white",
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
@@ -64,7 +64,7 @@ function ModalLogin({ closeModal }){
       }}>
         <div style={{    
           width: "500px",
-          height: "380px",
+          height: "450px",
           borderRadius: "12px",
           backgroundColor: "white",
           boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
@@ -83,7 +83,7 @@ function ModalLogin({ closeModal }){
                 {...register("oldPassword", { 
                   required: "Required",
                   minLength : {
-                    value: 3,
+                    value: 6,
                     message: "Password is too short"
                   }, })}
               />
@@ -102,12 +102,16 @@ function ModalLogin({ closeModal }){
                 {...register("password",{ 
                   required: "Required",
                   minLength : {
-                    value: 3,
+                    value: 6,
                     message: "Password is too short"
-                  }, })}
+                  },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+                  message: "At least: \n -one Uppercase letter, \n -one lowercase letter, \n -one number"
+                } })}
               />
               {errors.password && (
-                <ErrorsLoginSpan font-size="20" style={{ color: "red" }}>{errors.password.message}</ErrorsLoginSpan>
+                <ErrorsLoginSpan font-size="20" style={{ color: "red", display: "flex", whiteSpace: "pre" }}>{errors.password.message}</ErrorsLoginSpan>
               )}
             </div>
             <div>
