@@ -7,6 +7,7 @@ import TargetList from "../components/Targets/TargetList";
 import axios from "axios";
 import {Context} from "./Context";
 import {useHistory} from "react-router-dom";
+import getCurrentQuarter from "../Utils/QuarterUtils";
 
 function Targets() {
   // TODO: error handling
@@ -22,6 +23,8 @@ function Targets() {
   const [targetIndex, setTargetIndex] = useState();
   const [targets, setTargets] = useState([]);
 
+  const defaultQuarter = getCurrentQuarter().label
+
   useEffect(() => {
     if (targets.length === 0) {
       context && axios.get(
@@ -35,6 +38,7 @@ function Targets() {
         .then((goals => {
           console.log(goals);
           setTargets(goals.data);
+          return goals.data
         })).catch(err => {
           console.log("GET emp goals err", err);
         });

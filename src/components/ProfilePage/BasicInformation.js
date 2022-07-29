@@ -167,6 +167,7 @@ function BasicInformation(props) {
         },
       })
     }
+    if(!formReady) window.location.reload();
   };
 
   let button;
@@ -277,7 +278,7 @@ function BasicInformation(props) {
             <ProfileDataText>Date of birth</ProfileDataText>
             <InputField
               type="date"
-              {...register("birthDate", { 
+              {...register("birthDate", {
                 required: "Required",
                 validate: {
                   over18: value => moment(value, "YYYY-MM-DD").diff(dateNow, 'years', true)<-18,

@@ -13,13 +13,13 @@ import {
   StatusIcon,
   ProfileAvatar,
 } from "../../styles/ProfilePageStyle";
-import { 
+import {
   PageWrapper,
   TeamsWrapper,
   TableTeams,
   RowLi,
   Heading,
-  ProfileDataText,
+  ProfileDataText, GlobalButton,
 } from "../../styles/GlobalStyle";
 import { Link, useLocation } from "react-router-dom";
 
@@ -77,7 +77,7 @@ function YourTeam(props) {
             </ProfileAvatar>
             <ProfileTextWrapper>
               <ProfileHeaderText>
-                <Link to={`/profile/${emp.personalNumber}`} style={{  
+                <Link to={`/profile/${emp.personalNumber}`} style={{
                   fontSize: "25px",
                   fontWeight: "bold",
                   color: "#ff4e01",

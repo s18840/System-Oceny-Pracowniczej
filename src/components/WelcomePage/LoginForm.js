@@ -35,6 +35,7 @@ function LoginForm() {
         history.push("/dashboard");
       })
       .catch((error) => {
+        console.log("err", error)
         if (error.response.status === 401) {
           setCredentialsCorrect(false);
           return Promise.reject("Unauthrozied");

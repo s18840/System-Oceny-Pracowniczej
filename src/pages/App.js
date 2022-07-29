@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useCallback, useState} from "react";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import Dashboard from "./Dashboard";
 import WelcomePage from "./WelcomePage";
@@ -7,7 +7,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch,
+  Switch, useHistory,
 } from "react-router-dom";
 import Competences from "./Competences";
 import NewCompetenceView from "./NewCompetenceView";
@@ -21,6 +21,7 @@ import NewEmpView from "./NewEmpView";
 import EmployeeList from "./EmployeeList";
 import Targets from "./Targets";
 import { Context } from "./Context.js";
+import Grade from "./Grade";
 import Jobs from "./Jobs";
 import DepartmentJobsList from "./DepartmentJobs";
 import NewJobView from "./NewJobsView";
@@ -29,13 +30,32 @@ import YourTeam from "../components/Team/YourTeam";
 function App() {
   //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
   const [context, setContext] = useState("default context value");
+  const history = useHistory()
+
+  const notAuthorized = <>
+    <h1>
+      Not authorized
+    </h1>
+    <button onClick={() => history.push('/dashboard')}>dashboard</button>
+    </>
+
+  const checkRoles = useCallback((...acceptedRoles)=>{
+    let isAuthorized = false;
+    const userRoles = localStorage.getItem("roles").split(",")
+    userRoles.forEach((value)=> {
+      if (acceptedRoles.includes(value)) {
+        isAuthorized = true
+      }
+    })
+    return isAuthorized
+  }, [])
 
   return (
     <Context.Provider value={[context, setContext]}>
+      <GlobalStyle/>
       <Router>
-        <GlobalStyle/>
         <Switch>
-          <Route exact path="/" component={WelcomePage}>
+          <Route exact path="/">
             <Redirect to="/welcome" />
           </Route>
           <Route exact path="/welcome">
@@ -65,13 +85,16 @@ function App() {
           <Route exact path="/Teams">
             <Team />
           </Route>
-          <Route exact path="/newTeam" >
+          <Route exact path="/newTeam">
             <NewTeamView />
           </Route>
-          <Route exact path="/settings" component={Settings}>
+          <Route exact path="/settings">
             <Settings />
           </Route>
-          <Route exact path="/grades" component={Grades}>
+          <Route exact path="/grades">
+            <Grades />
+          </Route>
+          <Route exact path="/grades/:id">
             <Grades />
           </Route>
           <Route exact path="/newEmp">
@@ -80,6 +103,9 @@ function App() {
           <Route exact path="/employees">
             <EmployeeList />
           </Route>
+          <Route exact path="/grade/:id" render={()=>
+            checkRoles("Manager", "HR") ? <Grade/> : notAuthorized
+          }/>
           <Route exact path="/targets">
             <Targets/>
           </Route>

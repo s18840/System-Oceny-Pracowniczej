@@ -12,10 +12,7 @@ import getCurrentQuarter from "../../Utils/QuarterUtils";
 const currentQuarter = getCurrentQuarter().label;
 
 const AddTarget = ({onSubmit, onCancel, target}) => {
-  const {register, handleSubmit, setValue, formState: {errors}} = useForm(
-    {
-      mode: "onChange",
-    });
+  const {register, handleSubmit, setValue, formState: {errors}} = useForm();
 
   const isUpdatable = typeof target !== "undefined";
   const isUpdatableInDB = isUpdatable && target.hasOwnProperty("goalID") && target.goalID !== 0;

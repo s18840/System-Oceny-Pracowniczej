@@ -43,10 +43,10 @@ function Dashboard() {
           <DashboardContentWrapper>
             <Title>Hi, {firstName}</Title>
             <SubTitle>grading</SubTitle>
-            <NextGrading />
+            <NextGrading/>
             <SubTitle>your targets</SubTitle>
           </DashboardContentWrapper>
-          <Clock />
+          <Clock/>
         </DashboardWrapper>
       </PageWrapper>
     </>

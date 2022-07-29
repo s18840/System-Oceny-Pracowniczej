@@ -43,7 +43,7 @@ function ModalEmployment( props ){
           ContentType: "application/json",
         },
       })
-    //window.location.reload();
+    window.location.reload();
     props.closeModal(false)
   }
 

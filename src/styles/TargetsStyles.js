@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {InputField, OrangeInputButton, Span, TextField} from "./GlobalStyle";
-import { ImPlus } from "react-icons/im";
-import { GoCalendar } from "react-icons/go";
+import {ImPlus} from "react-icons/im";
 
 export const TargetForm = styled.form`
   display: flex;
@@ -23,13 +22,6 @@ export const TargetTextField = styled(TextField)`
 
 export const ActionButton = styled(OrangeInputButton)`
   background: #3d098a;
-`
-
-export const CalendarIcon = styled(GoCalendar)`
-  overflow: visible;
-  color: #ff4e01;
-  transform: scale(5);
-  margin: 60px;
 `
 
 export const PlusIcon = styled(ImPlus)`
@@ -58,11 +50,12 @@ export const TargetContainer = styled.div`
   border-radius: 5px;
   padding: 2.5em 0;
   justify-content: space-evenly;
+  cursor: pointer;
 `
 
 export const AddTargetContainer = styled(TargetContainer)`
   justify-content: center;
-
+  cursor: pointer;
 `
 
 export const TargetDate = styled(Span)`
