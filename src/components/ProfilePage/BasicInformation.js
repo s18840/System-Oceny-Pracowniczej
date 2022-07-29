@@ -23,8 +23,9 @@ import {
   CompanyMail,
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
+import moment from 'moment';
 
-function BasicInformation() {
+function BasicInformation(props) {
   const [context] = useContext(Context);
   const {
     register,
@@ -34,7 +35,7 @@ function BasicInformation() {
   } = useForm({ mode: "onChange" });
 
   useEffect(() => {
-    context &&
+    context && !props.empId &&
       axios
         .get(
           `https://localhost:5001/api/Dto/emp/${localStorage.getItem(
@@ -78,10 +79,51 @@ function BasicInformation() {
         });
   }, [context, setValue]);
 
+  useEffect(() => {
+    context && props.empId &&
+      axios
+        .get(
+          `https://localhost:5001/api/Dto/emp/${props.empId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(({ data }) => {
+          setValue("firstName", data.firstName, { shouldValidate: true });
+          setValue("secondName", data.secondName ? data.secondName : null, {
+            shouldValidate: true,
+          });
+          setValue("lastName", data.lastName, { shouldValidate: true });
+          setValue(
+            "birthDate",
+            data?.birthDate.split("T")[0] ? data?.birthDate.split("T")[0] : null,
+            { shouldValidate: true }
+          );
+          setValue("street", data.street, { shouldValidate: true });
+          setValue("buildingNumber", data.buildingNumber, {
+            shouldValidate: true,
+          });
+          setValue(
+            "apartmentNumber",
+            data.apartmentNumber ? data.apartmentNumber : null,
+            { shouldValidate: true }
+          );
+          setValue("city", data.city, { shouldValidate: true });
+          setValue("postalCode", data.postalCode, { shouldValidate: true });
+          setValue("country", data.country, { shouldValidate: true });
+          setValue("cellPhoneNumber", data.cellPhoneNumber, {
+            shouldValidate: true,
+          });
+          setValue("email", data.email ? data.email : null, {
+            shouldValidate: true,
+          });
+        });
+  }, [context, setValue]);
   const [formReady, setFormReady] = useState(false);
 
   const switchForm = () => {
-    //console.log(formReady,isValid)
     setFormReady((currentFormReady) => !(currentFormReady && isValid));
   };
 
@@ -102,15 +144,23 @@ function BasicInformation() {
       apartmentNumber: e.apartmentNumber,
       postalCode: e.postalCode,
     };
-
     return obj;
   };
   const submitForm = (data) => {
-    if (!formReady) {
+    if (!formReady && !props.empId) {
       const employeeReady = prepareUser(data);
       axios.put(`https://localhost:5001/api/Dto/emp/${localStorage.getItem(
         "employeeId"
       )}`, employeeReady,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+    }
+    if (!formReady && props.empId) {
+      const employeeReady = prepareUser(data);
+      axios.put(`https://localhost:5001/api/Dto/emp/${props.empId}`, employeeReady,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -126,7 +176,7 @@ function BasicInformation() {
       {!formReady ? "Edit" : "Save"}
     </FormButton>
   );
-
+  const dateNow = moment(moment.now()).format('YYYY-MM-DD');
   return (
     <>
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
@@ -223,12 +273,16 @@ function BasicInformation() {
               <ErrorsSpan font-size="20" style={{ color: "red" }}>{errors.lastName.message}</ErrorsSpan>
             )}
           </SurName>
-          {/* Walidacja do dorobienia */}
           <DateOfBirth>
             <ProfileDataText>Date of birth</ProfileDataText>
             <InputField
               type="date"
-              {...register("birthDate", { required: true })}
+              {...register("birthDate", { 
+                required: "Required",
+                validate: {
+                  over18: value => moment(value, "YYYY-MM-DD").diff(dateNow, 'years', true)<-18,
+                }
+               })}
               disabled={!formReady}
               style={
                 !formReady
@@ -238,6 +292,9 @@ function BasicInformation() {
             />
             {formReady && errors.birthDate && errors.birthDate.type === "required" && (
               <ErrorsSpan font-size="20" style={{ color: "red" }}>required</ErrorsSpan>
+            )}
+            {formReady &&errors.birthDate && errors.birthDate.type !== "required" && (
+              <ErrorsSpan font-size="20" style={{ color: "red", marginTop: "-23px", marginLeft: "-64px" }}>You must be over 18</ErrorsSpan>
             )}
           </DateOfBirth>
           <PhoneNumber>

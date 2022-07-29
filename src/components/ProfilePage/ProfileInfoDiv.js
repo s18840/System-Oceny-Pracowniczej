@@ -12,6 +12,8 @@ import {
   ProfileTextWrapper,
   StatusIcon,
   ProfileAvatar,
+  FormButton,
+  ProfileAvatarDiv
 } from "../../styles/ProfilePageStyle";
 import { PageWrapper } from "../../styles/GlobalStyle";
 import BasicInformation from "./BasicInformation";
@@ -55,7 +57,7 @@ function ProfileInfo(props) {
           setEmployee(data);
           setFirstName(data.firstName);
           setSurname(data.lastName);
-          setDepartment(data.departmentName);
+          setDepartment(data.departmentName ? data.departmentName : "Not Assigned");
           setTeam(data.teamName);
           setPhoneNumber(data.cellPhoneNumber);
           setMail(data.companyEmail);
@@ -80,6 +82,27 @@ function ProfileInfo(props) {
     setOpenModal(status == 0);  
   },[status])
 
+  const prepareUserId = () =>{
+    const userId = {
+      employeeId: props.id ? props.id : localStorage.getItem("employeeId")
+    }
+    return userId;
+  }
+
+  const resetPassword = () => {
+    const userId =prepareUserId();
+    axios.put(`https://localhost:5001/api/Account/passwordreset`, userId,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }).then((resp) => {
+        console.log("res",resp)
+    })
+    .catch((err) => {
+      console.log("error",err);
+    });
+  }
   function checkStatus() {
     if (status === 1) {
       return true;
@@ -95,9 +118,14 @@ function ProfileInfo(props) {
       <PageWrapper>
         <>
           <ProfileInfoDiv>
-            <ProfileAvatar to="/profile">
+            {!props.id && <ProfileAvatar to="/profile">
               {initials}
             </ProfileAvatar>
+            }
+            {props.id && <ProfileAvatarDiv>
+              {initials}
+            </ProfileAvatarDiv>
+            }
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 {formFirstName + " " + formSurname}
@@ -139,6 +167,10 @@ function ProfileInfo(props) {
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
           </ProfileInfoDiv>
+          {(localStorage.getItem("roles").includes("Admin")) && <FormButton onClick={resetPassword} style={{width: "200px", position: "absolute", marginTop: "10px", right: "50px"}} >
+              Reset password
+            </FormButton>
+            }
         </>
         {!props.id && <>
           <ProfileTabWrapper>
@@ -171,6 +203,41 @@ function ProfileInfo(props) {
                 return <EmploymentInformation />;
               case EDUCATION_INFO:
                 return <EducationInformation />;
+              }
+            })()}
+          </div>
+        </>}
+        {(localStorage.getItem("roles").includes("Admin")) && props.id && <>
+          <ProfileTabWrapper>
+            <ProfileTab
+              onClick={() => switchType(BASIC_INFO)}
+              style={contentType === BASIC_INFO ? activeStyle : {}}
+            >
+            Basic Information
+            </ProfileTab>
+            <ProfileTab
+              onClick={() => switchType(EMPLOYMENT_INFO)}
+              style={contentType === EMPLOYMENT_INFO ? activeStyle : {}}
+            >
+            Employment
+            </ProfileTab>
+            <ProfileTab
+              onClick={() => switchType(EDUCATION_INFO)}
+              style={contentType === EDUCATION_INFO ? activeStyle : {}}
+            >
+            Education
+            </ProfileTab>
+          </ProfileTabWrapper>
+          <ProfileTabBar />
+          <div>
+            {(() => {
+              switch (contentType) {
+              case BASIC_INFO:
+                return <BasicInformation empId={props.id} />;
+              case EMPLOYMENT_INFO:
+                return <EmploymentInformation empId={props.id} />;
+              case EDUCATION_INFO:
+                return <EducationInformation empId={props.id} />;
               }
             })()}
           </div>
