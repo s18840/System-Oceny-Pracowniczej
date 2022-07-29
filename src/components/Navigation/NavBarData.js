@@ -1,97 +1,84 @@
-import React from "react"
-import { FaStar } from "react-icons/fa" // grades
-import { FaUsers } from "react-icons/fa" // teams
-import { FaRegUser } from "react-icons/fa" // profile
-import { FaRegObjectGroup } from "react-icons/fa" // projects
-import { FaIdCard } from "react-icons/fa" // dashboard
-import * as MDIcons from "react-icons/md"
+import React from "react";
+import {
+  FaIdCard,
+  FaRegObjectGroup,
+  FaRegUser,
+  FaStar,
+  FaUsers,
+} from "react-icons/fa"; // dashboard // projects // profile // grades // teams
+import * as MDIcons from "react-icons/md";
 
 
 export const NavBarData = [{
   title: "Dashboard",
   path: "/Dashboard",
-  icon: < FaIdCard /> ,
-  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
-  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+  icon: < FaIdCard/>,
+  iconClosed: < MDIcons.MdKeyboardArrowDown/>,
+  iconOpened: < MDIcons.MdKeyboardArrowUp/>,
 },
-{
-  title: "Profile",
-  path: "/Profile",
-  icon: < FaRegUser /> ,
-  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
-  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  subnav: [
   {
-    title: "Your goals",
-    path: "/targets",
-    role: "all"
+    title: "Profile",
+    path: "/Profile",
+    icon: < FaRegUser/>,
+    iconClosed: < MDIcons.MdKeyboardArrowDown/>,
+    iconOpened: < MDIcons.MdKeyboardArrowUp/>,
+    subnav:
+      {
+        title: "Create new employee",
+        path: "/newEmp",
+        role: "Admin",
+      },
   },
   {
-    title: "Create new employee",
-    path: "/newEmp",
-    role: "Admin"
+    title: "Teams",
+    path: "/Teams",
+    icon: < FaUsers/>,
+    iconClosed: < MDIcons.MdKeyboardArrowDown/>,
+    iconOpened: < MDIcons.MdKeyboardArrowUp/>,
+    subnav: [{
+      title: "Your team",
+      path: "/YourTeam",
+      role: "Manager",
+    }],
   },
-  ],
-},
-{
-  title: "Teams",
-  path: "/Teams",
-  icon: < FaUsers /> ,
-  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
-  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  subnav: [{
-    title: "Your team",
-    path: "/YourTeam",
-    role: "Manager"
-  },]
-},
-{
-  title: "Employees",
-  path: "/Employees",
-  icon: < FaUsers /> ,
-  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
-  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-},
-{
-  title: "Departments",
-  path: "/Departments",
-  icon: < FaUsers /> ,
-  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
-  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-},
-{
-  title: "Competences",
-  path: "/Competences",
-  icon: < FaRegObjectGroup /> ,
-  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
-  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-},
-{
-  title: "Jobs",
-  path: "/Jobs",
-  icon: < FaUsers /> ,
-  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
-  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  subnav: [{
-    title: "Department jobs",
-    path: "/DepartmentJobs",
-    role: "Director"
-  },]
-},
-{
-  title: "Grades",
-  path: "/grades",
-  icon: < FaStar /> ,
-  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
-  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  subnav: [{
+  {
+    title: "Employees",
+    path: "/Employees",
+    icon: < FaUsers/>,
+    iconClosed: < MDIcons.MdKeyboardArrowDown/>,
+    iconOpened: < MDIcons.MdKeyboardArrowUp/>,
+  },
+  {
+    title: "Departments",
+    path: "/Departments",
+    icon: < FaUsers/>,
+    iconClosed: < MDIcons.MdKeyboardArrowDown/>,
+    iconOpened: < MDIcons.MdKeyboardArrowUp/>,
+  },
+  {
     title: "Competences",
-    path: "/competences",
+    path: "/Competences",
+    icon: < FaRegObjectGroup/>,
+    iconClosed: < MDIcons.MdKeyboardArrowDown/>,
+    iconOpened: < MDIcons.MdKeyboardArrowUp/>,
   },
   {
-    title: "Your Grades",
-    path: "/historyGrades",
+    title: "Jobs",
+    path: "/Jobs",
+    icon: < FaUsers/>,
+    iconClosed: < MDIcons.MdKeyboardArrowDown/>,
+    iconOpened: < MDIcons.MdKeyboardArrowUp/>,
+    subnav: [{
+      title: "Department jobs",
+      path: "/DepartmentJobs",
+      role: "Director",
+    }],
   },
-  ],
-},
-]
+  {
+    title: "Grades",
+    path: "/grades",
+    icon: < FaStar/>,
+    iconClosed: < MDIcons.MdKeyboardArrowDown/>,
+    iconOpened: < MDIcons.MdKeyboardArrowUp/>,
+  },
+];

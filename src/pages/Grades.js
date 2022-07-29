@@ -16,7 +16,9 @@ import {Context} from "./Context";
 import {useForm} from "react-hook-form";
 import TargetList from "../components/Targets/TargetList";
 import {ErrorLabel, QuarterSelect} from "../styles/CompetencesGradeStyles";
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
+
+//TODO only targets that have been graded ?
 
 function Grades() {
   const {id} = useParams()
@@ -26,7 +28,8 @@ function Grades() {
   const [competenceGrades, setCompetenceGrades] = useState([]);
   const [targetGrades, setTargetGrades] = useState([]);
 
-  const [availableQuarters, setAvailableQuarters] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [surname, setSurname] = useState("");
 
   const addUniqueQuarters = useCallback((quarters) => {
     setAvailableQuarters(prev => {
@@ -39,16 +42,21 @@ function Grades() {
 
   const defaultQuarter = getCurrentQuarter().label || "";
   const [currentQuarter, setCurrentQuarter] = useState(defaultQuarter);
+  const [availableQuarters, setAvailableQuarters] = useState([defaultQuarter]);
 
   const [context] = useContext(Context);
-  const {register, watch} = useForm();
+  const {register,
+    watch,
+
+  } = useForm();
+  const history = useHistory()
 
   const getCompGrade = (quarter) => {
     let quarterGrade = competenceGrades.find(grade => grade.quarter === quarter);
     if (quarterGrade && quarterGrade.competenceGrades.length !== 0) {
       return <CompetenceGradeDetails grade={quarterGrade}/>;
-    } else if (currentQuarter === getCurrentQuarter().label) {
-      return <GlobalButton>Grade</GlobalButton>;
+    } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")) {
+      return <GlobalButton onClick={()=>history.push(`/grade/${id}`)}>Grade</GlobalButton>;
     } else {
       return <ErrorLabel>No grades!</ErrorLabel>;
     }
@@ -67,15 +75,29 @@ function Grades() {
     }
   };
 
-  //only targets that have been graded
-
-
-
   useEffect(() => {
     const quarterSubscription = watch((value) => setCurrentQuarter(value.quarterSelect));
     return () => quarterSubscription.unsubscribe();
   }, [watch]);
 
+  useEffect(() => {
+    if(currentEmp !== localStorage.getItem("employeeId")) {
+      context &&
+      axios
+        .get(
+          `${process.env.REACT_APP_API_ADDRESS}Employee/${currentEmp}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(({data}) => {
+          setFirstName(data.firstName);
+          setSurname(data.lastName);
+        });
+    }
+  }, [context, currentEmp]);
 
   useEffect(() => {
 
@@ -113,7 +135,7 @@ function Grades() {
         console.log("GET comp. details err", err);
       });
 
-  }, [context, addUniqueQuarters]);
+  }, [context, addUniqueQuarters, currentEmp]);
 
   return (
     <>
@@ -122,12 +144,15 @@ function Grades() {
       <Footer/>
       <PageWrapper>
         <ContentWrapper>
-          <SubTitle>Grades</SubTitle>
+          <SubTitle>
+            {firstName.length != 0 ? firstName + " " + surname + "'s " :"My "}grades
+          </SubTitle>
           <QuarterSelect
             {...register("quarterSelect")}
             defaultValue={defaultQuarter}
           >
-            {availableQuarters.map(value => (
+            {
+              availableQuarters.map(value => (
               <option
                 value={value}
                 selected={value === defaultQuarter}

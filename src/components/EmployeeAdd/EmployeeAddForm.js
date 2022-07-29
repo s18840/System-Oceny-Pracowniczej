@@ -42,7 +42,6 @@ function EmployeeAddForm() {
       lastName: e.lastName,
       birthDate: e.birthDate,
       cellPhoneNumber: e.cellPhoneNumber,
-      stationaryPhoneNumber: null,
       email: e.email,
       companyEmail: e.email,
       country: e.country,
@@ -185,7 +184,7 @@ function EmployeeAddForm() {
             <ProfileDataText>Date of birth</ProfileDataText>
             <InputField
               type="date"
-              {...register("birthDate", { 
+              {...register("birthDate", {
                 required: "Required",
                 validate: {
                   over18: value => moment(value, "YYYY-MM-DD").diff(dateNow, 'years', true)<-18,

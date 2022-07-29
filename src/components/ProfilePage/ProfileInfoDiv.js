@@ -22,7 +22,7 @@ import EducationInformation from "./EducationInformation";
 import { Context } from "../../pages/Context";
 import axios from "axios";
 import ModalLogin from "../ModalLogin";
-import { useLocation } from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
@@ -66,6 +66,27 @@ function ProfileInfo(props) {
           setLoading(false);
         });
   }, [context]);
+
+  const [teamIds, setTeamIds] = useState([])
+  useEffect(()=>{
+    if((localStorage.getItem("roles").includes("Manager"))){
+      context &&
+      axios
+        .get(
+          `${process.env.REACT_APP_API_ADDRESS}Employee/team/${localStorage.getItem("employeeId")}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(({data}) => {
+          let teamEmpIds = data.map((value) => value.personalNumber)
+          console.log(teamEmpIds)
+          setTeamIds(teamEmpIds)
+        });
+    }
+  }, [context])
   const [formFirstName, setFirstName] = useState(" ");
   const [formSurname, setSurname] = useState(" ");
   const [formDepartment, setDepartment] = useState(" ");
@@ -78,8 +99,9 @@ function ProfileInfo(props) {
   const [openModal,setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const history = useHistory()
   useEffect (()=>{
-    setOpenModal(status == 0);  
+    setOpenModal(status == 0);
   },[status])
 
   const prepareUserId = () =>{
@@ -167,6 +189,12 @@ function ProfileInfo(props) {
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
           </ProfileInfoDiv>
+          {(localStorage.getItem("roles").includes("HR") ||
+              localStorage.getItem("roles").includes("Admin") ||
+              ((localStorage.getItem("roles").includes("Manager") && teamIds.includes(parseInt(props.id))))) &&
+            <FormButton onClick={()=>history.push(`/grades/${props.id}`)} style={{width: "200px", position: "absolute", marginTop: "10px", right: "300px"}} >
+            Grades
+          </FormButton>}
           {(localStorage.getItem("roles").includes("Admin")) && <FormButton onClick={resetPassword} style={{width: "200px", position: "absolute", marginTop: "10px", right: "50px"}} >
               Reset password
             </FormButton>

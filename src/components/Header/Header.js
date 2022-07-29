@@ -24,7 +24,7 @@ const HeaderBar = () => {
     context &&
       axios
         .get(
-          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
+          `${process.env.REACT_APP_API_ADDRESS}Employee/${localStorage.getItem(
             "employeeId"
           )}`,
           {

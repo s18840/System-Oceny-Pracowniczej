@@ -50,11 +50,12 @@ export const TargetContainer = styled.div`
   border-radius: 5px;
   padding: 2.5em 0;
   justify-content: space-evenly;
+  cursor: pointer;
 `
 
 export const AddTargetContainer = styled(TargetContainer)`
   justify-content: center;
-
+  cursor: pointer;
 `
 
 export const TargetDate = styled(Span)`

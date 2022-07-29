@@ -70,7 +70,8 @@ export const GradeElementWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 27.5%;
-  height: 1rem;
+  height: 1.2rem;
+  padding: 5px;
 `
 
 export const AcceptButtonWrapper = styled.div`

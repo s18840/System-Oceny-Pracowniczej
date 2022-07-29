@@ -78,7 +78,7 @@ function CompetenceGradeElement({competence, index, register}) {
                 ))}
               </MarkerGradeWrapper>
               <TextField
-                {...register(`compGrade.${index}.comment`)}
+                {...register(`compGrade.${index}.comment`, ({required: true}))}
                 width="27.5%"/>
               <input
                 hidden

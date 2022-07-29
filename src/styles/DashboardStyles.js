@@ -5,7 +5,7 @@ export const DashboardWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin: 100px 50px;
+  margin: 100px 80px;
 `
 
 export const DashboardContentWrapper = styled.div`

@@ -39,6 +39,7 @@ export const InputField = styled.input`
   box-sizing: border-box;
   padding-left: 20px;
   max-lines: 1;
+  
 `
 
 export const DescriptionInputField = styled.input`
@@ -62,7 +63,7 @@ export const TextField = styled.textarea`
   border: 2px solid #cccccc;
   box-sizing: border-box;
   padding: 20px 20px 20px 20px;
-  
+  resize: none;
 `
 
 export const Span = styled.div`
