@@ -18,6 +18,21 @@ export const ProfileAvatar = styled(Link)`
   background: #FFA500;
   text-decoration: none ;
   `
+export const ProfileAvatarDiv = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+width: 170px;
+height: 170px;
+border-radius: 50%;
+font-size: 100px;
+color: #FFFFFF;
+margin-right: 10px;
+line-height: 50px;
+text-align: center;
+background: #FFA500;
+text-decoration: none ;
+`
 
 
 export const ProfileTextWrapper = styled.div`

@@ -25,6 +25,7 @@ import Jobs from "./Jobs";
 import DepartmentJobsList from "./DepartmentJobs";
 import NewJobView from "./NewJobsView";
 import TeamDetails from "./TeamDetails";
+import YourTeam from "../components/Team/YourTeam";
 function App() {
   //dodać sprawdzanie w session storage czy user jest, wtedy przy odswiezaniu nie bedzie znikac
   const [context, setContext] = useState("default context value");
@@ -94,6 +95,9 @@ function App() {
           {/*For Director job lists */}
           <Route exact path="/DepartmentJobs">
             <DepartmentJobsList />
+          </Route>
+          <Route exact path="/YourTeam">
+            <YourTeam />
           </Route>
         </Switch>
       </Router>

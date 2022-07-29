@@ -127,7 +127,7 @@ const NewTeam = () => {
         Creating new team
         <NewButton
           onClick={() => {
-            window.location.href = "/teamList";
+            window.location.href = "/Teams";
           }}
         >
           Add
@@ -137,7 +137,7 @@ const NewTeam = () => {
         <InsideWrapper>
           <Heading>
             <ProfileDataText>Name: </ProfileDataText>
-            <InputField placeholder="ING Team" {...register("name", { required: true })}></InputField>
+            <InputField {...register("name", { required: true })}></InputField>
           </Heading>
           <Heading>
             <ProfileDataText>Add Department: </ProfileDataText>
