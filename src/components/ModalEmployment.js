@@ -110,9 +110,13 @@ function ModalEmployment( props ){
           </div>
           <div>
             <ProfileDataText>Time basis</ProfileDataText>
-            <InputField
-              {...register("timeBasis", { required: "Please provide correct time basis" })}
-            />
+            <SelectJobs {...register("timeBasis", { required: "Please provide correct time basis" })}>
+              <OptionJobs value="Full" >Full</OptionJobs>
+              <OptionJobs value="3/4" >3/4</OptionJobs>
+              <OptionJobs value="3/5" >3/5</OptionJobs>
+              <OptionJobs value="1/2" >1/2</OptionJobs>
+              <OptionJobs value="3/5" >1/4</OptionJobs>
+            </SelectJobs>
               {errors.timeBasis && errors.timeBasis.type === "required" && (
                 <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.timeBasis.message}</ErrorsLoginSpan>
               )}
