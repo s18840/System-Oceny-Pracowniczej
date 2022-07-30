@@ -70,7 +70,7 @@ function TeamDetails(props) {
         <Heading style={{marginLeft:30, marginTop:30}}>
           <ProfileDataText>Members of this team: </ProfileDataText>
         </Heading>
-        {employee?.map((emp) => (
+        {employee.length > 0 ? employee?.map((emp) => (
           <ProfileInfoDiv style={{marginTop:20}}>
             <ProfileAvatar to={`/profile/${emp.personalNumber}`}>
               {(emp.firstName[0]) + (emp.lastName[0])}
@@ -103,13 +103,13 @@ function TeamDetails(props) {
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
           </ProfileInfoDiv>
-        ))}
-        <Heading style={{marginLeft:30, marginTop:30}}>
+        )): <div style={{marginLeft: 30, fontSize: "20px", color: "gray" }}>No employees in this team</div>}
+        <Heading style={{marginLeft: 30, marginTop: 30}}>
           <ProfileDataText>Competences in this team: </ProfileDataText>
         </Heading>
         <TeamsWrapper style={{marginLeft:30}}>
           <TableTeams className="table">
-            {competences?.map((el) => (
+            {competences.length > 0 ? competences?.map((el) => (
               <tr>
                 <td>
                   <RowLi>
@@ -117,7 +117,7 @@ function TeamDetails(props) {
                   </RowLi>
                 </td>
               </tr>
-            ))}
+            )):<RowLi>No competences in this team</RowLi>}
           </TableTeams>
         </TeamsWrapper>
       </PageWrapper>

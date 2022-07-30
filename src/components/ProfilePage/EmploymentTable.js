@@ -7,6 +7,7 @@ import {
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
 import ModalEmployment from "../ModalEmployment";
+import { ErrorsSpan } from "../../styles/GlobalStyle";
 
 const dataJson = ["Start date", "End date", "Job", "Time basis"];
 
@@ -56,6 +57,7 @@ function EmploymentTable(props) {
 
   return (
     <>
+      {employee?.employmentsJobs.length != 0 ?
       <TableInfo className="table">
         <thead>
           <tr>
@@ -74,15 +76,14 @@ function EmploymentTable(props) {
               )}
             </td>
             <td>
-              {content.terminationDate ? reformatDate(
-                content?.terminationDate.split("T")[0]) : "Current"}
+              {reformatDate(content?.terminationDate.split("T")[0])}
             </td>
             <td>{content.jobName}</td>
             <td>{content.timeBasis}</td>
           </Row>
         ))}
-      </TableInfo>
-      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin")) && <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
+      </TableInfo> : <ErrorsSpan font-size="20" style={{ color: "gray", marginTop: "300px", fontSize: "60px", marginLeft: "600px" }}>No employments</ErrorsSpan>}
+      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin")) && (props.empId) && <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
         Add
       </ModalOpenButton>
       }

@@ -287,6 +287,7 @@ export const ModalOpenButton = styled.button`
   align-self: center;
   position: fixed;
   right: 20px;
+  margin-top: 30px ;
 `;
 
 export const ModalCompetencesOpenButton = styled.button`

@@ -67,7 +67,6 @@ function Grade() {
   const {
     register,
     getValues,
-    formState: {errors}
   } = useForm({mode: "onChange"});
 
   const handleSubmit = () => {
@@ -104,7 +103,7 @@ function Grade() {
       },
     ).then(res => {
       console.log(res);
-      history.push("/grades");
+      history.push(`/grades/${id}`);
     })
       .catch(err => console.log("POST emp grade err", err));
   };
@@ -146,7 +145,7 @@ function Grade() {
                 width="100%"
               />
               <AcceptButtonWrapper>
-                {errors && <Span>All fields required</Span>}
+                
                 <AcceptButton onClick={handleSubmit}>Accept</AcceptButton>
               </AcceptButtonWrapper>
             </>}

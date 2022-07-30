@@ -149,6 +149,9 @@ function BasicInformation(props) {
   const submitForm = (data) => {
     if (!formReady && !props.empId) {
       const employeeReady = prepareUser(data);
+      if(props.empId == localStorage.getItem("employeeId") || !props.empId){
+      localStorage.setItem("fullName",`${data.firstName} ${data.lastName}`)
+      }
       axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
         "employeeId"
       )}`, employeeReady,

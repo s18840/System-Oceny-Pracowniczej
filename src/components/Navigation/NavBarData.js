@@ -2,7 +2,6 @@ import React from "react"
 import { FaStar, FaUser } from "react-icons/fa" // grades
 import { FaUsers } from "react-icons/fa" // teams
 import { BsPeopleFill } from "react-icons/bs" // teams
-import { FaRegUser } from "react-icons/fa" // profile
 import { FaRegObjectGroup } from "react-icons/fa" // projects
 import { FaIdCard } from "react-icons/fa" // dashboard
 import { FaBuilding } from "react-icons/fa" // department
@@ -90,6 +89,6 @@ export const NavBarData = [{
   icon: < FaStar /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  role: ["Manager","User","HR"],
+  role: ["Manager","User"],
 },
 ]

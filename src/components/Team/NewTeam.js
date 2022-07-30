@@ -11,7 +11,8 @@ import {
   NewButton,
   AddTeamButton,
   TeamsWrapper,
-  TableTeams
+  TableTeams,
+  ErrorsSpan
 } from "../../styles/GlobalStyle";
 import { useForm } from "react-hook-form";
 import { Context } from "../../pages/Context";
@@ -21,16 +22,21 @@ const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
     <AddTeamButton
+      //depId={props.depId}
       onClick={() => {
         props.onClick();
         setAdded((prev) => !prev);
       }}
-      disabled={added ? true : false}
+      //disabled={added ? true : false}
     >
       {added ? "Added" : "Add"}
     </AddTeamButton>
   );
 };
+
+// const removeFromArray = (name,setRemoved) => {
+//   setRemoved(current => current.filter(element => element != name))
+// }
 
 const NewTeam = () => {
   const {
@@ -130,9 +136,13 @@ const NewTeam = () => {
           onClick={() => {
             window.location.href = "/Teams";
           }}
+          disabled={mans.length == 0 || emps.length == 0}
         >
           Add
         </NewButton>
+        {(mans.length == 0 || emps.length == 0) && 
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add team</ErrorsSpan>
+        }
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
@@ -166,7 +176,7 @@ const NewTeam = () => {
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {mans.map((el) => (
+              {mans.length > 0 ? mans.map((el) => (
                 <tr>
                   <td>
                     <RowLi>
@@ -179,7 +189,8 @@ const NewTeam = () => {
                     </RowLi>
                   </td>
                 </tr>
-              ))}
+              )):
+              <RowLi>No available managers</RowLi>}
             </TableTeams>
           </TeamsWrapper>
           <Heading>
@@ -187,7 +198,7 @@ const NewTeam = () => {
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {emps?.map((el) => (
+              {emps.length > 0 ? emps?.map((el) => (
                 <tr>
                   <td>
                     <RowLi>
@@ -200,7 +211,8 @@ const NewTeam = () => {
                     </RowLi>
                   </td>
                 </tr>
-              ))}
+              )):
+              <RowLi>No available employees</RowLi>}
             </TableTeams>
           </TeamsWrapper>
           <Heading>

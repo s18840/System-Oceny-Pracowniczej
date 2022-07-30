@@ -73,7 +73,7 @@ function ProfileInfo(props) {
       context &&
       axios
         .get(
-          `${process.env.REACT_APP_API_ADDRESS}Employee/team/${localStorage.getItem("employeeId")}`,
+          `${process.env.REACT_APP_API_ADDRESS}Employee/teammembers/${localStorage.getItem("employeeId")}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -189,13 +189,13 @@ function ProfileInfo(props) {
               </ProfileSubHeaderText>
             </ProfileTextWrapper>
           </ProfileInfoDiv>
-          {(localStorage.getItem("roles").includes("HR") ||
-              localStorage.getItem("roles").includes("Admin") ||
+          {((localStorage.getItem("roles").includes("HR") && (props.id && props.id !== localStorage.getItem("employeeId"))) ||
+              (localStorage.getItem("roles").includes("Admin") && (props.id && props.id !== localStorage.getItem("employeeId"))) ||
               ((localStorage.getItem("roles").includes("Manager") && teamIds.includes(parseInt(props.id))))) &&
             <FormButton onClick={()=>history.push(`/grades/${props.id}`)} style={{width: "200px", position: "absolute", marginTop: "10px", right: "300px"}} >
             Grades
           </FormButton>}
-          {(localStorage.getItem("roles").includes("Admin")) && <FormButton onClick={resetPassword} style={{width: "200px", position: "absolute", marginTop: "10px", right: "50px"}} >
+          {(localStorage.getItem("roles").includes("Admin") && (props.id && props.id !== localStorage.getItem("employeeId"))) && <FormButton onClick={resetPassword} style={{width: "200px", position: "absolute", marginTop: "10px", right: "50px"}} >
               Reset password
             </FormButton>
             }
@@ -235,7 +235,7 @@ function ProfileInfo(props) {
             })()}
           </div>
         </>}
-        {(localStorage.getItem("roles").includes("Admin")) && props.id && <>
+        {((localStorage.getItem("roles").includes("Admin")) || (localStorage.getItem("roles").includes("HR"))) && props.id && <>
           <ProfileTabWrapper>
             <ProfileTab
               onClick={() => switchType(BASIC_INFO)}

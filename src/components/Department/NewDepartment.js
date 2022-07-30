@@ -11,7 +11,8 @@ import {
   NewButton,
   AddTeamButton,
   TeamsWrapper,
-  TableTeams
+  TableTeams,
+  ErrorsSpan
 } from "../../styles/GlobalStyle";
 import { useForm } from "react-hook-form";
 import { Context } from "../../pages/Context";
@@ -80,9 +81,13 @@ const NewDepartment = () => {
           onClick={() => {
             window.location.href = "/Departments";
           }}
+          disabled={dirs.length == 0}
         >
           Add
         </NewButton>
+        {(dirs.length == 0) && 
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add department</ErrorsSpan>
+        }
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
@@ -95,7 +100,7 @@ const NewDepartment = () => {
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {dirs.map((el) => (
+              {dirs.length > 0 ?dirs.map((el) => (
                 <tr>
                   <td>
                     <RowLi>
@@ -108,7 +113,7 @@ const NewDepartment = () => {
                     </RowLi>
                   </td>
                 </tr>
-              ))}
+              )):<RowLi>No available directors</RowLi>}
             </TableTeams>
           </TeamsWrapper>
         </InsideWrapper>

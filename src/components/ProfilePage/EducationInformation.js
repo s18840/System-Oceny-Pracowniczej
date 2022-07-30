@@ -7,6 +7,7 @@ import {
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
 import Modal from "../Modal";
+import { ErrorsSpan } from "../../styles/GlobalStyle";
 
 const dataJson = ["Graduation Date", "Institution", "Degree"];
 function EducationInformation(props) {
@@ -56,6 +57,7 @@ function EducationInformation(props) {
 
   return (
     <>
+      {employee?.educations.length != 0 ?
       <TableInfo className="table">
         <thead>
           <tr>
@@ -77,7 +79,7 @@ function EducationInformation(props) {
             <td>{content.degree}</td>
           </Row>
         ))}
-      </TableInfo>
+      </TableInfo> : <ErrorsSpan font-size="20" style={{ color: "gray", marginTop: "300px", fontSize: "60px", marginLeft: "600px" }}>No educations</ErrorsSpan>}
       <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
         Add
       </ModalOpenButton>

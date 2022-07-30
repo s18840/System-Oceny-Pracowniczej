@@ -87,7 +87,7 @@ function App() {
             checkRoles("HR", "Director", "Admin") ? <NewTeamView/> : notAuthorized
           }/>
           <Route exact path="/grades" render={()=>
-            checkRoles("Manager", "User", "HR") ? <Grades/> : notAuthorized
+            checkRoles("Manager", "User") ? <Grades/> : notAuthorized
           }/>
           <Route exact path="/grades/:id" render={()=>
             checkRoles("HR", "Manager", "Director", "Admin") ? <Grades/> : notAuthorized

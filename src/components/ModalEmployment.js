@@ -24,7 +24,7 @@ function ModalEmployment( props ){
     const obj = {
       personalNumber: props.empId ? props.empId : localStorage.getItem("employeeId"),
       hireDate : e.hireDate,
-      terminationDate : null,
+      terminationDate : e.expirationDate,
       timeBasis : e.timeBasis,
       contractType : e.contractType,
       contractExpirationDate: e.expirationDate ,
