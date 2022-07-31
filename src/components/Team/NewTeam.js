@@ -152,23 +152,25 @@ const NewTeam = () => {
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {deps?.map((el) => (
-                <tr key={el.departmentId}>
-                  <td>
-                    <RowLi>
-                      {el.departmentName}
-                      <Button
-                        onClick={() => {
-                          setChoosenDeps(curr => curr !== el.departmentId? el.departmentId : "");
-                        }}
-                        disabled = {choosenDeps && choosenDeps !== el.departmentId}
-                        active={choosenDeps && choosenDeps !== el.departmentId}
-                        radio
-                      />
-                    </RowLi>
-                  </td>
-                </tr>
-              ))}
+              <tbody>
+                {deps?.map((el) => (
+                  <tr key={el.departmentId}>
+                    <td>
+                      <RowLi>
+                        {el.departmentName}
+                        <Button
+                          onClick={() => {
+                            setChoosenDeps(curr => curr !== el.departmentId? el.departmentId : "");
+                          }}
+                          disabled = {choosenDeps && choosenDeps !== el.departmentId}
+                          active={choosenDeps && choosenDeps !== el.departmentId}
+                          radio
+                        />
+                      </RowLi>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </TableTeams>
           </TeamsWrapper>
           <Heading>
@@ -176,24 +178,26 @@ const NewTeam = () => {
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {mans.length > 0 ? mans.map((el) => (
-                <tr key={el.personalNumber}>
-                  <td>
-                    <RowLi>
-                      {el.firstName + " " + el.lastName}
-                      <Button
-                        onClick={() => {
-                          setChoosenMans(curr => curr !== el.personalNumber? el.personalNumber : "");
-                        }}
-                        disabled = {choosenMans && choosenMans !== el.personalNumber}
-                        active={choosenMans && choosenMans !== el.personalNumber}
-                        radio
-                      />
-                    </RowLi>
-                  </td>
-                </tr>
-              )):
+              <tbody>
+                {mans.length > 0 ? mans.map((el) => (
+                  <tr key={el.personalNumber}>
+                    <td>
+                      <RowLi>
+                        {el.firstName + " " + el.lastName}
+                        <Button
+                          onClick={() => {
+                            setChoosenMans(curr => curr !== el.personalNumber? el.personalNumber : "");
+                          }}
+                          disabled = {choosenMans && choosenMans !== el.personalNumber}
+                          active={choosenMans && choosenMans !== el.personalNumber}
+                          radio
+                        />
+                      </RowLi>
+                    </td>
+                  </tr>
+                )):
                 <RowLi>No available managers</RowLi>}
+              </tbody>
             </TableTeams>
           </TeamsWrapper>
           <Heading>
@@ -201,21 +205,23 @@ const NewTeam = () => {
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {emps.length > 0 ? emps?.map((el) => (
-                <tr key={el.personalNumber}>
-                  <td>
-                    <RowLi>
-                      {el.firstName + " " + el.lastName}
-                      <Button
-                        onClick={() => {
-                          setChoosenEmps((prev) => prev.includes(el.personalNumber) ? prev.filter(item => item !== el.personalNumber) : [...prev, el.personalNumber]);
-                        }}
-                      />
-                    </RowLi>
-                  </td>
-                </tr>
-              )):
-                <RowLi>No available employees</RowLi>}
+              <tbody>
+                {emps.length > 0 ? emps?.map((el) => (
+                  <tr key={el.personalNumber}>
+                    <td>
+                      <RowLi>
+                        {el.firstName + " " + el.lastName}
+                        <Button
+                          onClick={() => {
+                            setChoosenEmps((prev) => prev.includes(el.personalNumber) ? prev.filter(item => item !== el.personalNumber) : [...prev, el.personalNumber]);
+                          }}
+                        />
+                      </RowLi>
+                    </td>
+                  </tr>
+                )):
+                  <RowLi>No available employees</RowLi>}
+              </tbody>
             </TableTeams>
           </TeamsWrapper>
           <Heading>
@@ -225,20 +231,22 @@ const NewTeam = () => {
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {comps?.map((el) => (
-                <tr key={el.competenceId}>
-                  <td>
-                    <RowLi>
-                      {el.name}
-                      <Button
-                        onClick={() => {
-                          setChoosenComps((prev) => prev.includes(el.competenceId)? prev.filter(item => item !== el.competenceId) : [...prev, el.competenceId]);
-                        }}
-                      />
-                    </RowLi>
-                  </td>
-                </tr>
-              ))}
+              <tbody>
+                {comps?.map((el) => (
+                  <tr key={el.competenceId}>
+                    <td>
+                      <RowLi>
+                        {el.name}
+                        <Button
+                          onClick={() => {
+                            setChoosenComps((prev) => prev.includes(el.competenceId)? prev.filter(item => item !== el.competenceId) : [...prev, el.competenceId]);
+                          }}
+                        />
+                      </RowLi>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </TableTeams>
           </TeamsWrapper>
         </InsideWrapper>
