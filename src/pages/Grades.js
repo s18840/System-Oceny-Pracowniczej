@@ -78,7 +78,7 @@ function Grades() {
   useEffect(() => {
     setLoading(true);
     context && axios.get(
-      `https://localhost:5001/api/Dto/grades/${currentEmp}`,
+      `${process.env.REACT_APP_API_ADDRESS}Dto/grades/${currentEmp}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -89,7 +89,7 @@ function Grades() {
         let quarters = res.data.map(grade => grade.quarter);
         addUniqueQuarters(quarters);
         return axios.get(
-          `https://localhost:5001/api/Goal/emp/${currentEmp}`,
+          `${process.env.REACT_APP_API_ADDRESS}Goal/emp/${currentEmp}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
