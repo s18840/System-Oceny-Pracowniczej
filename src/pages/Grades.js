@@ -44,7 +44,7 @@ function Grades() {
   const defaultQuarter = getCurrentQuarter().label || "";
   const [currentQuarter, setCurrentQuarter] = useState(defaultQuarter);
   const [availableQuarters, setAvailableQuarters] = useState([defaultQuarter]);
-
+  const [loading, setLoading] = useState(true);
   const [context] = useContext(Context);
   const {register,
     watch,
@@ -76,7 +76,7 @@ function Grades() {
   }, [context, currentEmp]);
 
   useEffect(() => {
-
+    setLoading(true);
     context && axios.get(
       `https://localhost:5001/api/Dto/grades/${currentEmp}`,
       {
@@ -97,6 +97,7 @@ function Grades() {
           })
           .then(res => {
             setTargetGrades(res.data);
+            setLoading(false);
             let quarters = res.data.map(grade => grade.quarter);
             addUniqueQuarters(quarters);
             return res;
@@ -167,7 +168,9 @@ function Grades() {
     }};
 
 
-
+    if(loading){
+      return(<></>)
+    }
   return (
     <>
       <NavBar/>
