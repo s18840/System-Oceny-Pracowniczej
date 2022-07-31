@@ -26,6 +26,7 @@ import Jobs from "./Jobs";
 import DepartmentJobsList from "./DepartmentJobs";
 import NewJobView from "./NewJobsView";
 import TeamDetails from "./TeamDetails";
+import AddEmployeeTeam from "../components/Team/AddEmployeeTeam";
 function App() {
   const [context, setContext] = useState("default context value");
   const history = useHistory()
@@ -118,6 +119,9 @@ function App() {
           }/>
           <Route exact path="/Team" render={()=>
             checkRoles("Manager", "User") ? <UserTeam/> : notAuthorized
+          }/>
+          <Route exact path="/AddEmployeTeam" render={()=>
+            checkRoles("HR", "Admin") ? <AddEmployeeTeam/> : notAuthorized
           }/>
           
         </Switch>

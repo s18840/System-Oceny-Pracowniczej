@@ -13,7 +13,7 @@ import {
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 
-const dataJson = ["Competence name:", "Markers required", "Description"];
+const dataJson = ["Competence name:", "Markers required:", "Description:"];
 
 function CompetenceList() {
   const [context] = useContext(Context);

@@ -22,29 +22,28 @@ const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
     <AddTeamButton
-      //depId={props.depId}
-      onClick={() => {
-        props.onClick();
-        setAdded((prev) => !prev);
+      onClick={(e) => {
+      e.preventDefault();
+      props.onClick();
+      setAdded((prev) => !prev);
       }}
-      //disabled={added ? true : false}
+      disabled= {props.disabled}
+      style={{backgroundColor: props.active ? 'gray' : '#efaa8c'}}
     >
-      {added ? "Added" : "Add"}
+      {added ? props.radio? "Remove" : "Added": "Add"}
     </AddTeamButton>
-  );
+);
 };
-
-// const removeFromArray = (name,setRemoved) => {
-//   setRemoved(current => current.filter(element => element != name))
-// }
 
 const NewTeam = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
   const submitForm = (data) => {
+    if(choosenComps.length === 0 || choosenDeps === '' || choosenEmps.length === 0 || choosenMans === '') return;
     const team = prepareTeam(data);
     axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/teams/add`, team, 
       {
@@ -60,11 +59,10 @@ const NewTeam = () => {
   const [deps, setDeps] = useState([]);
   const [choosenComps, setChoosenComps] = useState([]);
   const [choosenEmps, setChoosenEmps] = useState([]);
-  const [choosenMans, setChoosenMans] = useState();
-  const [choosenDeps, setChoosenDeps] = useState();
+  const [choosenMans, setChoosenMans] = useState('');
+  const [choosenDeps, setChoosenDeps] = useState('');
   const [abbreviation, setAbreviation] = useState("");
   const [context, setContext] = useContext(Context);
-  //setAbreviation(e.name.subString(0,2))
   const prepareTeam = (e) => {
     setAbreviation(e.name.substring(0,2));
     const obj = {
@@ -133,15 +131,19 @@ const NewTeam = () => {
       <PersonalDataHeadingText>
         Creating new team
         <NewButton
+        type="submit"
           onClick={() => {
             window.location.href = "/Teams";
           }}
-          disabled={mans.length == 0 || emps.length == 0}
+          disabled={(choosenComps.length === 0 || choosenDeps === '' || choosenEmps.length === 0 || choosenMans === '' || getValues("name") === '')}
         >
           Add
         </NewButton>
         {(mans.length == 0 || emps.length == 0) && 
         <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add team</ErrorsSpan>
+        }
+        {(choosenComps.length === 0 || choosenDeps === '' || choosenEmps.length === 0 || choosenMans === '' || getValues("name") === '') &&
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>
         }
       </PersonalDataHeadingText>
       <Wrapper>
@@ -156,14 +158,17 @@ const NewTeam = () => {
           <TeamsWrapper>
             <TableTeams className="table">
               {deps?.map((el) => (
-                <tr>
+                <tr key={el.departmentId}>
                   <td>
                     <RowLi>
                       {el.departmentName}
                       <Button
                         onClick={() => {
-                          setChoosenDeps(el.departmentId);
+                          setChoosenDeps(curr => curr !== el.departmentId? el.departmentId : '');
                         }}
+                        disabled = {choosenDeps && choosenDeps !== el.departmentId}
+                        active={choosenDeps && choosenDeps !== el.departmentId}
+                        radio
                       />
                     </RowLi>
                   </td>
@@ -177,14 +182,17 @@ const NewTeam = () => {
           <TeamsWrapper>
             <TableTeams className="table">
               {mans.length > 0 ? mans.map((el) => (
-                <tr>
+                <tr key={el.personalNumber}>
                   <td>
                     <RowLi>
                       {el.firstName + " " + el.lastName}
                       <Button
                         onClick={() => {
-                          setChoosenMans(el.personalNumber);
+                          setChoosenMans(curr => curr !== el.personalNumber? el.personalNumber : '');
                         }}
+                        disabled = {choosenMans && choosenMans !== el.personalNumber}
+                        active={choosenMans && choosenMans !== el.personalNumber}
+                        radio
                       />
                     </RowLi>
                   </td>
@@ -199,13 +207,13 @@ const NewTeam = () => {
           <TeamsWrapper>
             <TableTeams className="table">
               {emps.length > 0 ? emps?.map((el) => (
-                <tr>
+                <tr key={el.personalNumber}>
                   <td>
                     <RowLi>
                       {el.firstName + " " + el.lastName}
                       <Button
                         onClick={() => {
-                          setChoosenEmps((prev) => [...prev, el.personalNumber]);
+                          setChoosenEmps((prev) => prev.includes(el.personalNumber) ? prev.filter(item => item !== el.personalNumber) : [...prev, el.personalNumber]);
                         }}
                       />
                     </RowLi>
@@ -223,13 +231,13 @@ const NewTeam = () => {
           <TeamsWrapper>
             <TableTeams className="table">
               {comps?.map((el) => (
-                <tr>
+                <tr key={el.competenceId}>
                   <td>
                     <RowLi>
                       {el.name}
                       <Button
                         onClick={() => {
-                          setChoosenComps((prev) => [...prev, el.competenceId]);
+                          setChoosenComps((prev) => prev.includes(el.competenceId)? prev.filter(item => item !== el.competenceId) : [...prev, el.competenceId]);
                         }}
                       />
                     </RowLi>

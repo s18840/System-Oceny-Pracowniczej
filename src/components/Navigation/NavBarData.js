@@ -37,6 +37,11 @@ export const NavBarData = [{
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
   role: ["Manager","Director","HR","Admin"],
+  subnav:{
+    title: "Add employee to team",
+    path: "/AddEmployeTeam",
+    role: ["HR","Admin"]
+  }
 },
 {
   title: "Your Team",

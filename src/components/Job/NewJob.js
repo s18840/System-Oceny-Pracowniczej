@@ -11,7 +11,8 @@ import {
   NewButton,
   AddTeamButton,
   TeamsWrapper,
-  TableTeams
+  TableTeams,
+  ErrorsSpan
 } from "../../styles/GlobalStyle";
 import { useForm } from "react-hook-form";
 import { Context } from "../../pages/Context";
@@ -21,14 +22,16 @@ const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
     <AddTeamButton
-      onClick={() => {
+      onClick={(e) => {
+        e.preventDefault();
         props.onClick();
         setAdded((prev) => !prev);
       }}
-      disabled={added ? true : false}
-    >
-      {added ? "Added" : "Add"}
-    </AddTeamButton>
+      disabled= {props.disabled}
+      style={{backgroundColor: props.active ? 'gray' : '#efaa8c'}}
+          >
+      {added ? props.radio? "Remove" : "Added": "Add"}
+          </AddTeamButton>
   );
 };
 
@@ -36,9 +39,11 @@ const NewJob = (props) => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
   const submitForm = (data) => {
+    if( choosenDeps.length == 0) return;
     const job = prepareJob(data);
     axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/jobs/add`, job, 
     {
@@ -78,12 +83,17 @@ const NewJob = (props) => {
       <PersonalDataHeadingText>
         Creating new job
         <NewButton
+          type="submit"
           onClick={() => {
             window.location.href = "/Jobs";
           }}
+          disabled={choosenDeps.length == 0 || getValues("name") === ''}
         >
           Add
         </NewButton>
+        {(choosenDeps.length == 0 || getValues("name") === '') &&
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>
+        }
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
@@ -99,13 +109,13 @@ const NewJob = (props) => {
           <TeamsWrapper>
             <TableTeams className="table">
               {deps?.map((el) => (
-                <tr>
+                <tr key={el.departmentId}>
                   <td>
                     <RowLi>
                       {el.departmentName}
                       <Button
                         onClick={() => {
-                          setChoosenDeps((prev) => [...prev, el.departmentId]);
+                          setChoosenDeps((prev) => prev.includes(el.departmentId) ? prev.filter(item => item !== el.departmentId) : [...prev, el.departmentId]);
                         }}
                       />
                     </RowLi>

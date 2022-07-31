@@ -76,14 +76,17 @@ function EmploymentTable(props) {
               )}
             </td>
             <td>
-              {reformatDate(content?.terminationDate.split("T")[0])}
+              {content?.terminationDate ? reformatDate(
+                content?.terminationDate.split("T")[0]
+                ): "Current"}
             </td>
             <td>{content.jobName}</td>
             <td>{content.timeBasis}</td>
           </Row>
         ))}
       </TableInfo> : <ErrorsSpan font-size="20" style={{ color: "gray", marginTop: "300px", fontSize: "60px", marginLeft: "600px" }}>No employments</ErrorsSpan>}
-      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin")) && (props.empId) && <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
+      {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin")) && (props.empId) && <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}
+      hidden={employee?.employmentsJobs.filter(value => value.terminationDate == null).length > 0}>
         Add
       </ModalOpenButton>
       }

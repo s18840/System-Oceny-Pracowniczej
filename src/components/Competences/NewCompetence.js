@@ -11,6 +11,7 @@ import {
   RowLi,
   DescriptionField,
   NewButton,
+  ErrorsSpan
 } from "../../styles/GlobalStyle";
 import {
   ModalCompetencesOpenButton,
@@ -23,9 +24,11 @@ import axios from "axios";
 const NewCompetence = () => {
   const {
     register,
-    handleSubmit
+    handleSubmit,
+    getValues,
   } = useForm();
   const submitForm = (data) => {
+    if(markers.length === 0 || getValues("name") === '' || getValues("description") === '') return;
     const competence = prepareCompetence(data);
     axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/comps/add`, competence,
       {
@@ -53,17 +56,28 @@ const NewCompetence = () => {
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
         <PersonalDataHeadingText>
           Creating new competence
-          <NewButton onClick={() => {window.location.href="/Competences"}}>Add</NewButton>
+          <NewButton 
+          type="submit"
+          onClick={() => {window.location.href="/Competences"}} disabled={(markers.length === 0 || getValues("name") === '' || getValues("description") === '')}>Add</NewButton>
+            {(markers.length === 0 || getValues("name") === '' || getValues("description") === '') &&
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>
+        }
         </PersonalDataHeadingText>
         <Wrapper>
           <InsideWrapper>
             <Heading>
               <ProfileDataText>Name: </ProfileDataText>
-              <InputField placeholder="Competence name" {...register("name", { required: true })}/>
+              <InputField {...register("name", { required: true })}/>
             </Heading>
+            <Heading>
+              <ProfileDataText>Description: </ProfileDataText>
+            </Heading>
+            <DescriptionField {...register("description", { required: true })} />
             <Heading style={{display: "flex", alignItems: "center"}}>
               <ProfileDataText>Markers required: </ProfileDataText>
-              <ModalCompetencesOpenButton id="modalCompetencesButton" onClick={() =>{setOpenModal(true)}}>
+              <ModalCompetencesOpenButton id="modalCompetencesButton" onClick={(e) =>{
+                e.preventDefault();
+                setOpenModal(true)}}>
                 Add
               </ModalCompetencesOpenButton>
             </Heading>
@@ -80,10 +94,6 @@ const NewCompetence = () => {
                 ))}
               </TableMarkers>
             </MarkersSmallWrapper>
-            <Heading>
-              <ProfileDataText>Description: </ProfileDataText>
-            </Heading>
-            <DescriptionField {...register("description", { required: true })} />
           </InsideWrapper>
         </Wrapper>
 
