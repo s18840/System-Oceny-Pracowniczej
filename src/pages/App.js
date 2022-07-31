@@ -96,7 +96,7 @@ function App() {
             <EmployeeList/>
           </Route>
           <Route exact path="/grade/:id" render={()=>
-            checkRoles("Manager", "HR") ? <Grade/> : notAuthorized}/>
+            checkRoles("Manager", "HR", "Admin") ? <Grade/> : notAuthorized}/>
           <Route exact path="/targets" render={()=>
             checkRoles("Manager", "HR", "User") ? <Targets/> : notAuthorized}/>
           <Route exact path="/targets/:id" render={()=>

@@ -39,7 +39,6 @@ export const InputField = styled.input`
   box-sizing: border-box;
   padding-left: 20px;
   max-lines: 1;
-  
 `
 
 export const DescriptionInputField = styled.input`

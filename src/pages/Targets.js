@@ -146,11 +146,13 @@ function Targets() {
         let tmpTargetArray = targets;
         tmpTargetArray[targetIndex] = target;
         setTargets(tmpTargetArray);
-        window.location.reload()
       })
         .catch(err => log.warn(err))
         .then(() => returnToList());
     }
+    let tmpTargetArray = targets;
+    tmpTargetArray[targetIndex] = target;
+    setTargets(tmpTargetArray);
     returnToList();
   };
 

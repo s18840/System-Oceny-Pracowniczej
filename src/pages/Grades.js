@@ -51,65 +51,6 @@ function Grades() {
   } = useForm();
   const history = useHistory()
 
-  const calcWeightedAvg = useCallback((quarterGrade)=>{
-    let total = 0
-    let data = quarterGrade.map(target => {
-      total += target.importance
-      return {importance: target.importance,
-        grade: target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade}
-    })
-    let weightedAvg = 0.0
-    data.forEach(data => weightedAvg += data.importance / total * data.grade)
-
-    return weightedAvg.toFixed(2)
-  },[])
-
-  const getCompGrade = (quarter) => {
-    let quarterGrade = competenceGrades.find(grade => grade.quarter === quarter);
-    if (quarterGrade && quarterGrade.competenceGrades.length !== 0) {
-      return <CompetenceGradeDetails grade={quarterGrade}/>;
-    } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")) {
-      return <GlobalButton onClick={()=>history.push(`/grade/${id}`)}>Grade</GlobalButton>;
-    } else {
-      return <ErrorLabel>No grades!</ErrorLabel>;
-    }
-  };
-
-  const getTargetsGrade = (quarter) => {
-    let quarterGrade = targetGrades.filter(target => target.quarter === quarter);
-    if (quarterGrade && quarterGrade.length !== 0) {
-      if(quarterGrade.filter(grade => grade.realisationGrade).length === quarterGrade.length) {
-        return (
-          <>
-            <TargetListTitlesWrapper>
-              <TargetNameTitle>Name</TargetNameTitle>
-              <TargetTitle>Importance</TargetTitle>
-              <TargetTitle>Realisation grade</TargetTitle>
-            </TargetListTitlesWrapper>
-            <TargetsListWrapper>
-              {
-                quarterGrade.map((target) => (
-                  <TargetContainer key={target.goalID} style={{cursor: "default"}} onClick={(() => {})}>
-                    <TargetName>{target.name}</TargetName>
-                    <TargetImportance>{target.importance}</TargetImportance>
-                    <TargetImportance>{target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade}%</TargetImportance>
-                  </TargetContainer>
-                ),
-                )
-              }
-            </TargetsListWrapper>
-            <TargetsAvgElement>
-            Weighted average: <HighlightText fontSize="1.5rem">{calcWeightedAvg(quarterGrade)}% </HighlightText>
-            </TargetsAvgElement>
-          </>
-        )
-      } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")){
-        return <GlobalButton onClick={()=>history.push(`/targets/${id}`)}>Grade</GlobalButton>;
-      } else return <ErrorLabel>No Grades!</ErrorLabel>;
-    } else {
-      return <ErrorLabel>No Targets!</ErrorLabel>;
-    }};
-
   useEffect(() => {
     const quarterSubscription = watch((value) => setCurrentQuarter(value.quarterSelect));
     return () => quarterSubscription.unsubscribe();
@@ -166,6 +107,67 @@ function Grades() {
 
   }, [context, addUniqueQuarters, currentEmp]);
 
+  const calcWeightedAvg = useCallback((quarterGrade)=>{
+    let total = 0
+    let data = quarterGrade.map(target => {
+      total += target.importance
+      return {importance: target.importance,
+        grade: target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade}
+    })
+    let weightedAvg = 0.0
+    data.forEach(data => weightedAvg += data.importance / total * data.grade)
+
+    return weightedAvg.toFixed(2)
+  },[])
+
+  const getCompGrade = (quarter) => {
+    let quarterGrade = competenceGrades.find(grade => grade.quarter === quarter);
+    if (quarterGrade && quarterGrade.competenceGrades.length !== 0) {
+      return <CompetenceGradeDetails grade={quarterGrade}/>;
+    } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")) {
+      return <GlobalButton onClick={()=>history.push(`/grade/${id}`)}>Grade</GlobalButton>;
+    } else {
+      return <ErrorLabel>No grades!</ErrorLabel>;
+    }
+  };
+
+  const getTargetsGrade = (quarter) => {
+    let quarterGrade = targetGrades.filter(target => target.quarter === quarter);
+    if (quarterGrade && quarterGrade.length !== 0) {
+      if(quarterGrade.filter(grade => grade.realisationGrade).length === quarterGrade.length) {
+        return (
+          <>
+            <TargetListTitlesWrapper>
+              <TargetNameTitle>Name</TargetNameTitle>
+              <TargetTitle>Importance</TargetTitle>
+              <TargetTitle>Realisation grade</TargetTitle>
+            </TargetListTitlesWrapper>
+            <TargetsListWrapper>
+              {
+                quarterGrade.map((target) => (
+                  <TargetContainer key={target.goalID} style={{cursor: "default"}}>
+                    <TargetName>{target.name}</TargetName>
+                    <TargetImportance>{target.importance}</TargetImportance>
+                    <TargetImportance>{target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade}%</TargetImportance>
+                  </TargetContainer>
+                ),
+                )
+              }
+            </TargetsListWrapper>
+            <TargetsAvgElement>
+            Weighted average: <HighlightText fontSize="1.5rem">{calcWeightedAvg(quarterGrade)}% </HighlightText>
+            </TargetsAvgElement>
+          </>
+        )
+      } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")){
+        return <GlobalButton onClick={()=>history.push(`/targets/${id}`)}>Grade</GlobalButton>;
+      } else return <ErrorLabel>No grades!</ErrorLabel>;
+    } else {
+      return <ErrorLabel>No targets!</ErrorLabel>;
+    }};
+
+
+
   return (
     <>
       <NavBar/>
@@ -193,7 +195,7 @@ function Grades() {
             }
           </QuarterSelect>
           <ContentWrapper>
-            <SubTitle>Competence Grade</SubTitle>
+            <SubTitle>Competence grade</SubTitle>
             {getCompGrade(currentQuarter)}
             <SubTitle>Targets grade</SubTitle>
             {getTargetsGrade(currentQuarter)}
