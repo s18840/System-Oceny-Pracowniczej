@@ -11,6 +11,7 @@ import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
 import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
+import moment from 'moment';
 
 function ModalEmployment( props ){
   const [context] = useContext(Context);
@@ -18,13 +19,14 @@ function ModalEmployment( props ){
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
   const prepareEmployment = (e) => {
     const obj = {
       personalNumber: props.empId ? props.empId : localStorage.getItem("employeeId"),
       hireDate : e.hireDate,
-      terminationDate : e.expirationDate,
+      terminationDate : null,
       timeBasis : e.timeBasis,
       contractType : e.contractType,
       contractExpirationDate: e.expirationDate ,
@@ -86,13 +88,33 @@ function ModalEmployment( props ){
             <ModalTitleDiv>Add employment</ModalTitleDiv>
             <ModalButton onClick={() => props.closeModal(false) }style={{alignSelf: "end"}}> X </ModalButton>
           </div>
-          <div>
+          {props.emptyJobs && <div>
             <ProfileDataText>Hire date</ProfileDataText>
             <InputField
               type="date"
-              {...register("hireDate", { required: true })}
+              {...register("hireDate", { required: "Required" })}
             />
-          </div>
+            {errors.hireDate && errors.hireDate.type === "required" && (
+              <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.hireDate.message}</ErrorsLoginSpan>
+            )}
+          </div>}
+          {!props.emptyJobs && <div>
+            <ProfileDataText>Hire date</ProfileDataText>
+            <InputField
+              type="date"
+              {...register("hireDate", { 
+                required: "Required",
+                validate: {
+                  afterHire: value => moment(value, "YYYY-MM-DD").isAfter(moment(props.endDate, "YYYY-MM-DD")),
+                } })}
+            />
+            {errors.hireDate && errors.hireDate.type === "required" && (
+              <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.hireDate.message}</ErrorsLoginSpan>
+            )}
+            {errors.hireDate && errors.hireDate.type !== "required" && (
+              <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>New hire date must be after last end date</ErrorsLoginSpan>
+            )}
+          </div>}
           <div>
             <ProfileDataText>Job name</ProfileDataText>
             <SelectJobs {...register("jobName", { required: true })}>{jobs?.map((job)=>(
@@ -134,8 +156,18 @@ function ModalEmployment( props ){
             <ProfileDataText>Expiration date</ProfileDataText>
             <InputField
               type="date"
-              {...register("expirationDate", { required: true })}
+              {...register("expirationDate", { 
+                required: "Required",
+                validate: {
+                  afterNewHire: value => moment(value, "YYYY-MM-DD").isAfter(moment(getValues("hireDate"), "YYYY-MM-DD")),
+                } })}
             />
+            {errors.expirationDate && errors.expirationDate.type === "required" && (
+              <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.hireDate.message}</ErrorsLoginSpan>
+            )}
+            {errors.expirationDate && errors.expirationDate.type !== "required" && (
+              <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>New expiration date must be after new hire date</ErrorsLoginSpan>
+            )}
           </div>
           <div style={{display: "flex", justifyContent:"end", padding: "20px 0px 20px 20px"}}>
             <ModalButton onClick={() => props.closeModal(false)}> Close </ModalButton>

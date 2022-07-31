@@ -54,7 +54,9 @@ function EmploymentTable(props) {
     dataArray = dateStr.split("-");
     return dataArray[2] + "-" + dataArray[1] + "-" + dataArray[0];
   }
-
+  const endDate = employee?.employmentsJobs?.map((val)=> val.terminationDate ? val.terminationDate : val.contractExpirationDate)
+  const emptyJobs = employee?.employmentsJobs.length == 0
+  
   return (
     <>
       {employee?.employmentsJobs.length != 0 ?
@@ -90,7 +92,7 @@ function EmploymentTable(props) {
         Add
       </ModalOpenButton>
       }
-      {openModal && <ModalEmployment empId={props.empId} closeModal={setOpenModal}
+      {openModal && <ModalEmployment endDate={endDate} emptyJobs={emptyJobs} empId={props.empId} closeModal={setOpenModal}
         style={{
           width: 100,
           height: 100,
