@@ -31,7 +31,7 @@ function EmploymentTable(props) {
         .then(({ data }) => {
           setEmployee(data);
         }).catch(err => log.warn(err));
-  }, [context]);
+  }, [context, props.empId]);
 
   useEffect(() => {
     context && props.empId &&
@@ -47,7 +47,7 @@ function EmploymentTable(props) {
         .then(({ data }) => {
           setEmployee(data);
         }).catch(err => log.warn(err));
-  }, [context]);
+  }, [context, props.empId]);
 
   let dataArray;
   function reformatDate(dateStr) {
@@ -60,38 +60,37 @@ function EmploymentTable(props) {
   return (
     <>
       {employee?.employmentsJobs.length != 0 ?
-      <TableInfo className="table">
-        <thead>
-          <tr>
-            {dataJson.map((title) => (
-              <th>{title}</th>
-            ))}
-          </tr>
-        </thead>
-        {employee?.employmentsJobs?.map((content) => (
-          <Row>
-            <td>
-              {reformatDate(
-                content?.hireDate.split("T")[0]
-                  ? content?.hireDate.split("T")[0]
-                  : ""
-              )}
-            </td>
-            <td>
-              {content?.terminationDate ? reformatDate(
-                content?.terminationDate.split("T")[0]
+        <TableInfo className="table">
+          <thead>
+            <tr>
+              {dataJson.map((title) => (
+                <th>{title}</th>
+              ))}
+            </tr>
+          </thead>
+          {employee?.employmentsJobs?.map((content) => (
+            <Row>
+              <td>
+                {reformatDate(
+                  content?.hireDate.split("T")[0]
+                    ? content?.hireDate.split("T")[0]
+                    : ""
+                )}
+              </td>
+              <td>
+                {content?.terminationDate ? reformatDate(
+                  content?.terminationDate.split("T")[0]
                 ): "Current"}
-            </td>
-            <td>{content.jobName}</td>
-            <td>{content.timeBasis}</td>
-          </Row>
-        ))}
-      </TableInfo> : <ErrorsSpan font-size="20" style={{ color: "gray", marginTop: "300px", fontSize: "60px", marginLeft: "600px" }}>No employments</ErrorsSpan>}
+              </td>
+              <td>{content.jobName}</td>
+              <td>{content.timeBasis}</td>
+            </Row>
+          ))}
+        </TableInfo> : <ErrorsSpan font-size="20" style={{ color: "gray", marginTop: "300px", fontSize: "60px", marginLeft: "600px" }}>No employments</ErrorsSpan>}
       {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin")) && (props.empId) && <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}
-      hidden={employee?.employmentsJobs.filter(value => value.terminationDate == null).length > 0}>
+        hidden={employee?.employmentsJobs.filter(value => value.terminationDate == null).length > 0}>
         Add
-      </ModalOpenButton>
-      }
+      </ModalOpenButton>}
       {openModal && <ModalEmployment endDate={endDate} emptyJobs={emptyJobs} empId={props.empId} closeModal={setOpenModal}
         style={{
           width: 100,

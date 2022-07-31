@@ -28,7 +28,7 @@ const NewCompetence = () => {
     getValues,
   } = useForm();
   const submitForm = (data) => {
-    if(markers.length === 0 || getValues("name") === '' || getValues("description") === '') return;
+    if(markers.length === 0 || getValues("name") === "" || getValues("description") === "") return;
     const competence = prepareCompetence(data);
     axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/comps/add`, competence,
       {
@@ -57,11 +57,10 @@ const NewCompetence = () => {
         <PersonalDataHeadingText>
           Creating new competence
           <NewButton 
-          type="submit"
-          onClick={() => {window.location.href="/Competences"}} disabled={(markers.length === 0 || getValues("name") === '' || getValues("description") === '')}>Create</NewButton>
-            {(markers.length === 0 || getValues("name") === '' || getValues("description") === '') &&
-        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>
-        }
+            type="submit"
+            onClick={() => {window.location.href="/Competences"}} disabled={(markers.length === 0 || getValues("name") === "" || getValues("description") === "")}>Create</NewButton>
+          {(markers.length === 0 || getValues("name") === "" || getValues("description") === "") &&
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>}
         </PersonalDataHeadingText>
         <Wrapper>
           <InsideWrapper>

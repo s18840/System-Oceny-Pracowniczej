@@ -26,8 +26,8 @@ const Navbar = () => {
         {NavBarData.map((item, index) => {
           return  item.role === "all" ||
           checkRoles(item.role) ?
-          <SubMenu item={item} key={index} />
-          : null;
+            <SubMenu item={item} key={index} />
+            : null;
         })}
       </NavMenu>
     </Nav>

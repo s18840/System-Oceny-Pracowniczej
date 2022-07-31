@@ -66,7 +66,7 @@ function ProfileInfo(props) {
           setPersonalNumber(props.id? props.id : localStorage.getItem("employeeId"));
           setLoading(false);
         }).catch(err => log.warn(err));
-  }, [context]);
+  }, [context, props.id]);
 
   const [teamIds, setTeamIds] = useState([])
   useEffect(()=>{
@@ -114,12 +114,12 @@ function ProfileInfo(props) {
   const resetPassword = () => {
     const userId =prepareUserId();
     axios.put(`${process.env.REACT_APP_API_ADDRESS}Account/passwordreset`, userId,
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }).then((resp) => {})
-    .catch(err => log.warn(err));
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .catch(err => log.warn(err));
   }
 
   if(loading){
@@ -132,12 +132,10 @@ function ProfileInfo(props) {
           <ProfileInfoDiv>
             {!props.id && <ProfileAvatar to="/profile">
               {initials}
-            </ProfileAvatar>
-            }
+            </ProfileAvatar>}
             {props.id && <ProfileAvatarDiv>
               {initials}
-            </ProfileAvatarDiv>
-            }
+            </ProfileAvatarDiv>}
             <ProfileTextWrapper>
               <ProfileHeaderText>
                 {formFirstName + " " + formSurname}
@@ -184,11 +182,10 @@ function ProfileInfo(props) {
               ((localStorage.getItem("roles").includes("Manager") && teamIds.includes(parseInt(props.id))))) &&
             <FormButton onClick={()=>history.push(`/grades/${props.id}`)} style={{width: "200px", position: "absolute", marginTop: "10px", right: "300px"}} >
             Grades
-          </FormButton>}
+            </FormButton>}
           {(localStorage.getItem("roles").includes("Admin") && (props.id && props.id !== localStorage.getItem("employeeId"))) && <FormButton onClick={resetPassword} style={{width: "200px", position: "absolute", marginTop: "10px", right: "50px"}} >
               Reset password
-            </FormButton>
-            }
+          </FormButton>}
         </>
         {!props.id && <>
           <ProfileTabWrapper>

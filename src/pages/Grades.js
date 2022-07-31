@@ -17,7 +17,7 @@ import {useForm} from "react-hook-form";
 import {ErrorLabel, QuarterSelect, TargetsAvgElement} from "../styles/CompetencesGradeStyles";
 import {useHistory, useParams} from "react-router-dom";
 import {
-  TargetContainer, TargetDate, TargetImportance,
+  TargetContainer, TargetImportance,
   TargetListTitlesWrapper, TargetName,
   TargetNameTitle, TargetsListWrapper, TargetTitle,
 } from "../styles/TargetsStyles";
@@ -89,18 +89,18 @@ function Grades() {
             <TargetsListWrapper>
               {
                 quarterGrade.map((target) => (
-                    <TargetContainer style={{cursor: "default"}} onClick={(() => {})}>
-                      <TargetName>{target.name}</TargetName>
-                      <TargetImportance>{target.importance}</TargetImportance>
-                      <TargetImportance>{target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade}%</TargetImportance>
-                    </TargetContainer>
-                  ),
+                  <TargetContainer key={target.goalID} style={{cursor: "default"}} onClick={(() => {})}>
+                    <TargetName>{target.name}</TargetName>
+                    <TargetImportance>{target.importance}</TargetImportance>
+                    <TargetImportance>{target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade}%</TargetImportance>
+                  </TargetContainer>
+                ),
                 )
               }
             </TargetsListWrapper>
-          <TargetsAvgElement>
+            <TargetsAvgElement>
             Weighted average: <HighlightText fontSize="1.5rem">{calcWeightedAvg(quarterGrade)}% </HighlightText>
-          </TargetsAvgElement>
+            </TargetsAvgElement>
           </>
         )
       } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")){
@@ -108,7 +108,7 @@ function Grades() {
       } else return <ErrorLabel>No Grades!</ErrorLabel>;
     } else {
       return <ErrorLabel>No Targets!</ErrorLabel>;
-  }};
+    }};
 
   useEffect(() => {
     const quarterSubscription = watch((value) => setCurrentQuarter(value.quarterSelect));
@@ -182,13 +182,15 @@ function Grades() {
           >
             {
               availableQuarters.map(value => (
-              <option
-                value={value}
-                selected={value === defaultQuarter}
-              >
-                {value}
-              </option>
-            ))}
+                <option
+                  key={value}
+                  value={value}
+                  selected={value === defaultQuarter}
+                >
+                  {value}
+                </option>
+              ))
+            }
           </QuarterSelect>
           <ContentWrapper>
             <SubTitle>Competence Grade</SubTitle>

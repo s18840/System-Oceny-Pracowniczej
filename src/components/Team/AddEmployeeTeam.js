@@ -7,7 +7,6 @@ import {
   Heading,
   PersonalDataHeadingText,
   ProfileDataText,
-  InputField,
   Wrapper,
   InsideWrapper,
   RowLi,
@@ -26,25 +25,24 @@ const Button = (props) => {
   return (
     <AddTeamButton
       onClick={(e) => {
-      e.preventDefault();
-      props.onClick();
-      setAdded((prev) => !prev);
+        e.preventDefault();
+        props.onClick();
+        setAdded((prev) => !prev);
       }}
       disabled= {props.disabled}
-      style={{backgroundColor: props.active ? 'gray' : '#efaa8c'}}
+      style={{backgroundColor: props.active ? "gray" : "#efaa8c"}}
     >
       {added ? props.radio? "Remove" : "Added": "Add"}
     </AddTeamButton>
-);
+  );
 };
 
 const AddEmployeeTeam = () => {
   const {
     handleSubmit,
-    formState: { errors },
   } = useForm();
   const submitForm = (data) => {
-    if(choosenTeam === '' || choosenEmps.length === 0) return;
+    if(choosenTeam === "" || choosenEmps.length === 0) return;
     const team = prepareTeam(data);
     axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/teams/addEmployees`, team, 
       {
@@ -56,10 +54,10 @@ const AddEmployeeTeam = () => {
   };
   const [teams, setTeams] = useState([]);
   const [emps, setEmps] = useState([]);
-  const [choosenTeam, setChoosenTeam] = useState('');
+  const [choosenTeam, setChoosenTeam] = useState("");
   const [choosenEmps, setChoosenEmps] = useState([]);
-  const [context, setContext] = useContext(Context);
-  const prepareTeam = (e) => {
+  const [context] = useContext(Context);
+  const prepareTeam = () => {
     const obj = {
       teamId : choosenTeam,
       employeeIDs: choosenEmps,
@@ -105,16 +103,14 @@ const AddEmployeeTeam = () => {
             onClick={() => {
               window.location.href = "/Teams";
             }}
-            disabled={(choosenEmps.length === 0 || choosenTeam === '')}
+            disabled={(choosenEmps.length === 0 || choosenTeam === "")}
           >
             Create
           </NewButton>
           {(emps.length == 0) && 
-          <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add to team</ErrorsSpan>
-          }
-          {(choosenEmps.length === 0 || choosenTeam === '') &&
-          <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>
-          }
+          <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add to team</ErrorsSpan>}
+          {(choosenEmps.length === 0 || choosenTeam === "") &&
+          <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>}
         </PersonalDataHeadingText>
         <Wrapper>
           <InsideWrapper>
@@ -130,7 +126,7 @@ const AddEmployeeTeam = () => {
                         {el.teamName}
                         <Button
                           onClick={() => {
-                            setChoosenTeam(curr => curr !== el.teamId? el.teamId : '');
+                            setChoosenTeam(curr => curr !== el.teamId? el.teamId : "");
                           }}
                           disabled = {choosenTeam && choosenTeam !== el.teamId}
                           active={choosenTeam && choosenTeam !== el.teamId}
@@ -161,7 +157,7 @@ const AddEmployeeTeam = () => {
                     </td>
                   </tr>
                 )):
-                <RowLi>No available employees</RowLi>}
+                  <RowLi>No available employees</RowLi>}
               </TableTeams>
             </TeamsWrapper>
           </InsideWrapper>

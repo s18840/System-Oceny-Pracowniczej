@@ -10,8 +10,8 @@ import {
 import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
-import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
-import moment from 'moment';
+import { InputField, ErrorsLoginSpan } from "../styles/GlobalStyle";
+import moment from "moment";
 import { log } from "loglevel";
 function ModalEmployment( props ){
   const [context] = useContext(Context);
@@ -20,7 +20,7 @@ function ModalEmployment( props ){
     register,
     handleSubmit,
     getValues,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({ mode: "onChange" });
   const prepareEmployment = (e) => {
     const obj = {
@@ -139,18 +139,18 @@ function ModalEmployment( props ){
               <OptionJobs value="1/2" >1/2</OptionJobs>
               <OptionJobs value="3/5" >1/4</OptionJobs>
             </SelectJobs>
-              {errors.timeBasis && errors.timeBasis.type === "required" && (
-                <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.timeBasis.message}</ErrorsLoginSpan>
-              )}
+            {errors.timeBasis && errors.timeBasis.type === "required" && (
+              <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.timeBasis.message}</ErrorsLoginSpan>
+            )}
           </div>
           <div>
             <ProfileDataText>Contract type</ProfileDataText>
             <InputField
               {...register("contractType", { required: "Please provide correct contract type" })}
             />
-              {errors.contractType && errors.contractType.type === "required" && (
-                <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.contractType.message}</ErrorsLoginSpan>
-              )}
+            {errors.contractType && errors.contractType.type === "required" && (
+              <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.contractType.message}</ErrorsLoginSpan>
+            )}
           </div>
           <div>
             <ProfileDataText>Expiration date</ProfileDataText>

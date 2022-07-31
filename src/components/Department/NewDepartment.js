@@ -28,10 +28,10 @@ const Button = (props) => {
         setAdded((prev) => !prev);
       }}
       disabled= {props.disabled}
-      style={{backgroundColor: props.active ? 'gray' : '#efaa8c'}}
-          >
+      style={{backgroundColor: props.active ? "gray" : "#efaa8c"}}
+    >
       {added ? props.radio? "Remove" : "Added": "Add"}
-          </AddTeamButton>
+    </AddTeamButton>
   );
 };
 
@@ -43,7 +43,7 @@ const NewDepartment = () => {
     formState: { errors },
   } = useForm();
   const submitForm = (data) => {
-    if( choosenDirs === '') return;
+    if( choosenDirs === "") return;
     const department = prepareDepartment(data);
     axios.post(`${process.env.REACT_APP_API_ADDRESS}Department`, department, 
       {
@@ -54,8 +54,8 @@ const NewDepartment = () => {
       }).catch(err => log.warn(err));
   };
   const [dirs, setDirs] = useState([]);
-  const [choosenDirs, setChoosenDirs] = useState('');
-  const [context, setContext] = useContext(Context);
+  const [choosenDirs, setChoosenDirs] = useState("");
+  const [context] = useContext(Context);
   const prepareDepartment = (e) => {
     const obj = {
       departmentId : 0,
@@ -86,16 +86,14 @@ const NewDepartment = () => {
           onClick={() => {
             window.location.href = "/Departments";
           }}
-          disabled={dirs.length == 0 || getValues("name") === ''}
+          disabled={dirs.length == 0 || getValues("name") === ""}
         >
           Create
         </NewButton>
         {(dirs.length == 0) && 
-        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add department</ErrorsSpan>
-        }
-        {(choosenDirs === '' || getValues("name") === '') &&
-        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>
-        }
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add department</ErrorsSpan>}
+        {(choosenDirs === "" || getValues("name") === "") &&
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>}
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
@@ -116,7 +114,7 @@ const NewDepartment = () => {
                         {el.firstName + " " + el.lastName}
                         <Button
                           onClick={() => {
-                            setChoosenDirs(curr => curr !== el.personalNumber? el.personalNumber : '');
+                            setChoosenDirs(curr => curr !== el.personalNumber? el.personalNumber : "");
                           }}
                           disabled = {choosenDirs && choosenDirs !== el.personalNumber}
                           active={choosenDirs && choosenDirs !== el.personalNumber}

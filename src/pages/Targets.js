@@ -45,7 +45,7 @@ function Targets() {
           return goals.data;
         })).catch(err => log.warn(err));
     }
-  }, [context, targets.length]);
+  }, [context, targets.length, currentEmp, currentQuarter]);
 
   useEffect(() => {
     if (currentEmpRole === "Manager") {
@@ -65,17 +65,17 @@ function Targets() {
         })).catch(err => log.warn(err));
     } else {
       switch (currentEmpRole) {
-        case "User":
-        case "Director":
-          setCanGrade(false);
-          break;
-        case "HR":
-        case "Admin":
-          setCanGrade(true);
-          break;
+      case "User":
+      case "Director":
+        setCanGrade(false);
+        break;
+      case "HR":
+      case "Admin":
+        setCanGrade(true);
+        break;
       }
     }
-  }, [context]);
+  }, [context, currentEmpRole, id]);
 
   const switchType = (conType) => {
     setContentType(conType);
@@ -142,7 +142,7 @@ function Targets() {
             contentType: "application/json",
           },
         },
-      ).then(res => {
+      ).then(() => {
         let tmpTargetArray = targets;
         tmpTargetArray[targetIndex] = target;
         setTargets(tmpTargetArray);
@@ -176,30 +176,29 @@ function Targets() {
                 <div>
                   {(() => {
                     switch (contentType) {
-                      case TARGET_LIST:
-                        return <TargetList
-                          targetList={targets}
-                          switchContent={showAddTarget}
-                          onAccept={onAccept}
-                          onSelect={showTargetDetails}
-                        />;
-                      case ADD_TARGET:
-                        return <AddTarget
-                          onCancel={returnToList}
-                          onSubmit={addTarget}
-                          target={undefined}
-                        />;
-                      case TARGET_DETAILS:
-                        return <AddTarget
-                          onCancel={returnToList}
-                          onSubmit={updateTarget}
-                          target={targets[targetIndex]}
-                        />;
+                    case TARGET_LIST:
+                      return <TargetList
+                        targetList={targets}
+                        switchContent={showAddTarget}
+                        onAccept={onAccept}
+                        onSelect={showTargetDetails}
+                      />;
+                    case ADD_TARGET:
+                      return <AddTarget
+                        onCancel={returnToList}
+                        onSubmit={addTarget}
+                        target={undefined}
+                      />;
+                    case TARGET_DETAILS:
+                      return <AddTarget
+                        onCancel={returnToList}
+                        onSubmit={updateTarget}
+                        target={targets[targetIndex]}
+                      />;
                     }
                   })()}
                 </div>
-              </>
-          }
+              </>}
         </ContentWrapper>
       </PageWrapper>
     </>

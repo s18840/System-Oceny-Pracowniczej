@@ -23,14 +23,14 @@ import {
 } from "../styles/GlobalStyle";
 import { Link, useLocation } from "react-router-dom";
 import { log } from "loglevel";
-function TeamDetails(props) {
-    const [context] = useContext(Context);
-    const [employee, setEmployee] = useState([]);
-    const [competences, setCompetences] = useState([]);
-    const [status, setStatus] = useState(" ");
-    const location = useLocation();
-    useEffect(() => {
-        context &&
+function TeamDetails() {
+  const [context] = useContext(Context);
+  const [employee, setEmployee] = useState([]);
+  const [competences, setCompetences] = useState([]);
+  const [status, setStatus] = useState(" ");
+  const location = useLocation();
+  useEffect(() => {
+    context &&
           axios
             .get(
               `${process.env.REACT_APP_API_ADDRESS}Employee/team/${location.state}`,
@@ -44,7 +44,7 @@ function TeamDetails(props) {
               setEmployee(data);
               setStatus(data.status);
             }).catch(err => log.warn(err));
-  }, [context]);
+  }, [context, location.state]);
   useEffect(() => {
     context &&
         axios
@@ -59,7 +59,7 @@ function TeamDetails(props) {
           .then(({ data }) => {
             setCompetences(data);
           }).catch(err => log.warn(err));
-  }, [context]);
+  }, [context, location.state]);
 
   return (
     <>
@@ -109,15 +109,17 @@ function TeamDetails(props) {
         </Heading>
         <TeamsWrapper style={{marginLeft:30}}>
           <TableTeams className="table">
-            {location.state ?competences?.map((el) => (
-              <tr>
-                <td>
-                  <RowLi>
-                    {el.name}
-                  </RowLi>
-                </td>
-              </tr>
-            )): <RowLi>Select a team to see its competences</RowLi>}
+            <tbody>
+              {location.state ?competences?.map((el) => (
+                <tr key={el.competenceId}>
+                  <td>
+                    <RowLi>
+                      {el.name}
+                    </RowLi>
+                  </td>
+                </tr>
+              )): <RowLi>Select a team to see its competences</RowLi>}
+            </tbody>
           </TableTeams>
         </TeamsWrapper> 
       </PageWrapper>

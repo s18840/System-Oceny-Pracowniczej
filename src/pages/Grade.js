@@ -60,7 +60,7 @@ function Grade() {
         .then(res => setCompetences(res.data))
         .catch(err => log.warn(err));
     }
-  }, [context, id]);
+  }, [context, id, exists]);
 
   const {
     register,
@@ -98,10 +98,10 @@ function Grade() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       },
-    ).then(res => {
+    ).then(() => {
       history.push(`/grades/${id}`);
     })
-    .catch(err => log.warn(err));
+      .catch(err => log.warn(err));
   };
 
   return (

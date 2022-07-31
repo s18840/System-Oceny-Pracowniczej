@@ -23,16 +23,16 @@ const Button = (props) => {
   return (
     <AddTeamButton
       onClick={(e) => {
-      e.preventDefault();
-      props.onClick();
-      setAdded((prev) => !prev);
+        e.preventDefault();
+        props.onClick();
+        setAdded((prev) => !prev);
       }}
       disabled= {props.disabled}
-      style={{backgroundColor: props.active ? 'gray' : '#efaa8c'}}
+      style={{backgroundColor: props.active ? "gray" : "#efaa8c"}}
     >
       {added ? props.radio? "Remove" : "Added": "Add"}
     </AddTeamButton>
-);
+  );
 };
 
 const NewTeam = () => {
@@ -40,10 +40,9 @@ const NewTeam = () => {
     register,
     handleSubmit,
     getValues,
-    formState: { errors },
   } = useForm();
   const submitForm = (data) => {
-    if(choosenComps.length === 0 || choosenDeps === '' || choosenEmps.length === 0 || choosenMans === '') return;
+    if(choosenComps.length === 0 || choosenDeps === "" || choosenEmps.length === 0 || choosenMans === "") return;
     const team = prepareTeam(data);
     axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/teams/add`, team, 
       {
@@ -59,12 +58,10 @@ const NewTeam = () => {
   const [deps, setDeps] = useState([]);
   const [choosenComps, setChoosenComps] = useState([]);
   const [choosenEmps, setChoosenEmps] = useState([]);
-  const [choosenMans, setChoosenMans] = useState('');
-  const [choosenDeps, setChoosenDeps] = useState('');
-  const [abbreviation, setAbreviation] = useState("");
-  const [context, setContext] = useContext(Context);
+  const [choosenMans, setChoosenMans] = useState("");
+  const [choosenDeps, setChoosenDeps] = useState("");
+  const [context] = useContext(Context);
   const prepareTeam = (e) => {
-    setAbreviation(e.name.substring(0,2));
     const obj = {
       teamId : 0,
       name : e.name,
@@ -131,20 +128,18 @@ const NewTeam = () => {
       <PersonalDataHeadingText>
         Creating new team
         <NewButton
-        type="submit"
+          type="submit"
           onClick={() => {
             window.location.href = "/Teams";
           }}
-          disabled={(choosenComps.length === 0 || choosenDeps === '' || choosenEmps.length === 0 || choosenMans === '' || getValues("name") === '')}
+          disabled={(choosenComps.length === 0 || choosenDeps === "" || choosenEmps.length === 0 || choosenMans === "" || getValues("name") === "")}
         >
           Create
         </NewButton>
         {(mans.length == 0 || emps.length == 0) && 
-        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add team</ErrorsSpan>
-        }
-        {(choosenComps.length === 0 || choosenDeps === '' || choosenEmps.length === 0 || choosenMans === '' || getValues("name") === '') &&
-        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>
-        }
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add team</ErrorsSpan>}
+        {(choosenComps.length === 0 || choosenDeps === "" || choosenEmps.length === 0 || choosenMans === "" || getValues("name") === "") &&
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>}
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
@@ -164,7 +159,7 @@ const NewTeam = () => {
                       {el.departmentName}
                       <Button
                         onClick={() => {
-                          setChoosenDeps(curr => curr !== el.departmentId? el.departmentId : '');
+                          setChoosenDeps(curr => curr !== el.departmentId? el.departmentId : "");
                         }}
                         disabled = {choosenDeps && choosenDeps !== el.departmentId}
                         active={choosenDeps && choosenDeps !== el.departmentId}
@@ -188,7 +183,7 @@ const NewTeam = () => {
                       {el.firstName + " " + el.lastName}
                       <Button
                         onClick={() => {
-                          setChoosenMans(curr => curr !== el.personalNumber? el.personalNumber : '');
+                          setChoosenMans(curr => curr !== el.personalNumber? el.personalNumber : "");
                         }}
                         disabled = {choosenMans && choosenMans !== el.personalNumber}
                         active={choosenMans && choosenMans !== el.personalNumber}
@@ -198,7 +193,7 @@ const NewTeam = () => {
                   </td>
                 </tr>
               )):
-              <RowLi>No available managers</RowLi>}
+                <RowLi>No available managers</RowLi>}
             </TableTeams>
           </TeamsWrapper>
           <Heading>
@@ -220,7 +215,7 @@ const NewTeam = () => {
                   </td>
                 </tr>
               )):
-              <RowLi>No available employees</RowLi>}
+                <RowLi>No available employees</RowLi>}
             </TableTeams>
           </TeamsWrapper>
           <Heading>

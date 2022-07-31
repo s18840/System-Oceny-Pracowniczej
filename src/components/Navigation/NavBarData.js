@@ -97,12 +97,12 @@ export const NavBarData = [{
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
   role: ["Manager","User", "HR"],
 },
-  {
-    title: "Targets",
-    path: "/targets",
-    icon: <GiArcheryTarget/>,
-    iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
-    iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-    role: ["Manager", "User", "HR"]
-  }
+{
+  title: "Targets",
+  path: "/targets",
+  icon: <GiArcheryTarget/>,
+  iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
+  iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+  role: ["Manager", "User", "HR"]
+}
 ]

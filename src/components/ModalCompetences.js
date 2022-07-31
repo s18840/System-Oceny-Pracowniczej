@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   ProfileDataText,
   ModalButton,
@@ -13,7 +13,6 @@ function ModalCompetences({ closeModal, addMarker }){
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
   function submitForm(data){

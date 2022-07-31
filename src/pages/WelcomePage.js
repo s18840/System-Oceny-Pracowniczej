@@ -56,16 +56,16 @@ function WelcomePage() {
             <p>
           In current world employee is the most important, it is the basis of the company and allows it to achieve profit.
           In order to ensure development, the company must first of all ensure the employee's development - these are things that are closely related to each other.
-          </p>
-          <p>
+            </p>
+            <p>
           FeeDBack enables and supports companies in assessing employees according to their competences.
           Additionally, it is an easy-to-use tool for storing and processing employees personal data.
           FeeDBack supports Human Resources department in quaterly grading.
           You can be sure that after each team work you will be graded - system automaticly will generate feedback request.
-          </p>
-          <p style={{fontWeight: "bold"}}>
+            </p>
+            <p style={{fontWeight: "bold"}}>
           Does it sound equal? With FeeDBack it does!
-          </p>
+            </p>
           </AboutInfoWrapper>
         </ContactRightSide>
         <ImageStack>
@@ -80,13 +80,13 @@ function WelcomePage() {
             Contact
           </Title>
           <ContactInfoWrapper>
-        <MailIcon />
-        <Contact>mail@support.com</Contact>
-      </ContactInfoWrapper>
-      <ContactInfoWrapper>
-        <PhoneIcon />
-        <Contact>504123323</Contact>
-      </ContactInfoWrapper>
+            <MailIcon />
+            <Contact>mail@support.com</Contact>
+          </ContactInfoWrapper>
+          <ContactInfoWrapper>
+            <PhoneIcon />
+            <Contact>504123323</Contact>
+          </ContactInfoWrapper>
         </ContactRightSide>
       </ConctactContentWrapper>
       <HomeDiv>

@@ -28,14 +28,14 @@ const Button = (props) => {
         setAdded((prev) => !prev);
       }}
       disabled= {props.disabled}
-      style={{backgroundColor: props.active ? 'gray' : '#efaa8c'}}
-          >
+      style={{backgroundColor: props.active ? "gray" : "#efaa8c"}}
+    >
       {added ? props.radio? "Remove" : "Added": "Add"}
-          </AddTeamButton>
+    </AddTeamButton>
   );
 };
 
-const NewJob = (props) => {
+const NewJob = () => {
   const {
     register,
     handleSubmit,
@@ -46,12 +46,12 @@ const NewJob = (props) => {
     if( choosenDeps.length == 0) return;
     const job = prepareJob(data);
     axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/jobs/add`, job, 
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        ContentType: "application/json",
-      },
-    }).catch(err => log.warn(err));
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          ContentType: "application/json",
+        },
+      }).catch(err => log.warn(err));
   };
   const [deps, setDeps] = useState([]);
   const [choosenDeps, setChoosenDeps] = useState([]);
@@ -87,13 +87,12 @@ const NewJob = (props) => {
           onClick={() => {
             window.location.href = "/Jobs";
           }}
-          disabled={choosenDeps.length == 0 || getValues("name") === ''}
+          disabled={choosenDeps.length == 0 || getValues("name") === ""}
         >
           Create
         </NewButton>
-        {(choosenDeps.length == 0 || getValues("name") === '') &&
-        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>
-        }
+        {(choosenDeps.length == 0 || getValues("name") === "") &&
+        <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>}
       </PersonalDataHeadingText>
       <Wrapper>
         <InsideWrapper>
@@ -109,20 +108,20 @@ const NewJob = (props) => {
           <TeamsWrapper>
             <TableTeams className="table">
               <tbody>
-              {deps?.map((el) => (
-                <tr key={el.departmentId}>
-                  <td>
-                    <RowLi>
-                      {el.departmentName}
-                      <Button
-                        onClick={() => {
-                          setChoosenDeps((prev) => prev.includes(el.departmentId) ? prev.filter(item => item !== el.departmentId) : [...prev, el.departmentId]);
-                        }}
-                      />
-                    </RowLi>
-                  </td>
-                </tr>
-              ))}
+                {deps?.map((el) => (
+                  <tr key={el.departmentId}>
+                    <td>
+                      <RowLi>
+                        {el.departmentName}
+                        <Button
+                          onClick={() => {
+                            setChoosenDeps((prev) => prev.includes(el.departmentId) ? prev.filter(item => item !== el.departmentId) : [...prev, el.departmentId]);
+                          }}
+                        />
+                      </RowLi>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </TableTeams>
           </TeamsWrapper>

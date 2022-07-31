@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback} from "react";
 import {NextGradingWrapper} from "../../styles/DashboardStyles";
 import {HighlightText} from "../../styles/GlobalStyle";
 import unknownGrade from "../../assets/img/Grade_unknown_small.png"

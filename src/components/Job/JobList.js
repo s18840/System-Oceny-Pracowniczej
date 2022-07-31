@@ -41,8 +41,7 @@ function JobList() {
       <PersonalDataHeadingText>Jobs List</PersonalDataHeadingText>
       {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") ) && <NewButton onClick={() => (window.location.href = "/newJob")}>
         New
-      </NewButton>
-      }
+      </NewButton>}
       <TableInfo className="table">
         <thead>
           <tr>

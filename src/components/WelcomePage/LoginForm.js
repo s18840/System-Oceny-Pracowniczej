@@ -39,10 +39,8 @@ function LoginForm() {
         log.warn(error)
         if (error.response.status === 401) {
           setCredentialsCorrect(false);
-          return Promise.reject("Unauthrozied");
         }
 
-        return Promise.reject("error");
       });
   };
 

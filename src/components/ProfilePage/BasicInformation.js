@@ -23,7 +23,7 @@ import {
   CompanyMail,
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
-import moment from 'moment';
+import moment from "moment";
 import { log } from "loglevel";
 function BasicInformation(props) {
   const [context] = useContext(Context);
@@ -77,7 +77,7 @@ function BasicInformation(props) {
             shouldValidate: true,
           });
         }).catch(err => log.warn(err));
-  }, [context, setValue]);
+  }, [context, setValue, props.empId]);
 
   useEffect(() => {
     context && props.empId &&
@@ -120,7 +120,7 @@ function BasicInformation(props) {
             shouldValidate: true,
           });
         }).catch(err => log.warn(err));
-  }, [context, setValue]);
+  }, [context, setValue, props.empId]);
   const [formReady, setFormReady] = useState(false);
 
   const switchForm = () => {
@@ -150,7 +150,7 @@ function BasicInformation(props) {
     if (!formReady && !props.empId) {
       const employeeReady = prepareUser(data);
       if(props.empId == localStorage.getItem("employeeId") || !props.empId){
-      localStorage.setItem("fullName",`${data.firstName} ${data.lastName}`)
+        localStorage.setItem("fullName",`${data.firstName} ${data.lastName}`)
       }
       axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
         "employeeId"
@@ -164,11 +164,11 @@ function BasicInformation(props) {
     if (!formReady && props.empId) {
       const employeeReady = prepareUser(data);
       axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.empId}`, employeeReady,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }).catch(err => log.warn(err));
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }).catch(err => log.warn(err));
     }
     if(!formReady) window.location.reload();
   };
@@ -180,7 +180,7 @@ function BasicInformation(props) {
       {!formReady ? "Edit" : "Save"}
     </FormButton>
   );
-  const dateNow = moment(moment.now()).format('YYYY-MM-DD');
+  const dateNow = moment(moment.now()).format("YYYY-MM-DD");
   return (
     <>
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
@@ -284,9 +284,9 @@ function BasicInformation(props) {
               {...register("birthDate", {
                 required: "Required",
                 validate: {
-                  over18: value => moment(value, "YYYY-MM-DD").diff(dateNow, 'years', true)<-18,
+                  over18: value => moment(value, "YYYY-MM-DD").diff(dateNow, "years", true)<-18,
                 }
-               })}
+              })}
               disabled={!formReady}
               style={
                 !formReady

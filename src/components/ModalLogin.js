@@ -105,10 +105,10 @@ function ModalLogin({ closeModal }){
                     value: 6,
                     message: "Password is too short"
                   },
-                pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
-                  message: "At least: \n -one Uppercase letter, \n -one lowercase letter, \n -one number"
-                } })}
+                  pattern: {
+                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+                    message: "At least: \n -one Uppercase letter, \n -one lowercase letter, \n -one number"
+                  } })}
               />
               {errors.password && (
                 <ErrorsLoginSpan font-size="20" style={{ color: "red", display: "flex", whiteSpace: "pre" }}>{errors.password.message}</ErrorsLoginSpan>

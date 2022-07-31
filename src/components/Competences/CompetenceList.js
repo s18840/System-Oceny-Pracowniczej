@@ -43,25 +43,25 @@ function CompetenceList() {
           </tr>
         </thead>
         <tbody>
-        {competences?.map((content) => (
-          <Row key={content.competenceId}>
-            <TableDetailsDate>{content.name}</TableDetailsDate>
-            <TableDetailsMarker>
-              <MarkersTable>
-                {content.markers?.map(marker =>(
-                  <MarkersRow>
-                    {marker.name}
-                  </MarkersRow>
-                ))}
-              </MarkersTable>
-            </TableDetailsMarker>
-            <TableDetails>
-              <div>
-                {content.description + "."}
-              </div>
-            </TableDetails>
-          </Row>
-        ))}
+          {competences?.map((content) => (
+            <Row key={content.competenceId}>
+              <TableDetailsDate>{content.name}</TableDetailsDate>
+              <TableDetailsMarker>
+                <MarkersTable>
+                  {content.markers?.map(marker =>(
+                    <MarkersRow>
+                      {marker.name}
+                    </MarkersRow>
+                  ))}
+                </MarkersTable>
+              </TableDetailsMarker>
+              <TableDetails>
+                <div>
+                  {content.description + "."}
+                </div>
+              </TableDetails>
+            </Row>
+          ))}
         </tbody>
       </TableInfo>
     </>

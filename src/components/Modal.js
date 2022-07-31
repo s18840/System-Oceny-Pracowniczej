@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import axios from "axios";
 import {
   ProfileDataText,
@@ -6,16 +6,14 @@ import {
   ModalTitleDiv
 } from "../styles/ProfilePageStyle";
 import { FormWrapper } from "../styles/ProfilePageFormStyle";
-import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
-import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
+import { InputField, ErrorsLoginSpan } from "../styles/GlobalStyle";
 import { log } from "loglevel";
 function Modal(props){
-  const [context] = useContext(Context);
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({ mode: "onChange" });
 
   const prepareEducation = (e) => {
@@ -72,7 +70,7 @@ function Modal(props){
           <div>
             <ProfileDataText>Graduation date</ProfileDataText>
             <InputField
-            type="date"
+              type="date"
               {...register("graduationDate", { required: true })}
             />
           </div>
@@ -82,8 +80,8 @@ function Modal(props){
               {...register("degree", { required: "Please provide correct degree" })}
             />
             {errors.degree && errors.degree.type === "required" && (
-                <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.degree.message}</ErrorsLoginSpan>
-              )}
+              <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.degree.message}</ErrorsLoginSpan>
+            )}
           </div>
           <div>
             <ProfileDataText>Place of education</ProfileDataText>

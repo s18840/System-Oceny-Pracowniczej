@@ -31,7 +31,7 @@ function EducationInformation(props) {
         .then(({ data }) => {
           setEmployee(data);
         }).catch(err => log.warn(err));
-  }, [context]);
+  }, [context, props.empId]);
 
   useEffect(() => {
     context && props.empId &&
@@ -47,7 +47,7 @@ function EducationInformation(props) {
         .then(({ data }) => {
           setEmployee(data);
         }).catch(err => log.warn(err));
-  }, [context]);
+  }, [context, props.empId]);
 
   let dataArray;
   function reformatDate(dateStr) {
@@ -58,28 +58,28 @@ function EducationInformation(props) {
   return (
     <>
       {employee?.educations.length != 0 ?
-      <TableInfo className="table">
-        <thead>
-          <tr>
-            {dataJson.map((title) => (
-              <th>{title}</th>
-            ))}
-          </tr>
-        </thead>
-        {employee?.educations?.map((content) => (
-          <Row>
-            <td>
-              {reformatDate(
-                content?.graduationDate.split("T")[0]
-                  ? content?.graduationDate.split("T")[0]
-                  : ""
-              )}
-            </td>
-            <td>{content.placeOfEducation ? content.placeOfEducation : "-"}</td>
-            <td>{content.degree}</td>
-          </Row>
-        ))}
-      </TableInfo> : <ErrorsSpan font-size="20" style={{ color: "gray", marginTop: "300px", fontSize: "60px", marginLeft: "600px" }}>No educations</ErrorsSpan>}
+        <TableInfo className="table">
+          <thead>
+            <tr>
+              {dataJson.map((title) => (
+                <th>{title}</th>
+              ))}
+            </tr>
+          </thead>
+          {employee?.educations?.map((content) => (
+            <Row>
+              <td>
+                {reformatDate(
+                  content?.graduationDate.split("T")[0]
+                    ? content?.graduationDate.split("T")[0]
+                    : ""
+                )}
+              </td>
+              <td>{content.placeOfEducation ? content.placeOfEducation : "-"}</td>
+              <td>{content.degree}</td>
+            </Row>
+          ))}
+        </TableInfo> : <ErrorsSpan font-size="20" style={{ color: "gray", marginTop: "300px", fontSize: "60px", marginLeft: "600px" }}>No educations</ErrorsSpan>}
       <ModalOpenButton id="modalButton" onClick={() =>{setOpenModal(true)}}>
         Add
       </ModalOpenButton>

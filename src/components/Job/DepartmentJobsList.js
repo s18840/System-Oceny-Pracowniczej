@@ -22,8 +22,8 @@ function DepartmentJobList() {
     context &&
       axios
         .get(`${process.env.REACT_APP_API_ADDRESS}Dto/jobs/${localStorage.getItem(
-            "employeeId"
-          )}`, {
+          "employeeId"
+        )}`, {
           headers: {
             Authorization: `Bearer ${
               localStorage.getItem("token")
@@ -47,10 +47,10 @@ function DepartmentJobList() {
           </tr>
         </thead>
         {jobs?.map((content) => (
-          <Row>
+          <Row key={content.jobID}>
             <TableDetailsDate>{content.name}</TableDetailsDate>
             <TableDetailsMarker>
-                {content.jobID}
+              {content.jobID}
             </TableDetailsMarker>
           </Row>
         ))}

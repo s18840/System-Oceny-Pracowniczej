@@ -48,34 +48,34 @@ function EmployeeList() {
           </tr>
         </thead>
         <tbody>
-        {employee?.map((content) => (
-          <Row key={content.personalNumber}>
-            <TableDetailsDate>
-              <Link to={`/profile/${content.personalNumber}`} style={{  
-                fontSize: "25px",
-                fontWeight: "bold",
-                color: "#ff4e01",
-                textDecoration: "none"}}>
-                {content.firstName + " " + content.lastName}
-              </Link>
-            </TableDetailsDate>
-            <TableDetails>
-              {content.personalNumber}
-            </TableDetails>
-            <TableDetails>
-              {content.team_ID}
-            </TableDetails>
-            <TableDetails>
-              <StatusIcon
-                style={
-                  content.status > 0
-                    ? { backgroundColor: "#55ff11" }
-                    : { backgroundColor: "#ff5511" }
-                }
-              />
-            </TableDetails>
-          </Row>
-        ))}
+          {employee?.map((content) => (
+            <Row key={content.personalNumber}>
+              <TableDetailsDate>
+                <Link to={`/profile/${content.personalNumber}`} style={{  
+                  fontSize: "25px",
+                  fontWeight: "bold",
+                  color: "#ff4e01",
+                  textDecoration: "none"}}>
+                  {content.firstName + " " + content.lastName}
+                </Link>
+              </TableDetailsDate>
+              <TableDetails>
+                {content.personalNumber}
+              </TableDetails>
+              <TableDetails>
+                {content.team_ID}
+              </TableDetails>
+              <TableDetails>
+                <StatusIcon
+                  style={
+                    content.status > 0
+                      ? { backgroundColor: "#55ff11" }
+                      : { backgroundColor: "#ff5511" }
+                  }
+                />
+              </TableDetails>
+            </Row>
+          ))}
         </tbody>
       </TableInfo>
     </>

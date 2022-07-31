@@ -35,8 +35,7 @@ const SubMenu = ({ item }) => {
           <DropdownLink to={item.subnav.path} >
             <SidebarLabel>{item.subnav.title}</SidebarLabel>
           </DropdownLink>
-        ) : null
-        }
+        ) : null}
     </>
   );
 };

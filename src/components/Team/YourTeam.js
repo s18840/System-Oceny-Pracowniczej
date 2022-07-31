@@ -19,18 +19,17 @@ import {
   TableTeams,
   RowLi,
   Heading,
-  ProfileDataText, GlobalButton,
+  ProfileDataText,
 } from "../../styles/GlobalStyle";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { log } from "loglevel";
-function YourTeam(props) {
-    const [context] = useContext(Context);
-    const [employee, setEmployee] = useState([]);
-    const [competences, setCompetences] = useState([]);
-    const [status, setStatus] = useState(" ");
-    const location = useLocation();
-    useEffect(() => {
-        context &&
+function YourTeam() {
+  const [context] = useContext(Context);
+  const [employee, setEmployee] = useState([]);
+  const [competences, setCompetences] = useState([]);
+  const [status, setStatus] = useState(" ");
+  useEffect(() => {
+    context &&
           axios
             .get(
               `${process.env.REACT_APP_API_ADDRESS}Employee/team/${localStorage.getItem("employeeId")}`,
@@ -71,7 +70,7 @@ function YourTeam(props) {
           <ProfileDataText>Members of your team: </ProfileDataText>
         </Heading>
         {employee?.map((emp) => (
-          <ProfileInfoDiv style={{marginTop:20}}>
+          <ProfileInfoDiv key={emp.personalNumber} style={{marginTop:20}}>
             <ProfileAvatar to={`/profile/${emp.personalNumber}`}>
               {(emp.firstName[0]) + (emp.lastName[0])}
             </ProfileAvatar>
@@ -110,7 +109,7 @@ function YourTeam(props) {
         <TeamsWrapper style={{marginLeft:30}}>
           <TableTeams className="table">
             {competences?.map((el) => (
-              <tr>
+              <tr key={el.competenceId}>
                 <td>
                   <RowLi>
                     {el.name}

@@ -44,8 +44,7 @@ function TeamList() {
       <PersonalDataHeadingText>Teams List</PersonalDataHeadingText>
       {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") || localStorage.getItem("roles").includes("Director")) && <NewButton onClick={() => (window.location.href = "/newTeam")}>
         New
-      </NewButton>
-      }
+      </NewButton>}
       <TableInfo className="table">
         <thead>
           <tr>
@@ -55,47 +54,46 @@ function TeamList() {
           </tr>
         </thead>
         <tbody>
-        {teams?.map((content) => (
-          <Row key={content.teamId}>
-            <TableDetailsDate
-              nameOfTeam ={content.teamName}
-              departmentOfTeam ={content.departmentId}
-              managerOfTeam ={content.managerId}>
-              {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") || localStorage.getItem("roles").includes("Director")) && <Link to={{pathname:`/teamDetails`, state: content.managerId}} style={{  
-                fontSize: "25px",
-                fontWeight: "bold",
-                color: "#ff4e01",
-                textDecoration: "none"}}>
-                {content.teamName}
-              </Link>
-              }
-              {(localStorage.getItem("roles").includes("Manager")) && <div style={{
-                fontSize: "25px",
-                fontWeight: "bold",
-                color: "#ff4e01",
-                textDecoration: "none"}}>
-              {content.teamName}
-              </div>}
-            </TableDetailsDate>
-            <TableDetailsDate>{content.departmentName}</TableDetailsDate>
-            <TableDetails>
-              <Link to={`/profile/${content.managerId}`} style={{  
-                fontSize: "25px",
-                fontWeight: "bold",
-                color: "#ff4e01",
-                textDecoration: "none"}}>
-                {content.managerFirstName + " " + content.managerLastName}
-              </Link>
-            </TableDetails>
-            <TableDetailsMarker>
-              <MarkersTable>
-                {content?.employees?.map((emp) => (
-                  <MarkersRow>{emp.firstName + " " + emp.lastName}</MarkersRow>
-                ))}
-              </MarkersTable>
-            </TableDetailsMarker>
-          </Row>
-        ))}
+          {teams?.map((content) => (
+            <Row key={content.teamId}>
+              <TableDetailsDate
+                nameOfTeam ={content.teamName}
+                departmentOfTeam ={content.departmentId}
+                managerOfTeam ={content.managerId}>
+                {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") || localStorage.getItem("roles").includes("Director")) && <Link to={{pathname:"/teamDetails", state: content.managerId}} style={{  
+                  fontSize: "25px",
+                  fontWeight: "bold",
+                  color: "#ff4e01",
+                  textDecoration: "none"}}>
+                  {content.teamName}
+                </Link>}
+                {(localStorage.getItem("roles").includes("Manager")) && <div style={{
+                  fontSize: "25px",
+                  fontWeight: "bold",
+                  color: "#ff4e01",
+                  textDecoration: "none"}}>
+                  {content.teamName}
+                </div>}
+              </TableDetailsDate>
+              <TableDetailsDate>{content.departmentName}</TableDetailsDate>
+              <TableDetails>
+                <Link to={`/profile/${content.managerId}`} style={{  
+                  fontSize: "25px",
+                  fontWeight: "bold",
+                  color: "#ff4e01",
+                  textDecoration: "none"}}>
+                  {content.managerFirstName + " " + content.managerLastName}
+                </Link>
+              </TableDetails>
+              <TableDetailsMarker>
+                <MarkersTable>
+                  {content?.employees?.map((emp) => (
+                    <MarkersRow key={emp.personalNumber}>{emp.firstName + " " + emp.lastName}</MarkersRow>
+                  ))}
+                </MarkersTable>
+              </TableDetailsMarker>
+            </Row>
+          ))}
         </tbody>
       </TableInfo>
     </>
