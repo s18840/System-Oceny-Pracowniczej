@@ -71,10 +71,10 @@ export const ClockWrapper = styled.div`
   text-align: center;
 `
 
-export const TimeView = styled.a`
+export const TimeView = styled.div`
   font-size: 120px;
 `
 
-export const DateView = styled.a`
+export const DateView = styled.div`
   font-size: 40px;
 `

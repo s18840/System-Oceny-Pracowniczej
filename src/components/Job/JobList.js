@@ -51,29 +51,31 @@ function JobList() {
             ))}
           </tr>
         </thead>
-        {jobs?.map((content) => (
-          <Row>
-            <TableDetailsDate>{content.name}</TableDetailsDate>
-            <TableDetailsMarker>
-              <MarkersTable>
-                {content.jobDepartments?.map(dep =>(
-                  <MarkersRow>
-                    {dep.departmentName}
-                  </MarkersRow>
-                ))}
-              </MarkersTable>
-            </TableDetailsMarker>
-            <TableDetailsMarker>
-              <MarkersTable>
-                {content.jobDepartments?.map(dep =>(
-                  <MarkersRow>
-                    {dep.departmentId}
-                  </MarkersRow>
-                ))}
-              </MarkersTable>
-            </TableDetailsMarker>
-          </Row>
-        ))}
+        <tbody>
+          {jobs?.map((content) => (
+            <Row key={content.jobID}>
+              <TableDetailsDate>{content.name}</TableDetailsDate>
+              <TableDetailsMarker>
+                <MarkersTable>
+                  {content.jobDepartments?.map(dep =>(
+                    <MarkersRow key={dep.departmentId}>
+                      {dep.departmentName}
+                    </MarkersRow>
+                  ))}
+                </MarkersTable>
+              </TableDetailsMarker>
+              <TableDetailsMarker>
+                <MarkersTable>
+                  {content.jobDepartments?.map(dep =>(
+                    <MarkersRow key={dep.departmentId}>
+                      {dep.departmentId}
+                    </MarkersRow>
+                  ))}
+                </MarkersTable>
+              </TableDetailsMarker>
+            </Row>
+          ))}
+        </tbody>
       </TableInfo>
     </>
   );

@@ -47,8 +47,9 @@ function EmployeeList() {
             ))}
           </tr>
         </thead>
+        <tbody>
         {employee?.map((content) => (
-          <Row>
+          <Row key={content.personalNumber}>
             <TableDetailsDate>
               <Link to={`/profile/${content.personalNumber}`} style={{  
                 fontSize: "25px",
@@ -75,6 +76,7 @@ function EmployeeList() {
             </TableDetails>
           </Row>
         ))}
+        </tbody>
       </TableInfo>
     </>
   );

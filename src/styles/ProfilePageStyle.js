@@ -45,7 +45,7 @@ export const ProfileWrapper = styled.div`
   flex-direction: column;
 `;
 
-export const ProfileHeaderText = styled.text`
+export const ProfileHeaderText = styled.div`
   display: flex;
   font-size: 28px;
   color: #6137a0;
@@ -53,13 +53,13 @@ export const ProfileHeaderText = styled.text`
   align-items: center;
   margin: 15px 0px;
 `;
-export const ProfileSubHeaderText = styled.text`
+export const ProfileSubHeaderText = styled.div`
   font-size: 14px;
   color: #6137a0;
   font-weight: bold;
   margin: 15px 0px;
 `;
-export const ProfileText = styled.text`
+export const ProfileText = styled.div`
   font-size: 14px;
   color: #111111;
   font-weight: bold;

@@ -108,23 +108,25 @@ const NewDepartment = () => {
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
-              {dirs.length > 0 ?dirs.map((el) => (
-                <tr key={el.personalNumber}>
-                  <td>
-                    <RowLi>
-                      {el.firstName + " " + el.lastName}
-                      <Button
-                        onClick={() => {
-                          setChoosenDirs(curr => curr !== el.personalNumber? el.personalNumber : '');
-                        }}
-                        disabled = {choosenDirs && choosenDirs !== el.personalNumber}
-                        active={choosenDirs && choosenDirs !== el.personalNumber}
-                        radio
-                      />
-                    </RowLi>
-                  </td>
-                </tr>
-              )):<RowLi>No available directors</RowLi>}
+              <tbody>
+                {dirs.length > 0 ?dirs.map((el) => (
+                  <tr key={el.personalNumber}>
+                    <td>
+                      <RowLi>
+                        {el.firstName + " " + el.lastName}
+                        <Button
+                          onClick={() => {
+                            setChoosenDirs(curr => curr !== el.personalNumber? el.personalNumber : '');
+                          }}
+                          disabled = {choosenDirs && choosenDirs !== el.personalNumber}
+                          active={choosenDirs && choosenDirs !== el.personalNumber}
+                          radio
+                        />
+                      </RowLi>
+                    </td>
+                  </tr>
+                )):<RowLi>No available directors</RowLi>}
+              </tbody>
             </TableTeams>
           </TeamsWrapper>
         </InsideWrapper>

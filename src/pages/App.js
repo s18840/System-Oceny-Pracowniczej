@@ -7,7 +7,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch, useHistory,
+  Switch,
 } from "react-router-dom";
 import Competences from "./Competences";
 import NewCompetenceView from "./NewCompetenceView";
@@ -59,9 +59,9 @@ function App() {
       <GlobalStyle/>
       <Router>
         <Switch>
-          <ouRte exact path="/">
+          <Route exact path="/">
             <Redirect to="/Welcome" />
-          </ouRte>
+          </Route>
           <Route exact path="/Welcome">
             <WelcomePage/>
           </Route>

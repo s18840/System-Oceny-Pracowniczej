@@ -54,8 +54,9 @@ function TeamList() {
             ))}
           </tr>
         </thead>
+        <tbody>
         {teams?.map((content) => (
-          <Row>
+          <Row key={content.teamId}>
             <TableDetailsDate
               nameOfTeam ={content.teamName}
               departmentOfTeam ={content.departmentId}
@@ -95,6 +96,7 @@ function TeamList() {
             </TableDetailsMarker>
           </Row>
         ))}
+        </tbody>
       </TableInfo>
     </>
   );

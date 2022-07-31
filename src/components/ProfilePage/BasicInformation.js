@@ -319,8 +319,8 @@ function BasicInformation(props) {
               disabled={!formReady}
               style={
                 !formReady
-                  ? { "-webkit-appearance": "none", backgroundColor: "white" }
-                  : { "-webkit-appearance": "none", backgroundColor: "#DDDDDD" }
+                  ? { "WebkitAppearance": "none", backgroundColor: "white" }
+                  : { "WebkitAppearance": "none", backgroundColor: "#DDDDDD" }
               }
             />
             {formReady && errors.cellPhoneNumber && errors.cellPhoneNumber.type === "required" && (

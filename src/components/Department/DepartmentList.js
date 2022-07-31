@@ -42,21 +42,23 @@ function DepartmentList() {
             ))}
           </tr>
         </thead>
-        {departments?.map((content) => (
-          <Row>
-            <TableDetailsDate>{content.departmentName}</TableDetailsDate>
-            <TableDetailsMarker>
-              <MarkersTable>
-                {content?.teams?.map((team) => (
-                  <MarkersRow>{team.teamName}</MarkersRow>
-                ))}
-              </MarkersTable>
-            </TableDetailsMarker>
-            <TableDetails>
-              {content.directorName + " " + content.directorSurname}
-            </TableDetails>
-          </Row>
-        ))}
+        <tbody>
+          {departments?.map((content) => (
+            <Row key={content.departmentId}>
+              <TableDetailsDate>{content.departmentName}</TableDetailsDate>
+              <TableDetailsMarker>
+                <MarkersTable>
+                  {content?.teams?.map((team) => (
+                    <MarkersRow key={team.teamId}>{team.teamName}</MarkersRow>
+                  ))}
+                </MarkersTable>
+              </TableDetailsMarker>
+              <TableDetails>
+                {content.directorName + " " + content.directorSurname}
+              </TableDetails>
+            </Row>
+          ))}
+        </tbody>
       </TableInfo>
     </>
   );

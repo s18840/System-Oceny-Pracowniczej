@@ -71,7 +71,7 @@ function TeamDetails(props) {
           <ProfileDataText>Members of this team: </ProfileDataText>
         </Heading>
         {location.state ? employee?.map((emp) => (
-          <ProfileInfoDiv style={{marginTop:20}}>
+          <ProfileInfoDiv key={emp.personalNumber} style={{marginTop:20}}>
             <ProfileAvatar to={`/profile/${emp.personalNumber}`}>
               {(emp.firstName[0]) + (emp.lastName[0])}
             </ProfileAvatar>

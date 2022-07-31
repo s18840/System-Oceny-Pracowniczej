@@ -108,6 +108,7 @@ const NewJob = (props) => {
           </Heading>
           <TeamsWrapper>
             <TableTeams className="table">
+              <tbody>
               {deps?.map((el) => (
                 <tr key={el.departmentId}>
                   <td>
@@ -122,6 +123,7 @@ const NewJob = (props) => {
                   </td>
                 </tr>
               ))}
+              </tbody>
             </TableTeams>
           </TeamsWrapper>
         </InsideWrapper>

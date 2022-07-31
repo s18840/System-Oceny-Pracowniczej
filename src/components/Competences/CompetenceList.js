@@ -42,8 +42,9 @@ function CompetenceList() {
             ))}
           </tr>
         </thead>
+        <tbody>
         {competences?.map((content) => (
-          <Row>
+          <Row key={content.competenceId}>
             <TableDetailsDate>{content.name}</TableDetailsDate>
             <TableDetailsMarker>
               <MarkersTable>
@@ -61,6 +62,7 @@ function CompetenceList() {
             </TableDetails>
           </Row>
         ))}
+        </tbody>
       </TableInfo>
     </>
   );
