@@ -183,7 +183,8 @@ function ProfileInfo(props) {
             <FormButton onClick={()=>history.push(`/grades/${props.id}`)} style={{width: "200px", position: "absolute", marginTop: "10px", right: "300px"}} >
             Grades
             </FormButton>}
-          {(localStorage.getItem("roles").includes("Admin") && (props.id && props.id !== localStorage.getItem("employeeId"))) && <FormButton onClick={resetPassword} style={{width: "200px", position: "absolute", marginTop: "10px", right: "50px"}} >
+          {(localStorage.getItem("roles").includes("Admin") && (props.id && props.id !== localStorage.getItem("employeeId"))) && 
+          <FormButton onClick={() => {resetPassword(); alert("Password succesfully reset")}} style={{width: "200px", position: "absolute", marginTop: "10px", right: "50px"}} >
               Reset password
           </FormButton>}
         </>
