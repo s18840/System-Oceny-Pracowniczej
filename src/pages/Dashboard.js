@@ -23,7 +23,6 @@ function Dashboard() {
             <Title>Hi, {firstName}</Title>
             <SubTitle>grading</SubTitle>
             <NextGrading/>
-            <SubTitle>your targets</SubTitle>
           </DashboardContentWrapper>
           <Clock/>
         </DashboardWrapper>

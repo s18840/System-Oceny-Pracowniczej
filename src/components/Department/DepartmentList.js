@@ -18,7 +18,6 @@ const dataJson = ["Department name:", "Department Teams:", " Director:"];
 function DepartmentList() {
   const [context] = useContext(Context);
   const [departments, setDepartments] = useState();
-  console.log(process.env.REACT_APP_API_ADDRESS)
   useEffect(() => {
     context &&
       axios

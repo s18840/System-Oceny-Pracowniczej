@@ -4,6 +4,7 @@ export const GradeDescWrapper = styled.div`
   border: 2px solid black;
   border-radius: 5px;
   padding: 3%;
+  font-size: 1.3rem;
 `
 export const CompetentGradesWrapper = styled.div`
   display: flex;
@@ -118,4 +119,13 @@ export const QuarterSelect = styled.select`
   padding: 20px;
   border: 1px solid black;
   border-radius: 5px;
+`
+
+export const TargetsAvgElement = styled.div`
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  color: #3D098A;
+  font-weight: bold;
+  font-size: 1.5rem;
 `

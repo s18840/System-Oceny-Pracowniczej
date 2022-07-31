@@ -8,14 +8,18 @@ import {
 import {GlobalButton, InputWrapper, Span} from "../../styles/GlobalStyle";
 import {useForm} from "react-hook-form";
 import getCurrentQuarter from "../../Utils/QuarterUtils";
+import {useParams} from "react-router-dom";
 
 const currentQuarter = getCurrentQuarter().label;
 
 const AddTarget = ({onSubmit, onCancel, target}) => {
   const {register, handleSubmit, setValue, formState: {errors}} = useForm();
 
+  const {id} = useParams()
   const isUpdatable = typeof target !== "undefined";
-  const isUpdatableInDB = isUpdatable && target.hasOwnProperty("goalID") && target.goalID !== 0;
+  const isUpdatableInDB = isUpdatable && target.goalID && target.goalID !== 0;
+  const isMyTargets = !(id && id != localStorage.getItem("employeeId"));
+  const isGraded = isUpdatableInDB && target.realisationGrade
 
   const [edit, setEdit] = useState(false);
 
@@ -39,11 +43,9 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
   } else {
     setValue("quarter", currentQuarter);
     setValue("goalID", 0)
-    //might be changed
     setValue("employeeId", localStorage.getItem("employeeId"))
   }
 
-  console.log(target);
   return (
     <>
       <TargetForm onSubmit={handleSubmit(submitForm)}>
@@ -58,70 +60,70 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
           {...register("employeeId")}
         />
         <InputWrapper width="40%">
-          <Span>Nazwa Celu</Span>
+          <Span>Name</Span>
           <TargetInputField
             {...register("name", ({required: true}))}
-            disabled={isUpdatable && !edit}
+            disabled={(isUpdatable && !edit) || !isMyTargets}
           />
           {errors.name && errors.name.type === "required" &&
             <Span>Required</Span>}
         </InputWrapper>
         <InputWrapper width="40%">
-          <Span>Kwartał</Span>
+          <Span>Quarter</Span>
           <TargetInputField
-            disabled={isUpdatable && !edit}
+            disabled={(isUpdatable && !edit) || !isMyTargets}
             readonly
             {...register("quarter")}
           />
         </InputWrapper>
         <InputWrapper width="100%">
-          <Span>Opis zadania</Span>
+          <Span>Description</Span>
           <TargetTextField
             {...register("description", ({required: true}))}
-            disabled={isUpdatable && !edit}
+            disabled={(isUpdatable && !edit) || !isMyTargets}
           />
           {errors.description && errors.description.type === "required" &&
             <Span>Required</Span>}
         </InputWrapper>
         <InputWrapper width="40%">
-          <Span>Miernik realizacji celu</Span>
+          <Span>Completion measurement</Span>
           <TargetTextField
             {...register("measure", ({required: true}))}
-            disabled={isUpdatable && !edit}
+            disabled={(isUpdatable && !edit) || !isMyTargets}
           />
           {errors.measure && errors.measure.type === "required" &&
             <Span>Required</Span>}
         </InputWrapper>
         <InputWrapper width="40%">
-          <Span>Waga celu</Span>
+          <Span>Importance</Span>
           <TargetInputField
             type="number"
             {...register("importance", ({required: true, min: 0, max: 10}))}
-            disabled={isUpdatable && !edit}
+            disabled={(isUpdatable && !edit) || !isMyTargets}
           />
           {errors.importance && errors.importance.type === "required" &&
             <Span>Required</Span>}
           {errors.importance && (errors.importance.type === "min" || "max") &&
             <Span>wartość pomiędzy 0-10</Span>}
         </InputWrapper>
-        {isUpdatable ?
+        {isUpdatable && !isMyTargets ?
           <>
             <InputWrapper width="40%">
-              <Span>Ocena realizacji celu (%)</Span>
+              <Span>Realisation Grade (%)</Span>
               <TargetInputField
                 type="number"
                 {...register("realisationGrade", ({
                   min: 0,
                   max: 100,
                 }))}
-                disabled={isUpdatable && !edit}
+                disabled={(isUpdatable && !edit)}
               />
             </InputWrapper>
             <InputWrapper width="40%">
-              <Span>Komentarz do oceny</Span>
+              <Span>Comment</Span>
               <TargetInputField
                 {...register("gradeComment")}
-                disabled={isUpdatable && !edit}
+                disabled={(isUpdatable && !edit)}
               />
             </InputWrapper>
           </>
@@ -129,6 +131,7 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
           <>
             <input
               hidden
+              type="number"
               {...register("realisationGrade")}
               value=""
             />
@@ -139,7 +142,7 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
             />
           </>}
         <GlobalButton onClick={onCancel}>Cancel</GlobalButton>
-        {isUpdatable && !edit ?
+        {isUpdatable && !edit && !isGraded ?
           <GlobalButton
             onClick={() => setEdit(prev => !prev)}>Edit</GlobalButton> : <></>}
         {!isUpdatable || edit ?

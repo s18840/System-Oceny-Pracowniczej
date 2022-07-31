@@ -4,7 +4,7 @@ import NavBar from "../components/Navigation/NavBar";
 import Footer from "../components/Footer/Footer";
 import {
   ContentWrapper,
-  GlobalButton,
+  GlobalButton, HighlightText,
   PageWrapper,
   SubTitle,
 } from "../styles/GlobalStyle";
@@ -14,16 +14,17 @@ import CompetenceGradeDetails
   from "../components/CompetenceGrade/CompetenceGradeDetails";
 import {Context} from "./Context";
 import {useForm} from "react-hook-form";
-import TargetList from "../components/Targets/TargetList";
-import {ErrorLabel, QuarterSelect} from "../styles/CompetencesGradeStyles";
+import {ErrorLabel, QuarterSelect, TargetsAvgElement} from "../styles/CompetencesGradeStyles";
 import {useHistory, useParams} from "react-router-dom";
-
-//TODO only targets that have been graded ?
+import {
+  TargetContainer, TargetDate, TargetImportance,
+  TargetListTitlesWrapper, TargetName,
+  TargetNameTitle, TargetsListWrapper, TargetTitle,
+} from "../styles/TargetsStyles";
 
 function Grades() {
   const {id} = useParams()
   const currentEmp = id ? id : localStorage.getItem("employeeId");
-  const roles = localStorage.getItem("roles");
 
   const [competenceGrades, setCompetenceGrades] = useState([]);
   const [targetGrades, setTargetGrades] = useState([]);
@@ -47,9 +48,21 @@ function Grades() {
   const [context] = useContext(Context);
   const {register,
     watch,
-
   } = useForm();
   const history = useHistory()
+
+  const calcWeightedAvg = useCallback((quarterGrade)=>{
+    let total = 0
+    let data = quarterGrade.map(target => {
+      total += target.importance
+      return {importance: target.importance,
+        grade: target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade}
+    })
+    let weightedAvg = 0.0
+    data.forEach(data => weightedAvg += data.importance / total * data.grade)
+
+    return weightedAvg.toFixed(2)
+  },[])
 
   const getCompGrade = (quarter) => {
     let quarterGrade = competenceGrades.find(grade => grade.quarter === quarter);
@@ -65,15 +78,37 @@ function Grades() {
   const getTargetsGrade = (quarter) => {
     let quarterGrade = targetGrades.filter(target => target.quarter === quarter);
     if (quarterGrade && quarterGrade.length !== 0) {
-      return <TargetList
-        targetList={quarterGrade}
-      />;
-    } else if (currentQuarter === getCurrentQuarter().label) {
-      return <GlobalButton>Grade</GlobalButton>;
+      if(quarterGrade.filter(grade => grade.realisationGrade).length === quarterGrade.length) {
+        return (
+          <>
+            <TargetListTitlesWrapper>
+              <TargetNameTitle>Name</TargetNameTitle>
+              <TargetTitle>Importance</TargetTitle>
+              <TargetTitle>Realisation grade</TargetTitle>
+            </TargetListTitlesWrapper>
+            <TargetsListWrapper>
+              {
+                quarterGrade.map((target) => (
+                    <TargetContainer style={{cursor: "default"}} onClick={(() => {})}>
+                      <TargetName>{target.name}</TargetName>
+                      <TargetImportance>{target.importance}</TargetImportance>
+                      <TargetImportance>{target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade}%</TargetImportance>
+                    </TargetContainer>
+                  ),
+                )
+              }
+            </TargetsListWrapper>
+          <TargetsAvgElement>
+            Weighted average: <HighlightText fontSize="1.5rem">{calcWeightedAvg(quarterGrade)}% </HighlightText>
+          </TargetsAvgElement>
+          </>
+        )
+      } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")){
+        return <GlobalButton onClick={()=>history.push(`/targets/${id}`)}>Grade</GlobalButton>;
+      } else return <ErrorLabel>No Grades!</ErrorLabel>;
     } else {
-      return <ErrorLabel>No Grades!</ErrorLabel>;
-    }
-  };
+      return <ErrorLabel>No Targets!</ErrorLabel>;
+  }};
 
   useEffect(() => {
     const quarterSubscription = watch((value) => setCurrentQuarter(value.quarterSelect));
@@ -109,7 +144,6 @@ function Grades() {
         },
       })
       .then((res => {
-        console.log(res);
         setCompetenceGrades(res.data);
         let quarters = res.data.map(grade => grade.quarter);
         addUniqueQuarters(quarters);
@@ -121,7 +155,6 @@ function Grades() {
             },
           })
           .then(res => {
-            console.log(res);
             setTargetGrades(res.data);
             let quarters = res.data.map(grade => grade.quarter);
             addUniqueQuarters(quarters);

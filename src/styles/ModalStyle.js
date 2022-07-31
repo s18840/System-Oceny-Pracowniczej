@@ -7,7 +7,6 @@ export const ModalContent = styled.div`
     align-items: center;
     flex-direction: column;
     background-color: red ;
-    //font-family: "Nunito", sans-serif;
   `
 
 export const ModalButton = styled.button`

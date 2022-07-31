@@ -9,7 +9,6 @@ import {
 import contact_img from "../../assets/img/contact_img.png";
 
 function ContactInfo() {
-  // TODO getting contact info from file/db
 
   return (
     <ContactListWrapper>

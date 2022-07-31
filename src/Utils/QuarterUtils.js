@@ -15,8 +15,6 @@ function getCurrentQuarter(){
     (value.start <= today) && (today <= value.end)
   ))
 
-  console.log(result)
-
   return result
 }
 

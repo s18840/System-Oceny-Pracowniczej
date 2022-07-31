@@ -82,7 +82,6 @@ function ProfileInfo(props) {
         )
         .then(({data}) => {
           let teamEmpIds = data.map((value) => value.personalNumber)
-          console.log(teamEmpIds)
           setTeamIds(teamEmpIds)
         });
     }
@@ -118,20 +117,12 @@ function ProfileInfo(props) {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    }).then((resp) => {
-        console.log("res",resp)
-    })
+    }).then((resp) => {})
     .catch((err) => {
       console.log("error",err);
     });
   }
-  function checkStatus() {
-    if (status === 1) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+
   if(loading){
     return(<></>)
   }

@@ -36,7 +36,6 @@ function WelcomePage() {
         <InlineWrapper>
           <WelcomeNav/>
           <WelcomeTextWrapper>
-            {/* TODO make translation to this text */}
             The platform your employee need <br/>
             for a better <HighlightText>growth</HighlightText>
           </WelcomeTextWrapper>
@@ -59,9 +58,9 @@ function WelcomePage() {
           In order to ensure development, the company must first of all ensure the employee's development - these are things that are closely related to each other.
           </p>
           <p>
-          FeeDBack enables and supports companies in assessing employees according to their competences. 
-          Additionally, it is an easy-to-use tool for storing and processing employees personal data. 
-          FeeDBack supports Human Resources department in quaterly grading. 
+          FeeDBack enables and supports companies in assessing employees according to their competences.
+          Additionally, it is an easy-to-use tool for storing and processing employees personal data.
+          FeeDBack supports Human Resources department in quaterly grading.
           You can be sure that after each team work you will be graded - system automaticly will generate feedback request.
           </p>
           <p style={{fontWeight: "bold"}}>

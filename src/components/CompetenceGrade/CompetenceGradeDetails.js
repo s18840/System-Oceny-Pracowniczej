@@ -10,7 +10,6 @@ import {Span, TextField} from "../../styles/GlobalStyle";
 
 function CompetenceGradeDetails({grade}) {
 
-  console.log(grade);
   if (Object.entries(grade).length === 0) {
     return <></>;
   }

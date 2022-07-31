@@ -6,6 +6,7 @@ import { FaRegObjectGroup } from "react-icons/fa" // projects
 import { FaIdCard } from "react-icons/fa" // dashboard
 import { FaBuilding } from "react-icons/fa" // department
 import { MdWork } from "react-icons/md" // department
+import { GiArcheryTarget } from "react-icons/gi" //targets
 import * as MDIcons from "react-icons/md"
 
 
@@ -49,7 +50,7 @@ export const NavBarData = [{
   icon: < BsPeopleFill /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  role: ["User","Manager"],
+  role: ["User","Manager", "HR"],
 },
 {
   title: "Employees",
@@ -94,6 +95,14 @@ export const NavBarData = [{
   icon: < FaStar /> ,
   iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
   iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
-  role: ["Manager","User"],
+  role: ["Manager","User", "HR"],
 },
+  {
+    title: "Targets",
+    path: "/targets",
+    icon: <GiArcheryTarget/>,
+    iconClosed: < MDIcons.MdKeyboardArrowDown /> ,
+    iconOpened: < MDIcons.MdKeyboardArrowUp /> ,
+    role: ["Manager", "User", "HR"]
+  }
 ]

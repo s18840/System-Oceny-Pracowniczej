@@ -23,8 +23,6 @@ import axios from "axios";
 import {useHistory, useParams} from "react-router-dom";
 import getCurrentQuarter from "../Utils/QuarterUtils";
 
-//TODO employee can be graded only be his MANAGER (and HR/ADMIN)
-
 function Grade() {
   const {id} = useParams();
   const history = useHistory();
@@ -91,7 +89,6 @@ function Grade() {
       conclusion: values.gradeConclusion,
       competenceGrades: competenceGrades,
     };
-    console.log("empGrade", empGrade);
 
     axios.post(
       `${process.env.REACT_APP_API_ADDRESS}Dto/grades/add/${id}`,
@@ -102,7 +99,6 @@ function Grade() {
         },
       },
     ).then(res => {
-      console.log(res);
       history.push(`/grades/${id}`);
     })
       .catch(err => console.log("POST emp grade err", err));
@@ -123,11 +119,9 @@ function Grade() {
                 Competence grade
               </SubTitle>
               <GradeDescWrapper>
-                poniżej znajduje sie opis kompetencji istatnych dla wykonywanej
-                pracy,
-                zgodny z przyjętymi przez firmę wartościami. Zastanów się w
-                jakim
-                stopniu pracownik ...
+                On this page there are descriptions of competences that are relevant in this employee's team and are compatible with company's values.
+                Consider how employee is working according to these values. What is easy or hard for him/her? How much these competences are visible in employee's behaviour?
+                Please provide examples supporting your decision.
               </GradeDescWrapper>
               <CompetentGradesWrapper>
                 {competences.map((value, index) => (
@@ -139,13 +133,13 @@ function Grade() {
                   />
                 ))}
               </CompetentGradesWrapper>
-              <Span>Grade conclusion</Span>
+              <Span>Conclusion</Span>
               <TextField
                 {...register("gradeConclusion", ({required: true}))}
                 width="100%"
               />
               <AcceptButtonWrapper>
-                
+
                 <AcceptButton onClick={handleSubmit}>Accept</AcceptButton>
               </AcceptButtonWrapper>
             </>}

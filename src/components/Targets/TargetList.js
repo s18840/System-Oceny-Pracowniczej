@@ -17,7 +17,6 @@ import {GlobalButton} from "../../styles/GlobalStyle";
 let maxTargetAmount = 3;
 
 function TargetList({targetList, switchContent, onAccept, onSelect}) {
-  console.log(targetList);
 
   if(targetList.length > 0 && targetList[0].goalID !== 0){
     maxTargetAmount = targetList.length
@@ -36,9 +35,9 @@ function TargetList({targetList, switchContent, onAccept, onSelect}) {
   return (
     <>
       <TargetListTitlesWrapper>
-        <TargetNameTitle>nazwa celu</TargetNameTitle>
-        <TargetTitle>kwartał</TargetTitle>
-        <TargetTitle>waga realizacji</TargetTitle>
+        <TargetNameTitle>Name</TargetNameTitle>
+        <TargetTitle>Quarter</TargetTitle>
+        <TargetTitle>Importance</TargetTitle>
       </TargetListTitlesWrapper>
       <TargetsListWrapper>
         {
@@ -54,7 +53,7 @@ function TargetList({targetList, switchContent, onAccept, onSelect}) {
         {addTargetElements}
       </TargetsListWrapper>
       <AcceptButtonWrapper>
-        <GlobalButton onClick={onAccept}> Accept</GlobalButton>
+        <GlobalButton onClick={onAccept}>Accept</GlobalButton>
       </AcceptButtonWrapper>
     </>
   );

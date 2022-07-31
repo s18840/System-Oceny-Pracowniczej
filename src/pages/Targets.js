@@ -6,11 +6,15 @@ import {ContentWrapper, PageWrapper, SubTitle} from "../styles/GlobalStyle";
 import TargetList from "../components/Targets/TargetList";
 import axios from "axios";
 import {Context} from "./Context";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import getCurrentQuarter from "../Utils/QuarterUtils";
 
 function Targets() {
-  // TODO: error handling
+  const {id} = useParams();
+  const currentEmp = id ? id : localStorage.getItem("employeeId");
+  const isMyTargets = !(id && id != localStorage.getItem("employeeId"));
+  const currentEmpRole = localStorage.getItem("roles");
+
   let history = useHistory();
 
   const TARGET_LIST = "TARGET_LIST";
@@ -22,13 +26,14 @@ function Targets() {
   const [contentType, setContentType] = useState(TARGET_LIST);
   const [targetIndex, setTargetIndex] = useState();
   const [targets, setTargets] = useState([]);
+  const [canGrade, setCanGrade] = useState(false);
 
-  const defaultQuarter = getCurrentQuarter().label
+  const currentQuarter = getCurrentQuarter().label;
 
   useEffect(() => {
     if (targets.length === 0) {
       context && axios.get(
-        `${process.env.REACT_APP_API_ADDRESS}Goal/emp/${localStorage.getItem("employeeId")}`,
+        `${process.env.REACT_APP_API_ADDRESS}Goal/emp/quarter/${currentEmp}/${currentQuarter}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -36,18 +41,48 @@ function Targets() {
         },
       )
         .then((goals => {
-          console.log(goals);
           setTargets(goals.data);
-          return goals.data
+          return goals.data;
         })).catch(err => {
           console.log("GET emp goals err", err);
         });
     }
   }, [context, targets.length]);
 
+  useEffect(() => {
+    if (currentEmpRole === "Manager") {
+      context && axios.get(
+        `${process.env.REACT_APP_API_ADDRESS}Employee/teammembers/${localStorage.getItem("employeeId")}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      )
+        .then((team => {
+          setCanGrade(
+            team.data.filter(emp => emp.personalNumber === parseInt(id)).length > 0,
+          );
+          return team.data;
+        })).catch(err => {
+          console.log("GET emp goals err", err);
+        });
+    } else {
+      switch (currentEmpRole) {
+        case "User":
+        case "Director":
+          setCanGrade(false);
+          break;
+        case "HR":
+        case "Admin":
+          setCanGrade(true);
+          break;
+      }
+    }
+  }, [context]);
+
   const switchType = (conType) => {
     setContentType(conType);
-    console.log("state change to: " + conType);
   };
 
   const returnToList = () => {
@@ -70,12 +105,11 @@ function Targets() {
         targetsPostData.push({
           name: target.name,
           description: target.description,
-          importance: parseFloat(target.importance),
+          importance: parseInt(target.importance),
           quarter: target.quarter,
           measure: target.measure,
         });
       });
-      console.log(JSON.stringify(targetsPostData));
       axios.post(
         `${process.env.REACT_APP_API_ADDRESS}Dto/goals/add/${localStorage.getItem("employeeId")}`,
         targetsPostData,
@@ -85,9 +119,6 @@ function Targets() {
             contentType: "application/json",
           },
         })
-        .then(res => {
-          console.log(res);
-        })
         .catch(err => console.log("GET emp goals err", err));
     }
     history.push("/dashboard");
@@ -95,19 +126,19 @@ function Targets() {
   };
 
   const addTarget = (target) => {
-    console.log(target);
     let tempTargetArray = targets;
     tempTargetArray.push(target);
     setTargets(tempTargetArray);
-    console.log(targets);
     returnToList();
   };
 
   const updateTarget = (target, isUpdatableInDB) => {
-    console.log(target);
+    if (target.realisationGrade) {
+      target.realisationGrade = parseInt(target.realisationGrade);
+    }
     if (isUpdatableInDB) {
       axios.put(
-        `${process.env.REACT_APP_API_ADDRESS}Goal/emp/${localStorage.getItem("employeeId")}/${target.goalID}`,
+        `${process.env.REACT_APP_API_ADDRESS}Goal/emp/${target.employeeId}/${target.goalID}`,
         target,
         {
           headers: {
@@ -116,10 +147,10 @@ function Targets() {
           },
         },
       ).then(res => {
-        console.log(res);
         let tmpTargetArray = targets;
         tmpTargetArray[targetIndex] = target;
         setTargets(tmpTargetArray);
+        window.location.reload()
       })
         .catch(err => console.log("PUT emp goal err", err))
         .then(() => returnToList());
@@ -134,36 +165,45 @@ function Targets() {
       <footer/>
       <PageWrapper>
         <ContentWrapper>
-          <SubTitle>
-            {contentType === ADD_TARGET ?
-              "Dodawanie celu" : contentType === TARGET_DETAILS ?
-                "Szczegóły celu" : "Cele kwartalne"}
-          </SubTitle>
-          <div>
-            {(() => {
-              switch (contentType) {
-              case TARGET_LIST:
-                return <TargetList
-                  targetList={targets}
-                  switchContent={showAddTarget}
-                  onAccept={onAccept}
-                  onSelect={showTargetDetails}
-                />;
-              case ADD_TARGET:
-                return <AddTarget
-                  onCancel={returnToList}
-                  onSubmit={addTarget}
-                  target={undefined}
-                />;
-              case TARGET_DETAILS:
-                return <AddTarget
-                  onCancel={returnToList}
-                  onSubmit={updateTarget}
-                  target={targets[targetIndex]}
-                />;
-              }
-            })()}
-          </div>
+          {!isMyTargets && !canGrade ?
+            <SubTitle>Cannot add or show targets for another
+              employee</SubTitle> :
+            !canGrade && !isMyTargets && currentEmpRole === "Manager" ?
+              <SubTitle>Cannot grade targets for employees outside your
+                team</SubTitle> :
+              <>
+                <SubTitle>
+                  {contentType === ADD_TARGET ?
+                    "Add targets" : contentType === TARGET_DETAILS ?
+                      "target's details" : "Quarter targets"}
+                </SubTitle>
+                <div>
+                  {(() => {
+                    switch (contentType) {
+                      case TARGET_LIST:
+                        return <TargetList
+                          targetList={targets}
+                          switchContent={showAddTarget}
+                          onAccept={onAccept}
+                          onSelect={showTargetDetails}
+                        />;
+                      case ADD_TARGET:
+                        return <AddTarget
+                          onCancel={returnToList}
+                          onSubmit={addTarget}
+                          target={undefined}
+                        />;
+                      case TARGET_DETAILS:
+                        return <AddTarget
+                          onCancel={returnToList}
+                          onSubmit={updateTarget}
+                          target={targets[targetIndex]}
+                        />;
+                    }
+                  })()}
+                </div>
+              </>
+          }
         </ContentWrapper>
       </PageWrapper>
     </>

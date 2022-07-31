@@ -24,7 +24,7 @@ const HeaderBar = () => {
     <HeaderWrapper>
       <HeaderBtnProfileWrapper>
         <HeaderBtnSignOut
-          to="/welcome"
+          to="/Welcome"
           onClick={() => {
             localStorage.clear();
           }}

@@ -13,7 +13,7 @@ import {
   StatusIcon,
   ProfileAvatar,
 } from "../styles/ProfilePageStyle";
-import { 
+import {
   PageWrapper,
   TeamsWrapper,
   TableTeams,
@@ -77,7 +77,7 @@ function TeamDetails(props) {
             </ProfileAvatar>
             <ProfileTextWrapper>
               <ProfileHeaderText>
-                <Link to={`/profile/${emp.personalNumber}`} style={{  
+                <Link to={`/profile/${emp.personalNumber}`} style={{
                   fontSize: "25px",
                   fontWeight: "bold",
                   color: "#ff4e01",

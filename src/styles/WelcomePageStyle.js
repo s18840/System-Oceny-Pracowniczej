@@ -115,7 +115,6 @@ export const ContactInfoWrapper = styled.div`
   display: flex;
   vertical-align: middle;
 `
-//TODO change name
 export const ContactRightSide = styled.div`
   display: flex;
   flex-direction: column;
