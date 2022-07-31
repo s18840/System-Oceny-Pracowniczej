@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
@@ -23,7 +23,7 @@ import {
 import { Context } from "../../pages/Context";
 import { EmployeeAddWrapper } from "../../styles/FormEmpStyles";
 import moment from 'moment';
-
+import { log } from "loglevel";
 function EmployeeAddForm() {
   const [context] = useContext(Context);
   const {
@@ -70,9 +70,7 @@ function EmployeeAddForm() {
           setIsSucceed(false);
         }, 3000);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(err => log.warn(err));
     }
   };
   const clearForm = () => {

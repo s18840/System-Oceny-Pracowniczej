@@ -15,7 +15,7 @@ import Header from "../components/Header/Header";
 import NavBar from "../components/Navigation/NavBar";
 import Footer from "../components/Footer/Footer";
 import { Link } from "react-router-dom";
-
+import { log } from "loglevel";
 const dataJson = ["Name: ", "Personal number:", "Team number:", "Status: "];
 
 function EmployeeList() {
@@ -31,7 +31,7 @@ function EmployeeList() {
         })
         .then(({ data }) => {
           setEmployee(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
   return (
     <>

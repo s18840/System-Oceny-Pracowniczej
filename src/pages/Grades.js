@@ -21,7 +21,7 @@ import {
   TargetListTitlesWrapper, TargetName,
   TargetNameTitle, TargetsListWrapper, TargetTitle,
 } from "../styles/TargetsStyles";
-
+import { log } from "loglevel";
 function Grades() {
   const {id} = useParams()
   const currentEmp = id ? id : localStorage.getItem("employeeId");
@@ -130,7 +130,7 @@ function Grades() {
         .then(({data}) => {
           setFirstName(data.firstName);
           setSurname(data.lastName);
-        });
+        }).catch(err => log.warn(err));
     }
   }, [context, currentEmp]);
 
@@ -160,13 +160,9 @@ function Grades() {
             addUniqueQuarters(quarters);
             return res;
           })
-          .catch(err => {
-            console.log("GET targets details err", err);
-          });
+          .catch(err => log.warn(err));
       }))
-      .catch(err => {
-        console.log("GET comp. details err", err);
-      });
+      .catch(err => log.warn(err));
 
   }, [context, addUniqueQuarters, currentEmp]);
 

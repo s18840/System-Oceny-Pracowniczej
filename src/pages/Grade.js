@@ -22,7 +22,7 @@ import {Context} from "./Context";
 import axios from "axios";
 import {useHistory, useParams} from "react-router-dom";
 import getCurrentQuarter from "../Utils/QuarterUtils";
-
+import { log } from "loglevel";
 function Grade() {
   const {id} = useParams();
   const history = useHistory();
@@ -44,7 +44,7 @@ function Grade() {
         if (res.data.compGradeId !== 0) {
           setExists(true);
         }
-      });
+      }).catch(err => log.warn(err));
   });
 
   useEffect(() => {
@@ -58,7 +58,7 @@ function Grade() {
         },
       )
         .then(res => setCompetences(res.data))
-        .catch(err => console.log("GET emp comps err", err));
+        .catch(err => log.warn(err));
     }
   }, [context, id]);
 
@@ -101,7 +101,7 @@ function Grade() {
     ).then(res => {
       history.push(`/grades/${id}`);
     })
-      .catch(err => console.log("POST emp grade err", err));
+    .catch(err => log.warn(err));
   };
 
   return (

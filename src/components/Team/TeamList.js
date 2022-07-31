@@ -13,7 +13,7 @@ import {
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 import { Link } from "react-router-dom";
-
+import { log } from "loglevel";
 const dataJson = [
   "Team name:",
   "Department name:",
@@ -36,7 +36,7 @@ function TeamList() {
         })
         .then(({ data }) => {
           setTeams(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   return (

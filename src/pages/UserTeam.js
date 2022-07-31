@@ -22,7 +22,7 @@ import {
   ProfileDataText,
 } from "../styles/GlobalStyle";
 import { Link, useLocation } from "react-router-dom";
-
+import { log } from "loglevel";
 function TeamDetails(props) {
     const [context] = useContext(Context);
     const [employee, setEmployee] = useState([]);
@@ -43,7 +43,7 @@ function TeamDetails(props) {
             .then(({ data }) => {
               setEmployee(data);
               setStatus(data.status);
-            });
+            }).catch(err => log.warn(err));
   }, [context]);
   useEffect(() => {
     context &&
@@ -58,7 +58,7 @@ function TeamDetails(props) {
           )
           .then(({ data }) => {
             setCompetences(data);
-          });
+          }).catch(err => log.warn(err));
   }, [context]);
 
   return (

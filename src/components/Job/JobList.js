@@ -11,7 +11,7 @@ import {
   NewButton,
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
-
+import { log } from "loglevel";
 const dataJson = [
   "Job name:",
   "Department name:",
@@ -33,7 +33,7 @@ function JobList() {
         })
         .then(({ data }) => {
           setJobs(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   return (

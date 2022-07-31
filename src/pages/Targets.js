@@ -8,7 +8,7 @@ import axios from "axios";
 import {Context} from "./Context";
 import {useHistory, useParams} from "react-router-dom";
 import getCurrentQuarter from "../Utils/QuarterUtils";
-
+import { log } from "loglevel";
 function Targets() {
   const {id} = useParams();
   const currentEmp = id ? id : localStorage.getItem("employeeId");
@@ -43,9 +43,7 @@ function Targets() {
         .then((goals => {
           setTargets(goals.data);
           return goals.data;
-        })).catch(err => {
-          console.log("GET emp goals err", err);
-        });
+        })).catch(err => log.warn(err));
     }
   }, [context, targets.length]);
 
@@ -64,9 +62,7 @@ function Targets() {
             team.data.filter(emp => emp.personalNumber === parseInt(id)).length > 0,
           );
           return team.data;
-        })).catch(err => {
-          console.log("GET emp goals err", err);
-        });
+        })).catch(err => log.warn(err));
     } else {
       switch (currentEmpRole) {
         case "User":
@@ -119,7 +115,7 @@ function Targets() {
             contentType: "application/json",
           },
         })
-        .catch(err => console.log("GET emp goals err", err));
+        .catch(err => log.warn(err));
     }
     history.push("/dashboard");
 
@@ -152,7 +148,7 @@ function Targets() {
         setTargets(tmpTargetArray);
         window.location.reload()
       })
-        .catch(err => console.log("PUT emp goal err", err))
+        .catch(err => log.warn(err))
         .then(() => returnToList());
     }
     returnToList();

@@ -23,6 +23,7 @@ import { Context } from "../../pages/Context";
 import axios from "axios";
 import ModalLogin from "../ModalLogin";
 import {useHistory, useLocation} from "react-router-dom";
+import { log } from "loglevel";
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
@@ -64,7 +65,7 @@ function ProfileInfo(props) {
           setStatus(data.status);
           setPersonalNumber(props.id? props.id : localStorage.getItem("employeeId"));
           setLoading(false);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   const [teamIds, setTeamIds] = useState([])
@@ -83,7 +84,7 @@ function ProfileInfo(props) {
         .then(({data}) => {
           let teamEmpIds = data.map((value) => value.personalNumber)
           setTeamIds(teamEmpIds)
-        });
+        }).catch(err => log.warn(err));
     }
   }, [context])
   const [formFirstName, setFirstName] = useState(" ");
@@ -118,9 +119,7 @@ function ProfileInfo(props) {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then((resp) => {})
-    .catch((err) => {
-      console.log("error",err);
-    });
+    .catch(err => log.warn(err));
   }
 
   if(loading){

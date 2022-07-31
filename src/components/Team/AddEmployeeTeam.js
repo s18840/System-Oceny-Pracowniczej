@@ -20,7 +20,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Context } from "../../pages/Context";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
-
+import { log } from "loglevel";
 const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
@@ -52,7 +52,7 @@ const AddEmployeeTeam = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           ContentType: "application/json",
         },
-      })
+      }).catch(err => log.warn(err));
   };
   const [teams, setTeams] = useState([]);
   const [emps, setEmps] = useState([]);
@@ -77,7 +77,7 @@ const AddEmployeeTeam = () => {
         })
         .then(({ data }) => {
           setEmps(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
   useEffect(() => {
     context &&
@@ -89,7 +89,7 @@ const AddEmployeeTeam = () => {
         })
         .then(({ data }) => {
           setTeams(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
   
   return (

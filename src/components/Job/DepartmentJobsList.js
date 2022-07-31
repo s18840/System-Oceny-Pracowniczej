@@ -8,7 +8,7 @@ import {
   TableDetailsMarker,
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
-
+import { log } from "loglevel";
 const dataJson = [
   "Job name:",
   "Job ID:",
@@ -32,7 +32,7 @@ function DepartmentJobList() {
         })
         .then(({ data }) => {
           setJobs(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   return (

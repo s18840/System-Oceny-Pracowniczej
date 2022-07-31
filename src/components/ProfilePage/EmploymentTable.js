@@ -8,7 +8,7 @@ import {
 import { Context } from "../../pages/Context";
 import ModalEmployment from "../ModalEmployment";
 import { ErrorsSpan } from "../../styles/GlobalStyle";
-
+import { log } from "loglevel";
 const dataJson = ["Start date", "End date", "Job", "Time basis"];
 
 function EmploymentTable(props) {
@@ -30,7 +30,7 @@ function EmploymentTable(props) {
         )
         .then(({ data }) => {
           setEmployee(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function EmploymentTable(props) {
         )
         .then(({ data }) => {
           setEmployee(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   let dataArray;

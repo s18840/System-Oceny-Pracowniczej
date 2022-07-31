@@ -10,7 +10,7 @@ import { InputField, Span } from "../../styles/GlobalStyle";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Context } from "../../pages/Context";
-
+import { log } from "loglevel";
 function LoginForm() {
   const [context, setContext] = useContext(Context);
   let history = useHistory();
@@ -36,7 +36,7 @@ function LoginForm() {
         history.push("/dashboard");
       })
       .catch((error) => {
-        console.log("err", error)
+        log.warn(error)
         if (error.response.status === 401) {
           setCredentialsCorrect(false);
           return Promise.reject("Unauthrozied");

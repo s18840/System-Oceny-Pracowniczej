@@ -8,7 +8,7 @@ import {
 import { Context } from "../../pages/Context";
 import Modal from "../Modal";
 import { ErrorsSpan } from "../../styles/GlobalStyle";
-
+import { log } from "loglevel";
 const dataJson = ["Graduation Date", "Institution", "Degree"];
 function EducationInformation(props) {
   const [context] = useContext(Context);
@@ -30,7 +30,7 @@ function EducationInformation(props) {
         )
         .then(({ data }) => {
           setEmployee(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function EducationInformation(props) {
         )
         .then(({ data }) => {
           setEmployee(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   let dataArray;

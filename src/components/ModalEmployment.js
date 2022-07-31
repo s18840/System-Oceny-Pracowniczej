@@ -12,7 +12,7 @@ import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
 import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
 import moment from 'moment';
-
+import { log } from "loglevel";
 function ModalEmployment( props ){
   const [context] = useContext(Context);
   const [jobs, setJobs] = useState([]);
@@ -44,7 +44,7 @@ function ModalEmployment( props ){
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           ContentType: "application/json",
         },
-      })
+      }).catch(err => log.warn(err));
     window.location.reload();
     props.closeModal(false)
   }
@@ -59,7 +59,7 @@ function ModalEmployment( props ){
         })
         .then(({ data }) => {
           setJobs(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
   return (
     <div style={{

@@ -12,7 +12,7 @@ import {
   NewButton
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
-
+import { log } from "loglevel";
 const dataJson = ["Department name:", "Department Teams:", " Director:"];
 
 function DepartmentList() {
@@ -28,7 +28,7 @@ function DepartmentList() {
         })
         .then(({ data }) => {
           setDepartments(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
   return (
     <>

@@ -24,7 +24,7 @@ import {
 } from "../../styles/ProfilePageStyle";
 import { Context } from "../../pages/Context";
 import moment from 'moment';
-
+import { log } from "loglevel";
 function BasicInformation(props) {
   const [context] = useContext(Context);
   const {
@@ -76,7 +76,7 @@ function BasicInformation(props) {
           setValue("email", data.email ? data.email : null, {
             shouldValidate: true,
           });
-        });
+        }).catch(err => log.warn(err));
   }, [context, setValue]);
 
   useEffect(() => {
@@ -119,7 +119,7 @@ function BasicInformation(props) {
           setValue("email", data.email ? data.email : null, {
             shouldValidate: true,
           });
-        });
+        }).catch(err => log.warn(err));
   }, [context, setValue]);
   const [formReady, setFormReady] = useState(false);
 
@@ -159,7 +159,7 @@ function BasicInformation(props) {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      })
+      }).catch(err => log.warn(err));
     }
     if (!formReady && props.empId) {
       const employeeReady = prepareUser(data);
@@ -168,7 +168,7 @@ function BasicInformation(props) {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      })
+      }).catch(err => log.warn(err));
     }
     if(!formReady) window.location.reload();
   };

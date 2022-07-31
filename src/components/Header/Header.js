@@ -1,15 +1,12 @@
-import axios from "axios";
-import React, { useEffect, useState, useContext } from "react";
-import { FaPowerOff, FaWrench } from "react-icons/fa";
+import React from "react";
+import { FaPowerOff } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
-import { Context } from "../../pages/Context";
 import {
   HeaderLocTree,
   HeaderProfile,
   HeaderWrapper,
   HeaderBtnProfileWrapper,
   HeaderBtnSignOut,
-  HeaderBtnTol,
   HeaderName,
   HeaderAvatar
 } from "./HeaderElements";

@@ -17,7 +17,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Context } from "../../pages/Context";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
-
+import { log } from "loglevel";
 const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
@@ -51,7 +51,7 @@ const NewDepartment = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           ContentType: "application/json",
         },
-      })
+      }).catch(err => log.warn(err));
   };
   const [dirs, setDirs] = useState([]);
   const [choosenDirs, setChoosenDirs] = useState('');
@@ -74,7 +74,7 @@ const NewDepartment = () => {
         })
         .then(({ data }) => {
           setDirs(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   return (

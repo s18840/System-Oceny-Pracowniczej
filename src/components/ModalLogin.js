@@ -8,7 +8,7 @@ import {
 import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { useForm } from "react-hook-form";
 import { InputField, ErrorsLoginSpan } from "../styles/GlobalStyle";
-
+import { log } from "loglevel";
 function ModalLogin({ closeModal }){
   const {
     register,
@@ -34,7 +34,7 @@ function ModalLogin({ closeModal }){
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      })
+      }).catch(err => log.warn(err));
     window.location.reload();
     closeModal(false)
   }

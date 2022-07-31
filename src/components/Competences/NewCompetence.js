@@ -20,7 +20,7 @@ import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 import { useForm } from "react-hook-form";
 import ModalCompetences from "../ModalCompetences";
 import axios from "axios";
-
+import { log } from "loglevel";
 const NewCompetence = () => {
   const {
     register,
@@ -36,7 +36,7 @@ const NewCompetence = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           ContentType: "application/json",
         },
-      })
+      }).catch(err => log.warn(err));
   };
   const [markers, setMarkers] = useState([]);
   const [openModal,setOpenModal] = useState(false);

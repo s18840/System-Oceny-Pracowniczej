@@ -12,7 +12,7 @@ import {
   NewButton,
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
-
+import { log } from "loglevel";
 const dataJson = ["Competence name:", "Markers required:", "Description:"];
 
 function CompetenceList() {
@@ -28,7 +28,7 @@ function CompetenceList() {
         })
         .then(({ data }) => {
           setCompetences(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
   return (
     <>

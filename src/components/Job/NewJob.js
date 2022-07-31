@@ -17,7 +17,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Context } from "../../pages/Context";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
-
+import { log } from "loglevel";
 const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
@@ -51,7 +51,7 @@ const NewJob = (props) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         ContentType: "application/json",
       },
-    })
+    }).catch(err => log.warn(err));
   };
   const [deps, setDeps] = useState([]);
   const [choosenDeps, setChoosenDeps] = useState([]);
@@ -75,7 +75,7 @@ const NewJob = (props) => {
         })
         .then(({ data }) => {
           setDeps(data);
-        });
+        }).catch(err => log.warn(err));
   }, [context]);
 
   return (

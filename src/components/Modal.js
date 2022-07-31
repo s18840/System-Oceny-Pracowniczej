@@ -9,7 +9,7 @@ import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { Context } from "../pages/Context";
 import { useForm } from "react-hook-form";
 import { InputField, ErrorsSpan, ErrorsLoginSpan } from "../styles/GlobalStyle";
-
+import { log } from "loglevel";
 function Modal(props){
   const [context] = useContext(Context);
   const {
@@ -38,7 +38,7 @@ function Modal(props){
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           ContentType: "application/json",
         },
-      })
+      }).catch(err => log.warn(err));
     window.location.reload();
     props.closeModal(false)
   }
