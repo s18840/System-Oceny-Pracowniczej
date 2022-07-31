@@ -58,7 +58,7 @@ const NewCompetence = () => {
           Creating new competence
           <NewButton 
           type="submit"
-          onClick={() => {window.location.href="/Competences"}} disabled={(markers.length === 0 || getValues("name") === '' || getValues("description") === '')}>Add</NewButton>
+          onClick={() => {window.location.href="/Competences"}} disabled={(markers.length === 0 || getValues("name") === '' || getValues("description") === '')}>Create</NewButton>
             {(markers.length === 0 || getValues("name") === '' || getValues("description") === '') &&
         <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>
         }

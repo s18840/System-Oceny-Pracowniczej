@@ -88,7 +88,7 @@ const NewDepartment = () => {
           }}
           disabled={dirs.length == 0 || getValues("name") === ''}
         >
-          Add
+          Create
         </NewButton>
         {(dirs.length == 0) && 
         <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add department</ErrorsSpan>

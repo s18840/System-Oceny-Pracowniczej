@@ -89,7 +89,7 @@ const NewJob = (props) => {
           }}
           disabled={choosenDeps.length == 0 || getValues("name") === ''}
         >
-          Add
+          Create
         </NewButton>
         {(choosenDeps.length == 0 || getValues("name") === '') &&
         <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Please provide all needed data</ErrorsSpan>

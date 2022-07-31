@@ -137,7 +137,7 @@ const NewTeam = () => {
           }}
           disabled={(choosenComps.length === 0 || choosenDeps === '' || choosenEmps.length === 0 || choosenMans === '' || getValues("name") === '')}
         >
-          Add
+          Create
         </NewButton>
         {(mans.length == 0 || emps.length == 0) && 
         <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginRight: 20, position: "unset", float: "right" }}>Not possible to add team</ErrorsSpan>
