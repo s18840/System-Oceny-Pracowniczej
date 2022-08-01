@@ -59,6 +59,8 @@ function Clock() {
 
   useEffect(() => {
     startClock();
+    const interval = setInterval(() => setTime(getTime),1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
