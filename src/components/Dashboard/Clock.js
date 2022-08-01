@@ -35,7 +35,6 @@ function Clock() {
 
   const startClock = useCallback(()=>{
     setTime(getTime)
-    setInterval(() => setTime(getTime), 1000);
   }, [getTime])
 
   const getDayOfWeekString = (dayOfWeek) => {
