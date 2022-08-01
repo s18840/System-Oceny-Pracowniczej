@@ -59,7 +59,7 @@ function Clock() {
 
   useEffect(() => {
     startClock();
-  }, [startClock]);
+  }, []);
 
   return (
     <ClockWrapper>
