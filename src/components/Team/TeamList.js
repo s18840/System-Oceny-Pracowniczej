@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import {
   TableInfo,
   Row,
@@ -14,6 +13,7 @@ import {
 import { Context } from "../../pages/Context";
 import { Link } from "react-router-dom";
 import { log } from "loglevel";
+import { get } from "../../Utils/APIUtils"
 const dataJson = [
   "Team name:",
   "Department name:",
@@ -25,18 +25,10 @@ function TeamList() {
   const [context] = useContext(Context);
   const [teams, setTeams] = useState();
   useEffect(() => {
-    context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/teams`, {
-          headers: {
-            Authorization: `Bearer ${
-              localStorage.getItem("token")
-            }`,
-          },
-        })
-        .then(({ data }) => {
-          setTeams(data);
-        }).catch(err => log.warn(err));
+    context && get("Dto/teams")
+      .then(({ data }) => {
+        setTeams(data);
+      }).catch(err => log.warn(err));
   }, [context]);
 
   return (

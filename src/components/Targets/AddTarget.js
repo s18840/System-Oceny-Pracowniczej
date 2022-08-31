@@ -60,7 +60,7 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
           {...register("employeeId")}
         />
         <InputWrapper width="40%">
-          <Span fontSize={"1.5rem"}>Name</Span>
+          <Span fontSize="1.5rem">Name</Span>
           <TargetInputField
             {...register("name", ({required: true}))}
             disabled={(isUpdatable && !edit) || !isMyTargets}
@@ -69,14 +69,14 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
             <Span>Required</Span>}
         </InputWrapper>
         <InputWrapper width="40%">
-          <Span fontSize={"1.5rem"}>Quarter</Span>
+          <Span fontSize="1.5rem">Quarter</Span>
           <TargetInputField
             {...register("quarter")}
             disabled
           />
         </InputWrapper>
         <InputWrapper width="100%">
-          <Span fontSize={"1.5rem"}>Description</Span>
+          <Span fontSize="1.5rem">Description</Span>
           <TargetTextField
             {...register("description", ({required: true}))}
             disabled={(isUpdatable && !edit) || !isMyTargets}
@@ -85,7 +85,7 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
             <Span>Required</Span>}
         </InputWrapper>
         <InputWrapper width="40%">
-          <Span fontSize={"1.5rem"}>Completion measurement</Span>
+          <Span fontSize="1.5rem">Completion measurement</Span>
           <TargetTextField
             {...register("measure", ({required: true}))}
             disabled={(isUpdatable && !edit) || !isMyTargets}
@@ -94,7 +94,7 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
             <Span>Required</Span>}
         </InputWrapper>
         <InputWrapper width="40%">
-          <Span fontSize={"1.5rem"}>Importance</Span>
+          <Span fontSize="1.5rem">Importance</Span>
           <TargetInputField
             type="number"
             {...register("importance", ({required: true, min: 0, max: 10}))}
@@ -108,7 +108,7 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
         {isUpdatable && !isMyTargets ?
           <>
             <InputWrapper width="40%">
-              <Span fontSize={"1.5rem"}>Realisation Grade (%)</Span>
+              <Span fontSize="1.5rem">Realisation Grade (%)</Span>
               <TargetInputField
                 type="number"
                 {...register("realisationGrade", ({
@@ -119,7 +119,7 @@ const AddTarget = ({onSubmit, onCancel, target}) => {
               />
             </InputWrapper>
             <InputWrapper width="40%">
-              <Span fontSize={"1.5rem"}>Comment</Span>
+              <Span fontSize="1.5rem">Comment</Span>
               <TargetInputField
                 {...register("gradeComment")}
                 disabled={(isUpdatable && !edit)}

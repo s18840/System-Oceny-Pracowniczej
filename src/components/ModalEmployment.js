@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import axios from "axios";
 import {
   ProfileDataText,
   ModalButton,
@@ -13,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { InputField, ErrorsLoginSpan } from "../styles/GlobalStyle";
 import moment from "moment";
 import { log } from "loglevel";
+import { post, get } from "../Utils/APIUtils";
 function ModalEmployment( props ){
   const [context] = useContext(Context);
   const [jobs, setJobs] = useState([]);
@@ -38,25 +38,15 @@ function ModalEmployment( props ){
 
   function submitForm(data){
     const employment = prepareEmployment(data);
-    axios.post(`${process.env.REACT_APP_API_ADDRESS}Employee/addEmployment`, employment,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          ContentType: "application/json",
-        },
-      }).catch(err => log.warn(err));
+    post("Employee/addEmployment", employment)
+      .catch(err => log.warn(err));
     window.location.reload();
     props.closeModal(false)
   }
 
   useEffect(() => {
     context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/avaijobs`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
+      get("Dto/avaijobs")
         .then(({ data }) => {
           setJobs(data);
         }).catch(err => log.warn(err));

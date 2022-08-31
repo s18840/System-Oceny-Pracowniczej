@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import {
   TableInfo,
   Row,
@@ -16,22 +15,17 @@ import NavBar from "../components/Navigation/NavBar";
 import Footer from "../components/Footer/Footer";
 import { Link } from "react-router-dom";
 import { log } from "loglevel";
+import { get } from "../Utils/APIUtils"
 const dataJson = ["Name: ", "Personal number:", "Team number:", "Status: "];
 
 function EmployeeList() {
   const [context] = useContext(Context);
   const [employee, setEmployee] = useState();
   useEffect(() => {
-    context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Employee`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then(({ data }) => {
-          setEmployee(data);
-        }).catch(err => log.warn(err));
+    context && get("Employee")
+      .then(({ data }) => {
+        setEmployee(data);
+      }).catch(err => log.warn(err));
   }, [context]);
   return (
     <>

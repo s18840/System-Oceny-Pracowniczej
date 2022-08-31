@@ -20,10 +20,10 @@ import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
 import { Context } from "../../pages/Context";
-import axios from "axios";
 import ModalLogin from "../ModalLogin";
 import {useHistory, useLocation} from "react-router-dom";
 import { log } from "loglevel";
+import { put, get } from "../../Utils/APIUtils"
 const activeStyle = {
   color: "#ff4e01",
   borderRadius: "30px 30px 0 0",
@@ -42,45 +42,25 @@ function ProfileInfo(props) {
   };
   useEffect(() => {
     setLoading(true);
-    context &&
-      axios
-        .get(
-          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.id ? props.id : localStorage.getItem(
-            "employeeId"
-          )}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then(({ data }) => {
-          setEmployee(data);
-          setFirstName(data.firstName);
-          setSurname(data.lastName);
-          setDepartment(data.departmentName ? data.departmentName : "Not Assigned");
-          setTeam(data.teamName);
-          setPhoneNumber(data.cellPhoneNumber);
-          setMail(data.companyEmail);
-          setStatus(data.status);
-          setPersonalNumber(props.id? props.id : localStorage.getItem("employeeId"));
-          setLoading(false);
-        }).catch(err => log.warn(err));
+    context && get(`Dto/emp/${props.id ? props.id : localStorage.getItem("employeeId")}`)
+      .then(({ data }) => {
+        setEmployee(data);
+        setFirstName(data.firstName);
+        setSurname(data.lastName);
+        setDepartment(data.departmentName ? data.departmentName : "Not Assigned");
+        setTeam(data.teamName);
+        setPhoneNumber(data.cellPhoneNumber);
+        setMail(data.companyEmail);
+        setStatus(data.status);
+        setPersonalNumber(props.id? props.id : localStorage.getItem("employeeId"));
+        setLoading(false);
+      }).catch(err => log.warn(err));
   }, [context, props.id]);
 
   const [teamIds, setTeamIds] = useState([])
   useEffect(()=>{
     if((localStorage.getItem("roles").includes("Manager"))){
-      context &&
-      axios
-        .get(
-          `${process.env.REACT_APP_API_ADDRESS}Employee/teammembers/${localStorage.getItem("employeeId")}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
+      context && get(`Employee/teammembers/${localStorage.getItem("employeeId")}`)
         .then(({data}) => {
           let teamEmpIds = data.map((value) => value.personalNumber)
           setTeamIds(teamEmpIds)
@@ -113,12 +93,7 @@ function ProfileInfo(props) {
 
   const resetPassword = () => {
     const userId =prepareUserId();
-    axios.put(`${process.env.REACT_APP_API_ADDRESS}Account/passwordreset`, userId,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    put("Account/passwordreset", userId)
       .catch(err => log.warn(err));
   }
 

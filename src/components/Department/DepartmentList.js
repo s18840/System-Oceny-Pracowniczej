@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import {
   TableInfo,
   Row,
@@ -13,22 +12,17 @@ import {
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 import { log } from "loglevel";
+import { get } from "../../Utils/APIUtils"
 const dataJson = ["Department name:", "Department Teams:", " Director:"];
 
 function DepartmentList() {
   const [context] = useContext(Context);
   const [departments, setDepartments] = useState();
   useEffect(() => {
-    context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/deps`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then(({ data }) => {
-          setDepartments(data);
-        }).catch(err => log.warn(err));
+    context && get("Dto/deps")
+      .then(({ data }) => {
+        setDepartments(data);
+      }).catch(err => log.warn(err));
   }, [context]);
   return (
     <>

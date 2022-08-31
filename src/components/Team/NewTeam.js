@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import {
   Heading,
   PersonalDataHeadingText,
@@ -18,6 +17,8 @@ import { useForm } from "react-hook-form";
 import { Context } from "../../pages/Context";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 import { log } from "loglevel";
+import { post, get } from "../../Utils/APIUtils";
+
 const Button = (props) => {
   const [added, setAdded] = useState(false);
   return (
@@ -44,13 +45,8 @@ const NewTeam = () => {
   const submitForm = (data) => {
     if(choosenComps.length === 0 || choosenDeps === "" || choosenEmps.length === 0 || choosenMans === "") return;
     const team = prepareTeam(data);
-    axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/teams/add`, team, 
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          ContentType: "application/json",
-        },
-      }).catch(err => log.warn(err));
+    post("Dto/teams/add", team)
+      .catch(err => log.warn(err));
   };
   const [comps, setComps] = useState([]);
   const [emps, setEmps] = useState([]);
@@ -75,52 +71,28 @@ const NewTeam = () => {
     return obj;
   };
   useEffect(() => {
-    context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Employee/avaiMana`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then(({ data }) => {
-          setMans(data);
-        }).catch(err => log.warn(err));
+    context && get("Employee/avaiMana")
+      .then(({ data }) => {
+        setMans(data);
+      }).catch(err => log.warn(err));
   }, [context]);
   useEffect(() => {
-    context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Employee/avaiEmps`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then(({ data }) => {
-          setEmps(data);
-        }).catch(err => log.warn(err));
+    context && get("Employee/avaiEmps")
+      .then(({ data }) => {
+        setEmps(data);
+      }).catch(err => log.warn(err));
   }, [context]);
   useEffect(() => {
-    context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Competence`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then(({ data }) => {
-          setComps(data);
-        }).catch(err => log.warn(err));
+    context && get("Competence")
+      .then(({ data }) => {
+        setComps(data);
+      }).catch(err => log.warn(err));
   }, [context]);
   useEffect(() => {
-    context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Department`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then(({ data }) => {
-          setDeps(data);
-        }).catch(err => log.warn(err));
+    context && get("Department")
+      .then(({ data }) => {
+        setDeps(data);
+      }).catch(err => log.warn(err));
   }, [context]);
   
   return (
@@ -196,7 +168,7 @@ const NewTeam = () => {
                     </td>
                   </tr>
                 )):
-                <RowLi>No available managers</RowLi>}
+                  <RowLi>No available managers</RowLi>}
               </tbody>
             </TableTeams>
           </TeamsWrapper>

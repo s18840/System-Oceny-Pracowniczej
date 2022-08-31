@@ -19,8 +19,8 @@ import {
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 import { useForm } from "react-hook-form";
 import ModalCompetences from "../ModalCompetences";
-import axios from "axios";
 import { log } from "loglevel";
+import { post } from "../../Utils/APIUtils";
 const NewCompetence = () => {
   const {
     register,
@@ -30,13 +30,8 @@ const NewCompetence = () => {
   const submitForm = (data) => {
     if(markers.length === 0 || getValues("name") === "" || getValues("description") === "") return;
     const competence = prepareCompetence(data);
-    axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/comps/add`, competence,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          ContentType: "application/json",
-        },
-      }).catch(err => log.warn(err));
+    post("Dto/comps/add", competence)
+      .catch(err => log.warn(err));
   };
   const [markers, setMarkers] = useState([]);
   const [openModal,setOpenModal] = useState(false);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import {
   TableInfo,
   Row,
@@ -9,6 +8,7 @@ import {
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 import { log } from "loglevel";
+import { get } from "../../Utils/APIUtils"
 const dataJson = [
   "Job name:",
   "Job ID:",
@@ -19,20 +19,10 @@ function DepartmentJobList() {
   const [jobs, setJobs] = useState();
 
   useEffect(() => {
-    context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/jobs/${localStorage.getItem(
-          "employeeId"
-        )}`, {
-          headers: {
-            Authorization: `Bearer ${
-              localStorage.getItem("token")
-            }`,
-          },
-        })
-        .then(({ data }) => {
-          setJobs(data);
-        }).catch(err => log.warn(err));
+    context && get(`Dto/jobs/${localStorage.getItem("employeeId")}`)
+      .then(({ data }) => {
+        setJobs(data);
+      }).catch(err => log.warn(err));
   }, [context]);
 
   return (

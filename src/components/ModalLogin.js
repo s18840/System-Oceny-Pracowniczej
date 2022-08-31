@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import axios from "axios";
 import {
   ProfileDataText,
   ModalTitleDiv,
@@ -9,6 +8,7 @@ import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { useForm } from "react-hook-form";
 import { InputField, ErrorsLoginSpan } from "../styles/GlobalStyle";
 import { log } from "loglevel";
+import { put } from "../Utils/APIUtils";
 function ModalLogin({ closeModal }){
   const {
     register,
@@ -29,12 +29,7 @@ function ModalLogin({ closeModal }){
   };
   function submitForm(data){
     const pswd = preparePassword(data);
-    axios.put(`${process.env.REACT_APP_API_ADDRESS}Account/password`, pswd,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }).catch(err => log.warn(err));
+    put("Account/password", pswd).catch(err => log.warn(err));
     window.location.reload();
     closeModal(false)
   }

@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import {
   ProfileDataText,
   ModalButton,
@@ -9,6 +8,7 @@ import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { useForm } from "react-hook-form";
 import { InputField, ErrorsLoginSpan } from "../styles/GlobalStyle";
 import { log } from "loglevel";
+import { post } from "../Utils/APIUtils";
 function Modal(props){
   const {
     register,
@@ -30,13 +30,8 @@ function Modal(props){
 
   function submitForm(data){
     const education = prepareEducation(data);
-    axios.post(`${process.env.REACT_APP_API_ADDRESS}Education`, education,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          ContentType: "application/json",
-        },
-      }).catch(err => log.warn(err));
+    post("Education", education)
+      .catch(err => log.warn(err));
     window.location.reload();
     props.closeModal(false)
   }

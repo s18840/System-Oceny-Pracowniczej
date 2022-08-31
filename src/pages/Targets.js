@@ -4,11 +4,11 @@ import Navbar from "../components/Navigation/NavBar";
 import Header from "../components/Header/Header";
 import {ContentWrapper, PageWrapper, SubTitle} from "../styles/GlobalStyle";
 import TargetList from "../components/Targets/TargetList";
-import axios from "axios";
 import {Context} from "./Context";
 import {useHistory, useParams} from "react-router-dom";
 import getCurrentQuarter from "../Utils/QuarterUtils";
 import { log } from "loglevel";
+import { get, post, put} from "../Utils/APIUtils"
 function Targets() {
   const {id} = useParams();
   const currentEmp = id ? id : localStorage.getItem("employeeId");
@@ -32,14 +32,7 @@ function Targets() {
 
   useEffect(() => {
     if (targets.length === 0) {
-      context && axios.get(
-        `${process.env.REACT_APP_API_ADDRESS}Goal/emp/quarter/${currentEmp}/${currentQuarter}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        },
-      )
+      context && get(`Goal/emp/quarter/${currentEmp}/${currentQuarter}`)
         .then((goals => {
           setTargets(goals.data);
           return goals.data;
@@ -49,14 +42,7 @@ function Targets() {
 
   useEffect(() => {
     if (currentEmpRole === "Manager") {
-      context && axios.get(
-        `${process.env.REACT_APP_API_ADDRESS}Employee/teammembers/${localStorage.getItem("employeeId")}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        },
-      )
+      context && get(`Employee/teammembers/${localStorage.getItem("employeeId")}`)
         .then((team => {
           setCanGrade(
             team.data.filter(emp => emp.personalNumber === parseInt(id)).length > 0,
@@ -106,15 +92,7 @@ function Targets() {
           measure: target.measure,
         });
       });
-      axios.post(
-        `${process.env.REACT_APP_API_ADDRESS}Dto/goals/add/${localStorage.getItem("employeeId")}`,
-        targetsPostData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            contentType: "application/json",
-          },
-        })
+      post(`Dto/goals/add/${localStorage.getItem("employeeId")}`, targetsPostData)
         .catch(err => log.warn(err));
     }
     history.push("/dashboard");
@@ -133,20 +111,12 @@ function Targets() {
       target.realisationGrade = parseInt(target.realisationGrade);
     }
     if (isUpdatableInDB) {
-      axios.put(
-        `${process.env.REACT_APP_API_ADDRESS}Goal/emp/${target.employeeId}/${target.goalID}`,
-        target,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            contentType: "application/json",
-          },
-        },
-      ).then(() => {
-        let tmpTargetArray = targets;
-        tmpTargetArray[targetIndex] = target;
-        setTargets(tmpTargetArray);
-      })
+      put(`Goal/emp/${target.employeeId}/${target.goalID}`, target)
+        .then(() => {
+          let tmpTargetArray = targets;
+          tmpTargetArray[targetIndex] = target;
+          setTargets(tmpTargetArray);
+        })
         .catch(err => log.warn(err))
         .then(() => returnToList());
     }

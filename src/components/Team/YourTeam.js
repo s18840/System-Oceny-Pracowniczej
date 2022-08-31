@@ -3,7 +3,6 @@ import Header from "../../components/Header/Header";
 import NavBar from "../../components/Navigation/NavBar";
 import Footer from "../../components/Footer/Footer";
 import { Context } from "../../pages/Context";
-import axios from "axios";
 import {
   ProfileHeaderText,
   ProfileInfoDiv,
@@ -23,41 +22,24 @@ import {
 } from "../../styles/GlobalStyle";
 import { Link } from "react-router-dom";
 import { log } from "loglevel";
+import { get } from "../../Utils/APIUtils"
 function YourTeam() {
   const [context] = useContext(Context);
   const [employee, setEmployee] = useState([]);
   const [competences, setCompetences] = useState([]);
   const [status, setStatus] = useState(" ");
   useEffect(() => {
-    context &&
-          axios
-            .get(
-              `${process.env.REACT_APP_API_ADDRESS}Employee/team/${localStorage.getItem("employeeId")}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-              }
-            )
-            .then(({ data }) => {
-              setEmployee(data);
-              setStatus(data.status);
-            }).catch(err => log.warn(err));
+    context && get(`Employee/team/${localStorage.getItem("employeeId")}`)
+      .then(({ data }) => {
+        setEmployee(data);
+        setStatus(data.status);
+      }).catch(err => log.warn(err));
   }, [context]);
   useEffect(() => {
-    context &&
-        axios
-          .get(
-            `${process.env.REACT_APP_API_ADDRESS}Dto/comps/${localStorage.getItem("employeeId")}`,
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
-            }
-          )
-          .then(({ data }) => {
-            setCompetences(data);
-          }).catch(err => log.warn(err));
+    context && get(`Dto/comps/${localStorage.getItem("employeeId")}`)
+      .then(({ data }) => {
+        setCompetences(data);
+      }).catch(err => log.warn(err));
   }, [context]);
 
   return (

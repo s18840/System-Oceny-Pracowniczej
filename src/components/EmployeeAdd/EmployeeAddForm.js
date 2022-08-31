@@ -1,37 +1,38 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
-import { useForm } from "react-hook-form";
-import { FormWrapper } from "../../styles/ProfilePageFormStyle";
-import { InputField, ErrorsSpan } from "../../styles/GlobalStyle";
+import React, {useContext, useState} from "react";
+import {useForm} from "react-hook-form";
+import {FormWrapper} from "../../styles/ProfilePageFormStyle";
+import {ErrorsSpan, InputField} from "../../styles/GlobalStyle";
 import {
+  AddButton,
   City,
+  CompanyMail,
   Country,
   DateOfBirth,
   District,
   FirstName,
   HouseNumber,
   PersonalDataHeadingText,
+  PhoneNumber,
   PostalCode,
   ProfileDataText,
   SecondName,
   Street,
-  SurName,
-  PhoneNumber,
-  CompanyMail,
-  AddButton
+  SurName
 } from "../../styles/ProfilePageStyle";
-import { Context } from "../../pages/Context";
-import { EmployeeAddWrapper } from "../../styles/FormEmpStyles";
+import {Context} from "../../pages/Context";
+import {EmployeeAddWrapper} from "../../styles/FormEmpStyles";
 import moment from "moment";
-import { log } from "loglevel";
+import {log} from "loglevel";
+import {post} from "../../Utils/APIUtils";
+
 function EmployeeAddForm() {
   const [context] = useContext(Context);
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
+    formState: {errors, isValid},
+  } = useForm({mode: "onChange"});
 
 
   const [isSucceed, setIsSucceed] = useState(false);
@@ -57,35 +58,30 @@ function EmployeeAddForm() {
   const submitForm = (data) => {
     if (isValid) {
       const employeeReady = prepareUser(data);
-      context && axios.post(`${process.env.REACT_APP_API_ADDRESS}Dto/addEmp`, employeeReady,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            ContentType: "application/json",
-          },
-        }).then(() => {
-        setIsSucceed(true);
-        clearForm();
-        setTimeout(() => {
-          setIsSucceed(false);
-        }, 3000);
-      })
+      context && post("Dto/addEmp", employeeReady)
+        .then(() => {
+          setIsSucceed(true);
+          clearForm();
+          setTimeout(() => {
+            setIsSucceed(false);
+          }, 3000);
+        })
         .catch(err => log.warn(err));
     }
   };
   const clearForm = () => {
-    setValue("firstName"," ");
-    setValue("secondName"," ");
-    setValue("lastName"," ");
-    setValue("birthDate"," ");
-    setValue("cellPhoneNumber"," ");
-    setValue("email"," ");
-    setValue("street"," ");
-    setValue("buildingNumber"," ");
-    setValue("city"," ");
-    setValue("apartmentNumber"," ");
-    setValue("postalCode"," ");
-    setValue("country"," ");
+    setValue("firstName", " ");
+    setValue("secondName", " ");
+    setValue("lastName", " ");
+    setValue("birthDate", " ");
+    setValue("cellPhoneNumber", " ");
+    setValue("email", " ");
+    setValue("street", " ");
+    setValue("buildingNumber", " ");
+    setValue("city", " ");
+    setValue("apartmentNumber", " ");
+    setValue("postalCode", " ");
+    setValue("country", " ");
   };
 
   const dateNow = moment(moment.now()).format("YYYY-MM-DD");
@@ -103,14 +99,14 @@ function EmployeeAddForm() {
         <FormWrapper onSubmit={handleSubmit(submitForm)}>
           <EmployeeAddWrapper>
             <PersonalDataHeadingText>
-            Create New Employee
+              Create New Employee
             </PersonalDataHeadingText>
             <FirstName>
               <ProfileDataText>First name</ProfileDataText>
               <InputField
                 {...register("firstName", {
                   required: "Required",
-                  maxLength : {
+                  maxLength: {
                     value: 32,
                     message: "Too long name"
                   },
@@ -119,28 +115,37 @@ function EmployeeAddForm() {
                     message: "Provide correct name"
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.firstName && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.firstName.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20" style={{
+                  color: "red",
+                  marginTop: 10,
+                  marginLeft: 20
+                }}>{errors.firstName.message}</ErrorsSpan>
               )}
             </FirstName>
             <SecondName>
               <ProfileDataText>Second name</ProfileDataText>
               <InputField
-                {...register("secondName", {maxLength : {
-                  value: 32,
-                  message: "Too long name"
-                },
-                pattern: {
-                  value: /^[a-zA-Z\s]*$/,
-                  message: "Provide correct name"
-                }
+                {...register("secondName", {
+                  maxLength: {
+                    value: 32,
+                    message: "Too long name"
+                  },
+                  pattern: {
+                    value: /^[a-zA-Z\s]*$/,
+                    message: "Provide correct name"
+                  }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.secondName && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.secondName.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20" style={{
+                  color: "red",
+                  marginTop: 10,
+                  marginLeft: 20
+                }}>{errors.secondName.message}</ErrorsSpan>
               )}
 
             </SecondName>
@@ -149,7 +154,7 @@ function EmployeeAddForm() {
               <InputField
                 {...register("lastName", {
                   required: "Required",
-                  maxLength : {
+                  maxLength: {
                     value: 64,
                     message: "Too long surname"
                   },
@@ -158,10 +163,11 @@ function EmployeeAddForm() {
                     message: "Provide correct surname"
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.lastName && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.lastName.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20"
+                  style={{color: "red", marginTop: 10, marginLeft: 20}}>{errors.lastName.message}</ErrorsSpan>
               )}
             </SurName>
             <DateOfBirth>
@@ -171,16 +177,21 @@ function EmployeeAddForm() {
                 {...register("birthDate", {
                   required: "Required",
                   validate: {
-                    over18: value => moment(value, "YYYY-MM-DD").diff(dateNow, "years", true)<-18,
+                    over18: value => moment(value, "YYYY-MM-DD").diff(dateNow, "years", true) < -18,
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.birthDate && errors.birthDate.type === "required" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.birthDate.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20" style={{
+                  color: "red",
+                  marginTop: 10,
+                  marginLeft: 20
+                }}>{errors.birthDate.message}</ErrorsSpan>
               )}
               {errors.birthDate && errors.birthDate.type !== "required" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>Employee must be over 18</ErrorsSpan>
+                <ErrorsSpan font-size="20" style={{color: "red", marginTop: 10, marginLeft: 20}}>Employee must be over
+                  18</ErrorsSpan>
               )}
             </DateOfBirth>
             <PhoneNumber>
@@ -189,19 +200,23 @@ function EmployeeAddForm() {
                 type="number"
                 {...register("cellPhoneNumber", {
                   required: "Required",
-                  maxLength : {
+                  maxLength: {
                     value: 9,
                     message: "Number is too long"
                   },
-                  minLength : {
+                  minLength: {
                     value: 9,
                     message: "Number is too short"
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.cellPhoneNumber && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20" style={{
+                  color: "red",
+                  marginTop: 10,
+                  marginLeft: 20
+                }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
               )}
 
             </PhoneNumber>
@@ -215,10 +230,11 @@ function EmployeeAddForm() {
                     message: "It is not email"
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.email && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.email.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20"
+                  style={{color: "red", marginTop: 10, marginLeft: 20}}>{errors.email.message}</ErrorsSpan>
               )}
             </CompanyMail>
             <Street>
@@ -226,7 +242,7 @@ function EmployeeAddForm() {
               <InputField
                 {...register("street", {
                   required: "Required",
-                  maxLength : {
+                  maxLength: {
                     value: 30,
                     message: "Too long street"
                   },
@@ -235,10 +251,11 @@ function EmployeeAddForm() {
                     message: "Provide correct street"
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.street && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.street.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20"
+                  style={{color: "red", marginTop: 10, marginLeft: 20}}>{errors.street.message}</ErrorsSpan>
               )}
             </Street>
             <HouseNumber>
@@ -246,7 +263,7 @@ function EmployeeAddForm() {
               <InputField
                 {...register("buildingNumber", {
                   required: "Required",
-                  maxLength : {
+                  maxLength: {
                     value: 5,
                     message: "Too long number"
                   },
@@ -255,10 +272,14 @@ function EmployeeAddForm() {
                     message: "Provide correct number"
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.buildingNumber && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.buildingNumber.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20" style={{
+                  color: "red",
+                  marginTop: 10,
+                  marginLeft: 20
+                }}>{errors.buildingNumber.message}</ErrorsSpan>
               )}
             </HouseNumber>
             <City>
@@ -266,7 +287,7 @@ function EmployeeAddForm() {
               <InputField
                 {...register("city", {
                   required: "Required",
-                  maxLength : {
+                  maxLength: {
                     value: 20,
                     message: "Too long city"
                   },
@@ -275,10 +296,11 @@ function EmployeeAddForm() {
                     message: "Provide correct city"
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.city && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.city.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20"
+                  style={{color: "red", marginTop: 10, marginLeft: 20}}>{errors.city.message}</ErrorsSpan>
               )}
             </City>
             <District>
@@ -286,16 +308,20 @@ function EmployeeAddForm() {
               <InputField
                 type="number"
                 {...register("apartmentNumber", {
-                  maxLength : {
+                  maxLength: {
                     value: 5,
                     message: "Too big number"
                   },
 
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.apartmentNumber && errors.apartmentNumber.type === "maxLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.apartmentNumber.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20" style={{
+                  color: "red",
+                  marginTop: 10,
+                  marginLeft: 20
+                }}>{errors.apartmentNumber.message}</ErrorsSpan>
               )}
             </District>
             <PostalCode>
@@ -303,7 +329,7 @@ function EmployeeAddForm() {
               <InputField
                 {...register("postalCode", {
                   required: "Required",
-                  maxLength : {
+                  maxLength: {
                     value: 10,
                     message: "Too long code"
                   },
@@ -312,10 +338,14 @@ function EmployeeAddForm() {
                     message: "Provide correct code"
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.postalCode && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.postalCode.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20" style={{
+                  color: "red",
+                  marginTop: 10,
+                  marginLeft: 20
+                }}>{errors.postalCode.message}</ErrorsSpan>
               )}
             </PostalCode>
             <Country>
@@ -323,7 +353,7 @@ function EmployeeAddForm() {
               <InputField
                 {...register("country", {
                   required: "Required",
-                  maxLength : {
+                  maxLength: {
                     value: 20,
                     message: "Too long country"
                   },
@@ -332,10 +362,11 @@ function EmployeeAddForm() {
                     message: "Provide correct country"
                   }
                 })}
-                style={{ backgroundColor: "#DDDDDD" }}
+                style={{backgroundColor: "#DDDDDD"}}
               />
               {errors.country && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.country.message}</ErrorsSpan>
+                <ErrorsSpan font-size="20"
+                  style={{color: "red", marginTop: 10, marginLeft: 20}}>{errors.country.message}</ErrorsSpan>
               )}
             </Country>
             {isSucceed && <p>You have added a user</p>}
@@ -346,4 +377,5 @@ function EmployeeAddForm() {
     </>
   );
 }
+
 export default EmployeeAddForm;

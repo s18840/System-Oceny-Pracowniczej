@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FormWrapper } from "../../styles/ProfilePageFormStyle";
 import { InputField, ErrorsSpan } from "../../styles/GlobalStyle";
@@ -25,6 +24,7 @@ import {
 import { Context } from "../../pages/Context";
 import moment from "moment";
 import { log } from "loglevel";
+import { put, get } from "../../Utils/APIUtils";
 function BasicInformation(props) {
   const [context] = useContext(Context);
   const {
@@ -36,17 +36,7 @@ function BasicInformation(props) {
 
   useEffect(() => {
     context && !props.empId &&
-      axios
-        .get(
-          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
-            "employeeId"
-          )}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
+      get(`Dto/emp/${localStorage.getItem("employeeId")}`)
         .then(({ data }) => {
           setValue("firstName", data.firstName, { shouldValidate: true });
           setValue("secondName", data.secondName ? data.secondName : null, {
@@ -81,15 +71,7 @@ function BasicInformation(props) {
 
   useEffect(() => {
     context && props.empId &&
-      axios
-        .get(
-          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.empId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
+      get(`Dto/emp/${props.empId}`)
         .then(({ data }) => {
           setValue("firstName", data.firstName, { shouldValidate: true });
           setValue("secondName", data.secondName ? data.secondName : null, {
@@ -152,23 +134,13 @@ function BasicInformation(props) {
       if(props.empId == localStorage.getItem("employeeId") || !props.empId){
         localStorage.setItem("fullName",`${data.firstName} ${data.lastName}`)
       }
-      axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
-        "employeeId"
-      )}`, employeeReady,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }).catch(err => log.warn(err));
+      put(`Dto/emp/${localStorage.getItem("employeeId")}`, employeeReady)
+        .catch(err => log.warn(err));
     }
     if (!formReady && props.empId) {
       const employeeReady = prepareUser(data);
-      axios.put(`${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.empId}`, employeeReady,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }).catch(err => log.warn(err));
+      put(`Dto/emp/${props.empId}`, employeeReady)
+        .catch(err => log.warn(err));
     }
     if(!formReady) window.location.reload();
   };

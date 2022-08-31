@@ -8,9 +8,10 @@ import {
 } from "../../styles/LoginStyle";
 import { InputField, Span } from "../../styles/GlobalStyle";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import { Context } from "../../pages/Context";
 import { log } from "loglevel";
+import { login } from "../../Utils/APIUtils";
+
 function LoginForm() {
   const [context, setContext] = useContext(Context);
   let history = useHistory();
@@ -23,8 +24,7 @@ function LoginForm() {
 
   const submitForm = (data) => {
 
-    axios
-      .post(`${process.env.REACT_APP_API_ADDRESS}Account/login`, data)
+    login(data)
       .then(({ data }) => {
         setContext(data);
         localStorage.setItem("token", data.token);

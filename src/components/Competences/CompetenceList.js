@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import {
   TableInfo,
   Row,
@@ -13,22 +12,17 @@ import {
 } from "../../styles/GlobalStyle";
 import { Context } from "../../pages/Context";
 import { log } from "loglevel";
+import { get } from "../../Utils/APIUtils"
 const dataJson = ["Competence name:", "Markers required:", "Description:"];
 
 function CompetenceList() {
   const [context] = useContext(Context);
   const [competences, setCompetences] = useState();
   useEffect(() => {
-    context &&
-      axios
-        .get(`${process.env.REACT_APP_API_ADDRESS}Dto/comps`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then(({ data }) => {
-          setCompetences(data);
-        }).catch(err => log.warn(err));
+    context && get("Dto/comps")
+      .then(({ data }) => {
+        setCompetences(data);
+      }).catch(err => log.warn(err));
   }, [context]);
   return (
     <>

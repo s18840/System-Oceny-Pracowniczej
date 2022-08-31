@@ -2,26 +2,25 @@ import React, {useCallback, useContext, useEffect, useState} from "react";
 import Header from "../components/Header/Header";
 import NavBar from "../components/Navigation/NavBar";
 import Footer from "../components/Footer/Footer";
-import {
-  ContentWrapper,
-  GlobalButton, HighlightText,
-  PageWrapper,
-  SubTitle,
-} from "../styles/GlobalStyle";
+import {ContentWrapper, GlobalButton, HighlightText, PageWrapper, SubTitle,} from "../styles/GlobalStyle";
 import getCurrentQuarter from "../Utils/QuarterUtils";
-import axios from "axios";
-import CompetenceGradeDetails
-  from "../components/CompetenceGrade/CompetenceGradeDetails";
+import CompetenceGradeDetails from "../components/CompetenceGrade/CompetenceGradeDetails";
 import {Context} from "./Context";
 import {useForm} from "react-hook-form";
 import {ErrorLabel, QuarterSelect, TargetsAvgElement} from "../styles/CompetencesGradeStyles";
 import {useHistory, useParams} from "react-router-dom";
 import {
-  TargetContainer, TargetImportance,
-  TargetListTitlesWrapper, TargetName,
-  TargetNameTitle, TargetsListWrapper, TargetTitle,
+  TargetContainer,
+  TargetImportance,
+  TargetListTitlesWrapper,
+  TargetName,
+  TargetNameTitle,
+  TargetsListWrapper,
+  TargetTitle,
 } from "../styles/TargetsStyles";
-import { log } from "loglevel";
+import {log} from "loglevel";
+import {get} from "../Utils/APIUtils"
+
 function Grades() {
   const {id} = useParams()
   const currentEmp = id ? id : localStorage.getItem("employeeId");
@@ -46,7 +45,8 @@ function Grades() {
   const [availableQuarters, setAvailableQuarters] = useState([defaultQuarter]);
   const [loading, setLoading] = useState(true);
   const [context] = useContext(Context);
-  const {register,
+  const {
+    register,
     watch,
   } = useForm();
   const history = useHistory()
@@ -57,17 +57,8 @@ function Grades() {
   }, [watch]);
 
   useEffect(() => {
-    if(currentEmp !== localStorage.getItem("employeeId")) {
-      context &&
-      axios
-        .get(
-          `${process.env.REACT_APP_API_ADDRESS}Employee/${currentEmp}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
+    if (currentEmp !== localStorage.getItem("employeeId")) {
+      context && get(`Employee/${currentEmp}`)
         .then(({data}) => {
           setFirstName(data.firstName);
           setSurname(data.lastName);
@@ -77,24 +68,12 @@ function Grades() {
 
   useEffect(() => {
     setLoading(true);
-    context && axios.get(
-      `${process.env.REACT_APP_API_ADDRESS}Dto/grades/${currentEmp}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    context && get(`Dto/grades/${currentEmp}`)
       .then((res => {
         setCompetenceGrades(res.data);
         let quarters = res.data.map(grade => grade.quarter);
         addUniqueQuarters(quarters);
-        return axios.get(
-          `${process.env.REACT_APP_API_ADDRESS}Goal/emp/${currentEmp}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          })
+        return get(`Goal/emp/${currentEmp}`)
           .then(res => {
             setTargetGrades(res.data);
             setLoading(false);
@@ -108,25 +87,27 @@ function Grades() {
 
   }, [context, addUniqueQuarters, currentEmp]);
 
-  const calcWeightedAvg = useCallback((quarterGrade)=>{
+  const calcWeightedAvg = useCallback((quarterGrade) => {
     let total = 0
     let data = quarterGrade.map(target => {
       total += target.importance
-      return {importance: target.importance,
-        grade: target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade}
+      return {
+        importance: target.importance,
+        grade: target.realisationGrade < 1 ? target.realisationGrade * 100 : target.realisationGrade
+      }
     })
     let weightedAvg = 0.0
     data.forEach(data => weightedAvg += data.importance / total * data.grade)
 
     return weightedAvg.toFixed(2)
-  },[])
+  }, [])
 
   const getCompGrade = (quarter) => {
     let quarterGrade = competenceGrades.find(grade => grade.quarter === quarter);
     if (quarterGrade && quarterGrade.competenceGrades.length !== 0) {
       return <CompetenceGradeDetails grade={quarterGrade}/>;
     } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")) {
-      return <GlobalButton onClick={()=>history.push(`/grade/${id}`)}>Grade</GlobalButton>;
+      return <GlobalButton onClick={() => history.push(`/grade/${id}`)}>Grade</GlobalButton>;
     } else {
       return <ErrorLabel>No grades!</ErrorLabel>;
     }
@@ -135,7 +116,7 @@ function Grades() {
   const getTargetsGrade = (quarter) => {
     let quarterGrade = targetGrades.filter(target => target.quarter === quarter);
     if (quarterGrade && quarterGrade.length !== 0) {
-      if(quarterGrade.filter(grade => grade.realisationGrade).length === quarterGrade.length) {
+      if (quarterGrade.filter(grade => grade.realisationGrade).length === quarterGrade.length) {
         return (
           <>
             <TargetListTitlesWrapper>
@@ -156,21 +137,22 @@ function Grades() {
               }
             </TargetsListWrapper>
             <TargetsAvgElement>
-            Weighted average: <HighlightText fontSize="1.5rem">{calcWeightedAvg(quarterGrade)}% </HighlightText>
+              Weighted average: <HighlightText fontSize="1.5rem">{calcWeightedAvg(quarterGrade)}% </HighlightText>
             </TargetsAvgElement>
           </>
         )
-      } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")){
-        return <GlobalButton onClick={()=>history.push(`/targets/${id}`)}>Grade</GlobalButton>;
+      } else if (currentQuarter === getCurrentQuarter().label && currentEmp !== localStorage.getItem("employeeId")) {
+        return <GlobalButton onClick={() => history.push(`/targets/${id}`)}>Grade</GlobalButton>;
       } else return <ErrorLabel>No grades!</ErrorLabel>;
     } else {
       return <ErrorLabel>No targets!</ErrorLabel>;
-    }};
-
-
-    if(loading){
-      return(<></>)
     }
+  };
+
+
+  if (loading) {
+    return (<></>)
+  }
   return (
     <>
       <NavBar/>
@@ -179,7 +161,7 @@ function Grades() {
       <PageWrapper>
         <ContentWrapper>
           <SubTitle>
-            {firstName.length != 0 ? firstName + " " + surname + "'s " :"My "}grades
+            {firstName.length != 0 ? firstName + " " + surname + "'s " : "My "}grades
           </SubTitle>
           <QuarterSelect
             {...register("quarterSelect")}

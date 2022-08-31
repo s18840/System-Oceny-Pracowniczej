@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import {
   Row,
   TableInfo,
@@ -9,6 +8,7 @@ import { Context } from "../../pages/Context";
 import Modal from "../Modal";
 import { ErrorsSpan } from "../../styles/GlobalStyle";
 import { log } from "loglevel";
+import { get } from "../../Utils/APIUtils"
 const dataJson = ["Graduation Date", "Institution", "Degree"];
 function EducationInformation(props) {
   const [context] = useContext(Context);
@@ -16,37 +16,17 @@ function EducationInformation(props) {
   const [openModal,setOpenModal] = useState(false);
 
   useEffect(() => {
-    context && !props.empId &&
-      axios
-        .get(
-          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${localStorage.getItem(
-            "employeeId"
-          )}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then(({ data }) => {
-          setEmployee(data);
-        }).catch(err => log.warn(err));
+    context && !props.empId && get(`Dto/emp/${localStorage.getItem("employeeId")}`)
+      .then(({ data }) => {
+        setEmployee(data);
+      }).catch(err => log.warn(err));
   }, [context, props.empId]);
 
   useEffect(() => {
-    context && props.empId &&
-      axios
-        .get(
-          `${process.env.REACT_APP_API_ADDRESS}Dto/emp/${props.empId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
-        .then(({ data }) => {
-          setEmployee(data);
-        }).catch(err => log.warn(err));
+    context && props.empId && get(`Dto/emp/${props.empId}`)
+      .then(({ data }) => {
+        setEmployee(data);
+      }).catch(err => log.warn(err));
   }, [context, props.empId]);
 
   let dataArray;

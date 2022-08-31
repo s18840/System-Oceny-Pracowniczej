@@ -19,10 +19,10 @@ import CompetenceGradeElement
 import {useForm} from "react-hook-form";
 import {AcceptButton} from "../styles/ProfilePageStyle";
 import {Context} from "./Context";
-import axios from "axios";
 import {useHistory, useParams} from "react-router-dom";
 import getCurrentQuarter from "../Utils/QuarterUtils";
 import { log } from "loglevel";
+import { get, post } from "../Utils/APIUtils"
 function Grade() {
   const {id} = useParams();
   const history = useHistory();
@@ -33,13 +33,7 @@ function Grade() {
   const currentQuarter = getCurrentQuarter().label;
 
   useEffect(() => {
-    context && axios.get(
-      `${process.env.REACT_APP_API_ADDRESS}Dto/grades/quarter/${id}/${currentQuarter}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
+    context && get(`Dto/grades/quarter/${id}/${currentQuarter}`)
       .then(res => {
         if (res.data.compGradeId !== 0) {
           setExists(true);
@@ -49,14 +43,7 @@ function Grade() {
 
   useEffect(() => {
     if (!exists) {
-      context && axios.get(
-        `${process.env.REACT_APP_API_ADDRESS}Dto/comps/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        },
-      )
+      context && get(`Dto/comps/${id}`)
         .then(res => setCompetences(res.data))
         .catch(err => log.warn(err));
     }
@@ -90,17 +77,10 @@ function Grade() {
       competenceGrades: competenceGrades,
     };
 
-    axios.post(
-      `${process.env.REACT_APP_API_ADDRESS}Dto/grades/add/${id}`,
-      empGrade,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      },
-    ).then(() => {
-      history.push(`/grades/${id}`);
-    })
+    post(`Dto/grades/add/${id}`, empGrade)
+      .then(() => {
+        history.push(`/grades/${id}`);
+      })
       .catch(err => log.warn(err));
   };
 
