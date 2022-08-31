@@ -26,8 +26,8 @@ const SubMenu = ({ item }) => {
           {item.subnav && checkRoles(item.subnav.role)
             ? item.iconClosed
             : item.subnav
-              ? null
-              : null}
+              ? null 
+              : item.subnav}
         </div>
       </SidebarLink>
       {subnav && item.subnav && 

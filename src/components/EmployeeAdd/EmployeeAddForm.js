@@ -121,13 +121,7 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.firstName && errors.firstName.type === "required" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.firstName.message}</ErrorsSpan>
-              )}
-              {errors.firstName && errors.firstName.type === "maxLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.firstName.message}</ErrorsSpan>
-              )}
-              {errors.firstName && errors.firstName.type === "pattern" && (
+              {errors.firstName && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.firstName.message}</ErrorsSpan>
               )}
             </FirstName>
@@ -145,12 +139,10 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.secondName && errors.secondName.type === "maxLength" && (
+              {errors.secondName && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.secondName.message}</ErrorsSpan>
               )}
-              {errors.secondName && errors.secondName.type === "pattern" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.secondName.message}</ErrorsSpan>
-              )}
+
             </SecondName>
             <SurName>
               <ProfileDataText>Surname</ProfileDataText>
@@ -168,13 +160,7 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.lastName && errors.lastName.type === "required" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.lastName.message}</ErrorsSpan>
-              )}
-              {errors.lastName && errors.lastName.type === "maxLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.lastName.message}</ErrorsSpan>
-              )}
-              {errors.lastName && errors.lastName.type === "pattern" && (
+              {errors.lastName && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.lastName.message}</ErrorsSpan>
               )}
             </SurName>
@@ -214,15 +200,10 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "required" && (
+              {errors.cellPhoneNumber && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
               )}
-              {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "maxLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
-              )}
-              {errors.cellPhoneNumber && errors.cellPhoneNumber.type === "minLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.cellPhoneNumber.message}</ErrorsSpan>
-              )}
+
             </PhoneNumber>
             <CompanyMail>
               <ProfileDataText>E-mail</ProfileDataText>
@@ -236,10 +217,7 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.email && errors.email.type === "pattern" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.email.message}</ErrorsSpan>
-              )}
-              {errors.email && errors.email.type === "required" && (
+              {errors.email && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.email.message}</ErrorsSpan>
               )}
             </CompanyMail>
@@ -259,13 +237,7 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.street && errors.street.type === "required" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.street.message}</ErrorsSpan>
-              )}
-              {errors.street && errors.street.type === "maxLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.street.message}</ErrorsSpan>
-              )}
-              {errors.street && errors.street.type === "pattern" && (
+              {errors.street && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.street.message}</ErrorsSpan>
               )}
             </Street>
@@ -285,13 +257,7 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.buildingNumber && errors.buildingNumber.type === "required" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.buildingNumber.message}</ErrorsSpan>
-              )}
-              {errors.buildingNumber && errors.buildingNumber.type === "maxLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.buildingNumber.message}</ErrorsSpan>
-              )}
-              {errors.buildingNumber && errors.buildingNumber.type === "pattern" && (
+              {errors.buildingNumber && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.buildingNumber.message}</ErrorsSpan>
               )}
             </HouseNumber>
@@ -311,13 +277,7 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.city && errors.city.type === "required" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.city.message}</ErrorsSpan>
-              )}
-              {errors.city && errors.city.type === "maxLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.city.message}</ErrorsSpan>
-              )}
-              {errors.city && errors.city.type === "pattern" && (
+              {errors.city && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.city.message}</ErrorsSpan>
               )}
             </City>
@@ -354,13 +314,7 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.postalCode && errors.postalCode.type === "required" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.postalCode.message}</ErrorsSpan>
-              )}
-              {errors.postalCode && errors.postalCode.type === "maxLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.postalCode.message}</ErrorsSpan>
-              )}
-              {errors.postalCode && errors.postalCode.type === "pattern" && (
+              {errors.postalCode && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.postalCode.message}</ErrorsSpan>
               )}
             </PostalCode>
@@ -380,13 +334,7 @@ function EmployeeAddForm() {
                 })}
                 style={{ backgroundColor: "#DDDDDD" }}
               />
-              {errors.country && errors.country.type === "required" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.country.message}</ErrorsSpan>
-              )}
-              {errors.country && errors.country.type === "maxLength" && (
-                <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.country.message}</ErrorsSpan>
-              )}
-              {errors.country && errors.country.type === "pattern" && (
+              {errors.country && (
                 <ErrorsSpan font-size="20" style={{ color: "red", marginTop: 10, marginLeft: 20 }}>{errors.country.message}</ErrorsSpan>
               )}
             </Country>

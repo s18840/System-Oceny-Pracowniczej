@@ -1,12 +1,8 @@
 import React from "react"
-import { FaStar, FaUser } from "react-icons/fa" // grades
-import { FaUsers } from "react-icons/fa" // teams
-import { BsPeopleFill } from "react-icons/bs" // teams
-import { FaRegObjectGroup } from "react-icons/fa" // projects
-import { FaIdCard } from "react-icons/fa" // dashboard
-import { FaBuilding } from "react-icons/fa" // department
-import { MdWork } from "react-icons/md" // department
-import { GiArcheryTarget } from "react-icons/gi" //targets
+import { FaStar, FaUser, FaUsers, FaRegObjectGroup, FaIdCard, FaBuilding } from "react-icons/fa"
+import { BsPeopleFill } from "react-icons/bs"
+import { MdWork } from "react-icons/md"
+import { GiArcheryTarget } from "react-icons/gi"
 import * as MDIcons from "react-icons/md"
 
 

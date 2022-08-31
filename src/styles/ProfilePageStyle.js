@@ -404,8 +404,6 @@ export const PhoneIcon = styled(BsFillTelephoneFill)`
 `;
 export const StatusIcon = styled(BsCircle)`
   overflow: visible;
-  //background-color: #55ff11;
-  //dla statusu nieaktywnego #ff5511
   border-color: black;
   border-radius: 50%;
   margin-top: 5px;

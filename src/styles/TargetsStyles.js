@@ -132,9 +132,9 @@ export const GradeForm = styled.div`
 `
 
 export const TargetGrade = styled.div`
-//  TODO
+
 `
 
 export const TargetGradeComment = styled.div`
-//  TODO
+
 `

@@ -120,15 +120,6 @@ function ModalEmployment( props ){
             <SelectJobs {...register("jobName", { required: true })}>{jobs?.map((job)=>(
               <OptionJobs value={job.name} >{job.name}</OptionJobs>
             ))}</SelectJobs>
-            {/* <InputField
-              {...register("jobName", { required: "Please provide job name that already exists in database" })}
-            />
-            {errors.jobName && errors.jobName.type === "minLength" && (
-              <ErrorsLoginSpan font-size="20" style={{ color: "red" }}>{errors.jobName.message}</ErrorsLoginSpan>
-            )}
-            {errors.jobName && errors.jobName.type === "required" && (
-                <ErrorsLoginSpan font-size="20" style={{ color: "red", display:"block" }}>{errors.jobName.message}</ErrorsLoginSpan>
-              )} */}
           </div>
           <div>
             <ProfileDataText>Time basis</ProfileDataText>

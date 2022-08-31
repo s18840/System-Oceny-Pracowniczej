@@ -87,10 +87,7 @@ function ModalLogin({ closeModal }){
                     message: "Password is too short"
                   }, })}
               />
-              {errors.oldPassword && errors.oldPassword.type === "required" && (
-                <ErrorsLoginSpan font-size="20" style={{ color: "red" }}>{errors.oldPassword.message}</ErrorsLoginSpan>
-              )}
-              {errors.oldPassword && errors.oldPassword.type === "minLength" && (
+              {errors.oldPassword && (
                 <ErrorsLoginSpan font-size="20" style={{ color: "red" }}>{errors.oldPassword.message}</ErrorsLoginSpan>
               )}
             </div>
