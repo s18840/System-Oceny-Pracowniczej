@@ -14,6 +14,7 @@ import { login } from "../../Utils/APIUtils";
 
 function LoginForm() {
   const [context, setContext] = useContext(Context);
+  const [isPendingRequest, setIsPendingRequest] = useState(false)
   let history = useHistory();
   const {
     register,
@@ -23,25 +24,27 @@ function LoginForm() {
   const [credentialsCorrect, setCredentialsCorrect] = useState(true);
 
   const submitForm = (data) => {
+    if(!isPendingRequest) {
+      setIsPendingRequest(true)
+      login(data)
+        .then(({data}) => {
+          setContext(data);
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("avatar", data.avatar);
+          localStorage.setItem("employeeId", data.employeeId);
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("roles", data.roles);
+          localStorage.setItem("fullName", data.fullName)
+          history.push("/dashboard");
+        })
+        .catch((error) => {
+          log.warn(error)
+          if (error.response.status === 401) {
+            setCredentialsCorrect(false);
+          }
 
-    login(data)
-      .then(({ data }) => {
-        setContext(data);
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("avatar", data.avatar);
-        localStorage.setItem("employeeId", data.employeeId);
-        localStorage.setItem("username", data.username);
-        localStorage.setItem("roles", data.roles);
-        localStorage.setItem("fullName", data.fullName)
-        history.push("/dashboard");
-      })
-      .catch((error) => {
-        log.warn(error)
-        if (error.response.status === 401) {
-          setCredentialsCorrect(false);
-        }
-
-      });
+        }).finally(() => setIsPendingRequest(false))
+    }
   };
 
   return (
@@ -81,7 +84,7 @@ function LoginForm() {
           <Span> Bad credentials </Span>
         )}
       </InputWrapper>
-      <LoginButton type="submit" value="login" />
+      <LoginButton type="submit" value="login" disabled={!isPendingRequest}/>
     </LoginFormWrapper>
   );
 }
