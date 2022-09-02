@@ -84,7 +84,7 @@ function LoginForm() {
           <Span> Bad credentials </Span>
         )}
       </InputWrapper>
-      <LoginButton type="submit" value="login" disabled={!isPendingRequest}/>
+      <LoginButton type="submit" value="login" disabled={isPendingRequest}/>
     </LoginFormWrapper>
   );
 }
