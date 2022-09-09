@@ -248,7 +248,17 @@ export const AddButton = styled.input`
   justify-self: center;
   align-self: center;
 `;
-
+export const ModalLink = styled(Link)`
+  width: 110px;
+  height: 40px;
+  background-color: #FF4E01;
+  color: white;
+  border-radius: 45px;
+  border: 0;
+  font-size: 28px;
+  font-family: 'Ubuntu';
+  text-decoration: none;
+`;
 export const ModalButton = styled.button`
   width: 110px;
   height: 40px;

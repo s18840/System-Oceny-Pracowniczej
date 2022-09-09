@@ -2,7 +2,8 @@ import React, { useRef } from "react";
 import {
   ProfileDataText,
   ModalTitleDiv,
-  ModalInput
+  ModalLink,
+  ModalButton
 } from "../styles/ProfilePageStyle";
 import { FormWrapper } from "../styles/ProfilePageFormStyle";
 import { useForm } from "react-hook-form";
@@ -46,7 +47,7 @@ function ModalLogin({ closeModal }){
       zIndex: 15
     }}>
       <div style={{
-        width: "500px",
+        width: "550px",
         height: "450px",
         borderRadius: "12px",
         backgroundColor: "white",
@@ -58,7 +59,7 @@ function ModalLogin({ closeModal }){
         left: 200
       }}>
         <div style={{    
-          width: "500px",
+          width: "550px",
           height: "450px",
           borderRadius: "12px",
           backgroundColor: "white",
@@ -69,7 +70,7 @@ function ModalLogin({ closeModal }){
         }}>
           <FormWrapper onSubmit={handleSubmit(submitForm)}>
             <div style={{display: "flex", justifyContent: "space-between"}}>
-              <ModalTitleDiv>Change default password</ModalTitleDiv>
+              <ModalTitleDiv>Default password needs to be changed</ModalTitleDiv>
             </div>
             <div>
               <ProfileDataText>Old password</ProfileDataText>
@@ -83,7 +84,7 @@ function ModalLogin({ closeModal }){
                   }, })}
               />
               {errors.oldPassword && (
-                <ErrorsLoginSpan font-size="20" style={{ color: "red" }}>{errors.oldPassword.message}</ErrorsLoginSpan>
+                <ErrorsLoginSpan font-size="20" style={{ color: "red", display: "flex" }}>{errors.oldPassword.message}</ErrorsLoginSpan>
               )}
             </div>
             <div>
@@ -119,12 +120,13 @@ function ModalLogin({ closeModal }){
                 )}
               />
               {errors.passwordRepeat && (
-                <ErrorsLoginSpan font-size="20" style={{ color: "red" }}>{errors.passwordRepeat.message}</ErrorsLoginSpan>
+                <ErrorsLoginSpan font-size="20" style={{ color: "red", display: "flex" }}>{errors.passwordRepeat.message}</ErrorsLoginSpan>
               )}
 
             </div>
-            <div style={{display: "flex", justifyContent:"end", padding: "20px 0px 20px 20px"}}>
-              <ModalInput id="inputModal" type="submit" style={{marginLeft:20, width:140}} value="Continue"/>
+            <div style={{display: "flex", justifyContent:"space-between", padding: "20px 0px 20px 0px"}}>
+              <ModalLink to="/Welcome" onClick={() => {localStorage.clear()}} style={{width: 140, display:"flex", justifyContent: "center", alignItems: "center"}} >Log out</ModalLink>
+              <ModalButton id="inputModal" type="submit" style={{marginLeft:20, width:140}} >Continue</ModalButton>
             </div>
           </FormWrapper>
         </div>

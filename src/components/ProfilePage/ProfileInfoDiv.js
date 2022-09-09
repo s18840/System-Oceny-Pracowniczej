@@ -20,8 +20,7 @@ import BasicInformation from "./BasicInformation";
 import EmploymentInformation from "./EmploymentInformation";
 import EducationInformation from "./EducationInformation";
 import { Context } from "../../pages/Context";
-import ModalLogin from "../ModalLogin";
-import {useHistory, useLocation} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { log } from "loglevel";
 import { put, get } from "../../Utils/APIUtils"
 const activeStyle = {
@@ -78,7 +77,6 @@ function ProfileInfo(props) {
   const initials = (formFirstName[0]) + (formSurname[0]);
   const [openModal,setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
-  const location = useLocation();
   const history = useHistory()
   useEffect (()=>{
     setOpenModal(status == 0);
@@ -234,14 +232,6 @@ function ProfileInfo(props) {
           </div>
         </>}
       </PageWrapper>
-      {location.pathname=="/Profile" && openModal && <ModalLogin closeModal={setOpenModal} emp={employee}
-        style={{
-          width: 100,
-          height: 100,
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column"
-        }} />}
     </>
   );
 }

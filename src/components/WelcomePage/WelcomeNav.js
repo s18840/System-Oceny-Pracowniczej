@@ -5,7 +5,7 @@ function Nav() {
 
   return (
     <WelcomeNav>
-      <WelcomeNavButton>Home</WelcomeNavButton>
+      <WelcomeNavButton to="#">Home</WelcomeNavButton>
       <WelcomeNavButton smooth spy to="About">
         About
       </WelcomeNavButton>

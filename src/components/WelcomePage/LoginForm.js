@@ -35,7 +35,7 @@ function LoginForm() {
           localStorage.setItem("username", data.username);
           localStorage.setItem("roles", data.roles);
           localStorage.setItem("fullName", data.fullName)
-          history.push("/dashboard");
+          history.push("/Dashboard");
         })
         .catch((error) => {
           log.warn(error)
