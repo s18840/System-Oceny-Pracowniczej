@@ -42,12 +42,12 @@ function EducationInformation(props) {
           <thead>
             <tr>
               {dataJson.map((title) => (
-                <th>{title}</th>
+                <th key={title}>{title}</th>
               ))}
             </tr>
           </thead>
           {employee?.educations?.map((content) => (
-            <Row>
+            <Row key={content.educationId}>
               <td>
                 {reformatDate(
                   content?.graduationDate.split("T")[0]

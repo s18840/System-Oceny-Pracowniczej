@@ -40,8 +40,7 @@ const NewJob = () => {
   const {
     register,
     handleSubmit,
-    getValues,
-    formState: {errors},
+    getValues
   } = useForm();
   const submitForm = (data) => {
     if (choosenDeps.length == 0) return;

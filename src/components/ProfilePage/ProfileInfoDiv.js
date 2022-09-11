@@ -34,7 +34,6 @@ function ProfileInfo(props) {
   const EMPLOYMENT_INFO = "EMPLOYMENT_INFO";
   const EDUCATION_INFO = "EDUCATION_INFO";
   const [context] = useContext(Context);
-  const [employee, setEmployee] = useState();
   const [contentType, setContentType] = useState(BASIC_INFO);
   const switchType = (conType) => {
     setContentType(conType);
@@ -43,7 +42,6 @@ function ProfileInfo(props) {
     setLoading(true);
     context && get(`Dto/emp/${props.id ? props.id : localStorage.getItem("employeeId")}`)
       .then(({ data }) => {
-        setEmployee(data);
         setFirstName(data.firstName);
         setSurname(data.lastName);
         setDepartment(data.departmentName ? data.departmentName : "Not Assigned");
@@ -75,12 +73,8 @@ function ProfileInfo(props) {
   const [formMail, setMail] = useState(" ");
   const [status, setStatus] = useState(" ");
   const initials = (formFirstName[0]) + (formSurname[0]);
-  const [openModal,setOpenModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const history = useHistory()
-  useEffect (()=>{
-    setOpenModal(status == 0);
-  },[status])
 
   const prepareUserId = () =>{
     const userId = {
@@ -156,7 +150,7 @@ function ProfileInfo(props) {
             <FormButton onClick={()=>history.push(`/grades/${props.id}`)} style={{width: "200px", position: "absolute", marginTop: "10px", right: "300px"}} >
             Grades
             </FormButton>}
-          {(localStorage.getItem("roles").includes("Admin") && (props.id && props.id !== localStorage.getItem("employeeId"))) && 
+          {(localStorage.getItem("roles").includes("Admin") && (props.id && props.id !== localStorage.getItem("employeeId"))) &&
           <FormButton onClick={() => {resetPassword(); alert("Password succesfully reset")}} style={{width: "200px", position: "absolute", marginTop: "10px", right: "50px"}} >
               Reset password
           </FormButton>}

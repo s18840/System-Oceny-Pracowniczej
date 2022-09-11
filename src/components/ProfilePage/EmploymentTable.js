@@ -36,7 +36,7 @@ function EmploymentTable(props) {
   }
   const endDate = employee?.employmentsJobs?.map((val)=> val.terminationDate ? val.terminationDate : val.contractExpirationDate)
   const emptyJobs = employee?.employmentsJobs.length == 0
-  
+
   return (
     <>
       {employee?.employmentsJobs.length != 0 ?
@@ -44,12 +44,12 @@ function EmploymentTable(props) {
           <thead>
             <tr>
               {dataJson.map((title) => (
-                <th>{title}</th>
+                <th key={title}>{title}</th>
               ))}
             </tr>
           </thead>
           {employee?.employmentsJobs?.map((content) => (
-            <Row>
+            <Row key={content.employmentID}>
               <td>
                 {reformatDate(
                   content?.hireDate.split("T")[0]

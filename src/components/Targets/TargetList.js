@@ -42,7 +42,7 @@ function TargetList({targetList, switchContent, onAccept, onSelect}) {
       <TargetsListWrapper>
         {
           targetList.map((target, index) => (
-            <TargetContainer onClick={(() => onSelect(index))}>
+            <TargetContainer key={index} onClick={(() => onSelect(index))}>
               <TargetName>{target.name}</TargetName>
               <TargetDate>{target.quarter}</TargetDate>
               <TargetImportance>{target.importance}</TargetImportance>

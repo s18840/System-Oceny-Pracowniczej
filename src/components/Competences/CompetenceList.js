@@ -32,7 +32,7 @@ function CompetenceList() {
         <thead>
           <tr>
             {dataJson.map((title) => (
-              <th>{title}</th>
+              <th key={title}>{title}</th>
             ))}
           </tr>
         </thead>
@@ -43,7 +43,7 @@ function CompetenceList() {
               <TableDetailsMarker>
                 <MarkersTable>
                   {content.markers?.map(marker =>(
-                    <MarkersRow>
+                    <MarkersRow key={marker.markerId}>
                       {marker.name}
                     </MarkersRow>
                   ))}

@@ -37,7 +37,7 @@ function EmployeeList() {
         <thead>
           <tr>
             {dataJson.map((title) => (
-              <th>{title}</th>
+              <th key={title}>{title}</th>
             ))}
           </tr>
         </thead>
@@ -45,7 +45,7 @@ function EmployeeList() {
           {employee?.map((content) => (
             <Row key={content.personalNumber}>
               <TableDetailsDate>
-                <Link to={`/profile/${content.personalNumber}`} style={{  
+                <Link to={`/profile/${content.personalNumber}`} style={{
                   fontSize: "25px",
                   fontWeight: "bold",
                   color: "#ff4e01",

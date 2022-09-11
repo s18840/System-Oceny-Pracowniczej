@@ -30,7 +30,6 @@ function LoginForm() {
         .then(({data}) => {
           setContext(data);
           localStorage.setItem("token", data.token);
-          localStorage.setItem("avatar", data.avatar);
           localStorage.setItem("employeeId", data.employeeId);
           localStorage.setItem("username", data.username);
           localStorage.setItem("roles", data.roles);

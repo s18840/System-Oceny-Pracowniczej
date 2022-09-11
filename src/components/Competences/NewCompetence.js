@@ -51,7 +51,7 @@ const NewCompetence = () => {
       <FormWrapper onSubmit={handleSubmit(submitForm)}>
         <PersonalDataHeadingText>
           Creating new competence
-          <NewButton 
+          <NewButton
             type="submit"
             onClick={() => {window.location.href="/Competences"}} disabled={(markers.length === 0 || getValues("name") === "" || getValues("description") === "")}>Create</NewButton>
           {(markers.length === 0 || getValues("name") === "" || getValues("description") === "") &&
@@ -78,7 +78,7 @@ const NewCompetence = () => {
             <MarkersSmallWrapper>
               <TableMarkers className="table">
                 {markers.map((el) => (
-                  <tr>
+                  <tr key={el.markerId}>
                     <td>
                       <RowLi>
                         {el.name}

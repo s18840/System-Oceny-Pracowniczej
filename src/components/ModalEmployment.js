@@ -92,7 +92,7 @@ function ModalEmployment( props ){
             <ProfileDataText>Hire date</ProfileDataText>
             <InputField
               type="date"
-              {...register("hireDate", { 
+              {...register("hireDate", {
                 required: "Required",
                 validate: {
                   afterHire: value => moment(value, "YYYY-MM-DD").isAfter(moment(props.endDate, "YYYY-MM-DD")),
@@ -107,9 +107,11 @@ function ModalEmployment( props ){
           </div>}
           <div>
             <ProfileDataText>Job name</ProfileDataText>
-            <SelectJobs {...register("jobName", { required: true })}>{jobs?.map((job)=>(
-              <OptionJobs value={job.name} >{job.name}</OptionJobs>
-            ))}</SelectJobs>
+            <SelectJobs {...register("jobName", { required: true })}>
+              {jobs?.map((job)=>(
+                <OptionJobs value={job.name} key={job.jobID} >{job.name}</OptionJobs>
+              ))}
+            </SelectJobs>
           </div>
           <div>
             <ProfileDataText>Time basis</ProfileDataText>
@@ -137,7 +139,7 @@ function ModalEmployment( props ){
             <ProfileDataText>Expiration date</ProfileDataText>
             <InputField
               type="date"
-              {...register("expirationDate", { 
+              {...register("expirationDate", {
                 required: "Required",
                 validate: {
                   afterNewHire: value => moment(value, "YYYY-MM-DD").isAfter(moment(getValues("hireDate"), "YYYY-MM-DD")),

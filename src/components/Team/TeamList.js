@@ -41,7 +41,7 @@ function TeamList() {
         <thead>
           <tr>
             {dataJson.map((title) => (
-              <th>{title}</th>
+              <th key={title}>{title}</th>
             ))}
           </tr>
         </thead>
@@ -52,7 +52,7 @@ function TeamList() {
                 nameOfTeam ={content.teamName}
                 departmentOfTeam ={content.departmentId}
                 managerOfTeam ={content.managerId}>
-                {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") || localStorage.getItem("roles").includes("Director")) && <Link to={{pathname:"/teamDetails", state: content.managerId}} style={{  
+                {(localStorage.getItem("roles").includes("HR") || localStorage.getItem("roles").includes("Admin") || localStorage.getItem("roles").includes("Director")) && <Link to={{pathname:"/teamDetails", state: content.managerId}} style={{
                   fontSize: "25px",
                   fontWeight: "bold",
                   color: "#ff4e01",
@@ -69,7 +69,7 @@ function TeamList() {
               </TableDetailsDate>
               <TableDetailsDate>{content.departmentName}</TableDetailsDate>
               <TableDetails>
-                <Link to={`/profile/${content.managerId}`} style={{  
+                <Link to={`/profile/${content.managerId}`} style={{
                   fontSize: "25px",
                   fontWeight: "bold",
                   color: "#ff4e01",
